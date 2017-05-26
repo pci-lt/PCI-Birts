@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="units">in</property>
+    <property name="theme">ThemesReportItems31.Modern</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">/ThemesReportItems31.rptlibrary</property>
+            <property name="namespace">ThemesReportItems31</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="Fecha Inicial" id="412">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017-05-22</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="413">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="Data Source" id="6">
+            <property name="datamartURL">ejemploPCIn</property>
+            <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Fecha Inicial</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Fecha Inicial"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Fecha Final"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+        </data-mart-data-source>
+    </data-sources>
+    <data-sets>
+        <data-mart-data-set name="Join_user_activities" id="7">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Nombre</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">correo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Feacha de Creacion</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Fecha Activacion</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">max</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">max</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sum</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">sum</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">correo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Feacha de Creacion</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Fecha Activacion</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">max</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">token</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">expiration</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">sum</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <property name="dataObject">Join_user_activities</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Nombre</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">correo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Feacha de Creacion</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Fecha Activacion</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">max</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">token</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">expiration</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">sum</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">us-letter</property>
+            <property name="orientation">auto</property>
+            <property name="height">100%</property>
+            <property name="width">100%</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="170">
+            <property name="fontSize">18pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Reporte de Actividad (Usuarios)
+]]></text-property>
+        </text>
+        <table id="118">
+            <property name="dataSet">Join_user_activities</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Nombre</property>
+                    <text-property name="displayName">Nombre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Nombre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">correo</property>
+                    <text-property name="displayName">correo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["correo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Feacha de Creacion</property>
+                    <text-property name="displayName">Feacha de Creacion</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Feacha de Creacion"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">Fecha Activacion</property>
+                    <text-property name="displayName">Fecha Activacion</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Fecha Activacion"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">max</property>
+                    <text-property name="displayName">max</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["max"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">token</property>
+                    <text-property name="displayName">token</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["token"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">expiration</property>
+                    <text-property name="displayName">expiration</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["expiration"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">sum</property>
+                    <text-property name="displayName">sum</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">100</property>
+            <column id="162"/>
+            <column id="163"/>
+            <column id="164"/>
+            <column id="165"/>
+            <column id="166"/>
+            <column id="167"/>
+            <column id="168"/>
+            <column id="169"/>
+            <header>
+                <row id="119">
+                    <cell id="120">
+                        <label id="121">
+                            <text-property name="text">Nombre</text-property>
+                        </label>
+                    </cell>
+                    <cell id="122">
+                        <label id="123">
+                            <text-property name="text">correo</text-property>
+                        </label>
+                    </cell>
+                    <cell id="124">
+                        <label id="125">
+                            <text-property name="text">Feacha de Creacion</text-property>
+                        </label>
+                    </cell>
+                    <cell id="126">
+                        <label id="127">
+                            <text-property name="text">Fecha Activacion</text-property>
+                        </label>
+                    </cell>
+                    <cell id="128">
+                        <label id="129">
+                            <text-property name="text">Cantidad de Registros</text-property>
+                        </label>
+                    </cell>
+                    <cell id="130">
+                        <label id="131">
+                            <text-property name="text">token</text-property>
+                        </label>
+                    </cell>
+                    <cell id="132">
+                        <label id="133">
+                            <text-property name="text">expiration</text-property>
+                        </label>
+                    </cell>
+                    <cell id="134">
+                        <label id="135">
+                            <text-property name="text">Promedio de Actividad</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="136">
+                    <cell id="137">
+                        <data id="138">
+                            <property name="resultSetColumn">Nombre</property>
+                        </data>
+                    </cell>
+                    <cell id="139">
+                        <data id="140">
+                            <property name="resultSetColumn">correo</property>
+                        </data>
+                    </cell>
+                    <cell id="141">
+                        <data id="142">
+                            <property name="resultSetColumn">Feacha de Creacion</property>
+                        </data>
+                    </cell>
+                    <cell id="143">
+                        <data id="144">
+                            <property name="resultSetColumn">Fecha Activacion</property>
+                        </data>
+                    </cell>
+                    <cell id="145">
+                        <data id="146">
+                            <property name="resultSetColumn">max</property>
+                        </data>
+                    </cell>
+                    <cell id="147">
+                        <data id="148">
+                            <property name="resultSetColumn">token</property>
+                        </data>
+                    </cell>
+                    <cell id="149">
+                        <data id="150">
+                            <property name="resultSetColumn">expiration</property>
+                        </data>
+                    </cell>
+                    <cell id="151">
+                        <data id="152">
+                            <property name="resultSetColumn">sum</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="153">
+                    <cell id="154"/>
+                    <cell id="155"/>
+                    <cell id="156"/>
+                    <cell id="157"/>
+                    <cell id="158"/>
+                    <cell id="159"/>
+                    <cell id="160"/>
+                    <cell id="161"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
