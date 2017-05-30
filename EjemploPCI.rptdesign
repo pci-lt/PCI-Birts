@@ -31,8 +31,12 @@
         </scalar-parameter>
         <scalar-parameter name="Fecha Final" id="413">
             <property name="valueType">static</property>
+            <property name="isRequired">true</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017/05/29</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -102,6 +106,13 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">token</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">token</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -132,18 +143,23 @@
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">token</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
                         <property name="name">expiration</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">7</property>
                         <property name="name">sum</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">position</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">token</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -177,18 +193,23 @@
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">token</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
                     <property name="name">expiration</property>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">7</property>
                     <property name="name">sum</property>
                     <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">position</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">token</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -215,6 +236,7 @@
 ]]></text-property>
         </text>
         <table id="118">
+            <property name="textAlign">justify</property>
             <property name="dataSet">Join_user_activities</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -265,6 +287,25 @@
                     <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
                     <property name="dataType">float</property>
                 </structure>
+                <structure>
+                    <property name="name">Actividad</property>
+                    <text-property name="displayName">Actividad</text-property>
+                    <expression name="expression" type="javascript">var total = dataSetRow["sum"]&#13;
+var dias = Math.floor(total / 86400)&#13;
+var horas = Math.floor((total % 86400)/3600)&#13;
+var minutos = Math.floor(((total % 86400) % 3600) /60)&#13;
+var segundos = (( total % 86400) % 3600) % 60&#13;
+dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " segundos"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Position</property>
+                    <text-property name="displayName">Posición</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["position"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">100</property>
             <column id="162"/>
@@ -277,6 +318,8 @@
             <column id="169"/>
             <header>
                 <row id="119">
+                    <property name="backgroundColor">#66BB6A</property>
+                    <property name="textAlign">center</property>
                     <cell id="120">
                         <label id="121">
                             <text-property name="text">Nombre</text-property>
@@ -284,12 +327,12 @@
                     </cell>
                     <cell id="122">
                         <label id="123">
-                            <text-property name="text">correo</text-property>
+                            <text-property name="text">Correo</text-property>
                         </label>
                     </cell>
                     <cell id="124">
                         <label id="125">
-                            <text-property name="text">Feacha de Creacion</text-property>
+                            <text-property name="text">Fecha de creación</text-property>
                         </label>
                     </cell>
                     <cell id="126">
@@ -304,17 +347,17 @@
                     </cell>
                     <cell id="130">
                         <label id="131">
-                            <text-property name="text">token</text-property>
+                            <text-property name="text">Puesto</text-property>
                         </label>
                     </cell>
                     <cell id="132">
                         <label id="133">
-                            <text-property name="text">expiration</text-property>
+                            <text-property name="text">Fecha de Expiración</text-property>
                         </label>
                     </cell>
                     <cell id="134">
                         <label id="135">
-                            <text-property name="text">Promedio de Actividad</text-property>
+                            <text-property name="text">Tiempo de Actividad</text-property>
                         </label>
                     </cell>
                 </row>
@@ -333,32 +376,45 @@
                     </cell>
                     <cell id="141">
                         <data id="142">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Long Date</property>
+                                <property name="pattern">Long Date</property>
+                            </structure>
                             <property name="resultSetColumn">Feacha de Creacion</property>
                         </data>
                     </cell>
                     <cell id="143">
                         <data id="144">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Long Date</property>
+                                <property name="pattern">Long Date</property>
+                            </structure>
                             <property name="resultSetColumn">Fecha Activacion</property>
                         </data>
                     </cell>
                     <cell id="145">
                         <data id="146">
+                            <property name="textAlign">center</property>
                             <property name="resultSetColumn">max</property>
                         </data>
                     </cell>
                     <cell id="147">
                         <data id="148">
-                            <property name="resultSetColumn">token</property>
+                            <property name="resultSetColumn">Position</property>
                         </data>
                     </cell>
                     <cell id="149">
                         <data id="150">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Long Date</property>
+                                <property name="pattern">Long Date</property>
+                            </structure>
                             <property name="resultSetColumn">expiration</property>
                         </data>
                     </cell>
                     <cell id="151">
                         <data id="152">
-                            <property name="resultSetColumn">sum</property>
+                            <property name="resultSetColumn">Actividad</property>
                         </data>
                     </cell>
                 </row>
