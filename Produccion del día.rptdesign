@@ -301,7 +301,7 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="width">9.3125in</property>
             </column>
             <row id="1076">
-                <property name="height">1.3541666666666667in</property>
+                <property name="height">0.8020833333333334in</property>
                 <cell id="1077">
                     <grid id="1081">
                         <column id="1082">
@@ -313,24 +313,13 @@ yy + '-' + mm + '-' + dd</value>
                         <row id="1084">
                             <cell id="1085">
                                 <image id="1079">
-                                    <property name="height">120px</property>
-                                    <property name="width">319px</property>
+                                    <property name="height">59px</property>
+                                    <property name="width">197px</property>
                                     <property name="source">embed</property>
                                     <property name="imageName">PCLink logo.png</property>
                                 </image>
                             </cell>
-                            <cell id="1086">
-                                <text id="1080">
-                                    <property name="fontWeight">bold</property>
-                                    <property name="paddingTop">15pt</property>
-                                    <property name="textAlign">left</property>
-                                    <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Acuerducto Rio Hondo No. 28 Int, 205
-Colonia Lomas Virreyes.
-Delegación Miguel Hidalgo. C.P. 11000
-Ciudad de México, México]]></text-property>
-                                </text>
-                            </cell>
+                            <cell id="1086"/>
                         </row>
                     </grid>
                 </cell>
@@ -386,12 +375,11 @@ Ciudad de México, México]]></text-property>
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
  <ChartWithoutAxes version="2.6.1" type="Pie Chart" subType="Standard">
   <block>
-   <children _type="TitleBlock">
+   <children _type="TitleBlock" visible="false">
     <outline>
      <color _nil="1"/>
     </outline>
     <label>
-     <caption value="Detalle de producci&#xf3;n "/>
      <background _nil="1"/>
      <outline>
       <color _nil="1"/>
@@ -436,6 +424,7 @@ Ciudad de México, México]]></text-property>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
   <extendedProperties name="jschart.series.shadow" value="false"/>
+  <extendedProperties name="enable.data.summarize" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -450,7 +439,9 @@ Ciudad de México, México]]></text-property>
   <seriesDefinitions>
    <query definition=""/>
    <seriesDefinitions>
-    <query definition=""/>
+    <query definition="">
+     <grouping/>
+    </query>
     <seriesPalette/>
     <series _type="PieSeries" seriesIdentifier="Series 1">
      <label>
@@ -462,6 +453,10 @@ Ciudad de México, México]]></text-property>
      <dataDefinition definition="row[&quot;cantidad&quot;]">
       <grouping/>
      </dataDefinition>
+     <dataPoint>
+      <components type="0"/>
+      <components type="3"/>
+     </dataPoint>
      <triggers condition="6">
       <action type="1">
        <value _type="TooltipValue" text="" delay="200"/>
@@ -493,8 +488,8 @@ Ciudad de México, México]]></text-property>
 ]]></xml-property>
                         <property name="outputFormat">JS</property>
                         <property name="inheritColumns">false</property>
-                        <property name="height">3.875in</property>
-                        <property name="width">6.291666666666667in</property>
+                        <property name="height">4.677083333333333in</property>
+                        <property name="width">7.291666666666667in</property>
                         <property name="dataSet">Produccion Fibra por Area</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -534,8 +529,8 @@ Ciudad de México, México]]></text-property>
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">2</property>
-                        <property name="width">100%</property>
+                        <property name="__ac_group_collapse_level">2,1</property>
+                        <property name="width">8.395833333333334in</property>
                         <property name="dataSet">Produccion Fibra por Area</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -605,9 +600,14 @@ total</expression>
                                 <property name="name">Tipo D2</property>
                                 <text-property name="displayName">Tipo D2</text-property>
                                 <expression name="expression" type="javascript">var text = dataSetRow["_id.tipo"].search("D2")&#13;
+var text1 = dataSetRow["_id.tipo"].search("D")&#13;
+var text2 = dataSetRow["_id.tipo"].search("D1")&#13;
+var text3 = dataSetRow["_id.tipo"].search("D3")&#13;
+var text4 = dataSetRow["_id.tipo"].search("D7")&#13;
+var text5 = dataSetRow["_id.tipo"].search("D9")&#13;
 var mult&#13;
 var total = 0&#13;
-if(text >= 0){&#13;
+if(text >= 0 || text1 >= 0 || text2 >= 0 || text3 >= 0 || text4 >= 0 || text5 >= 0){&#13;
 		mult = 1&#13;
 	}else{&#13;
 		mult = 0&#13;
@@ -615,7 +615,7 @@ if(text >= 0){&#13;
 total = mult * dataSetRow["cantidad"]&#13;
 &#13;
 total</expression>
-                                <property name="dataType">string</property>
+                                <property name="dataType">integer</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
@@ -670,6 +670,9 @@ total</expression>
                             <structure>
                                 <property name="name">Aggregation</property>
                                 <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Cope</value>
+                                </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
                                     <structure>
@@ -682,6 +685,9 @@ total</expression>
                             <structure>
                                 <property name="name">Aggregation_1</property>
                                 <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Cope</value>
+                                </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
                                     <structure>
@@ -800,18 +806,47 @@ total</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Suma COPE</property>
+                                <text-property name="displayName">Sum. COPE</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma D2"]+row["Suma A0"]+row["Suma TS"]+row["Suma TV"]+row["Suma VSI"]+row["Suma Tipo TK"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Gran Total</property>
+                                <text-property name="displayName">Gran Total</text-property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Total Area"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <column id="916">
-                            <property name="width">20%</property>
+                            <property name="width">1.5729166666666667in</property>
+                        </column>
+                        <column id="1160">
+                            <property name="width">1.5729166666666667in</property>
                         </column>
                         <column id="917">
-                            <property name="width">2.5in</property>
+                            <property name="width">1.6979166666666667in</property>
                         </column>
                         <column id="918">
-                            <property name="width">3.6145833333333335in</property>
-                        </column>
-                        <column id="919">
-                            <property name="width">2in</property>
+                            <property name="width">3.8854166666666665in</property>
                         </column>
                         <header>
                             <row id="893">
@@ -820,6 +855,11 @@ total</expression>
                                 <cell id="894">
                                     <label id="895">
                                         <text-property name="text">ÁREA</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1155">
+                                    <label id="901">
+                                        <text-property name="text">CANTIDAD</text-property>
                                     </label>
                                 </cell>
                                 <cell id="896">
@@ -832,15 +872,17 @@ total</expression>
                                         <text-property name="text">TIPO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="900">
-                                    <label id="901">
-                                        <text-property name="text">CANTIDAD</text-property>
-                                    </label>
-                                </cell>
                             </row>
                             <row id="1057">
                                 <property name="fontSize">12pt</property>
                                 <cell id="1058"/>
+                                <cell id="1156">
+                                    <text id="988">
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Total de Área y COPE: ]]></text-property>
+                                    </text>
+                                </cell>
                                 <cell id="1059"/>
                                 <cell id="1060">
                                     <grid id="1062">
@@ -890,7 +932,6 @@ total</expression>
                                         </row>
                                     </grid>
                                 </cell>
-                                <cell id="1061"/>
                             </row>
                         </header>
                         <group id="925">
@@ -907,33 +948,18 @@ total</expression>
                                     <cell id="927">
                                         <data id="936">
                                             <property name="fontWeight">bold</property>
-                                            <property name="paddingLeft">18pt</property>
+                                            <property name="paddingLeft">12pt</property>
                                             <property name="resultSetColumn">_id.area</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1157">
+                                        <data id="989">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Total Area</property>
                                         </data>
                                     </cell>
                                     <cell id="928"/>
                                     <cell id="929"/>
-                                    <cell id="930">
-                                        <grid id="982">
-                                            <column id="983"/>
-                                            <column id="984"/>
-                                            <row id="985">
-                                                <cell id="986">
-                                                    <text id="988">
-                                                        <property name="textAlign">right</property>
-                                                        <property name="contentType">auto</property>
-                                                        <text-property name="content"><![CDATA[Total de Área: ]]></text-property>
-                                                    </text>
-                                                </cell>
-                                                <cell id="987">
-                                                    <data id="989">
-                                                        <property name="textAlign">left</property>
-                                                        <property name="resultSetColumn">Total Area</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                        </grid>
-                                    </cell>
                                 </row>
                             </header>
                         </group>
@@ -947,6 +973,14 @@ total</expression>
                             <header>
                                 <row id="1046">
                                     <cell id="1047"/>
+                                    <cell id="1158">
+                                        <data id="1140">
+                                            <property name="fontStyle">italic</property>
+                                            <property name="textUnderline">none</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Suma COPE</property>
+                                        </data>
+                                    </cell>
                                     <cell id="1048">
                                         <data id="1056">
                                             <property name="resultSetColumn">_id.cope</property>
@@ -1008,16 +1042,29 @@ total</expression>
                                             </row>
                                         </grid>
                                     </cell>
-                                    <cell id="1050"/>
                                 </row>
                             </header>
                         </group>
                         <footer>
-                            <row id="911">
-                                <cell id="912"/>
-                                <cell id="913"/>
-                                <cell id="914"/>
-                                <cell id="915"/>
+                            <row id="1146">
+                                <cell id="1147">
+                                    <property name="colSpan">1</property>
+                                    <property name="rowSpan">1</property>
+                                    <text id="1151">
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Gran Total]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1161">
+                                    <data id="1154">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Gran Total</property>
+                                    </data>
+                                </cell>
+                                <cell id="1162"/>
+                                <cell id="1150"/>
                             </row>
                         </footer>
                     </table>
