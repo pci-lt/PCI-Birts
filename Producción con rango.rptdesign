@@ -341,7 +341,7 @@ titulo</expression>
                 <cell id="886">
                     <extended-item extensionName="Chart" id="1121">
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithoutAxes version="2.6.1" type="Pie Chart" subType="Standard">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side">
   <block>
    <children _type="TitleBlock" visible="false">
     <outline>
@@ -406,51 +406,122 @@ titulo</expression>
     <color _body=",128,127,127,127"/>
    </outline>
   </emptyMessage>
-  <seriesDefinitions>
-   <query definition=""/>
-   <seriesDefinitions>
-    <query definition=""/>
-    <seriesPalette/>
-    <series _type="PieSeries" seriesIdentifier="Series 1">
-     <label>
-      <background _nil="1"/>
-      <outline>
-       <color _nil="1"/>
-      </outline>
-     </label>
-     <dataDefinition definition="row[&quot;cantidad_mensual&quot;]">
-      <grouping enabled="true"/>
-     </dataDefinition>
-     <dataPoint>
-      <components type="3"/>
-      <components type="0"/>
-     </dataPoint>
-     <triggers condition="6">
-      <action type="1">
-       <value _type="TooltipValue" text="" delay="200"/>
-      </action>
-     </triggers>
-     <title>
-      <background _nil="1"/>
-      <outline>
-       <color _nil="1"/>
-      </outline>
-     </title>
-    </series>
-   </seriesDefinitions>
-   <series seriesIdentifier="">
+  <axes>
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <series _type="BarSeries" seriesIdentifier="Series 1" stacked="false" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="row[&quot;cantidad_mensual&quot;]">
+       <grouping enabled="true"/>
+      </dataDefinition>
+      <dataPoint>
+       <components type="3"/>
+       <components type="0"/>
+      </dataPoint>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+     <grouping _nil="1"/>
+    </seriesDefinitions>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
     <label>
      <background _nil="1"/>
      <outline>
       <color _nil="1"/>
      </outline>
     </label>
-    <dataDefinition definition="row[&quot;_id.area&quot;]"/>
-    <curveFitting _nil="1"/>
-   </series>
-   <grouping enabled="true"/>
-  </seriesDefinitions>
- </ChartWithoutAxes>
+    <majorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions sorting="1">
+    <query definition=""/>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="var area = row[&quot;_id.area&quot;];&#13;&#10;var arr = area.split(&#039;_&#039;);&#13;&#10;var resultado = &#039;&#039;;&#13;&#10;for (var i = 0; i &lt;arr.length;i++){&#13;&#10;var te =  (new Packages.java.lang.String(arr[i]));&#13;&#10;	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;&#10;	if (i &lt; arr.length - 1) {&#13;&#10;		resultado = resultado + &#039; &#039;;&#13;&#10;	}&#13;&#10;}&#13;&#10;resultado;"/>
+     <curveFitting _nil="1"/>
+    </series>
+    <grouping enabled="true"/>
+    <sortKey definition="row[&quot;cantidad&quot;]"/>
+   </seriesDefinitions>
+   <lineAttributes>
+    <color _nil="1"/>
+   </lineAttributes>
+   <label>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
 </ActuateChart>
 ]]></xml-property>
                         <property name="outputFormat">JS</property>
@@ -832,6 +903,40 @@ total</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Mayus Area</property>
+                                <text-property name="displayName">Mayus Area</text-property>
+                                <expression name="expression" type="javascript">var area = dataSetRow["_id.area"];&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Mayus COPE</property>
+                                <text-property name="displayName">Mayus COPE</text-property>
+                                <expression name="expression" type="javascript">var area = dataSetRow["_id.cope"];&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <column id="916">
                             <property name="width">1.7916666666666667in</property>
@@ -968,7 +1073,7 @@ total</expression>
                                         <data id="936">
                                             <property name="fontWeight">bold</property>
                                             <property name="paddingLeft">18pt</property>
-                                            <property name="resultSetColumn">_id.area</property>
+                                            <property name="resultSetColumn">Mayus Area</property>
                                         </data>
                                     </cell>
                                     <cell id="1177">
@@ -1016,7 +1121,7 @@ total</expression>
                                     <cell id="1056">
                                         <data id="1064">
                                             <property name="paddingLeft">12pt</property>
-                                            <property name="resultSetColumn">_id.cope</property>
+                                            <property name="resultSetColumn">Mayus COPE</property>
                                         </data>
                                     </cell>
                                     <cell id="1057">
