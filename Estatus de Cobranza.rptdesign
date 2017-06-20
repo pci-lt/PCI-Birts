@@ -248,10 +248,17 @@
                                         <structure>
                                             <property name="name">Mayúscula Cobranza</property>
                                             <text-property name="displayName">Mayúscula Cobranza</text-property>
-                                            <expression name="expression" type="javascript">var cobranza = dataSetRow["status_cob"];&#13;
-var mayu = cobranza.charAt(0).toUpperCase() + cobranza.slice(1);&#13;
-&#13;
-mayu</expression>
+                                            <expression name="expression" type="javascript">var area = dataSetRow["status_cob"];&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
                                             <property name="dataType">string</property>
                                             <property name="allowExport">true</property>
                                         </structure>
@@ -262,6 +269,40 @@ mayu</expression>
 var may = orden.charAt(0).toUpperCase() + orden.slice(1);&#13;
 &#13;
 may</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">MayusArea</property>
+                                            <text-property name="displayName">MayusArea</text-property>
+                                            <expression name="expression" type="javascript">var area = dataSetRow["area"];&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">MayusCope</property>
+                                            <text-property name="displayName">MayusCope</text-property>
+                                            <expression name="expression" type="javascript">var area = dataSetRow["cope"];&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
                                             <property name="dataType">string</property>
                                             <property name="allowExport">true</property>
                                         </structure>
@@ -281,9 +322,6 @@ may</expression>
                                     </column>
                                     <column id="56">
                                         <property name="width">1.1041666666666667in</property>
-                                    </column>
-                                    <column id="57">
-                                        <property name="width">1.2708333333333333in</property>
                                     </column>
                                     <header>
                                         <row id="19">
@@ -334,15 +372,6 @@ may</expression>
                                                     <text-property name="text">Tipo de Instalación</text-property>
                                                 </label>
                                             </cell>
-                                            <cell id="30">
-                                                <property name="borderBottomStyle">none</property>
-                                                <property name="borderLeftStyle">none</property>
-                                                <property name="borderRightStyle">none</property>
-                                                <property name="borderTopStyle">none</property>
-                                                <label id="31">
-                                                    <text-property name="text">Estatus Orden</text-property>
-                                                </label>
-                                            </cell>
                                         </row>
                                     </header>
                                     <group id="58">
@@ -369,7 +398,7 @@ may</expression>
                                                     </data>
                                                 </cell>
                                                 <cell id="61">
-                                                    <property name="colSpan">5</property>
+                                                    <property name="colSpan">4</property>
                                                     <property name="rowSpan">1</property>
                                                     <property name="borderBottomStyle">none</property>
                                                     <property name="borderLeftStyle">none</property>
@@ -401,11 +430,11 @@ may</expression>
                                                     <property name="borderTopStyle">none</property>
                                                     <data id="85">
                                                         <property name="fontWeight">bold</property>
-                                                        <property name="resultSetColumn">area</property>
+                                                        <property name="resultSetColumn">MayusArea</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="76">
-                                                    <property name="colSpan">4</property>
+                                                    <property name="colSpan">3</property>
                                                     <property name="rowSpan">1</property>
                                                     <property name="borderBottomStyle">none</property>
                                                     <property name="borderLeftStyle">none</property>
@@ -443,11 +472,11 @@ may</expression>
                                                     <property name="borderTopStyle">none</property>
                                                     <data id="111">
                                                         <property name="fontWeight">bold</property>
-                                                        <property name="resultSetColumn">cope</property>
+                                                        <property name="resultSetColumn">MayusCope</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="101">
-                                                    <property name="colSpan">3</property>
+                                                    <property name="colSpan">2</property>
                                                     <property name="rowSpan">1</property>
                                                     <property name="borderBottomStyle">none</property>
                                                     <property name="borderLeftStyle">none</property>
@@ -516,17 +545,6 @@ may</expression>
                                                     <property name="resultSetColumn">tipo</property>
                                                 </data>
                                             </cell>
-                                            <cell id="43">
-                                                <property name="borderBottomStyle">none</property>
-                                                <property name="borderLeftStyle">none</property>
-                                                <property name="borderRightStyle">none</property>
-                                                <property name="borderTopStyle">none</property>
-                                                <data id="44">
-                                                    <property name="backgroundColor">#CFD8DC</property>
-                                                    <property name="textAlign">center</property>
-                                                    <property name="resultSetColumn">Column Binding</property>
-                                                </data>
-                                            </cell>
                                         </row>
                                     </detail>
                                     <footer>
@@ -556,12 +574,6 @@ may</expression>
                                                 <property name="borderTopStyle">none</property>
                                             </cell>
                                             <cell id="50">
-                                                <property name="borderBottomStyle">none</property>
-                                                <property name="borderLeftStyle">none</property>
-                                                <property name="borderRightStyle">none</property>
-                                                <property name="borderTopStyle">none</property>
-                                            </cell>
-                                            <cell id="51">
                                                 <property name="borderBottomStyle">none</property>
                                                 <property name="borderLeftStyle">none</property>
                                                 <property name="borderRightStyle">none</property>
