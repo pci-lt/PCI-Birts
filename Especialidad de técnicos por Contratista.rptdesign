@@ -25,108 +25,6 @@
         </data-mart-data-source>
     </data-sources>
     <data-sets>
-        <data-mart-data-set name="Certificaciones" id="5">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">folio</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">folio</text-property>
-                    <text-property name="heading">folio</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">fibra</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">fibra</text-property>
-                    <text-property name="heading">fibra</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">cobre</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">cobre</text-property>
-                    <text-property name="heading">cobre</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">antenas</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">antenas</text-property>
-                    <text-property name="heading">antenas</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">redes</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">redes</text-property>
-                    <text-property name="heading">redes</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">folio</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">fibra</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">cobre</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">antenas</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">redes</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Certificaciones</property>
-            <property name="dataObject">Certificaciones</property>
-            <list-property name="selectedColumns">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">folio</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">fibra</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">cobre</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">antenas</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">redes</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-        </data-mart-data-set>
         <data-mart-data-set name="Especialidad" id="119">
             <list-property name="columnHints">
                 <structure>
@@ -456,14 +354,17 @@ resultado;</expression>
                                 <property name="name">MayusContratista</property>
                                 <text-property name="displayName">MContra</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.contratista"];&#13;
-var arr = area.split('_');&#13;
 var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
+if(area =! null){&#13;
+	var arr = area.split('_');&#13;
+	for (var i = 0; i &lt;arr.length;i++){&#13;
+	var te =  (new Packages.java.lang.String(arr[i]));&#13;
+		resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+		if (i &lt; arr.length - 1) {&#13;
+			resultado = resultado + ' ';&#13;
+		}&#13;
+}}else{&#13;
+	resultado = 'null';&#13;
 }&#13;
 resultado;</expression>
                                 <property name="dataType">string</property>

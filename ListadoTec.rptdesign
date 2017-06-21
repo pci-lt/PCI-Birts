@@ -183,7 +183,7 @@
                     </text>
                     <extended-item extensionName="Chart" id="1410">
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Stacked" orientation="1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="1">
   <block>
    <children _type="TitleBlock" visible="false">
     <outline>
@@ -206,7 +206,7 @@
      </outline>
     </clientArea>
    </children>
-   <children _type="Legend" itemType="1">
+   <children _type="Legend" visible="false" itemType="1">
     <outline>
      <color _nil="1"/>
     </outline>
@@ -264,7 +264,7 @@
      <query definition="row[&quot;_id.especialidad&quot;]">
       <grouping/>
      </query>
-     <series _type="BarSeries" seriesIdentifier="Series 1" labelPosition="4" stacked="true" riser="0">
+     <series _type="BarSeries" seriesIdentifier="Series 1" labelPosition="4" stacked="false" riser="0">
       <label>
        <background _nil="1"/>
        <outline>
@@ -272,7 +272,7 @@
        </outline>
       </label>
       <dataDefinition definition="row[&quot;cantidad&quot;]">
-       <grouping enabled="true" aggregateExpression="Min"/>
+       <grouping enabled="true"/>
       </dataDefinition>
       <triggers condition="6">
        <action type="1">
@@ -281,6 +281,7 @@
       </triggers>
       <curveFitting _nil="1"/>
      </series>
+     <grouping _nil="1"/>
     </seriesDefinitions>
     <lineAttributes>
      <color _nil="1"/>
@@ -458,6 +459,12 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
+                        <property name="__ac_group_collapse_level">1,2</property>
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">8.385416666666666in</property>
                         <property name="dataSet">Tecnicos</property>
@@ -719,6 +726,54 @@ resultado;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">SumDCobre</property>
+                                <text-property name="displayName">SumDCobre</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["SumC"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SumDHibrido</property>
+                                <text-property name="displayName">SumDH</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["SumH"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SumDM</property>
+                                <text-property name="displayName">SumDM</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["SumM"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">10000</property>
                         <column id="1555">
@@ -815,12 +870,45 @@ resultado;</expression>
                                 <row id="1561">
                                     <cell id="1562">
                                         <data id="1647">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingLeft">12pt</property>
                                             <property name="resultSetColumn">MayusD</property>
                                         </data>
                                     </cell>
                                     <cell id="1563">
-                                        <property name="colSpan">3</property>
+                                        <property name="colSpan">2</property>
                                         <property name="rowSpan">1</property>
+                                    </cell>
+                                    <cell id="1680">
+                                        <grid id="1681">
+                                            <property name="textAlign">center</property>
+                                            <column id="1682">
+                                                <property name="width">1.3645833333333333in</property>
+                                            </column>
+                                            <column id="1683">
+                                                <property name="width">1.2083333333333333in</property>
+                                            </column>
+                                            <column id="1684">
+                                                <property name="width">0.8229166666666666in</property>
+                                            </column>
+                                            <row id="1685">
+                                                <cell id="1686">
+                                                    <data id="1692">
+                                                        <property name="resultSetColumn">SumDCobre</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1688">
+                                                    <data id="1693">
+                                                        <property name="resultSetColumn">SumDHibrido</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1690">
+                                                    <data id="1694">
+                                                        <property name="resultSetColumn">SumDM</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
                                     </cell>
                                 </row>
                             </header>
