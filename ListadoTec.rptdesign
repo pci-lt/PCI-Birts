@@ -181,11 +181,11 @@
                         <property name="contentType">auto</property>
                         <text-property name="content"><![CDATA[Listado de Técnicos Activos (Sólo se consideran Técnicos Activos, no se consideran otros puestos)]]></text-property>
                     </text>
-                    <extended-item extensionName="Chart" id="1410">
+                    <extended-item extensionName="Chart" id="1709">
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side" orientation="1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side">
   <block>
-   <children _type="TitleBlock" visible="false">
+   <children _type="TitleBlock">
     <outline>
      <color _nil="1"/>
     </outline>
@@ -206,7 +206,7 @@
      </outline>
     </clientArea>
    </children>
-   <children _type="Legend" visible="false" itemType="1">
+   <children _type="Legend">
     <outline>
      <color _nil="1"/>
     </outline>
@@ -225,7 +225,7 @@
      </outline>
     </title>
    </children>
-   <bounds _body="0.0,0.0,747.0,156.75"/>
+   <bounds _body="0.0,0.0,747.0,177.0"/>
    <outline>
     <color _nil="1"/>
    </outline>
@@ -233,11 +233,9 @@
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
-  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
-   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
-   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
-   <ancillarySampleData dataSetRepresentation="Series 1"/>
+   <baseSampleData dataSetRepresentation="A, B, C"/>
+   <orthogonalSampleData dataSetRepresentation="5,4,12" seriesDefinitionIndex="0"/>
   </sampleData>
   <emptyMessage>
    <caption value="This chart contains no data."/>
@@ -253,7 +251,7 @@
      <color _nil="1"/>
     </outline>
    </title>
-   <associatedAxes type="0" primaryAxis="true" percent="false">
+   <associatedAxes primaryAxis="true">
     <title>
      <background _nil="1"/>
      <outline>
@@ -264,7 +262,7 @@
      <query definition="row[&quot;_id.especialidad&quot;]">
       <grouping/>
      </query>
-     <series _type="BarSeries" seriesIdentifier="Series 1" labelPosition="4" stacked="false" riser="0">
+     <series _type="BarSeries" seriesIdentifier="Series 1" stacked="false" riser="0">
       <label>
        <background _nil="1"/>
        <outline>
@@ -272,7 +270,7 @@
        </outline>
       </label>
       <dataDefinition definition="row[&quot;cantidad&quot;]">
-       <grouping enabled="true"/>
+       <grouping/>
       </dataDefinition>
       <triggers condition="6">
        <action type="1">
@@ -281,7 +279,6 @@
       </triggers>
       <curveFitting _nil="1"/>
      </series>
-     <grouping _nil="1"/>
     </seriesDefinitions>
     <lineAttributes>
      <color _nil="1"/>
@@ -312,54 +309,6 @@
      <value _nil="1"/>
     </origin>
    </associatedAxes>
-   <ancillaryAxes>
-    <title>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </title>
-    <seriesDefinitions>
-     <query definition=""/>
-     <series seriesIdentifier="">
-      <label>
-       <background _nil="1"/>
-       <outline>
-        <color _nil="1"/>
-       </outline>
-      </label>
-      <curveFitting _nil="1"/>
-     </series>
-    </seriesDefinitions>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <label>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </label>
-    <majorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </majorGrid>
-    <minorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </minorGrid>
-    <origin>
-     <value _type="NumberDataElement" value="0.0"/>
-    </origin>
-   </ancillaryAxes>
    <seriesDefinitions>
     <query definition=""/>
     <series seriesIdentifier="">
@@ -411,7 +360,7 @@
 ]]></xml-property>
                         <property name="outputFormat">JS</property>
                         <property name="inheritColumns">false</property>
-                        <property name="height">156.75pt</property>
+                        <property name="height">177pt</property>
                         <property name="width">747pt</property>
                         <property name="dataSet">Tecnicos</property>
                         <list-property name="boundDataColumns">
@@ -774,6 +723,38 @@ resultado;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">SumCope</property>
+                                <text-property name="displayName">SumCope</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["SumC"]+row["SumH"]+row["SumM"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">SumDiv</property>
+                                <text-property name="displayName">SumDiv</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["SumArea"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">10000</property>
                         <column id="1555">
@@ -866,14 +847,37 @@ resultado;</expression>
                                 <expression name="expressionValue" type="javascript">row["_id.division"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["SumDiv"]</expression>
+                                    <property name="direction">desc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
                             <header>
                                 <row id="1561">
                                     <cell id="1562">
-                                        <data id="1647">
-                                            <property name="fontWeight">bold</property>
-                                            <property name="paddingLeft">12pt</property>
-                                            <property name="resultSetColumn">MayusD</property>
-                                        </data>
+                                        <grid id="1702">
+                                            <column id="1703"/>
+                                            <column id="1704"/>
+                                            <row id="1705">
+                                                <cell id="1706">
+                                                    <data id="1647">
+                                                        <property name="fontWeight">bold</property>
+                                                        <property name="paddingLeft">12pt</property>
+                                                        <property name="resultSetColumn">MayusD</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1707">
+                                                    <data id="1708">
+                                                        <property name="fontWeight">bold</property>
+                                                        <property name="paddingRight">6pt</property>
+                                                        <property name="textAlign">right</property>
+                                                        <property name="resultSetColumn">SumDiv</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
                                     </cell>
                                     <cell id="1563">
                                         <property name="colSpan">2</property>
@@ -920,6 +924,13 @@ resultado;</expression>
                                 <expression name="expressionValue" type="javascript">row["_id.area"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["SumArea"]</expression>
+                                    <property name="direction">desc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
                             <header>
                                 <row id="1575">
                                     <cell id="1576"/>
@@ -959,15 +970,37 @@ resultado;</expression>
                                 <expression name="expressionValue" type="javascript">row["_id.cope"]</expression>
                             </structure>
                             <property name="hideDetail">true</property>
+                            <list-property name="sort">
+                                <structure>
+                                    <expression name="key" type="javascript">row["SumCope"]</expression>
+                                    <property name="direction">desc</property>
+                                    <property name="strength">-1</property>
+                                </structure>
+                            </list-property>
                             <header>
                                 <row id="1589">
                                     <cell id="1590"/>
                                     <cell id="1591"/>
                                     <cell id="1592">
-                                        <data id="1601">
-                                            <property name="paddingLeft">12pt</property>
-                                            <property name="resultSetColumn">MayusCope</property>
-                                        </data>
+                                        <grid id="1695">
+                                            <column id="1696"/>
+                                            <column id="1697"/>
+                                            <row id="1698">
+                                                <cell id="1699">
+                                                    <data id="1601">
+                                                        <property name="paddingLeft">12pt</property>
+                                                        <property name="resultSetColumn">MayusCope</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1700">
+                                                    <property name="textAlign">right</property>
+                                                    <data id="1701">
+                                                        <property name="paddingRight">5pt</property>
+                                                        <property name="resultSetColumn">SumCope</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
                                     </cell>
                                     <cell id="1593">
                                         <grid id="1630">
