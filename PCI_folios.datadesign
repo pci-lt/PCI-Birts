@@ -117,6 +117,12 @@
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Data Set" id="408">
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">status_cob</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">status_cob</text-property>
@@ -164,31 +170,36 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">status_cob</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">folio</property>
+                        <property name="name">status_cob</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">area</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">cope</property>
+                        <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">tipo</property>
+                        <property name="name">cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
                         <property name="name">status_ord</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -198,48 +209,55 @@
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">status_cob</property>
                     <property name="nativeName">status_cob</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">folio</property>
                     <property name="nativeName">folio</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">area</property>
                     <property name="nativeName">area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cope</property>
                     <property name="nativeName">cope</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">tipo</property>
                     <property name="nativeName">tipo</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">status_ord</property>
                     <property name="nativeName">status_ord</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "status_cob" , "folio" , "area" , "cope" , "tipo" , "status_ord"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "status_cob" , "folio" , "area" , "cope" , "tipo" , "status_ord"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -1525,6 +1543,12 @@ log('query' + query);]]></method>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Certificaciones" id="416">
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">folio</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">folio</text-property>
@@ -1612,61 +1636,66 @@ log('query' + query);]]></method>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">folio</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">division</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">fibra</property>
+                        <property name="name">division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">cobre</property>
+                        <property name="name">fibra</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">antenas</property>
+                        <property name="name">cobre</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">redes</property>
+                        <property name="name">antenas</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">nombre</property>
+                        <property name="name">redes</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">ap_pat</property>
+                        <property name="name">nombre</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">ap_mat</property>
+                        <property name="name">ap_pat</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">contratista</property>
+                        <property name="name">ap_mat</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">area</property>
+                        <property name="name">contratista</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">12</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">cope</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -1676,90 +1705,97 @@ log('query' + query);]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">folio</property>
                     <property name="nativeName">folio</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">division</property>
                     <property name="nativeName">division</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">fibra</property>
                     <property name="nativeName">fibra</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cobre</property>
                     <property name="nativeName">cobre</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">antenas</property>
                     <property name="nativeName">antenas</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">redes</property>
                     <property name="nativeName">redes</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">8</property>
                     <property name="name">nombre</property>
                     <property name="nativeName">nombre</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">9</property>
                     <property name="name">ap_pat</property>
                     <property name="nativeName">ap_pat</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">10</property>
                     <property name="name">ap_mat</property>
                     <property name="nativeName">ap_mat</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">11</property>
                     <property name="name">contratista</property>
                     <property name="nativeName">contratista</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">12</property>
                     <property name="name">area</property>
                     <property name="nativeName">area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">13</property>
                     <property name="name">cope</property>
                     <property name="nativeName">cope</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico'\r\n}},\r\n\r\n{$project:{\r\n\t\r\n\tfolio : '$folio',\r\n\tfibra:'$answers.590cdf33f851c25926110725',\r\n\tcobre:'$answers.590cdf33f851c25926110726',\r\n\tantenas:'$answers.59289efdb43fdd5d59125af0',\r\n\tredes: '$answers.59289efdb43fdd5d59125aee',\r\n\tdivision: '$answers.f1216500a010000000000011',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tap_pat: '$answers.f1216500a010000000000005',\r\n\tap_mat: '$answers.f1216500a010000000000006',\r\n\tcontratista: '$answers.590a2a71b43fdd3c7678af07',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tcope: '$answers.590a395ff851c2100f7c671a'\r\n\t\r\n\t\r\n\t\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "division" , "fibra" , "cobre" , "antenas" , "redes" , "nombre" , "ap_pat" , "ap_mat" , "contratista" , "area" , "cope"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico'\r\n}},\r\n\r\n{$project:{\r\n\t\r\n\tfolio : '$folio',\r\n\tfibra:'$answers.590cdf33f851c25926110725',\r\n\tcobre:'$answers.590cdf33f851c25926110726',\r\n\tantenas:'$answers.59289efdb43fdd5d59125af0',\r\n\tredes: '$answers.59289efdb43fdd5d59125aee',\r\n\tdivision: '$answers.f1216500a010000000000011',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tap_pat: '$answers.f1216500a010000000000005',\r\n\tap_mat: '$answers.f1216500a010000000000006',\r\n\tcontratista: '$answers.590a2a71b43fdd3c7678af07',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tcope: '$answers.590a395ff851c2100f7c671a'\r\n\t\r\n\t\r\n\t\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "division" , "fibra" , "cobre" , "antenas" , "redes" , "nombre" , "ap_pat" , "ap_mat" , "contratista" , "area" , "cope"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -2405,6 +2441,193 @@ log('query' + query);]]></method>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,10000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.status_cob</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.status_cob</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.status_cob</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.area</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.area</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.cope</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.cope</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.cope</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tipo</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tipo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tipo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cantidad</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cantidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cantidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="VETEC Cobre" id="424">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">promedio</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">promedio</text-property>
+                    <text-property name="heading">promedio</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantidad</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cantidad</text-property>
+                    <text-property name="heading">cantidad</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">promedio</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">10</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">promedio</property>
+                    <property name="nativeName">promedio</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:15016,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\t\tcope: '$answers.f1166900a010000000000006'\r\n\t\t\r\n\t},\r\n\t\tpromedio: { $avg : '$points' },\r\n\t\tcantidad: {$sum :1}\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "promedio" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100000000</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
