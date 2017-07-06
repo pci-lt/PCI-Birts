@@ -4344,17 +4344,15 @@ reportContext.setGlobalVariable('log', log);
 
 var query = this.queryText.toString();
 var new_query = "";
-
+var bookmark = "{$exists:false},";
 
 var fecha = params["Fecha"].value;
 
 
+if(fecha!=null &amp;&amp; fecha!=""){
 log('Fecha: ' + fecha);
-
-var bookmark = "{$exists:false},";
-
-
 new_query = "created_at: {$gte: {$date:'" + fecha + "T00:00:01Z'} , $lte:{$date:'" + fecha + "T23:59:59Z'} }"
+}
 
 
 log('new query= ' + new_query)
