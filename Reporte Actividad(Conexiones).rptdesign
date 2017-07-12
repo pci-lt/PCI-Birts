@@ -208,8 +208,8 @@
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="type">custom</property>
             <property name="orientation">auto</property>
-            <property name="height">100%</property>
-            <property name="width">100%</property>
+            <property name="height">11in</property>
+            <property name="width">8.5in</property>
             <page-footer>
                 <text id="3">
                     <property name="contentType">html</property>
@@ -223,7 +223,10 @@
             <property name="pageBreakAfter">avoid</property>
             <property name="pageBreakBefore">avoid</property>
             <property name="pageBreakInside">avoid</property>
-            <column id="685"/>
+            <property name="width">13.583333333333334in</property>
+            <column id="685">
+                <property name="width">13.583333333333334in</property>
+            </column>
             <row id="686">
                 <cell id="687">
                     <text id="170">
@@ -243,6 +246,10 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
+                        <property name="__ac_group_collapse_level">1</property>
+                        <property name="marginTop">24pt</property>
+                        <property name="marginLeft">30pt</property>
+                        <property name="width">13.083333333333334in</property>
                         <property name="dataSet">join_user_connections</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -340,61 +347,119 @@
                                 <property name="name">Actividad</property>
                                 <text-property name="displayName">Actividad</text-property>
                                 <expression name="expression" type="javascript">var total = dataSetRow["sum"]&#13;
-var dias = Math.floor(total / 86400)&#13;
-var horas = Math.floor((total % 86400)/3600)&#13;
-var minutos = Math.floor(((total % 86400) % 3600) /60)&#13;
-var segundos = (( total % 86400) % 3600) % 60&#13;
-dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " segundos"</expression>
+var display = "";&#13;
+if(total >60){&#13;
+	var dias = Math.floor(total / 86400)&#13;
+	var horas = Math.floor((total % 86400)/3600)&#13;
+	var minutos = Math.floor(((total % 86400) % 3600) /60)&#13;
+	var segundos = (( total % 86400) % 3600) % 60&#13;
+	&#13;
+	display =dias + " dias " + horas + " horas " + minutos + " minutos  ";&#13;
+}else{&#13;
+	if(total==60){&#13;
+		display = "1 minuto"&#13;
+	}&#13;
+	else{&#13;
+		if (total &lt; 60 &amp;&amp; total > 0){&#13;
+			display = total + " segundos"&#13;
+		}else{&#13;
+			display = "Sin Actividad"&#13;
+		}&#13;
+	}&#13;
+}</expression>
                                 <property name="dataType">string</property>
                                 <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
                         <column id="632">
-                            <property name="width">20%</property>
+                            <property name="width">3in</property>
                         </column>
                         <column id="633">
-                            <property name="width">20%</property>
+                            <property name="width">1.0208333333333333in</property>
                         </column>
                         <column id="634">
-                            <property name="width">10%</property>
+                            <property name="width">1.8020833333333333in</property>
                         </column>
                         <column id="635">
-                            <property name="width">10%</property>
+                            <property name="width">2.0208333333333335in</property>
                         </column>
                         <column id="636">
-                            <property name="width">10%</property>
+                            <property name="width">1.59375in</property>
                         </column>
                         <column id="637">
-                            <property name="width">20%</property>
+                            <property name="width">0.7604166666666666in</property>
                         </column>
                         <column id="638">
-                            <property name="width">10%</property>
+                            <property name="width">1.5729166666666667in</property>
                         </column>
                         <column id="639">
-                            <property name="width">10%</property>
+                            <property name="width">1.3125in</property>
                         </column>
                         <header>
-                            <row id="579">
-                                <cell id="580">
-                                    <text id="678">
-                                        <property name="style">NewStyle</property>
-                                        <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Contratista]]></text-property>
-                                    </text>
+                            <row id="731">
+                                <cell id="732">
+                                    <grid id="746">
+                                        <column id="747">
+                                            <property name="width">1.0833333333333333in</property>
+                                        </column>
+                                        <column id="748">
+                                            <property name="width">1.84375in</property>
+                                        </column>
+                                        <row id="749">
+                                            <cell id="750">
+                                                <text id="680">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[No. de Licencias]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="751">
+                                                <text id="678">
+                                                    <property name="style">NewStyle</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <property name="fontStyle">normal</property>
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Contratista]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
                                 </cell>
-                                <cell id="582">
-                                    <text id="680">
-                                        <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Número de Licencias]]></text-property>
-                                    </text>
+                                <cell id="733">
+                                    <label id="587">
+                                        <text-property name="text">Email</text-property>
+                                    </label>
                                 </cell>
-                                <cell id="584"/>
-                                <cell id="586"/>
-                                <cell id="588"/>
-                                <cell id="590"/>
-                                <cell id="592"/>
-                                <cell id="594"/>
+                                <cell id="734">
+                                    <label id="589">
+                                        <text-property name="text">Fecha de Creación</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="735">
+                                    <label id="591">
+                                        <text-property name="text">Último Inicio de Sesión</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="736">
+                                    <label id="593">
+                                        <text-property name="text">Puesto</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="737">
+                                    <label id="595">
+                                        <text-property name="text">Registros</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="738">
+                                    <label id="597">
+                                        <text-property name="text">Fecha de expiración</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="739">
+                                    <label id="599">
+                                        <text-property name="text">Minutos de Actividad</text-property>
+                                    </label>
+                                </cell>
                             </row>
                         </header>
                         <group id="642">
@@ -423,58 +488,47 @@ dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " seg
                             </list-property>
                             <header>
                                 <row id="643">
-                                    <property name="backgroundColor">#DCEDC8</property>
                                     <property name="color">black</property>
                                     <cell id="644">
-                                        <data id="665">
-                                            <property name="style">Propietario</property>
-                                            <property name="resultSetColumn">Data Set_1::first_name</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="645">
-                                        <data id="698">
-                                            <property name="textAlign">center</property>
-                                            <property name="resultSetColumn">Aggregation</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="646"/>
-                                    <cell id="647"/>
-                                    <cell id="648"/>
-                                    <cell id="649">
-                                        <grid id="721">
-                                            <column id="722"/>
-                                            <column id="723"/>
-                                            <row id="724">
-                                                <cell id="725">
-                                                    <text id="727">
-                                                        <property name="contentType">auto</property>
-                                                        <text-property name="content"><![CDATA[Total Registro:]]></text-property>
-                                                    </text>
+                                        <property name="colSpan">5</property>
+                                        <property name="rowSpan">1</property>
+                                        <grid id="740">
+                                            <column id="741">
+                                                <property name="width">0.8in</property>
+                                            </column>
+                                            <column id="742">
+                                                <property name="width">5.90625in</property>
+                                            </column>
+                                            <row id="743">
+                                                <cell id="744">
+                                                    <data id="698">
+                                                        <property name="fontWeight">bold</property>
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Aggregation</property>
+                                                    </data>
                                                 </cell>
-                                                <cell id="726">
-                                                    <data id="728">
-                                                        <property name="resultSetColumn">Total Registros</property>
+                                                <cell id="745">
+                                                    <data id="665">
+                                                        <property name="style">Propietario</property>
+                                                        <property name="resultSetColumn">Data Set_1::first_name</property>
                                                     </data>
                                                 </cell>
                                             </row>
                                         </grid>
                                     </cell>
-                                    <cell id="650"/>
-                                    <cell id="651"/>
+                                    <cell id="752">
+                                        <data id="728">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Total Registros</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="650">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                    </cell>
                                 </row>
                             </header>
-                            <footer>
-                                <row id="654">
-                                    <cell id="655"/>
-                                    <cell id="656"/>
-                                    <cell id="657"/>
-                                    <cell id="658"/>
-                                    <cell id="659"/>
-                                    <cell id="660"/>
-                                    <cell id="661"/>
-                                    <cell id="662"/>
-                                </row>
-                            </footer>
                         </group>
                         <group id="699">
                             <property name="groupName">Titulos</property>
@@ -506,54 +560,11 @@ dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " seg
                                         </grid>
                                     </cell>
                                     <cell id="702">
-                                        <label id="587">
-                                            <text-property name="text">Email</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="703">
-                                        <label id="589">
-                                            <text-property name="text">Fecha de Creación</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="704">
-                                        <label id="591">
-                                            <text-property name="text">Último Inicio de Sesión</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="705">
-                                        <label id="593">
-                                            <text-property name="text">Puesto</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="706">
-                                        <label id="595">
-                                            <text-property name="text">Registros</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="707">
-                                        <label id="597">
-                                            <text-property name="text">Fecha de expiración</text-property>
-                                        </label>
-                                    </cell>
-                                    <cell id="708">
-                                        <label id="599">
-                                            <text-property name="text">Minutos de Actividad</text-property>
-                                        </label>
+                                        <property name="colSpan">7</property>
+                                        <property name="rowSpan">1</property>
                                     </cell>
                                 </row>
                             </header>
-                            <footer>
-                                <row id="710">
-                                    <cell id="711"/>
-                                    <cell id="712"/>
-                                    <cell id="713"/>
-                                    <cell id="714"/>
-                                    <cell id="715"/>
-                                    <cell id="716"/>
-                                    <cell id="717"/>
-                                    <cell id="718"/>
-                                </row>
-                            </footer>
                         </group>
                         <detail>
                             <row id="667">
@@ -570,18 +581,20 @@ dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " seg
                                 <cell id="670">
                                     <data id="610">
                                         <structure name="dateTimeFormat">
-                                            <property name="category">Long Date</property>
-                                            <property name="pattern">Long Date</property>
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">MMMM dd, yyyy</property>
                                         </structure>
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">created_at</property>
                                     </data>
                                 </cell>
                                 <cell id="671">
                                     <data id="612">
                                         <structure name="dateTimeFormat">
-                                            <property name="category">Long Date</property>
-                                            <property name="pattern">Long Date</property>
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">MMMM dd, yyyy</property>
                                         </structure>
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">last_login</property>
                                     </data>
                                 </cell>
@@ -592,15 +605,17 @@ dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " seg
                                 </cell>
                                 <cell id="673">
                                     <data id="616">
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">max</property>
                                     </data>
                                 </cell>
                                 <cell id="674">
                                     <data id="618">
                                         <structure name="dateTimeFormat">
-                                            <property name="category">Long Date</property>
-                                            <property name="pattern">Long Date</property>
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">MMMM dd, yyyy</property>
                                         </structure>
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">expiration</property>
                                     </data>
                                 </cell>
@@ -611,18 +626,6 @@ dias + " dias " + horas + " horas " + minutos + " minutos y " + segundos + " seg
                                 </cell>
                             </row>
                         </detail>
-                        <footer>
-                            <row id="621">
-                                <cell id="622"/>
-                                <cell id="623"/>
-                                <cell id="624"/>
-                                <cell id="625"/>
-                                <cell id="626"/>
-                                <cell id="627"/>
-                                <cell id="628"/>
-                                <cell id="629"/>
-                            </row>
-                        </footer>
                     </table>
                 </cell>
             </row>
