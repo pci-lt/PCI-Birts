@@ -499,14 +499,21 @@ total</expression>
                                 <property name="name">Mayus Contratista</property>
                                 <text-property name="displayName">MayusC</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.contratista"];&#13;
-var arr = area.split('_');&#13;
 var resultado = '';&#13;
+if(area == null)&#13;
+	area = " ";&#13;
+&#13;
+if(area != null || area !=""){&#13;
+var arr = area.split('_');&#13;
 for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	var te =  (new Packages.java.lang.String(arr[i]));&#13;
 	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
 	if (i &lt; arr.length - 1) {&#13;
 		resultado = resultado + ' ';&#13;
 	}&#13;
+}&#13;
+}else{&#13;
+	resultado = "";&#13;
 }&#13;
 resultado;</expression>
                                 <property name="dataType">string</property>
