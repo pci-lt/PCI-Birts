@@ -95,6 +95,26 @@ yy + '-' + mm + '-' + dd</value>
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Seguimiento FTTH" id="77">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Mayus Estatus</property>
+                    <expression name="expression" type="javascript">var area = row["estatus"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+var resultado = ' ';&#13;
+var arr = area.split('_');&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -102,6 +122,10 @@ yy + '-' + mm + '-' + dd</value>
                     <text-property name="displayName">_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Mayus Estatus</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -149,6 +173,11 @@ yy + '-' + mm + '-' + dd</value>
                     <structure>
                         <property name="position">9</property>
                         <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Mayus Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -381,6 +410,13 @@ resultado;</expression>
                                 <property name="dataType">string</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Mayus Estatus</property>
+                                <text-property name="displayName">MEstatus</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Mayus Estatus"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
                         <column id="193"/>
@@ -565,7 +601,7 @@ resultado;</expression>
                                 <cell id="440">
                                     <data id="443">
                                         <property name="paddingLeft">12pt</property>
-                                        <property name="resultSetColumn">estatus</property>
+                                        <property name="resultSetColumn">Mayus Estatus</property>
                                     </data>
                                 </cell>
                             </row>
