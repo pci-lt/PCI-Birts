@@ -79,6 +79,20 @@
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Seguimiento Agendas" id="22">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Fecha Programada</property>
+                    <expression name="expression" type="javascript">var fecha = row["agendado"];&#13;
+var date = fecha.split("-");&#13;
+var year = date[0];&#13;
+var month = date[1] - 1;&#13;
+var day = date[2];&#13;
+var date_final = new Date(year, month, day);&#13;
+&#13;
+date_final;</expression>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -136,6 +150,10 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Fecha Programada</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -187,6 +205,16 @@
                     <structure>
                         <property name="position">10</property>
                         <property name="name">created</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">agendado</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Fecha Programada</property>
                         <property name="dataType">date</property>
                     </structure>
                 </list-property>
@@ -242,7 +270,12 @@
                 <structure>
                     <property name="position">10</property>
                     <property name="name">created</property>
-                    <property name="dataType">date</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">agendado</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -333,9 +366,9 @@
                     <property name="hierarchies">
                         <tabular-hierarchy name="NewTabularHierarchy" id="679">
                             <property name="levels">
-                                <tabular-level name="created" id="689">
+                                <tabular-level name="Fecha Programada" id="694">
                                     <property name="dataType">date</property>
-                                    <property name="columnName">created</property>
+                                    <property name="columnName">Fecha Programada</property>
                                 </tabular-level>
                                 <tabular-level name="first_name" id="682">
                                     <property name="dataType">string</property>
@@ -503,7 +536,7 @@ display</expression>
    </outline>
   </emptyMessage>
   <axes type="3">
-   <title visible="false">
+   <title>
     <background _nil="1"/>
     <outline>
      <color _nil="1"/>
@@ -580,7 +613,7 @@ display</expression>
        <color _nil="1"/>
       </outline>
      </label>
-     <dataDefinition definition="data[&quot;Datos/created&quot;]"/>
+     <dataDefinition definition="data[&quot;Datos/Fecha Programada&quot;]"/>
      <curveFitting _nil="1"/>
     </series>
     <grouping groupingUnit="7" groupType="1"/>
@@ -597,7 +630,6 @@ display</expression>
      <color _nil="1"/>
     </outline>
    </label>
-   <formatSpecifier _type="JavaDateFormatSpecifier" pattern="EE-dd"/>
    <majorGrid>
     <lineAttributes>
      <color _nil="1"/>
@@ -659,6 +691,26 @@ display</expression>
                                             <expression name="expression" type="javascript">measure["folio"]</expression>
                                             <property name="dataType">integer</property>
                                             <property name="aggregateFunction">SUM</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Datos/agendado</property>
+                                            <expression name="expression" type="javascript">dimension["Datos"]["agendado"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Datos/Fecha Reportado</property>
+                                            <expression name="expression" type="javascript">dimension["Datos"]["Fecha Reportado"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Datos/agendado_1</property>
+                                            <expression name="expression" type="javascript">dimension["Datos"]["agendado"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Datos/Fecha Programada</property>
+                                            <expression name="expression" type="javascript">dimension["Datos"]["Fecha Programada"]</expression>
+                                            <property name="dataType">date</property>
                                         </structure>
                                     </list-property>
                                     <property name="theme">ThemesReportItems31.Chart-Clean Blue</property>

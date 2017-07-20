@@ -4329,12 +4329,16 @@ log('query' + query);]]></method>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">conection</text-property>
                     <text-property name="heading">conection</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">folio</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">folio</text-property>
                     <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">hora</property>
@@ -4381,12 +4385,25 @@ log('query' + query);]]></method>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">estatus</text-property>
                     <text-property name="heading">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">created</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">created</text-property>
                     <text-property name="heading">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">agendado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">agendado</text-property>
+                    <text-property name="heading">agendado</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -4440,7 +4457,12 @@ log('query' + query);]]></method>
                     <structure>
                         <property name="position">10</property>
                         <property name="name">created</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">agendado</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -4461,7 +4483,8 @@ var year = params["Año"].value;
 
 if(fecha!=null &amp;&amp; fecha!=""){
 	log('Fecha: ' + fecha);
-	new_query = "'answers.f1054000a010000000000011': {$gte:'" + fecha + "' , $lte:'" + fecha + "' }";
+	fecha = fecha.toString();
+	new_query = "'answers.f1054000a010000000000011': '" + fecha + "',";
 }
 
 if(month != '' &amp;&amp; month != null){
@@ -4486,7 +4509,7 @@ if(month != '' &amp;&amp; month != null){
 	}
 	
 	
-	new_query = "created_at: {$gte: {$date:'" + year+"-"+month + "-01T00:00:01Z'} , $lte:{$date:'" + year_to + "-"+month_to + "-01T00:00:01Z'} }";	
+	new_query = "'answers.f1054000a010000000000011': {$gte: '" + year+"-"+month + "-01' , $lt:'" + year_to + "-"+month_to + "-01' }";	
 }
 
 
@@ -4565,11 +4588,18 @@ log('query' + query);]]></method>
                     <property name="position">10</property>
                     <property name="name">created</property>
                     <property name="nativeName">created</property>
-                    <property name="dataType">date</property>
+                    <property name="dataType">string</property>
                     <property name="nativeDataType">9</property>
                 </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">agendado</property>
+                    <property name="nativeName">agendado</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: '$connection_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico: '$answers.f1054000a040000000000001',\r\n\ttel_tec: '$answers.f1054000a040000000000002',\r\n\testatus: '$answers.f0121460a1000000000000e1'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conection" , "folio" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: '$connection_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico: '$answers.f1054000a040000000000001',\r\n\ttel_tec: '$answers.f1054000a040000000000002',\r\n\testatus: '$answers.f0121460a1000000000000e1',\r\n\tagendado: '$answers.f1054000a010000000000011'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conection" , "folio" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created" , "agendado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -4791,6 +4821,27 @@ log('query' + query);]]></method>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">agendado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">agendado</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -4837,10 +4888,15 @@ log('query' + query);]]></method>
                     <structure>
                         <property name="position">9</property>
                         <property name="name">created</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
+                        <property name="name">agendado</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -4862,6 +4918,7 @@ log('query' + query);]]></method>
 <tns:Column>Seguimiento Agendas::tel_tec</tns:Column>
 <tns:Column>Seguimiento Agendas::estatus</tns:Column>
 <tns:Column>Seguimiento Agendas::created</tns:Column>
+<tns:Column>Seguimiento Agendas::agendado</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 </tns:selectColumns>
 <tns:joins>
@@ -7287,34 +7344,13 @@ reportContext.setGlobalVariable('log', log);
 var query = this.queryText.toString();
 var new_query = "";
 var bookmark = "{$exists:false},";
-var month = params["Mes Mensual"].value;
-var year = params["Year Mensual"].value;
+var fecha = params["Fecha"].value;
+var hasta = params["Hasta"].value;
 
-if(month != null || month !=''){
-	log(' entr al if \n');
+	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T00:00:01Z'} , $lte:{$date:'" + hasta + "T23:59:59Z'} }, ";	
 
-	var month_to = month;
-	var year_to = year;
-	
-	if(month == 12){
-		year_to = year + 1;
-		month_to = "01";
-	}else{
-		month_to = month + 1 ;
-	}
-			
-	if(month_to<10 &amp;&amp; month_to != "01"){
-		month_to = '0' + month_to;
-	}
-		
-	if(month<10){
-		month = '0' + month;
-	}
-	
-	
-	new_query = " created_at: {$gte: {$date:'" + year+"-"+month + "-01T00:00:01Z'} , $lt:{$date:'" + year_to + "-"+month_to + "-01T00:00:01Z'} }, ";	
 
-}
 
 log('new query= ' + new_query)
 
@@ -7709,7 +7745,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2017-07-11</value>
+                <value type="constant">2017-07-19</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -7730,6 +7766,9 @@ log('query' + query);]]></method>
                     <expression name="valueExpr">row["Year"]</expression>
                     <expression name="labelExpr">row["Year"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2017</value>
+                    </simple-property-list>
                     <property name="paramType">simple</property>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
@@ -7742,6 +7781,9 @@ log('query' + query);]]></method>
                     <expression name="valueExpr">row["month"]</expression>
                     <expression name="labelExpr">row["Mes"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">7</value>
+                    </simple-property-list>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
                     <structure name="format"/>
@@ -7821,5 +7863,18 @@ log('query' + query);]]></method>
                 </scalar-parameter>
             </parameters>
         </cascading-parameter-group>
+        <scalar-parameter name="Hasta" id="463">
+            <text-property name="promptText">Hasta</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
 </datamart>
