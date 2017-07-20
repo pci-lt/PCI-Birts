@@ -159,6 +159,39 @@
                                 <expression name="expression" type="javascript">dataSetRow["cantidad"]</expression>
                                 <property name="dataType">integer</property>
                             </structure>
+                            <structure>
+                                <property name="name">Sum Total</property>
+                                <text-property name="displayName">STotal</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Mayus Cope</property>
+                                <text-property name="displayName">MCope</text-property>
+                                <expression name="expression" type="javascript">var area = dataSetRow["_id.cope"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+var resultado = "";&#13;
+var arr = area.split('_');&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">1000</property>
                         <column id="69">
@@ -210,7 +243,7 @@
                                             <cell id="76">
                                                 <data id="60">
                                                     <property name="paddingLeft">12pt</property>
-                                                    <property name="resultSetColumn">_id.cope</property>
+                                                    <property name="resultSetColumn">Mayus Cope</property>
                                                 </data>
                                             </cell>
                                             <cell id="77">
@@ -238,7 +271,31 @@
                         </detail>
                         <footer>
                             <row id="65">
-                                <cell id="66"/>
+                                <cell id="66">
+                                    <grid id="86">
+                                        <column id="87">
+                                            <property name="width">1.3541666666666667in</property>
+                                        </column>
+                                        <column id="88">
+                                            <property name="width">1.2291666666666667in</property>
+                                        </column>
+                                        <row id="89">
+                                            <cell id="90">
+                                                <text id="92">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Total de Registros]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="91">
+                                                <data id="85">
+                                                    <property name="paddingRight">20pt</property>
+                                                    <property name="textAlign">right</property>
+                                                    <property name="resultSetColumn">Sum Total</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
                                 <cell id="67"/>
                             </row>
                         </footer>
