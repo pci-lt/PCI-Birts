@@ -14,41 +14,65 @@
         </structure>
     </list-property>
     <parameters>
-        <cascading-parameter-group name="Asistencia Mensual" id="382">
-            <text-property name="promptText">Elegir Mes</text-property>
-            <property name="dataSet">Fechas</property>
-            <property name="dataSetMode">single</property>
-            <parameters>
-                <scalar-parameter name="Year Mensual" id="383">
-                    <text-property name="promptText">Años</text-property>
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Fechas</property>
-                    <expression name="valueExpr">row["Year"]</expression>
-                    <expression name="labelExpr">row["Year"]</expression>
-                    <property name="dataType">integer</property>
-                    <simple-property-list name="defaultValue">
-                        <value type="constant">2017</value>
-                    </simple-property-list>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">true</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="Mes Mensual" id="384">
-                    <text-property name="promptText">Mes</text-property>
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Fechas</property>
-                    <expression name="valueExpr">row["month"]</expression>
-                    <expression name="labelExpr">row["Mes"]</expression>
-                    <property name="dataType">integer</property>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">true</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-            </parameters>
-        </cascading-parameter-group>
+        <scalar-parameter name="Fecha" id="386">
+            <text-property name="promptText">Desde</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var time = new Date();&#13;
+var dd = time.getDate();&#13;
+var mm = time.getMonth()+1;&#13;
+var yy = time.getFullYear();&#13;
+&#13;
+if(dd&lt; 15){&#13;
+	dd = '01'&#13;
+}else{&#13;
+	dd = '15'&#13;
+}&#13;
+if(mm&lt;10){&#13;
+	mm = '0' + mm&#13;
+}&#13;
+&#13;
+yy + '-' + mm + '-' + dd</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Hasta" id="387">
+            <text-property name="promptText">Hasta</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var time = new Date();&#13;
+var dd = time.getDate();&#13;
+var mm = time.getMonth()+1;&#13;
+var yy = time.getFullYear();&#13;
+&#13;
+if(dd>= 15){&#13;
+	dd = '01'&#13;
+	mm += 1;&#13;
+}else{&#13;
+	dd = '15'&#13;
+}&#13;
+if(mm&lt;10){&#13;
+	mm = '0' + mm&#13;
+}&#13;
+&#13;
+yy + '-' + mm + '-' + dd</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Folios" id="4">
@@ -64,7 +88,13 @@
                 <structure>
                     <property name="paramName">Fecha</property>
                     <simple-property-list name="expression">
-                        <value type="constant">2017-07-11</value>
+                        <value type="javascript">params["Fecha"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Hasta</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Hasta"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
@@ -88,14 +118,11 @@
                 <structure>
                     <property name="paramName">Year Mensual</property>
                     <simple-property-list name="expression">
-                        <value type="javascript">params["Year Mensual"].value</value>
+                        <value type="constant">2017</value>
                     </simple-property-list>
                 </structure>
                 <structure>
                     <property name="paramName">Mes Mensual</property>
-                    <simple-property-list name="expression">
-                        <value type="javascript">params["Mes Mensual"].value</value>
-                    </simple-property-list>
                 </structure>
             </list-property>
         </data-mart-data-source>
@@ -415,7 +442,7 @@ total</expression>
     </page-setup>
     <body>
         <grid id="23">
-            <property name="width">9.875in</property>
+            <property name="width">15.614583333333334in</property>
             <column id="24">
                 <property name="width">9.875in</property>
             </column>
@@ -438,31 +465,30 @@ total</expression>
                                 </image>
                             </cell>
                             <cell id="36">
-                                <grid id="39">
-                                    <column id="40"/>
-                                    <row id="41">
-                                        <cell id="42">
-                                            <text id="38">
-                                                <property name="fontSize">16pt</property>
-                                                <property name="fontWeight">bold</property>
-                                                <property name="textAlign">center</property>
-                                                <property name="contentType">auto</property>
-                                                <text-property name="content"><![CDATA[Acumulado del mes de ]]></text-property>
-                                            </text>
-                                        </cell>
-                                    </row>
-                                    <row id="43">
-                                        <cell id="44">
-                                            <text-data id="385">
-                                                <property name="fontSize">16pt</property>
-                                                <property name="fontWeight">bold</property>
-                                                <property name="textAlign">center</property>
-                                                <expression name="valueExpr">params["Mes Mensual"].displayText</expression>
-                                                <property name="contentType">html</property>
-                                            </text-data>
-                                        </cell>
-                                    </row>
-                                </grid>
+                                <text-data id="388">
+                                    <property name="fontSize">16pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <expression name="valueExpr">var display = "Asistencia del ";&#13;
+var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];&#13;
+var desde = params["Fecha"].value;&#13;
+var hasta = params["Hasta"].value;&#13;
+var day1 = desde.getDate();&#13;
+var day2 = hasta.getDate();&#13;
+var mes1 = desde.getMonth();&#13;
+var month1 = months[mes1];&#13;
+var mes2 = hasta.getMonth();&#13;
+var month2 = months[mes2];&#13;
+&#13;
+&#13;
+var date1 = day1 + " de " + month1;&#13;
+var date2 = day2 + " de " + month2;&#13;
+&#13;
+display = display + date1 + " hasta " + date2;&#13;
+&#13;
+display;</expression>
+                                    <property name="contentType">html</property>
+                                </text-data>
                             </cell>
                         </row>
                     </grid>
@@ -1396,6 +1422,185 @@ result</expression>
                     </grid>
                 </cell>
             </row>
+            <row id="458">
+                <cell id="459">
+                    <grid id="446">
+                        <column id="447">
+                            <property name="width">8.833333333333334in</property>
+                        </column>
+                        <column id="448">
+                            <property name="width">6.708333333333333in</property>
+                        </column>
+                        <row id="449">
+                            <cell id="450">
+                                <text id="445">
+                                    <property name="backgroundColor">#1A237E</property>
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#FFFFFF</property>
+                                    <property name="marginTop">12pt</property>
+                                    <property name="paddingLeft">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="display">block</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Días Laborados]]></text-property>
+                                </text>
+                                <table id="391">
+                                    <list-property name="userProperties">
+                                        <structure>
+                                            <property name="name">__ac_group_collapse_level</property>
+                                            <property name="type">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="__ac_group_collapse_level">1</property>
+                                    <property name="marginTop">5pt</property>
+                                    <property name="marginLeft">12pt</property>
+                                    <property name="width">5.385416666666667in</property>
+                                    <property name="dataSet">Asistencia Mensual</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">folio</property>
+                                            <text-property name="displayName">folio</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">dia</property>
+                                            <text-property name="displayName">dia</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["dia"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Hora local</property>
+                                            <text-property name="displayName">Hora local</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Hora local"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">position</property>
+                                            <text-property name="displayName">position</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["position"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dia</property>
+                                            <text-property name="displayName">Dia</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Dia"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">nombre</property>
+                                            <text-property name="displayName">nombre</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">created</property>
+                                            <text-property name="displayName">created</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["created"]</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Dias</property>
+                                            <text-property name="displayName">CDias</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Nombre</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNTDISTINCT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">dataSetRow["dia"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Diference in Days</property>
+                                            <text-property name="displayName">diference</text-property>
+                                            <expression name="expression" type="javascript">var date1 = new Date(params["Fecha"].value);&#13;
+var date2 = new Date(params["Hasta"].value);&#13;
+var timeDiff = Math.abs(date2.getTime() - date1.getTime());&#13;
+var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));&#13;
+&#13;
+diffDays;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                    </list-property>
+                                    <column id="420">
+                                        <property name="width">2.15625in</property>
+                                    </column>
+                                    <column id="421">
+                                        <property name="width">1.96875in</property>
+                                    </column>
+                                    <column id="424">
+                                        <property name="width">1.1979166666666667in</property>
+                                    </column>
+                                    <header>
+                                        <row id="392">
+                                            <cell id="393">
+                                                <label id="394">
+                                                    <text-property name="text">Nombre</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="395">
+                                                <label id="396">
+                                                    <text-property name="text">Puesto</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="401">
+                                                <label id="402">
+                                                    <text-property name="text">Número de días Laborados</text-property>
+                                                </label>
+                                            </cell>
+                                        </row>
+                                    </header>
+                                    <group id="425">
+                                        <property name="groupName">Nombre</property>
+                                        <expression name="keyExpr" type="javascript">row["nombre"]</expression>
+                                        <structure name="toc">
+                                            <expression name="expressionValue" type="javascript">row["nombre"]</expression>
+                                        </structure>
+                                        <property name="hideDetail">true</property>
+                                        <header>
+                                            <row id="426">
+                                                <cell id="427">
+                                                    <data id="438">
+                                                        <property name="resultSetColumn">nombre</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="428">
+                                                    <data id="407">
+                                                        <property name="resultSetColumn">position</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="431">
+                                                    <data id="411">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Count Dias</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </header>
+                                    </group>
+                                    <footer>
+                                        <row id="414">
+                                            <cell id="415"/>
+                                            <cell id="416"/>
+                                            <cell id="419"/>
+                                        </row>
+                                    </footer>
+                                </table>
+                            </cell>
+                            <cell id="451"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
             <row id="29">
                 <cell id="30">
                     <grid id="126">
@@ -1428,7 +1633,7 @@ result</expression>
                                     <property name="__ac_group_collapse_level">2,1</property>
                                     <property name="marginTop">5pt</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">5.59375in</property>
+                                    <property name="width">5.791666666666667in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1521,19 +1726,19 @@ result</expression>
                                         </structure>
                                     </list-property>
                                     <column id="196">
-                                        <property name="width">2.1354166666666665in</property>
+                                        <property name="width">2.5416666666666665in</property>
                                     </column>
                                     <column id="197">
-                                        <property name="width">2.0416666666666665in</property>
+                                        <property name="width">1.7916666666666667in</property>
                                     </column>
                                     <column id="198">
-                                        <property name="width">1.4166666666666667in</property>
+                                        <property name="width">1.4583333333333333in</property>
                                     </column>
                                     <header>
                                         <row id="133">
                                             <cell id="134">
                                                 <label id="135">
-                                                    <text-property name="text">Usuario</text-property>
+                                                    <text-property name="text">Usuario y No. Retardos</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="136">
@@ -1555,29 +1760,47 @@ result</expression>
                                             <expression name="expressionValue" type="javascript">row["first_name"]</expression>
                                         </structure>
                                         <property name="hideDetail">false</property>
+                                        <list-property name="filter">
+                                            <structure>
+                                                <property name="operator">eq</property>
+                                                <expression name="expr" type="javascript">(row["hora"] == 14 &amp;&amp; row["minuto"] >15) || (row["hora"] >14)</expression>
+                                                <simple-property-list name="value1">
+                                                    <value>true</value>
+                                                </simple-property-list>
+                                                <property name="updateAggregation">true</property>
+                                            </structure>
+                                        </list-property>
                                         <header>
                                             <row id="209">
                                                 <cell id="210">
-                                                    <data id="217">
-                                                        <property name="fontWeight">bold</property>
-                                                        <property name="paddingLeft">10pt</property>
-                                                        <property name="resultSetColumn">first_name</property>
-                                                    </data>
+                                                    <grid id="452">
+                                                        <property name="width">2.4895833333333335in</property>
+                                                        <column id="453">
+                                                            <property name="width">1.6979166666666667in</property>
+                                                        </column>
+                                                        <column id="454">
+                                                            <property name="width">0.7916666666666666in</property>
+                                                        </column>
+                                                        <row id="455">
+                                                            <cell id="456">
+                                                                <data id="217">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="paddingLeft">10pt</property>
+                                                                    <property name="resultSetColumn">first_name</property>
+                                                                </data>
+                                                            </cell>
+                                                            <cell id="457">
+                                                                <data id="220">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="paddingLeft">10pt</property>
+                                                                    <property name="resultSetColumn">Count user</property>
+                                                                </data>
+                                                            </cell>
+                                                        </row>
+                                                    </grid>
                                                 </cell>
-                                                <cell id="211">
-                                                    <text id="219">
-                                                        <property name="textAlign">center</property>
-                                                        <property name="contentType">auto</property>
-                                                        <text-property name="content"><![CDATA[Número de retardos:]]></text-property>
-                                                    </text>
-                                                </cell>
-                                                <cell id="212">
-                                                    <data id="220">
-                                                        <property name="fontWeight">bold</property>
-                                                        <property name="paddingLeft">10pt</property>
-                                                        <property name="resultSetColumn">Count user</property>
-                                                    </data>
-                                                </cell>
+                                                <cell id="211"/>
+                                                <cell id="212"/>
                                             </row>
                                         </header>
                                     </group>
@@ -1616,7 +1839,7 @@ result</expression>
                                     <property name="paddingLeft">12pt</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Días extra]]></text-property>
+                                    <text-property name="content"><![CDATA[Domingos laborados]]></text-property>
                                 </text>
                                 <table id="222">
                                     <list-property name="userProperties">
@@ -1773,6 +1996,9 @@ result</expression>
                         </row>
                     </grid>
                 </cell>
+            </row>
+            <row id="389">
+                <cell id="390"/>
             </row>
         </grid>
     </body>
