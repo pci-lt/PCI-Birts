@@ -550,7 +550,7 @@ display;</expression>
   <extendedProperties name="enable.drill.series" value="true"/>
   <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
-   <baseSampleData dataSetRepresentation="6,4,12,8,10"/>
+   <baseSampleData dataSetRepresentation="01/05/2000,02/01/2000,04/12/2000,03/12/2000,02/29/2000"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
   </sampleData>
   <emptyMessage>
@@ -560,7 +560,7 @@ display;</expression>
     <color _body=",128,127,127,127"/>
    </outline>
   </emptyMessage>
-  <axes type="0">
+  <axes type="3">
    <title>
     <background _nil="1"/>
     <outline>
@@ -640,20 +640,25 @@ display;</expression>
        <color _nil="1"/>
       </outline>
      </label>
-     <dataDefinition definition="row[&quot;semana&quot;]"/>
+     <dataDefinition definition="row[&quot;created&quot;]"/>
      <curveFitting _nil="1"/>
     </series>
-    <grouping enabled="true" groupType="0"/>
+    <grouping enabled="true" groupType="1"/>
+    <sortKey/>
    </seriesDefinitions>
    <lineAttributes>
     <color _nil="1"/>
    </lineAttributes>
    <label>
+    <caption>
+     <font rotation="72.0"/>
+    </caption>
     <background _nil="1"/>
     <outline>
      <color _nil="1"/>
     </outline>
    </label>
+   <formatSpecifier _type="JavaDateFormatSpecifier" pattern="dd &#039;de&#039; MMMM"/>
    <majorGrid>
     <lineAttributes>
      <color _nil="1"/>
@@ -769,7 +774,7 @@ display;</expression>
                         </list-property>
                         <property name="__ac_group_collapse_level">3</property>
                         <property name="marginLeft">12pt</property>
-                        <property name="width">3.03125in</property>
+                        <property name="width">3.1770833333333335in</property>
                         <property name="dataSet">Asistencia Mensual</property>
                         <list-property name="visibility">
                             <structure>
@@ -889,12 +894,47 @@ result</expression>
                                 <property name="dataType">string</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Promedio Segundos Totales</property>
+                                <text-property name="displayName">PSTotal</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">AVE</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["segundos"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Total</property>
+                                <text-property name="displayName">PTotal</text-property>
+                                <expression name="expression" type="javascript">var time = row["Promedio Segundos Totales"];&#13;
+var hours = Math.floor( time / 3600 );  &#13;
+var minutes = Math.floor( (time % 3600) / 60 );&#13;
+var seconds = time % 60;&#13;
+var day = " AM"&#13;
+minutes = minutes &lt; 10 ? '0' + minutes : minutes;&#13;
+seconds = seconds &lt; 10 ? '0' + seconds : seconds;&#13;
+if(hours > 12){&#13;
+	hours = hours - 12;&#13;
+	day = " PM";&#13;
+}&#13;
+ &#13;
+var result = hours + ":" + minutes;// + ":" + seconds;  &#13;
+result = result + day;&#13;
+&#13;
+result</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <column id="372">
-                            <property name="width">1.8541666666666667in</property>
+                            <property name="width">2.0416666666666665in</property>
                         </column>
                         <column id="373">
-                            <property name="width">1.1770833333333333in</property>
+                            <property name="width">1.1354166666666667in</property>
                         </column>
                         <header>
                             <row id="356">
@@ -972,10 +1012,15 @@ result</expression>
                                 <cell id="369">
                                     <text id="370">
                                         <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Hora Promedio del Mes:]]></text-property>
+                                        <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
                                     </text>
                                 </cell>
-                                <cell id="371"/>
+                                <cell id="371">
+                                    <data id="460">
+                                        <property name="paddingLeft">12pt</property>
+                                        <property name="resultSetColumn">Promedio Total</property>
+                                    </data>
+                                </cell>
                             </row>
                         </footer>
                     </table>
@@ -1025,7 +1070,7 @@ result</expression>
                                     <property name="__ac_group_collapse_level">2</property>
                                     <property name="marginTop">5pt</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">3.03125in</property>
+                                    <property name="width">3.15625in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1139,12 +1184,47 @@ result</expression>
                                             <property name="dataType">string</property>
                                             <property name="allowExport">true</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">Promedio Segundos Totales</property>
+                                            <text-property name="displayName">PSTotales</text-property>
+                                            <property name="dataType">float</property>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["segundos"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Hora Promedio Total</property>
+                                            <text-property name="displayName">HPTotal</text-property>
+                                            <expression name="expression" type="javascript">var time = row["Promedio Segundos Totales"];&#13;
+var hours = Math.floor( time / 3600 );  &#13;
+var minutes = Math.floor( (time % 3600) / 60 );&#13;
+var seconds = time % 60;&#13;
+var day = " AM"&#13;
+minutes = minutes &lt; 10 ? '0' + minutes : minutes;&#13;
+seconds = seconds &lt; 10 ? '0' + seconds : seconds;&#13;
+if(hours > 12){&#13;
+	hours = hours - 12;&#13;
+	day = " PM";&#13;
+}&#13;
+ &#13;
+var result = hours + ":" + minutes;// + ":" + seconds;  &#13;
+result = result + day;&#13;
+&#13;
+result</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
                                     </list-property>
                                     <column id="108">
-                                        <property name="width">1.8541666666666667in</property>
+                                        <property name="width">2.0208333333333335in</property>
                                     </column>
                                     <column id="109">
-                                        <property name="width">1.1770833333333333in</property>
+                                        <property name="width">1.1354166666666667in</property>
                                     </column>
                                     <header>
                                         <row id="46">
@@ -1208,10 +1288,15 @@ result</expression>
                                             <cell id="97">
                                                 <text id="124">
                                                     <property name="contentType">auto</property>
-                                                    <text-property name="content"><![CDATA[Hora Promedio del Mes:]]></text-property>
+                                                    <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
                                                 </text>
                                             </cell>
-                                            <cell id="98"/>
+                                            <cell id="98">
+                                                <data id="461">
+                                                    <property name="paddingLeft">12pt</property>
+                                                    <property name="resultSetColumn">Hora Promedio Total</property>
+                                                </data>
+                                            </cell>
                                         </row>
                                     </footer>
                                 </table>
@@ -1227,7 +1312,7 @@ result</expression>
                                     <property name="__ac_group_collapse_level">2</property>
                                     <property name="marginTop">5pt</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">3.03125in</property>
+                                    <property name="width">3.1770833333333335in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1341,12 +1426,47 @@ result</expression>
                                             <property name="dataType">string</property>
                                             <property name="allowExport">true</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">Segundos Totales</property>
+                                            <text-property name="displayName">STotales</text-property>
+                                            <property name="dataType">float</property>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["segundos"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Promedio Total</property>
+                                            <text-property name="displayName">PTotal</text-property>
+                                            <expression name="expression" type="javascript">var time = row["Segundos Totales"];&#13;
+var hours = Math.floor( time / 3600 );  &#13;
+var minutes = Math.floor( (time % 3600) / 60 );&#13;
+var seconds = time % 60;&#13;
+var day = " AM"&#13;
+minutes = minutes &lt; 10 ? '0' + minutes : minutes;&#13;
+seconds = seconds &lt; 10 ? '0' + seconds : seconds;&#13;
+if(hours > 12){&#13;
+	hours = hours - 12;&#13;
+	day = " PM";&#13;
+}&#13;
+ &#13;
+var result = hours + ":" + minutes;// + ":" + seconds;  &#13;
+result = result + day;&#13;
+&#13;
+result</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
                                     </list-property>
                                     <column id="343">
-                                        <property name="width">1.8541666666666667in</property>
+                                        <property name="width">2.0416666666666665in</property>
                                     </column>
                                     <column id="344">
-                                        <property name="width">1.1770833333333333in</property>
+                                        <property name="width">1.1354166666666667in</property>
                                     </column>
                                     <header>
                                         <row id="327">
@@ -1410,10 +1530,15 @@ result</expression>
                                             <cell id="340">
                                                 <text id="341">
                                                     <property name="contentType">auto</property>
-                                                    <text-property name="content"><![CDATA[Hora Promedio del Mes:]]></text-property>
+                                                    <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
                                                 </text>
                                             </cell>
-                                            <cell id="342"/>
+                                            <cell id="342">
+                                                <data id="462">
+                                                    <property name="paddingLeft">12pt</property>
+                                                    <property name="resultSetColumn">Promedio Total</property>
+                                                </data>
+                                            </cell>
                                         </row>
                                     </footer>
                                 </table>

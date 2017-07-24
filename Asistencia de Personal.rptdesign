@@ -192,6 +192,21 @@ yy + '-' + mm + '-' + dd</value>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">geo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Longitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">Latitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Folios</property>
@@ -251,6 +266,21 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="position">11</property>
                     <property name="name">position</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">geo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">Longitud</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">Latitud</property>
+                    <property name="dataType">float</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -708,6 +738,27 @@ yy + '-' + mm + '-' + dd</value>
                                 <property name="dataType">string</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">latitud</property>
+                                <text-property name="displayName">latitud</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Latitud"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">longitud</property>
+                                <text-property name="displayName">longitud</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Longitud"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">geo</property>
+                                <text-property name="displayName">geo</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["geo"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
                         <column id="76">
@@ -722,10 +773,13 @@ yy + '-' + mm + '-' + dd</value>
                         <column id="78">
                             <property name="width">2.2708333333333335in</property>
                         </column>
+                        <column id="191">
+                            <property name="width">2.2708333333333335in</property>
+                        </column>
                         <header>
                             <row id="23">
                                 <cell id="24">
-                                    <property name="colSpan">4</property>
+                                    <property name="colSpan">5</property>
                                     <property name="rowSpan">1</property>
                                     <text id="103">
                                         <property name="fontSize">14pt</property>
@@ -788,6 +842,14 @@ yy + '-' + mm + '-' + dd</value>
                                             <text-property name="text">Comentarios</text-property>
                                         </label>
                                     </cell>
+                                    <cell id="188">
+                                        <label id="192">
+                                            <property name="fontSize">12pt</property>
+                                            <property name="fontWeight">bold</property>
+                                            <property name="textAlign">center</property>
+                                            <text-property name="text">Ubicación</text-property>
+                                        </label>
+                                    </cell>
                                 </row>
                             </header>
                         </group>
@@ -839,6 +901,215 @@ yy + '-' + mm + '-' + dd</value>
                                         <property name="resultSetColumn">comentarios</property>
                                     </data>
                                 </cell>
+                                <cell id="189">
+                                    <extended-item extensionName="HTMLControl" id="198">
+                                        <method name="clientOnCreate"><![CDATA[// This example demonstrates how create the map and markers using Google Map JSAPI
+
+/* ----------------------------------------------------------------------------------------- */
+/* This is the configuration object for creating the chart. You modify it to map your own data.
+ * See inline comments for more details.
+ */
+
+var config = {
+	/*
+	 * The Google map key. You should provide your own key to use the Google Map
+	 * JSAPI.
+	 */
+	googleMapKey : "",
+
+	/*
+	 * Provide the column binding names as shown below. If not all
+	 * column names are specified, the template will use the sample data instead.
+	 */
+
+	/* Specify the column name as it appears in the data set.
+	* Example: 
+	* 	latitudeColumn : "LATITUDE"
+	*/
+
+	/* the column name for marker latitude value */
+	latitudeColumn : "longitud",
+	/* the column name for marker longitude value */
+	longitudeColumn : "latitud",
+	/* the column name for marker label text */
+	markerLabelColumn : "first_name",
+	/* specify the default center coornidates for the map */
+	mapCenter : {
+		/* the latitude for the center */
+		lat : 20.497851,
+		/* the longitude for the center */
+		lng : -99.723905,
+	}
+};
+
+/* --------------------------------------------------------------------------------------- */
+/*
+ * Below is the implementation code for the example. In most cases you do not need to
+ * modify it, unless you want to change the chart style, or behavior. 
+ * Changing the config object above is sufficient. 
+ */
+ 
+// The Google Map jsapi url. You may provide your own api key and callback
+// function name.
+var googleMapScriptUrl = "https://maps.googleapis.com/maps/api/js?key="
+		+ config.googleMapKey + "&amp;sensor=false&amp;callback=initialize";
+
+// get the container id
+var id = this.getId();
+var map = null;
+var lastInfowindow = null;
+var customViz = this;
+customViz.setPrintTimeOut(5000);
+var data = this.getData();
+
+config.testMode = !data || !data.columns || data.columns.length == 0;
+
+function getMarkerData() {
+
+	if (config.testMode) {
+
+		// use sample data
+		return [ [ 36.169202, -115.140597, 'Las&amp;nbsp;Vegas' ],
+				[ 37.78008, -122.420168, 'San&amp;nbsp;Francisco' ],
+				[ 37.334807, -121.888128, 'San&amp;nbsp;Jose' ],
+				[ 32.71576, -117.163817, 'San&amp;nbsp;Diego' ],
+				[ 34.052238, -118.243344, 'Los&amp;nbsp;Angeles' ],
+				[ 40.713054, -74.007228, 'NYC' ],
+				[ 42.358894, -71.056742, 'Boston' ],
+				[ 39.951061, -75.16562, 'Philadelphia' ],
+				[ 41.308252, -72.924161, 'New&amp;nbsp;Haven' ],
+				[ 40.731507, -74.174388, 'Newark' ] ];
+	} else {
+
+		// use data bindings, make sure the column names in config is properly
+		// set
+		var data = customViz.getData();
+
+		if (!data || !data.rows || !data.columns) {
+			return [];
+		}
+
+		// gets the index for columns
+		var i1 = -1, i2 = -1, i3 = -1;
+		for (var i = 0; i < data.columns.length; i++) {
+			if (data.columns[i] == config.latitudeColumn) {
+				i1 = i;
+			} else if (data.columns[i] == config.longitudeColumn) {
+				i2 = i;
+			} else if (data.columns[i] == config.markerLabelColumn) {
+				i3 = i;
+			}
+		}
+
+		if (i1 < 0 || i2 < 0 || i3 < 0) {
+			return [];
+		}
+
+		// populate marker data by column index
+		var markerData = [];
+		for (var i = 0; i < data.rows.length; i++) {
+			var row = data.rows[i];
+			markerData.push([ row[i1], row[i2], row[i3] ]);
+		}
+
+		return markerData;
+	}
+}
+
+// load map jsapi
+function loadMap(scriptUrl) {
+
+	if (window.mapApiLoaded) {
+		return;
+	}
+
+	// mark the flag to prevent duplicate loading
+	window.mapApiLoaded = true;
+
+	// make sure we only load the jsapi once
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = scriptUrl;
+	document.body.appendChild(script);
+}
+
+// create the map
+function createMap() {
+	var mapOptions = {
+		zoom : 4,
+		center : new google.maps.LatLng(config.mapCenter.lat,
+  				  config.mapCenter.lng),
+		scrollwheel : true,
+		mapTypeId : google.maps.MapTypeId.ROADMAP,
+		navigationControlOptions : {
+			style : google.maps.NavigationControlStyle.SMALL,
+			position : google.maps.ControlPosition.TOP_RIGHT
+		}
+	};
+	map = new google.maps.Map(document.getElementById(id), mapOptions);
+	createMarker();
+	customViz.setDelegate(map);
+	// CreateMarker() calls google api that has untrackable async js call itself. 
+	// It is not safe to call setPrintReady() here rather we need a timer to control it.
+	window.setTimeout(function(){customViz.setPrintReady()} , 3000);
+}
+
+// create markers
+function createMarker() {
+	var data = getMarkerData();
+
+	if (!data || data.length == 0) {
+		return;
+	}
+
+	for (var i = 0; i < data.length; i++) {
+		var marker = new google.maps.Marker({
+			map : map,
+			position : new google.maps.LatLng(data[i][0], data[i][1])
+		});
+		createMarkerInfoWindow(marker, data[i][2]);
+	}
+}
+
+// create the popup info window for each marker
+function createMarkerInfoWindow(marker, info) {
+	var contentString = '<div><b>' + info + '</b></div>'
+	var infowindow = new google.maps.InfoWindow({
+		content : contentString
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		if (lastInfowindow != null) {
+			lastInfowindow.close();
+		}
+		infowindow.open(map, marker);
+		lastInfowindow = infowindow;
+	});
+}
+
+// check whether Google Map jsapi already loaded, duplicate loading may cause
+// issues.
+if (window.mapApiLoaded) {
+	// directly create the map
+	createMap();
+} else {
+
+	// due to the restriction of Google Map JSAPI, you must use a global
+	// callback function, here we use "initialize". change the name if there's
+	// any conflict
+	window.initialize = function() {
+		createMap();
+	};
+
+	// load jsapi and use callback to create the map
+	loadMap(googleMapScriptUrl);
+}
+]]></method>
+                                        <property name="height">1.5729166666666667in</property>
+                                        <property name="width">2.7291666666666665in</property>
+                                        <property name="displayName">Google Map</property>
+                                    </extended-item>
+                                </cell>
                             </row>
                         </detail>
                         <footer>
@@ -870,6 +1141,7 @@ yy + '-' + mm + '-' + dd</value>
                                         </row>
                                     </grid>
                                 </cell>
+                                <cell id="190"/>
                             </row>
                         </footer>
                     </table>
