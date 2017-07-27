@@ -151,6 +151,17 @@ var total = horas + minutos;&#13;
 total</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">Retardo</property>
+                    <expression name="expression" type="javascript">var hora = row["hora"]-5;&#13;
+var minutos = row["minuto"];&#13;
+var display = "A tiempo";&#13;
+if((hora == 9 &amp;&amp; minutos > 15) || (hora > 9))&#13;
+	display = "Retardo";&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -230,6 +241,10 @@ total</expression>
                     <property name="columnName">Time_Seconds</property>
                     <property name="analysis">measure</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Retardo</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -292,6 +307,11 @@ total</expression>
                         <property name="position">12</property>
                         <property name="name">Time_Seconds</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Retardo</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -498,7 +518,7 @@ display;</expression>
                 <cell id="28">
                     <extended-item extensionName="Chart" id="307">
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithAxes version="2.6.1" type="Line Chart" subType="Overlay">
+ <ChartWithAxes version="2.6.1" type="Line Chart" subType="Overlay" orientation="1">
   <block>
    <children _type="TitleBlock" visible="false">
     <outline>
@@ -585,8 +605,8 @@ display;</expression>
         <color _nil="1"/>
        </outline>
       </label>
-      <dataDefinition definition="row[&quot;Time_Seconds&quot;]">
-       <grouping/>
+      <dataDefinition definition="row[&quot;Time_Seconds&quot;];">
+       <grouping enabled="true" aggregateExpression="Average"/>
       </dataDefinition>
       <triggers condition="6">
        <action type="1">
@@ -601,6 +621,7 @@ display;</expression>
        <color _nil="1"/>
       </lineAttributes>
      </series>
+     <grouping _nil="1"/>
     </seriesDefinitions>
     <lineAttributes>
      <color _nil="1"/>
@@ -1012,7 +1033,7 @@ result</expression>
                                 <cell id="369">
                                     <text id="370">
                                         <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
+                                        <text-property name="content"><![CDATA[Hora promedio del periodo:]]></text-property>
                                     </text>
                                 </cell>
                                 <cell id="371">
@@ -1041,7 +1062,7 @@ result</expression>
                                     <property name="paddingLeft">12pt</property>
                                     <property name="textAlign">left</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Promedio de llegada del mes]]></text-property>
+                                    <text-property name="content"><![CDATA[Promedio de llegada del periodo]]></text-property>
                                 </text>
                             </cell>
                             <cell id="350">
@@ -1054,7 +1075,7 @@ result</expression>
                                     <property name="paddingLeft">12pt</property>
                                     <property name="textAlign">left</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Promedio de salida del mes]]></text-property>
+                                    <text-property name="content"><![CDATA[Promedio de salida del periodo]]></text-property>
                                 </text>
                             </cell>
                         </row>
@@ -1288,7 +1309,7 @@ result</expression>
                                             <cell id="97">
                                                 <text id="124">
                                                     <property name="contentType">auto</property>
-                                                    <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
+                                                    <text-property name="content"><![CDATA[Hora promedio del periodo:]]></text-property>
                                                 </text>
                                             </cell>
                                             <cell id="98">
@@ -1530,7 +1551,7 @@ result</expression>
                                             <cell id="340">
                                                 <text id="341">
                                                     <property name="contentType">auto</property>
-                                                    <text-property name="content"><![CDATA[Hora Promedio del periodo:]]></text-property>
+                                                    <text-property name="content"><![CDATA[Hora promedio del periodo:]]></text-property>
                                                 </text>
                                             </cell>
                                             <cell id="342">
@@ -1551,10 +1572,10 @@ result</expression>
                 <cell id="459">
                     <grid id="446">
                         <column id="447">
-                            <property name="width">8.833333333333334in</property>
+                            <property name="width">10.3125in</property>
                         </column>
                         <column id="448">
-                            <property name="width">6.708333333333333in</property>
+                            <property name="width">5.229166666666667in</property>
                         </column>
                         <row id="449">
                             <cell id="450">
@@ -1568,7 +1589,7 @@ result</expression>
                                     <property name="textAlign">center</property>
                                     <property name="display">block</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Días Laborados]]></text-property>
+                                    <text-property name="content"><![CDATA[Días laborados del periodo]]></text-property>
                                 </text>
                                 <table id="391">
                                     <list-property name="userProperties">
@@ -1746,19 +1767,16 @@ diffDays;</expression>
                                     <property name="paddingLeft">12pt</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Retardos del Mes]]></text-property>
+                                    <text-property name="content"><![CDATA[Retardos del periodo]]></text-property>
                                 </text>
-                                <table id="132">
+                                <table id="469">
                                     <list-property name="userProperties">
                                         <structure>
                                             <property name="name">__ac_group_collapse_level</property>
                                             <property name="type">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="__ac_group_collapse_level">2,1</property>
-                                    <property name="marginTop">5pt</property>
-                                    <property name="marginLeft">12pt</property>
-                                    <property name="width">5.791666666666667in</property>
+                                    <property name="width">5.958333333333333in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1772,6 +1790,46 @@ diffDays;</expression>
                                             <text-property name="displayName">created</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["created"]</expression>
                                             <property name="dataType">date</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">check</property>
+                                            <text-property name="displayName">check</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["check"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Hora local</property>
+                                            <text-property name="displayName">Hora local</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Hora local"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">first_name</property>
+                                            <text-property name="displayName">first_name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Retardo</property>
+                                            <text-property name="displayName">Retardo</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Retardo"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count User</property>
+                                            <text-property name="displayName">CUser</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
                                             <property name="name">hora</property>
@@ -1798,24 +1856,6 @@ diffDays;</expression>
                                             <property name="dataType">integer</property>
                                         </structure>
                                         <structure>
-                                            <property name="name">check</property>
-                                            <text-property name="displayName">check</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["check"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Hora local</property>
-                                            <text-property name="displayName">Hora local</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["Hora local"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">first_name</property>
-                                            <text-property name="displayName">first_name</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
                                             <property name="name">position</property>
                                             <text-property name="displayName">position</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["position"]</expression>
@@ -1833,124 +1873,120 @@ diffDays;</expression>
                                             <expression name="expression" type="javascript">dataSetRow["Time_Seconds"]</expression>
                                             <property name="dataType">integer</property>
                                         </structure>
+                                    </list-property>
+                                    <list-property name="filter">
                                         <structure>
-                                            <property name="name">Count user</property>
-                                            <text-property name="displayName">CUser</text-property>
-                                            <property name="dataType">integer</property>
-                                            <simple-property-list name="aggregateOn">
-                                                <value>Nombre Usuario</value>
+                                            <property name="operator">eq</property>
+                                            <expression name="expr" type="javascript">row["Retardo"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">"Retardo"</value>
                                             </simple-property-list>
-                                            <property name="aggregateFunction">COUNT</property>
-                                            <list-property name="arguments">
-                                                <structure>
-                                                    <property name="name">Expression</property>
-                                                    <expression name="value" type="javascript">row["Hora local"]</expression>
-                                                </structure>
-                                            </list-property>
-                                            <property name="allowExport">true</property>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <expression name="expr" type="javascript">row["check"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">"entrada"</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
                                         </structure>
                                     </list-property>
-                                    <column id="196">
-                                        <property name="width">2.5416666666666665in</property>
+                                    <column id="503">
+                                        <property name="width">2.6770833333333335in</property>
                                     </column>
-                                    <column id="197">
-                                        <property name="width">1.7916666666666667in</property>
+                                    <column id="504">
+                                        <property name="width">2.21875in</property>
                                     </column>
-                                    <column id="198">
-                                        <property name="width">1.4583333333333333in</property>
+                                    <column id="505">
+                                        <property name="width">1.0625in</property>
                                     </column>
                                     <header>
-                                        <row id="133">
-                                            <cell id="134">
-                                                <label id="135">
+                                        <row id="470">
+                                            <cell id="471">
+                                                <label id="472">
                                                     <text-property name="text">Usuario y No. Retardos</text-property>
                                                 </label>
                                             </cell>
-                                            <cell id="136">
-                                                <label id="137">
+                                            <cell id="473">
+                                                <label id="474">
                                                     <text-property name="text">Día del retardo</text-property>
                                                 </label>
                                             </cell>
-                                            <cell id="138">
-                                                <label id="139">
-                                                    <text-property name="text">Hora de Llegada</text-property>
+                                            <cell id="475">
+                                                <label id="476">
+                                                    <text-property name="text">Hora de llegada</text-property>
                                                 </label>
                                             </cell>
                                         </row>
                                     </header>
-                                    <group id="208">
-                                        <property name="groupName">Nombre Usuario</property>
+                                    <group id="516">
+                                        <property name="groupName">Usuarios</property>
                                         <expression name="keyExpr" type="javascript">row["first_name"]</expression>
                                         <structure name="toc">
                                             <expression name="expressionValue" type="javascript">row["first_name"]</expression>
                                         </structure>
                                         <property name="hideDetail">false</property>
-                                        <list-property name="filter">
-                                            <structure>
-                                                <property name="operator">eq</property>
-                                                <expression name="expr" type="javascript">(row["hora"] == 14 &amp;&amp; row["minuto"] >15) || (row["hora"] >14)</expression>
-                                                <simple-property-list name="value1">
-                                                    <value>true</value>
-                                                </simple-property-list>
-                                                <property name="updateAggregation">true</property>
-                                            </structure>
-                                        </list-property>
                                         <header>
-                                            <row id="209">
-                                                <cell id="210">
-                                                    <grid id="452">
-                                                        <property name="width">2.4895833333333335in</property>
-                                                        <column id="453">
-                                                            <property name="width">1.6979166666666667in</property>
+                                            <row id="517">
+                                                <cell id="518">
+                                                    <grid id="509">
+                                                        <column id="510">
+                                                            <property name="width">2.0208333333333335in</property>
                                                         </column>
-                                                        <column id="454">
-                                                            <property name="width">0.7916666666666666in</property>
+                                                        <column id="511">
+                                                            <property name="width">0.5833333333333334in</property>
                                                         </column>
-                                                        <row id="455">
-                                                            <cell id="456">
-                                                                <data id="217">
-                                                                    <property name="fontWeight">bold</property>
+                                                        <row id="512">
+                                                            <cell id="513">
+                                                                <data id="485">
                                                                     <property name="paddingLeft">10pt</property>
                                                                     <property name="resultSetColumn">first_name</property>
                                                                 </data>
                                                             </cell>
-                                                            <cell id="457">
-                                                                <data id="220">
-                                                                    <property name="fontWeight">bold</property>
-                                                                    <property name="paddingLeft">10pt</property>
-                                                                    <property name="resultSetColumn">Count user</property>
+                                                            <cell id="514">
+                                                                <data id="526">
+                                                                    <property name="paddingRight">5pt</property>
+                                                                    <property name="textAlign">right</property>
+                                                                    <property name="resultSetColumn">Count User</property>
                                                                 </data>
                                                             </cell>
                                                         </row>
                                                     </grid>
                                                 </cell>
-                                                <cell id="211"/>
-                                                <cell id="212"/>
+                                                <cell id="519"/>
+                                                <cell id="520"/>
                                             </row>
                                         </header>
                                     </group>
                                     <detail>
-                                        <row id="158">
-                                            <cell id="159"/>
-                                            <cell id="161">
-                                                <data id="162">
-                                                    <property name="paddingRight">5pt</property>
+                                        <row id="483">
+                                            <cell id="484"/>
+                                            <cell id="486">
+                                                <data id="487">
+                                                    <property name="paddingLeft">10pt</property>
                                                     <structure name="dateTimeFormat">
                                                         <property name="category">Custom</property>
-                                                        <property name="pattern">EEEE, dd 'de' MMMM 'de' yyyy</property>
+                                                        <property name="pattern">EEEE dd 'de' MMMM, yyyy</property>
                                                     </structure>
-                                                    <property name="textAlign">right</property>
                                                     <property name="resultSetColumn">created</property>
                                                 </data>
                                             </cell>
-                                            <cell id="163">
-                                                <data id="164">
-                                                    <property name="paddingLeft">12pt</property>
+                                            <cell id="488">
+                                                <data id="489">
+                                                    <property name="paddingLeft">10pt</property>
                                                     <property name="resultSetColumn">Hora local</property>
                                                 </data>
                                             </cell>
                                         </row>
                                     </detail>
+                                    <footer>
+                                        <row id="496">
+                                            <cell id="497"/>
+                                            <cell id="498"/>
+                                            <cell id="499"/>
+                                        </row>
+                                    </footer>
                                 </table>
                             </cell>
                             <cell id="131">
@@ -1964,7 +2000,7 @@ diffDays;</expression>
                                     <property name="paddingLeft">12pt</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Domingos laborados]]></text-property>
+                                    <text-property name="content"><![CDATA[Domingos laborados del periodo]]></text-property>
                                 </text>
                                 <table id="222">
                                     <list-property name="userProperties">

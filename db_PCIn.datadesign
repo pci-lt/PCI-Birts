@@ -1517,6 +1517,12 @@ createdPeriod == actualPeriod</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">is_active</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">is_active</text-property>
+                    <text-property name="heading">is_active</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -1540,6 +1546,11 @@ createdPeriod == actualPeriod</expression>
                         <property name="position">4</property>
                         <property name="name">expiration</property>
                         <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">is_active</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -1573,8 +1584,14 @@ createdPeriod == actualPeriod</expression>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">93</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">is_active</property>
+                    <property name="nativeName">is_active</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT "user_id", "owner_id", "connection_id", "expiration"
+            <xml-property name="queryText"><![CDATA[SELECT "user_id", "owner_id", "connection_id", "expiration", "is_active"
     FROM "public"."plans_license"
     WHERE "owner_id" = 1259 AND "connection_id" <> 1259
   ]]></xml-property>
@@ -1582,15 +1599,15 @@ createdPeriod == actualPeriod</expression>
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="connectios" version="1.0">&#13;
-&lt;SQLStatement>SELECT &amp;quot;user_id&amp;quot;, &amp;quot;owner_id&amp;quot;, &amp;quot;connection_id&amp;quot;, &amp;quot;expiration&amp;quot;&amp;#x0A;    FROM &amp;quot;public&amp;quot;.&amp;quot;plans_license&amp;quot;&amp;#x0A;    WHERE &amp;quot;owner_id&amp;quot; = 1259 AND &amp;quot;connection_id&amp;quot; &amp;lt;&amp;gt; 1259&amp;#x0A;  &lt;/SQLStatement>&#13;
+&lt;SQLStatement>SELECT &amp;quot;user_id&amp;quot;, &amp;quot;owner_id&amp;quot;, &amp;quot;connection_id&amp;quot;, &amp;quot;expiration&amp;quot;, &amp;quot;is_active&amp;quot;&amp;#x0A;    FROM &amp;quot;public&amp;quot;.&amp;quot;plans_license&amp;quot;&amp;#x0A;    WHERE &amp;quot;owner_id&amp;quot; = 1259 AND &amp;quot;connection_id&amp;quot; &amp;lt;&amp;gt; 1259&amp;#x0A;  &lt;/SQLStatement>&#13;
 &lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
-&lt;windowState height="857" version="1.0" width="1692">&#13;
-&lt;control height="256" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1665"/>&#13;
-&lt;control height="298" isHideable="true" isVisible="true" name="DesignViewer" width="1678"/>&#13;
-&lt;control height="265" isHideable="true" isVisible="true" name="GraphControl" width="1670"/>&#13;
-&lt;control height="269" isHideable="true" isVisible="false" name="OutlineViewer" width="124"/>&#13;
+&lt;windowState height="530" version="1.0" width="1122">&#13;
+&lt;control height="151" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1095"/>&#13;
+&lt;control height="183" isHideable="true" isVisible="true" name="DesignViewer" width="1108"/>&#13;
+&lt;control height="158" isHideable="true" isVisible="true" name="GraphControl" width="1100"/>&#13;
+&lt;control height="162" isHideable="true" isVisible="false" name="OutlineViewer" width="117"/>&#13;
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
@@ -1765,17 +1782,6 @@ createdPeriod == actualPeriod</expression>
                 </structure>
             </list-property>
             <list-property name="filter"/>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">fecha inicio</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">1</property>
-                    <property name="position">1</property>
-                    <property name="isOptional">false</property>
-                    <property name="allowNull">false</property>
-                    <property name="isInput">true</property>
-                </structure>
-            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1795,51 +1801,61 @@ createdPeriod == actualPeriod</expression>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">is_active</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">id</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">empleados::first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">email</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">8</property>
                         <property name="name">created_at</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">9</property>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">10</property>
                         <property name="name">last_login</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">11</property>
                         <property name="name">parent_id</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">12</property>
+                        <property name="name">phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">max</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">14</property>
                         <property name="name">sum</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">15</property>
                         <property name="name">Data Set_1::first_name</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -1856,6 +1872,7 @@ createdPeriod == actualPeriod</expression>
 <tns:Column>connectios::user_id</tns:Column>
 <tns:Column>connectios::connection_id</tns:Column>
 <tns:Column>connectios::expiration</tns:Column>
+<tns:Column>connectios::is_active</tns:Column>
 <tns:Column>empleados::id</tns:Column>
 <tns:Column>empleados::first_name</tns:Column>
 <tns:Column>empleados::email</tns:Column>
@@ -1863,6 +1880,7 @@ createdPeriod == actualPeriod</expression>
 <tns:Column>empleados::position</tns:Column>
 <tns:Column>empleados::last_login</tns:Column>
 <tns:Column>empleados::parent_id</tns:Column>
+<tns:Column>empleados::phone</tns:Column>
 <tns:Column>Activities1::max</tns:Column>
 <tns:Column>Activities1::sum</tns:Column>
 <tns:Column>Data Set_1::first_name</tns:Column>
@@ -1959,6 +1977,12 @@ createdPeriod == actualPeriod</expression>
                     <text-property name="displayName">parent_id</text-property>
                     <text-property name="heading">parent_id</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">phone</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">phone</text-property>
+                    <text-property name="heading">phone</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -1997,6 +2021,11 @@ createdPeriod == actualPeriod</expression>
                         <property name="position">7</property>
                         <property name="name">parent_id</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">phone</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -2051,24 +2080,31 @@ createdPeriod == actualPeriod</expression>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">4</property>
                 </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">phone</property>
+                    <property name="nativeName">phone</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT "id", "first_name", "email", "created_at", "position",
-    "last_login", "parent_id"
+    "last_login", "parent_id", "phone"
     FROM "public"."users_customuser"
   ]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Data Set" version="1.0">&#13;
-&lt;SQLStatement>SELECT &amp;quot;id&amp;quot;, &amp;quot;first_name&amp;quot;, &amp;quot;email&amp;quot;, &amp;quot;created_at&amp;quot;, &amp;quot;position&amp;quot;,&amp;#x0A;    &amp;quot;last_login&amp;quot;, &amp;quot;parent_id&amp;quot;&amp;#x0A;    FROM &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;&amp;#x0A;  &lt;/SQLStatement>&#13;
+&lt;SQLStatement>SELECT &amp;quot;id&amp;quot;, &amp;quot;first_name&amp;quot;, &amp;quot;email&amp;quot;, &amp;quot;created_at&amp;quot;, &amp;quot;position&amp;quot;,&amp;#x0A;    &amp;quot;last_login&amp;quot;, &amp;quot;parent_id&amp;quot;, &amp;quot;phone&amp;quot;&amp;#x0A;    FROM &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;&amp;#x0A;  &lt;/SQLStatement>&#13;
 &lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
-&lt;windowState height="852" version="1.0" width="1676">&#13;
-&lt;control height="259" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1649"/>&#13;
-&lt;control height="291" isHideable="true" isVisible="true" name="DesignViewer" width="1662"/>&#13;
-&lt;control height="264" isHideable="true" isVisible="true" name="GraphControl" width="1654"/>&#13;
-&lt;control height="268" isHideable="true" isVisible="false" name="OutlineViewer" width="126"/>&#13;
+&lt;windowState height="530" version="1.0" width="1122">&#13;
+&lt;control height="180" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1095"/>&#13;
+&lt;control height="128" isHideable="true" isVisible="true" name="DesignViewer" width="1108"/>&#13;
+&lt;control height="184" isHideable="true" isVisible="true" name="GraphControl" width="1100"/>&#13;
+&lt;control height="188" isHideable="true" isVisible="false" name="OutlineViewer" width="119"/>&#13;
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
