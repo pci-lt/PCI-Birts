@@ -5517,6 +5517,118 @@ log('query' + query);]]></method>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Cobranza-Nombres" id="452">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Contratista</property>
+                    <expression name="expression" type="javascript">var nombre  = row["first_name"];&#13;
+var display = nombre;&#13;
+&#13;
+if(nombre == "Zeidy Hernandez Vidal")&#13;
+	display = "Erika Hernández Vidal";&#13;
+&#13;
+if(nombre == "Juan Manuel Prieto Alvarez")&#13;
+	display = "SIJ";&#13;
+&#13;
+if(nombre == "Leoncio Velazco Ramos")&#13;
+	display = "Guillermina Muñoz Sánchez";&#13;
+&#13;
+if(nombre == "Jessica Vences Hernandez")&#13;
+	display =  "Grupo Viagus S.A. de C.V.";&#13;
+&#13;
+if(nombre == "Mario Humberto Ibañez Alba")&#13;
+	display = "Brusim";&#13;
+&#13;
+if(nombre == "Javier Castillo Pantoja")&#13;
+	display = "Telecomunicaciones";&#13;
+	&#13;
+if(nombre == "Luis Enrique Barrera Espinosa")&#13;
+	display =  "Francisco Arturo Amezcua Espinosa";&#13;
+&#13;
+if(nombre == "Omar Maldonado")&#13;
+	display = "Rafael Ortiz Camarillos";&#13;
+&#13;
+if(nombre == "Alejandro Rocha Martinez")&#13;
+	display = "Saira Denis Rodrigues";&#13;
+&#13;
+if(nombre == "Miguel Cachoa Ocampo")&#13;
+	display = "Leonor Ocampo";&#13;
+	&#13;
+if(nombre == "Adrian Cigala Esquivel")&#13;
+	display = "P&amp;P";&#13;
+&#13;
+if(nombre == "Juan Jose Salazar")&#13;
+	display = "Aglaskhom";&#13;
+&#13;
+if(nombre == "Fernando Espinoza Flores")&#13;
+	display = "Adriana Morales Miranda";&#13;
+	&#13;
+if(nombre == "Ana Cristina Peña Solorio")&#13;
+	display = "Grupo Aledher";&#13;
+	&#13;
+if(nombre == "Jose Antonio Martinez Bahena")&#13;
+	display = "IETT";&#13;
+	&#13;
+if(nombre == "Juan Carlos Solarez Sandoval")&#13;
+	display = "Sertel";&#13;
+	&#13;
+if(nombre == "Juan Gomez Hernandez")&#13;
+	display = "Alejandro Leal";&#13;
+	&#13;
+if(nombre == "Yair Arellano")&#13;
+	display = "Yair Arellano Mastechi";&#13;
+	&#13;
+if(nombre == "Saturno")&#13;
+	display = "Alta Tecnologia S.A. de C.V.";&#13;
+	&#13;
+if(nombre == "Victor Hugo Rodriguez Perez")&#13;
+	display = "Quetzal";&#13;
+	&#13;
+if(nombre == "Edgar Enriquez Mancilla")&#13;
+	display = "Panmar";&#13;
+	&#13;
+if(nombre == "Paulina Rosas Soto")&#13;
+	display = "Comunicación Digital Areas";&#13;
+	&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MArea</property>
+                    <expression name="expression" type="javascript">var area = row["area"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+var resultado = '';&#13;
+var arr = area.split('_');&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MCope</property>
+                    <expression name="expression" type="javascript">var area = row["cope"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+var resultado = '';&#13;
+var arr = area.split('_');&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -5567,6 +5679,27 @@ log('query' + query);]]></method>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Contratista</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MArea</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MCope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -5608,6 +5741,21 @@ log('query' + query);]]></method>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Contratista</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">MArea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">MCope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>

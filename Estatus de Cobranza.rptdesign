@@ -141,6 +141,20 @@ resultado;</expression>
                     <property name="columnName">Estatus</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Contratista</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MArea</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MCope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -181,6 +195,21 @@ resultado;</expression>
                     </structure>
                     <structure>
                         <property name="position">8</property>
+                        <property name="name">Contratista</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">MArea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">MCope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -224,6 +253,21 @@ resultado;</expression>
                     <property name="name">first_name</property>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">Contratista</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">MArea</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">MCope</property>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
         </data-mart-data-set>
     </data-sets>
@@ -256,9 +300,9 @@ resultado;</expression>
                     <property name="hierarchies">
                         <tabular-hierarchy name="NewTabularHierarchy" id="301">
                             <property name="levels">
-                                <tabular-level name="first_name" id="302">
+                                <tabular-level name="Contratista" id="508">
                                     <property name="dataType">string</property>
-                                    <property name="columnName">first_name</property>
+                                    <property name="columnName">Contratista</property>
                                 </tabular-level>
                                 <tabular-level name="area" id="303">
                                     <property name="dataType">string</property>
@@ -627,40 +671,6 @@ resultado;</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Mayus Area</property>
-                                <text-property name="displayName">Marea</text-property>
-                                <expression name="expression" type="javascript">var area = dataSetRow["area"];&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
-}&#13;
-resultado;</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Mayus COPE</property>
-                                <text-property name="displayName">MCope</text-property>
-                                <expression name="expression" type="javascript">var area = dataSetRow["cope"];&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
-}&#13;
-resultado;</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
                                 <property name="name">Count Estatus</property>
                                 <text-property name="displayName">CEstatus</text-property>
                                 <property name="dataType">integer</property>
@@ -720,6 +730,24 @@ resultado;</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Contratista</property>
+                                <text-property name="displayName">Contratista</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Contratista"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MArea</property>
+                                <text-property name="displayName">MArea</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MArea"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MCope</property>
+                                <text-property name="displayName">MCope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MCope"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">10000000</property>
@@ -833,9 +861,9 @@ resultado;</expression>
                         </group>
                         <group id="72">
                             <property name="groupName">Área</property>
-                            <expression name="keyExpr" type="javascript">row["area"]</expression>
+                            <expression name="keyExpr" type="javascript">row["MArea"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["area"]</expression>
+                                <expression name="expressionValue" type="javascript">row["MArea"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
                             <header>
@@ -858,7 +886,7 @@ resultado;</expression>
                                                 <cell id="141">
                                                     <data id="85">
                                                         <property name="fontWeight">bold</property>
-                                                        <property name="resultSetColumn">Mayus Area</property>
+                                                        <property name="resultSetColumn">MArea</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="142">
@@ -885,9 +913,9 @@ resultado;</expression>
                         </group>
                         <group id="96">
                             <property name="groupName">Cope</property>
-                            <expression name="keyExpr" type="javascript">row["cope"]</expression>
+                            <expression name="keyExpr" type="javascript">row["MCope"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["cope"]</expression>
+                                <expression name="expressionValue" type="javascript">row["MCope"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
                             <header>
@@ -920,7 +948,7 @@ resultado;</expression>
                                                 <cell id="148">
                                                     <data id="111">
                                                         <property name="fontWeight">bold</property>
-                                                        <property name="resultSetColumn">Mayus COPE</property>
+                                                        <property name="resultSetColumn">MCope</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="149">
@@ -1171,7 +1199,7 @@ resultado;</expression>
        <color _nil="1"/>
       </outline>
      </label>
-     <dataDefinition definition="data[&quot;Contratista/first_name&quot;]"/>
+     <dataDefinition definition="data[&quot;Contratista/Contratista&quot;]"/>
      <curveFitting _nil="1"/>
     </series>
     <sortKey definition="data[&quot;Summary Field1/folio1&quot;]"/>
@@ -1255,6 +1283,11 @@ resultado;</expression>
                                 <expression name="expression" type="javascript">measure["folio1"]</expression>
                                 <property name="dataType">integer</property>
                                 <property name="aggregateFunction">SUM</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Contratista/Contratista</property>
+                                <expression name="expression" type="javascript">dimension["Contratista"]["Contratista"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                         </list-property>
                     </extended-item>
@@ -1396,6 +1429,24 @@ resultado;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Contratista</property>
+                                <text-property name="displayName">Contratista</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Contratista"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MArea</property>
+                                <text-property name="displayName">MArea</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MArea"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MCope</property>
+                                <text-property name="displayName">MCope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MCope"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">1000000</property>
                         <column id="360">
@@ -1462,7 +1513,7 @@ resultado;</expression>
                                                 <cell id="469">
                                                     <data id="393">
                                                         <property name="paddingLeft">5pt</property>
-                                                        <property name="resultSetColumn">first_name</property>
+                                                        <property name="resultSetColumn">Contratista</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="470">
@@ -1526,9 +1577,9 @@ resultado;</expression>
                         </group>
                         <group id="394">
                             <property name="groupName">Área</property>
-                            <expression name="keyExpr" type="javascript">row["area"]</expression>
+                            <expression name="keyExpr" type="javascript">row["MArea"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["area"]</expression>
+                                <expression name="expressionValue" type="javascript">row["MArea"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
                             <header>
@@ -1549,7 +1600,7 @@ resultado;</expression>
                                                 <cell id="481">
                                                     <data id="417">
                                                         <property name="paddingLeft">5pt</property>
-                                                        <property name="resultSetColumn">Mayus Area</property>
+                                                        <property name="resultSetColumn">MArea</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="482">
