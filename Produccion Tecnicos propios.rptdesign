@@ -13,6 +13,67 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <scalar-parameter name="Fecha" id="663">
+            <text-property name="promptText">Desde:</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var time = new Date();&#13;
+var dd = time.getDate();&#13;
+var mm = time.getMonth()+1;&#13;
+var yy = time.getFullYear();&#13;
+&#13;
+if(dd&lt; 15){&#13;
+	dd = '01'&#13;
+}else{&#13;
+	dd = '15'&#13;
+}&#13;
+if(mm&lt;10){&#13;
+	mm = '0' + mm&#13;
+}&#13;
+&#13;
+yy + '-' + mm + '-' + dd</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Hasta" id="664">
+            <text-property name="promptText">Hasta:</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var time = new Date();&#13;
+var dd = time.getDate();&#13;
+var mm = time.getMonth()+1;&#13;
+var yy = time.getFullYear();&#13;
+&#13;
+if(dd>= 15){&#13;
+	dd = '01'&#13;
+	mm += 1;&#13;
+}else{&#13;
+	dd = '15'&#13;
+}&#13;
+if(mm&lt;10){&#13;
+	mm = '0' + mm&#13;
+}&#13;
+&#13;
+yy + '-' + mm + '-' + dd</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
     <data-sources>
         <data-mart-data-source name="folios" id="4">
             <property name="datamartURL">PCI_folios</property>
@@ -27,11 +88,14 @@
                 <structure>
                     <property name="paramName">Fecha</property>
                     <simple-property-list name="expression">
-                        <value type="constant">2017-07-27</value>
+                        <value type="javascript">params["Fecha"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
                     <property name="paramName">Hasta</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Hasta"].value</value>
+                    </simple-property-list>
                 </structure>
                 <structure>
                     <property name="paramName">Password</property>
@@ -874,6 +938,10 @@
                             </cell>
                             <cell id="21">
                                 <text id="23">
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="marginTop">20pt</property>
+                                    <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Productividad técnicos propios]]></text-property>
                                 </text>
@@ -958,6 +1026,7 @@
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -1298,6 +1367,7 @@ productividad;</expression>
                                 </cell>
                                 <cell id="40">
                                     <data id="41">
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">cantidad</property>
                                     </data>
                                 </cell>
@@ -1401,6 +1471,7 @@ productividad;</expression>
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -1701,6 +1772,7 @@ productividad;</expression>
                                 </cell>
                                 <cell id="63">
                                     <data id="62">
+                                        <property name="textAlign">center</property>
                                         <property name="resultSetColumn">cantidad</property>
                                     </data>
                                 </cell>
@@ -3478,8 +3550,16 @@ resultado;</expression>
                         </detail>
                         <footer>
                             <row id="187">
-                                <cell id="618"/>
-                                <cell id="193"/>
+                                <cell id="618">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <text id="662">
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Total de Certificados]]></text-property>
+                                    </text>
+                                </cell>
                                 <cell id="194">
                                     <data id="648">
                                         <structure name="numberFormat">
