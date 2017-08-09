@@ -11637,11 +11637,23 @@ month</expression>
 var n = 0;&#13;
 var display = "";&#13;
 &#13;
-if(error.search("exp_liq_telmex") != -1 || error.search("objetadas") != -1 || error.search("os_te") != -1 || error.search("abierto") != -1 || error.search("Herramienta DIQUE") != -1 || error.search("Tipo Tarea") != -1 || error.search("No fue instalado por un constratista."))&#13;
+if(error.search("exp_liq_telmex") != -1 || error.search("objetadas") != -1 || error.search("os_te") != -1 || error.search("abierto") != -1 || error.search("Herramienta DIQUE") != -1 || error.search("Tipo Tarea") != -1)&#13;
+	display = "Supervisor";&#13;
+&#13;
+if(error.search("No fue instalado por un constratista.") != -1 || error.search("El expediente") != -1 || error.search("No encontrado.") != -1)&#13;
+	display = "Supervisor";&#13;
+&#13;
+if(error.search("No fué instalado por un constratistas.") != -1 || error.search("Fue instalado por el contratista") != -1)&#13;
 	display = "Supervisor";&#13;
 &#13;
 if(error.search("cobre") != -1 || error.search("telefono_-_folio") != -1)&#13;
 	display = "Mesa de control";&#13;
+&#13;
+if(error.search("Fue instalado hace") != -1 || error.search("Fue instalado hace") != -1 || error.search("no pertenece al tipo de") != -1 || error.search("SIN ESTATUS CARGA FORANEA") != -1 || error.search("Ya fué capturado,") != -1)&#13;
+	display = "Facturación";&#13;
+&#13;
+if(error.search("No se pudo registrar el folio") != -1 || error.search("prev-2016") != -1 || error.search("Se encuentra duplicado.") != -1 || error.search("El trabajo contiene un valor") != -1 || error.search("No contiene ningún trabajo a registrar.") != -1)&#13;
+	display = "Facturación"&#13;
 &#13;
 display;</expression>
                     <property name="dataType">string</property>
@@ -12122,6 +12134,169 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Errores - Nombres" id="486">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">contratista</property>
+                    <expression name="expression" type="javascript">var nombre = row["first_name"];&#13;
+var display = "";&#13;
+if(nombre == null || nombre == "")&#13;
+	display = "Órden sin contratista";&#13;
+else&#13;
+	display = nombre;&#13;
+	&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">status_cob</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">status_cob</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cope</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">error</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">error</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Accion</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">contratista</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">status_cob</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">error</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Accion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">contratista</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Errores Cobranza</value>
+                <value>Nombres</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Errores Cobranza::_id</tns:Column>
+<tns:Column>Errores Cobranza::conexion</tns:Column>
+<tns:Column>Errores Cobranza::status_cob</tns:Column>
+<tns:Column>Errores Cobranza::folio</tns:Column>
+<tns:Column>Errores Cobranza::area</tns:Column>
+<tns:Column>Errores Cobranza::cope</tns:Column>
+<tns:Column>Errores Cobranza::error</tns:Column>
+<tns:Column>Errores Cobranza::Accion</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Errores Cobranza"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Errores Cobranza::conexion</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Folio" id="412">
