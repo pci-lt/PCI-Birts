@@ -6056,6 +6056,12 @@ longitud</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">autorizacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">autorizacion</text-property>
+                    <text-property name="heading">autorizacion</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Hora local</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -6124,16 +6130,21 @@ longitud</expression>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">Hora local</property>
+                        <property name="name">autorizacion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
+                        <property name="name">Hora local</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
                         <property name="name">Longitud</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">13</property>
                         <property name="name">Latitud</property>
                         <property name="dataType">float</property>
                     </structure>
@@ -6283,8 +6294,15 @@ log('query' + query);]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">autorizacion</property>
+                    <property name="nativeName">autorizacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "created" , "check" , "comentarios" , "hora" , "minuto" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "created" , "check" , "comentarios" , "hora" , "minuto" , "geo" , "autorizacion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -7559,6 +7577,39 @@ var local = hora + ":" + minuto + " " + momento;&#13;
 local;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Longitud</property>
+                    <expression name="expression" type="javascript">var geo = row["geo"];&#13;
+var longitud = 0;&#13;
+if(geo != null){&#13;
+	geo = geo.toString();&#13;
+	geo = geo.replace("[ " , "")&#13;
+	geo = geo.replace(" ]", "");&#13;
+	geo = geo.split(",");&#13;
+	longitud = geo[0];&#13;
+}else{&#13;
+	longitud = 0&#13;
+}&#13;
+&#13;
+longitud;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">Latitud</property>
+                    <expression name="expression" type="javascript">var geo = row["geo"];&#13;
+var longitud = 0;&#13;
+if(geo != null){&#13;
+	geo = geo.toString();&#13;
+	geo = geo.replace("]", "");&#13;
+	geo = geo.split(",");&#13;
+	longitud = geo[1];&#13;
+}else{&#13;
+	longitud = 0;&#13;
+}&#13;
+&#13;
+longitud</expression>
+                    <property name="dataType">float</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -7626,10 +7677,24 @@ local;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">geo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">geo</text-property>
+                    <text-property name="heading">geo</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Hora local</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Longitud</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Latitud</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -7677,8 +7742,23 @@ local;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">geo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">Hora local</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Longitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Latitud</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -7764,8 +7844,15 @@ log('query' + query);]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">geo</property>
+                    <property name="nativeName">geo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "check"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "check" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -8019,16 +8106,31 @@ log('query' + query);]]></method>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">Hora local</property>
+                        <property name="name">geo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">first_name</property>
+                        <property name="name">Hora local</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
+                        <property name="name">Longitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Latitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -8048,7 +8150,10 @@ log('query' + query);]]></method>
 <tns:Column>Asistencia Mensual::semana</tns:Column>
 <tns:Column>Asistencia Mensual::dia</tns:Column>
 <tns:Column>Asistencia Mensual::check</tns:Column>
+<tns:Column>Asistencia Mensual::geo</tns:Column>
 <tns:Column>Asistencia Mensual::Hora local</tns:Column>
+<tns:Column>Asistencia Mensual::Longitud</tns:Column>
+<tns:Column>Asistencia Mensual::Latitud</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 <tns:Column>Nombres::position</tns:Column>
 </tns:selectColumns>
