@@ -271,67 +271,6 @@ resultado;</expression>
             </list-property>
         </data-mart-data-set>
     </data-sets>
-    <cubes>
-        <tabular-cube name="Data" id="291">
-            <property name="dimensions">
-                <tabular-dimension name="Jera" id="292">
-                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
-                    <property name="hierarchies">
-                        <tabular-hierarchy name="NewTabularHierarchy1" id="293">
-                            <property name="levels">
-                                <tabular-level name="Estatus" id="294">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">Estatus</property>
-                                </tabular-level>
-                                <tabular-level name="area" id="295">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">area</property>
-                                </tabular-level>
-                                <tabular-level name="cope" id="296">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">cope</property>
-                                </tabular-level>
-                            </property>
-                        </tabular-hierarchy>
-                    </property>
-                </tabular-dimension>
-                <tabular-dimension name="Contratista" id="300">
-                    <property name="defaultHierarchy">NewTabularHierarchy</property>
-                    <property name="hierarchies">
-                        <tabular-hierarchy name="NewTabularHierarchy" id="301">
-                            <property name="levels">
-                                <tabular-level name="Contratista" id="508">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">Contratista</property>
-                                </tabular-level>
-                                <tabular-level name="area" id="303">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">area</property>
-                                </tabular-level>
-                                <tabular-level name="cope" id="304">
-                                    <property name="dataType">string</property>
-                                    <property name="columnName">cope</property>
-                                </tabular-level>
-                            </property>
-                        </tabular-hierarchy>
-                    </property>
-                </tabular-dimension>
-            </property>
-            <property name="measureGroups">
-                <tabular-measure-group name="Summary Field1" id="297">
-                    <property name="measures">
-                        <tabular-measure name="folio1" id="298">
-                            <property name="function">count</property>
-                            <expression name="measureExpression" type="javascript">dataSetRow["folio"]</expression>
-                            <property name="dataType">integer</property>
-                        </tabular-measure>
-                    </property>
-                </tabular-measure-group>
-            </property>
-            <property name="dataSet">Join Cobranza-Nombres</property>
-            <property name="autoKey">false</property>
-        </tabular-cube>
-    </cubes>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="type">custom</property>
@@ -391,7 +330,6 @@ resultado;</expression>
                 <property name="height">6.145833333333333in</property>
                 <cell id="15">
                     <extended-item extensionName="Chart" id="122">
-                        <property name="cube">Data</property>
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
  <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side">
   <block>
@@ -482,7 +420,7 @@ resultado;</expression>
         <color _nil="1"/>
        </outline>
       </label>
-      <dataDefinition definition="data[&quot;Summary Field1/folio1&quot;]">
+      <dataDefinition definition="row[&quot;folio&quot;]">
        <grouping enabled="true" aggregateExpression="Count"/>
       </dataDefinition>
       <dataPoint>
@@ -535,9 +473,10 @@ resultado;</expression>
        <color _nil="1"/>
       </outline>
      </label>
-     <dataDefinition definition="data[&quot;Jera/Estatus&quot;]"/>
+     <dataDefinition definition="row[&quot;Estatus&quot;]"/>
      <curveFitting _nil="1"/>
     </series>
+    <grouping enabled="true"/>
     <sortKey/>
    </seriesDefinitions>
    <lineAttributes>
@@ -582,27 +521,73 @@ resultado;</expression>
                         <property name="inheritColumns">true</property>
                         <property name="height">286.125pt</property>
                         <property name="width">572.25pt</property>
+                        <property name="dataSet">Join Cobranza-Nombres</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">Jera/Estatus</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["Estatus"]</expression>
+                                <property name="name">_id</property>
+                                <text-property name="displayName">_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Jera/area</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["area"]</expression>
+                                <property name="name">status_cob</property>
+                                <text-property name="displayName">status_cob</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["status_cob"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Jera/cope</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["cope"]</expression>
+                                <property name="name">folio</property>
+                                <text-property name="displayName">folio</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Summary Field1/folio1</property>
-                                <expression name="expression" type="javascript">measure["folio1"]</expression>
-                                <property name="dataType">integer</property>
-                                <property name="aggregateFunction">SUM</property>
+                                <property name="name">area</property>
+                                <text-property name="displayName">area</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["area"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">cope</property>
+                                <text-property name="displayName">cope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["cope"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">error</property>
+                                <text-property name="displayName">error</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["error"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">first_name</property>
+                                <text-property name="displayName">first_name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Contratista</property>
+                                <text-property name="displayName">Contratista</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Contratista"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MArea</property>
+                                <text-property name="displayName">MArea</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MArea"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MCope</property>
+                                <text-property name="displayName">MCope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MCope"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Estatus</property>
+                                <text-property name="displayName">Estatus</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Estatus"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                         </list-property>
                     </extended-item>
@@ -1060,7 +1045,6 @@ resultado;</expression>
                         <text-property name="content"><![CDATA[Por Contratista]]></text-property>
                     </text>
                     <extended-item extensionName="Chart" id="305">
-                        <property name="cube">Data</property>
                         <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
  <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Stacked">
   <block>
@@ -1139,7 +1123,7 @@ resultado;</expression>
      </outline>
     </title>
     <seriesDefinitions>
-     <query definition="data[&quot;Jera/Estatus&quot;]">
+     <query definition="row[&quot;Estatus&quot;]">
       <grouping/>
      </query>
      <series _type="BarSeries" seriesIdentifier="Series 1" labelPosition="4" stacked="true" riser="0">
@@ -1149,7 +1133,7 @@ resultado;</expression>
         <color _nil="1"/>
        </outline>
       </label>
-      <dataDefinition definition="data[&quot;Summary Field1/folio1&quot;]">
+      <dataDefinition definition="row[&quot;folio&quot;]">
        <grouping/>
       </dataDefinition>
       <triggers condition="6">
@@ -1199,10 +1183,11 @@ resultado;</expression>
        <color _nil="1"/>
       </outline>
      </label>
-     <dataDefinition definition="data[&quot;Contratista/Contratista&quot;]"/>
+     <dataDefinition definition="row[&quot;Contratista&quot;]"/>
      <curveFitting _nil="1"/>
     </series>
-    <sortKey definition="data[&quot;Summary Field1/folio1&quot;]"/>
+    <grouping enabled="true"/>
+    <sortKey definition="row[&quot;Contratista&quot;]"/>
    </seriesDefinitions>
    <lineAttributes>
     <color _nil="1"/>
@@ -1247,46 +1232,72 @@ resultado;</expression>
                         <property name="marginLeft">12pt</property>
                         <property name="height">4.53125in</property>
                         <property name="width">9.0625in</property>
+                        <property name="dataSet">Join Cobranza-Nombres</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">Jera/Estatus</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["Estatus"]</expression>
+                                <property name="name">_id</property>
+                                <text-property name="displayName">_id</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Jera/area</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["area"]</expression>
+                                <property name="name">status_cob</property>
+                                <text-property name="displayName">status_cob</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["status_cob"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Jera/cope</property>
-                                <expression name="expression" type="javascript">dimension["Jera"]["cope"]</expression>
+                                <property name="name">folio</property>
+                                <text-property name="displayName">folio</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Contratista/first_name</property>
-                                <expression name="expression" type="javascript">dimension["Contratista"]["first_name"]</expression>
+                                <property name="name">area</property>
+                                <text-property name="displayName">area</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["area"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Contratista/area</property>
-                                <expression name="expression" type="javascript">dimension["Contratista"]["area"]</expression>
+                                <property name="name">cope</property>
+                                <text-property name="displayName">cope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["cope"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Contratista/cope</property>
-                                <expression name="expression" type="javascript">dimension["Contratista"]["cope"]</expression>
+                                <property name="name">error</property>
+                                <text-property name="displayName">error</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["error"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Summary Field1/folio1</property>
-                                <expression name="expression" type="javascript">measure["folio1"]</expression>
-                                <property name="dataType">integer</property>
-                                <property name="aggregateFunction">SUM</property>
+                                <property name="name">first_name</property>
+                                <text-property name="displayName">first_name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                             <structure>
-                                <property name="name">Contratista/Contratista</property>
-                                <expression name="expression" type="javascript">dimension["Contratista"]["Contratista"]</expression>
+                                <property name="name">Contratista</property>
+                                <text-property name="displayName">Contratista</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Contratista"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MArea</property>
+                                <text-property name="displayName">MArea</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MArea"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MCope</property>
+                                <text-property name="displayName">MCope</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["MCope"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Estatus</property>
+                                <text-property name="displayName">Estatus</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Estatus"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
                         </list-property>
