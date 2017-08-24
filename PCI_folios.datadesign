@@ -7560,7 +7560,7 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "check" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tcheck: {$ifNull: ['$answers.59679cbff851c210dd23d517', 'Desconocido']},\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "check" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -16553,6 +16553,563 @@ log('query' + query);]]></method>
 <tns:condition>
 <tns:leftColumn>Seguimiento Sur Agendas::conection</tns:leftColumn>
 <tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Eliminados" id="508">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Hora local</property>
+                    <expression name="expression" type="javascript">var hora = row["hora"]-5;&#13;
+var minuto = row["minuto"];&#13;
+var momento = "AM"&#13;
+&#13;
+if(minuto&lt;10){&#13;
+	minuto = "0" + minuto;&#13;
+}&#13;
+if(hora > 12){&#13;
+	hora = hora - 12;&#13;
+	momento = "PM";&#13;
+	}&#13;
+if(hora == -5){&#13;
+	hora = 7&#13;
+	momento = "PM"&#13;
+}&#13;
+if(hora == -4){&#13;
+	hora = 8&#13;
+	momento = "PM"&#13;
+}&#13;
+if(hora == -3){&#13;
+	hora = 9&#13;
+	momento = "PM"&#13;
+}&#13;
+if(hora == -2){&#13;
+	hora = 10&#13;
+	momento = "PM"&#13;
+}&#13;
+if(hora == -1){&#13;
+	hora = 8&#13;
+	momento = "PM"&#13;
+}&#13;
+if(hora&lt;10){&#13;
+	hora = "0" + hora;&#13;
+}&#13;
+var local = hora + ":" + minuto + " " + momento;&#13;
+local;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">user</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">user</text-property>
+                    <text-property name="heading">user</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <text-property name="heading">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">hora</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">hora</text-property>
+                    <text-property name="heading">hora</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">minuto</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">minuto</text-property>
+                    <text-property name="heading">minuto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">semana</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">semana</text-property>
+                    <text-property name="heading">semana</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dia</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">dia</text-property>
+                    <text-property name="heading">dia</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">borrado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">borrado</text-property>
+                    <text-property name="heading">borrado</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">borrado_por</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">borrado_por</text-property>
+                    <text-property name="heading">borrado_por</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Hora local</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">user</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">hora</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">minuto</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">semana</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">dia</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">borrado</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">borrado_por</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Hora local</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">user</property>
+                    <property name="nativeName">user</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">created</property>
+                    <property name="nativeName">created</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">9</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">hora</property>
+                    <property name="nativeName">hora</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">minuto</property>
+                    <property name="nativeName">minuto</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">semana</property>
+                    <property name="nativeName">semana</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">dia</property>
+                    <property name="nativeName">dia</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">borrado</property>
+                    <property name="nativeName">borrado</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">9</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">borrado_por</property>
+                    <property name="nativeName">borrado_por</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:true},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tborrado: '$deleted_at',\r\n\tborrado_por: '$deleted_by'\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "borrado" , "borrado_por"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>user</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>user</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>user</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>9</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>check</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>check</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>check</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>comentarios</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>comentarios</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>comentarios</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Eliminados" id="509">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">hora</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">hora</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">minuto</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">minuto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">semana</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">semana</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dia</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">dia</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">borrado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">borrado</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Hora local</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Nombres::first_name</property>
+                    <property name="alias">Creado por</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Nombres_1::first_name</property>
+                    <property name="alias">Eliminado por</property>
+                    <property name="analysis">dimension</property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">hora</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">minuto</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">semana</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">dia</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">borrado</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Hora local</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Creado por</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Eliminado por</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Eliminados</value>
+                <value>Nombres</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Eliminados::folio</tns:Column>
+<tns:Column>Eliminados::created</tns:Column>
+<tns:Column>Eliminados::hora</tns:Column>
+<tns:Column>Eliminados::minuto</tns:Column>
+<tns:Column>Eliminados::semana</tns:Column>
+<tns:Column>Eliminados::dia</tns:Column>
+<tns:Column>Eliminados::borrado</tns:Column>
+<tns:Column>Eliminados::Hora local</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+<tns:Column>Nombres_1::first_name</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Eliminados"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Eliminados::user</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" alias="Nombres_1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Eliminados::borrado_por</tns:leftColumn>
+<tns:rightColumn>Nombres_1::id</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
