@@ -576,12 +576,12 @@ display;</expression>
             <row id="458">
                 <cell id="459">
                     <grid id="446">
-                        <property name="width">12.729166666666666in</property>
+                        <property name="width">12.21875in</property>
                         <column id="448">
-                            <property name="width">6.96875in</property>
+                            <property name="width">6.15625in</property>
                         </column>
                         <column id="605">
-                            <property name="width">5.760416666666667in</property>
+                            <property name="width">6.0625in</property>
                         </column>
                         <row id="449">
                             <cell id="451">
@@ -844,7 +844,7 @@ display;</expression>
                                             <property name="type">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="__ac_group_collapse_level">1</property>
+                                    <property name="__ac_group_collapse_level">2</property>
                                     <property name="marginTop">5pt</property>
                                     <property name="marginLeft">12pt</property>
                                     <property name="width">5.583333333333333in</property>
@@ -972,7 +972,7 @@ display;</expression>
                                                     <expression name="value" type="javascript">row["folio"]</expression>
                                                 </structure>
                                             </list-property>
-                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada"</expression>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada" &amp;&amp; row["Count Distinct"] == 1</expression>
                                             <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
@@ -986,6 +986,23 @@ display;</expression>
                                                     <expression name="value" type="javascript">row["Count Retardos"]</expression>
                                                 </structure>
                                             </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Distinct</property>
+                                            <text-property name="displayName">CD</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["check"] == "entrada"</expression>
                                             <property name="allowExport">true</property>
                                         </structure>
                                     </list-property>
@@ -1075,6 +1092,29 @@ display;</expression>
                                             </row>
                                         </header>
                                     </group>
+                                    <group id="653">
+                                        <property name="groupName">Fecha</property>
+                                        <expression name="keyExpr" type="javascript">row["created"]</expression>
+                                        <structure name="toc">
+                                            <expression name="expressionValue" type="javascript">row["created"]</expression>
+                                        </structure>
+                                        <property name="hideDetail">false</property>
+                                        <header>
+                                            <row id="654">
+                                                <cell id="655">
+                                                    <data id="662">
+                                                        <structure name="dateTimeFormat">
+                                                            <property name="category">Long Date</property>
+                                                            <property name="pattern">Long Date</property>
+                                                        </structure>
+                                                        <property name="resultSetColumn">created</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="656"/>
+                                                <cell id="657"/>
+                                            </row>
+                                        </header>
+                                    </group>
                                 </table>
                             </cell>
                         </row>
@@ -1110,7 +1150,7 @@ display;</expression>
                                     </list-property>
                                     <property name="__ac_group_collapse_level">2,1</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">12.020833333333334in</property>
+                                    <property name="width">12.364583333333334in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1163,7 +1203,7 @@ display;</expression>
                                                     <expression name="value" type="javascript">row["folio"]</expression>
                                                 </structure>
                                             </list-property>
-                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada"</expression>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada" &amp;&amp; row["Count Distinct"] == 1</expression>
                                             <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
@@ -1261,15 +1301,110 @@ resultado;</expression>
                                         <structure>
                                             <property name="name">Dias Laborados</property>
                                             <text-property name="displayName">Cdias</text-property>
-                                            <property name="dataType">integer</property>
+                                            <property name="dataType">float</property>
                                             <simple-property-list name="aggregateOn">
                                                 <value>Usuarios</value>
                                             </simple-property-list>
-                                            <property name="aggregateFunction">COUNTDISTINCT</property>
+                                            <property name="aggregateFunction">SUM</property>
                                             <list-property name="arguments">
                                                 <structure>
                                                     <property name="name">Expression</property>
-                                                    <expression name="value" type="javascript">row["created"]</expression>
+                                                    <expression name="value" type="javascript">row["Dias a Pagar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Distinct</property>
+                                            <text-property name="displayName">CD</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["check"] == "entrada"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Running Count Salida</property>
+                                            <text-property name="displayName">RCSal</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["check"] == "salida"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Entradas</property>
+                                            <text-property name="displayName">CDias</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["check"] == "entrada"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Salidas</property>
+                                            <text-property name="displayName">CSal</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["check"] == "salida"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias a Pagar</property>
+                                            <text-property name="displayName">DAPag</text-property>
+                                            <expression name="expression" type="javascript">var dia = 0;&#13;
+if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1)&#13;
+	dia = 1;&#13;
+&#13;
+dia;</expression>
+                                            <property name="dataType">float</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Sum Retardos</property>
+                                            <text-property name="displayName">SRet</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Area</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Count User"]</expression>
                                                 </structure>
                                             </list-property>
                                             <property name="allowExport">true</property>
@@ -1292,10 +1427,10 @@ resultado;</expression>
                                         <property name="width">2.375in</property>
                                     </column>
                                     <column id="505">
-                                        <property name="width">1.6875in</property>
+                                        <property name="width">1.3020833333333333in</property>
                                     </column>
                                     <column id="563">
-                                        <property name="width">1.84375in</property>
+                                        <property name="width">2.1354166666666665in</property>
                                     </column>
                                     <header>
                                         <row id="470">
@@ -1356,7 +1491,12 @@ resultado;</expression>
                                                 </cell>
                                                 <cell id="568"/>
                                                 <cell id="596"/>
-                                                <cell id="588"/>
+                                                <cell id="588">
+                                                    <data id="664">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Sum Retardos</property>
+                                                    </data>
+                                                </cell>
                                                 <cell id="569"/>
                                                 <cell id="570"/>
                                                 <cell id="571"/>
@@ -1429,7 +1569,11 @@ resultado;</expression>
                                                         <property name="resultSetColumn">created</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="549"/>
+                                                <cell id="549">
+                                                    <data id="663">
+                                                        <property name="resultSetColumn">Dias a Pagar</property>
+                                                    </data>
+                                                </cell>
                                                 <cell id="560"/>
                                             </row>
                                         </header>
@@ -1458,7 +1602,7 @@ resultado;</expression>
                                                             <property name="operator">is-true</property>
                                                             <property name="backgroundColor">#F44336</property>
                                                             <property name="color">#FFFFFF</property>
-                                                            <expression name="testExpr" type="javascript">row["Retardo"] == "Retardo" &amp;&amp; row["check"] == "entrada"</expression>
+                                                            <expression name="testExpr" type="javascript">row["Retardo"] == "Retardo" &amp;&amp; row["check"] == "entrada" &amp;&amp; row["Count Distinct"] == 1</expression>
                                                         </structure>
                                                     </list-property>
                                                     <property name="resultSetColumn">Hora local</property>
@@ -1491,9 +1635,6 @@ link;</expression>
                         </row>
                     </grid>
                 </cell>
-            </row>
-            <row id="389">
-                <cell id="390"/>
             </row>
         </grid>
     </body>
