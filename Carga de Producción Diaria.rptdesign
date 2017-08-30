@@ -124,6 +124,10 @@ carga</expression>
                     <property name="columnName">con_carga</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">empresa</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -149,11 +153,16 @@ carga</expression>
                     </structure>
                     <structure>
                         <property name="position">5</property>
+                        <property name="name">empresa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
                         <property name="name">Cantidad_Completa</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">con_carga</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -181,6 +190,11 @@ carga</expression>
                     <property name="position">4</property>
                     <property name="name">cantidad</property>
                     <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">empresa</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -383,6 +397,13 @@ display</expression>
                                             </list-property>
                                             <property name="allowExport">true</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">contratista</property>
+                                            <text-property name="displayName">contratista</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["empresa"]</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
                                     </list-property>
                                     <property name="pageBreakInterval">10000</property>
                                     <column id="106">
@@ -400,9 +421,9 @@ display</expression>
                                     </header>
                                     <group id="108">
                                         <property name="groupName">Contratista</property>
-                                        <expression name="keyExpr" type="javascript">row["first_name"]</expression>
+                                        <expression name="keyExpr" type="javascript">row["contratista"]</expression>
                                         <structure name="toc">
-                                            <expression name="expressionValue" type="javascript">row["first_name"]</expression>
+                                            <expression name="expressionValue" type="javascript">row["contratista"]</expression>
                                         </structure>
                                         <property name="hideDetail">true</property>
                                         <list-property name="filter">
@@ -419,7 +440,7 @@ display</expression>
                                             <row id="109">
                                                 <cell id="110">
                                                     <data id="115">
-                                                        <property name="resultSetColumn">first_name</property>
+                                                        <property name="resultSetColumn">contratista</property>
                                                     </data>
                                                 </cell>
                                             </row>
@@ -581,6 +602,18 @@ resultado;</expression>
                                             </list-property>
                                             <property name="allowExport">true</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">empresa</property>
+                                            <text-property name="displayName">empresa</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["empresa"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">con_carga</property>
+                                            <text-property name="displayName">con_carga</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["con_carga"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
                                     </list-property>
                                     <property name="pageBreakInterval">10000000</property>
                                     <column id="48">
@@ -625,9 +658,9 @@ resultado;</expression>
                                     </header>
                                     <group id="58">
                                         <property name="groupName">Contratista</property>
-                                        <expression name="keyExpr" type="javascript">row["first_name"]</expression>
+                                        <expression name="keyExpr" type="javascript">row["empresa"]</expression>
                                         <structure name="toc">
-                                            <expression name="expressionValue" type="javascript">row["first_name"]</expression>
+                                            <expression name="expressionValue" type="javascript">row["empresa"]</expression>
                                         </structure>
                                         <property name="hideDetail">false</property>
                                         <list-property name="sort">
@@ -652,7 +685,7 @@ resultado;</expression>
                                                 <cell id="60">
                                                     <data id="67">
                                                         <property name="paddingLeft">5pt</property>
-                                                        <property name="resultSetColumn">first_name</property>
+                                                        <property name="resultSetColumn">empresa</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="263">
