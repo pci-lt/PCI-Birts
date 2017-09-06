@@ -134,6 +134,70 @@
             <property name="name">flattenCollections</property>
             <property name="id">484</property>
         </structure>
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">collectionName</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">operationType</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">operationExpr</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">selectedFields</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">findQueryExpr</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">sortExpr</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">batchSize</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">rtMDSearchLimit</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">numSkipDocuments</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">indexHints</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">queryReadPreference</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">queryReadPreferenceTags</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">noTimeOut</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">allowsPartialResults</property>
+            <property name="id">445</property>
+        </structure>
+        <structure>
+            <property name="name">flattenCollections</property>
+            <property name="id">445</property>
+        </structure>
     </list-property>
     <data-sources>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile" name="Infosync" id="407">
@@ -5292,6 +5356,27 @@ if(tarea == "TS VOZ"){&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">vsi</property>
+                    <expression name="expression" type="javascript">var tarea = row["tipo"];&#13;
+var display = "";&#13;
+var ti = tarea.indexOf("TI");&#13;
+var tk = tarea.indexOf("TK");&#13;
+var fc = tarea.indexOf("FC");&#13;
+var d9 = tarea.indexOf("D9");&#13;
+&#13;
+if(ti != -1 || tk != -1 || fc != -1 || tarea == "TS VOZ" || tarea == "MIGRACIÓN VOZ" || d9 != -1){&#13;
+	display = "NO"&#13;
+}&#13;
+else if (tarea == "MIGRACION VOZ" || tarea.indexOf("Fc") != -1 || tarea.indexOf("Ti") != -1 || tarea.indexOf("Tk") != -1 || tarea.indexOf("d9") != -1) {&#13;
+	display = "NO"&#13;
+}&#13;
+else{&#13;
+	display = "MVSI"&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -5355,16 +5440,28 @@ display;</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">tipo_instalacion</text-property>
                     <text-property name="heading">tipo_instalacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">metros</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">metros</text-property>
                     <text-property name="heading">metros</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">codigo</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">vsi</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -5418,6 +5515,11 @@ display;</expression>
                     <structure>
                         <property name="position">10</property>
                         <property name="name">codigo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">vsi</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -5533,7 +5635,7 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1399,\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1399,\r\n\r\n}},\r\n{$project:{\r\n\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -5698,6 +5800,13 @@ log('query' + query);]]></method>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Juan Prieto - Precios" id="518">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">row["Precios::precio_contratista"] + row["vsi"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -5763,11 +5872,25 @@ log('query' + query);]]></method>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">precio_contratista</property>
+                    <property name="columnName">Precios::precio_contratista</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">precio_contratista</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Precios_1::precio_contratista</property>
+                    <property name="alias">vsi</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">vsi</text-property>
+                    <text-property name="heading">vsi</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -5819,7 +5942,17 @@ log('query' + query);]]></method>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">precio_contratista</property>
+                        <property name="name">Precios::precio_contratista</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">vsi</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">total</property>
                         <property name="dataType">float</property>
                     </structure>
                 </list-property>
@@ -5841,6 +5974,7 @@ log('query' + query);]]></method>
 <tns:Column>Juan Prieto::tipo_instalacion</tns:Column>
 <tns:Column>Juan Prieto::metros</tns:Column>
 <tns:Column>Precios::precio_contratista</tns:Column>
+<tns:Column>Precios_1::precio_contratista</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Juan Prieto"/>
@@ -5851,6 +5985,17 @@ log('query' + query);]]></method>
 <tns:condition>
 <tns:leftColumn>Juan Prieto::codigo</tns:leftColumn>
 <tns:rightColumn>Precios::producto</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" alias="Precios_1" name="Precios"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Juan Prieto::vsi</tns:leftColumn>
+<tns:rightColumn>Precios_1::producto</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -11626,6 +11771,27 @@ if(tarea == "TS VOZ"){&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">vsi</property>
+                    <expression name="expression" type="javascript">var tarea = row["tipo"];&#13;
+var display = "";&#13;
+var ti = tarea.indexOf("TI");&#13;
+var tk = tarea.indexOf("TK");&#13;
+var fc = tarea.indexOf("FC");&#13;
+var d9 = tarea.indexOf("D9");&#13;
+&#13;
+if(ti != -1 || tk != -1 || fc != -1 || tarea == "TS VOZ" || tarea == "MIGRACIÓN VOZ" || d9 != -1){&#13;
+	display = "NO"&#13;
+}&#13;
+else if (tarea == "MIGRACION VOZ" || tarea.indexOf("Fc") != -1 || tarea.indexOf("Ti") != -1 || tarea.indexOf("Tk") != -1 || tarea.indexOf("d9") != -1) {&#13;
+	display = "NO"&#13;
+}&#13;
+else{&#13;
+	display = "MVSI"&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -11714,6 +11880,10 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">vsi</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -11771,6 +11941,11 @@ display;</expression>
                     <structure>
                         <property name="position">11</property>
                         <property name="name">codigo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">vsi</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -12058,6 +12233,13 @@ log('query' + query);]]></method>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Candido Precios" id="517">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">row["Precios::precio_contratista"] + row["vsi"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -12130,11 +12312,27 @@ log('query' + query);]]></method>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">precio_contratista</property>
+                    <property name="columnName">Precios::precio_contratista</property>
+                    <property name="alias">precio_contratista</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">precio_contratista</text-property>
+                    <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Precios_1::precio_contratista</property>
+                    <property name="alias">vsi</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">vsi</text-property>
+                    <text-property name="heading">vsi</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -12194,6 +12392,16 @@ log('query' + query);]]></method>
                         <property name="name">precio_contratista</property>
                         <property name="dataType">float</property>
                     </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">vsi</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
@@ -12214,6 +12422,7 @@ log('query' + query);]]></method>
 <tns:Column>Candido Perez::tipo_instalacion</tns:Column>
 <tns:Column>Candido Perez::metros</tns:Column>
 <tns:Column>Precios::precio_contratista</tns:Column>
+<tns:Column>Precios_1::precio_contratista</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Candido Perez"/>
@@ -12224,6 +12433,17 @@ log('query' + query);]]></method>
 <tns:condition>
 <tns:leftColumn>Candido Perez::codigo</tns:leftColumn>
 <tns:rightColumn>Precios::producto</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" alias="Precios_1" name="Precios"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Candido Perez::vsi</tns:leftColumn>
+<tns:rightColumn>Precios_1::producto</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -17753,9 +17973,9 @@ local;</expression>
                 <structure>
                     <property name="name">codigo</property>
                     <expression name="expression" type="javascript">var display = "B";&#13;
-var instalacion = row["_id.tipo_instalacion"];&#13;
-var metros = row["_id.metros"];&#13;
-var tarea = row["_id.tipo_tarea"];&#13;
+var instalacion = row["tipo_instalacion"];&#13;
+var metros = row["metros"];&#13;
+var tarea = row["tipo_tarea"];&#13;
 &#13;
 if(tarea == "TS VOZ"){&#13;
 		display = "VSI"&#13;
@@ -17771,91 +17991,102 @@ display;</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">Cobranza</property>
-                    <expression name="expression" type="javascript">var area = row["_id.estatus_cob"];&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
+                    <property name="name">vsi</property>
+                    <expression name="expression" type="javascript">var tarea = row["tipo_tarea"];&#13;
+var display = "";&#13;
+var ti = tarea.indexOf("TI");&#13;
+var tk = tarea.indexOf("TK");&#13;
+var fc = tarea.indexOf("FC");&#13;
+var d9 = tarea.indexOf("D9");&#13;
+&#13;
+if(ti != -1 || tk != -1 || fc != -1 || tarea == "TS VOZ" || tarea == "MIGRACIÓN VOZ" || d9 != -1){&#13;
+	display = "NO"&#13;
+}&#13;
+else if (tarea == "MIGRACION VOZ" || tarea.indexOf("Fc") != -1 || tarea.indexOf("Ti") != -1 || tarea.indexOf("Tk") != -1 || tarea.indexOf("d9") != -1) {&#13;
+	display = "NO"&#13;
+}&#13;
+else{&#13;
+	display = "MVSI"&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">paco</property>
+                    <expression name="expression" type="javascript">var estatus = row["estatus_cob"];&#13;
+var display = "";&#13;
+&#13;
+if(estatus == "paco" || estatus == "estimacion" || estatus == "liberada" || estatus == "factura"){&#13;
+	display = "Con Paco";&#13;
 	}&#13;
+else{&#13;
+	display = "Sin Paco";&#13;
 }&#13;
-if(resultado=="Pendiente"){&#13;
-	resultado = "1.- Pendiente por reportar";&#13;
-}&#13;
-if(resultado == "Validacion"){&#13;
-	resultado = "2.- En validación Carso";&#13;
-}&#13;
-if(resultado == "Aceptada"){&#13;
-	resultado = "3.- Producción Aceptada";&#13;
-}&#13;
-if(resultado == "Archivo Carga Masiva")&#13;
-	resultado = "4.- MTF Generado";&#13;
-if(resultado == "Paco")&#13;
-	resultado = "5.- Con PACO";&#13;
-if(resultado == "Estimacion")&#13;
-	resultado = "6.- Estimación Generada";&#13;
-if(resultado == "Liberada")&#13;
-	resultado = "7.- Con OC de Carso";&#13;
-if(resultado == "Factura")&#13;
-	resultado = "8.- Facturada a Carso";&#13;
-if(resultado == "Pagada")&#13;
-	resultado = "9.- Pagada por Carso";&#13;
-if(resultado == "Error")&#13;
-	resultado = "99.- Error de Validación";&#13;
-resultado;</expression>
+display;</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">_id.estatus_cob</property>
+                    <property name="columnName">_id</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.estatus_cob</text-property>
-                    <text-property name="heading">_id.estatus_cob</text-property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">_id.tipo_tarea</property>
+                    <property name="columnName">folio</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.tipo_tarea</text-property>
-                    <text-property name="heading">_id.tipo_tarea</text-property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus_cob</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus_cob</text-property>
+                    <text-property name="heading">estatus_cob</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">_id.tipo_instalacion</property>
+                    <property name="columnName">tipo_tarea</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.tipo_instalacion</text-property>
-                    <text-property name="heading">_id.tipo_instalacion</text-property>
+                    <text-property name="displayName">tipo_tarea</text-property>
+                    <text-property name="heading">tipo_tarea</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">_id.metros</property>
+                    <property name="columnName">tipo_instalacion</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.metros</text-property>
-                    <text-property name="heading">_id.metros</text-property>
+                    <text-property name="displayName">tipo_instalacion</text-property>
+                    <text-property name="heading">tipo_instalacion</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">cantidad</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">cantidad</text-property>
-                    <text-property name="heading">cantidad</text-property>
+                    <property name="columnName">metros</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">metros</text-property>
+                    <text-property name="heading">metros</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">codigo</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Cobranza</property>
+                    <property name="columnName">vsi</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">paco</property>
                     <property name="analysis">dimension</property>
                 </structure>
             </list-property>
@@ -17864,37 +18095,47 @@ resultado;</expression>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.estatus_cob</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.tipo_tarea</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.tipo_instalacion</property>
+                        <property name="name">estatus_cob</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">_id.metros</property>
+                        <property name="name">tipo_tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">cantidad</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">tipo_instalacion</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">codigo</property>
+                        <property name="name">metros</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">Cobranza</property>
+                        <property name="name">codigo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">vsi</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">paco</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -17934,7 +18175,7 @@ if(month != null || month !=''){
 	}
 	
 	
-	new_query = " 'answers.f1054000a030000000000e14': {$gte: '" + year+"-"+month + "-01' , $lt:'" + year_to + "-"+month_to + "-01' }, ";	
+	new_query = " created_at: {$gte: {$date:'" + year+"-"+month + "-01T00:00:01Z'} , $lte:{$date:'" + year_to + "-"+month_to + "-01T00:00:01Z'} }, ";	
 
 }
 
@@ -17948,41 +18189,48 @@ log('query' + query);]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">_id.estatus_cob</property>
-                    <property name="nativeName">_id.estatus_cob</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
                     <property name="dataType">string</property>
-                    <property name="nativeDataType">2</property>
+                    <property name="nativeDataType">7</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">_id.tipo_tarea</property>
-                    <property name="nativeName">_id.tipo_tarea</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">_id.tipo_instalacion</property>
-                    <property name="nativeName">_id.tipo_instalacion</property>
+                    <property name="name">estatus_cob</property>
+                    <property name="nativeName">estatus_cob</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">_id.metros</property>
-                    <property name="nativeName">_id.metros</property>
+                    <property name="name">tipo_tarea</property>
+                    <property name="nativeName">tipo_tarea</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">cantidad</property>
-                    <property name="nativeName">cantidad</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="name">tipo_instalacion</property>
+                    <property name="nativeName">tipo_instalacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">metros</property>
+                    <property name="nativeName">metros</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at : {$exists:false},\r\n\tconnection_id : 1937,\r\n\tanswers.f1054000a030000000000012: { $in: [\"paco\", \"estimacion\", \"liberada\", \"factura\"]},\r\n\r\n}},\r\n{$group: {_id:{\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n  },\r\n  \tcantidad: {$sum:1}\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.estatus_cob" , "_id.tipo_tarea" , "_id.tipo_instalacion" , "_id.metros" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at : {$exists:false},\r\n\tconnection_id : 1937,\r\n\tanswers.f1054000a030000000000012: { $in: [\"paco\", \"estimacion\", \"liberada\", \"factura\", \"pendiente\", \"validacion\", \"aceptada\", \"archivo_carga_masiva\", \"error_validacion\", \"error_de_paco\"]},\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "estatus_cob" , "tipo_tarea" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -18211,99 +18459,162 @@ log('query' + query);]]></method>
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">total</property>
-                    <expression name="expression" type="javascript">row["cantidad"] * row["precio_contratista"]</expression>
+                    <expression name="expression" type="javascript">(row["Precios::precio_contratista"] + row["vsi2"])</expression>
                     <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">paco</property>
+                    <expression name="expression" type="javascript">var estatus = row["estatus_cob"];&#13;
+var display = "";&#13;
+if(estatus == "paco" || estatus == "estimacion" || estatus == "liberada" || estatus == "factura"){&#13;
+	display = "Con PACO"&#13;
+}else{&#13;
+	display = "Sin PACO";&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">_id.estatus_cob</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.estatus_cob</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.tipo_tarea</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.tipo_tarea</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.tipo_instalacion</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.tipo_instalacion</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.metros</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.metros</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">cantidad</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">cantidad</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">precio_contratista</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">precio_contratista</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">total</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Precios::precio_contratista</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">precio_contratista</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Precios_1::precio_contratista</property>
+                    <property name="alias">vsi2</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">vsi2</text-property>
+                    <text-property name="heading">vsi2</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">paco</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus_cob</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus_cob</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tipo_tarea</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo_instalacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tipo_instalacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">metros</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">metros</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">codigo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">vsi</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.estatus_cob</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.tipo_tarea</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.tipo_instalacion</property>
+                        <property name="name">estatus_cob</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">_id.metros</property>
+                        <property name="name">tipo_tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">cantidad</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">tipo_instalacion</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">Cobranza</property>
+                        <property name="name">metros</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">precio_contratista</property>
-                        <property name="dataType">float</property>
+                        <property name="name">codigo</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
+                        <property name="name">vsi</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Precios::precio_contratista</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">vsi2</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">total</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">paco</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -18314,13 +18625,16 @@ log('query' + query);]]></method>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
 <tns:selectColumns>
-<tns:Column>Cobranza Saturno::_id.estatus_cob</tns:Column>
-<tns:Column>Cobranza Saturno::_id.tipo_tarea</tns:Column>
-<tns:Column>Cobranza Saturno::_id.tipo_instalacion</tns:Column>
-<tns:Column>Cobranza Saturno::_id.metros</tns:Column>
-<tns:Column>Cobranza Saturno::cantidad</tns:Column>
-<tns:Column>Cobranza Saturno::Cobranza</tns:Column>
+<tns:Column>Cobranza Saturno::_id</tns:Column>
+<tns:Column>Cobranza Saturno::folio</tns:Column>
+<tns:Column>Cobranza Saturno::estatus_cob</tns:Column>
+<tns:Column>Cobranza Saturno::tipo_tarea</tns:Column>
+<tns:Column>Cobranza Saturno::tipo_instalacion</tns:Column>
+<tns:Column>Cobranza Saturno::metros</tns:Column>
+<tns:Column>Cobranza Saturno::codigo</tns:Column>
+<tns:Column>Cobranza Saturno::vsi</tns:Column>
 <tns:Column>Precios::precio_contratista</tns:Column>
+<tns:Column>Precios_1::precio_contratista</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Cobranza Saturno"/>
@@ -18331,6 +18645,17 @@ log('query' + query);]]></method>
 <tns:condition>
 <tns:leftColumn>Cobranza Saturno::codigo</tns:leftColumn>
 <tns:rightColumn>Precios::producto</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" alias="Precios_1" name="Precios"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Cobranza Saturno::vsi</tns:leftColumn>
+<tns:rightColumn>Precios_1::producto</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -18734,6 +19059,9 @@ month</expression>
                     <expression name="valueExpr">row["Year"]</expression>
                     <expression name="labelExpr">row["Year"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2017</value>
+                    </simple-property-list>
                     <property name="paramType">simple</property>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
@@ -18746,6 +19074,9 @@ month</expression>
                     <expression name="valueExpr">row["month"]</expression>
                     <expression name="labelExpr">row["Mes"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">8</value>
+                    </simple-property-list>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
                     <structure name="format"/>
