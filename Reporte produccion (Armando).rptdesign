@@ -13,20 +13,95 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <cascading-parameter-group name="Estatus Cobranza" id="103">
+            <property name="dataSet">Estatus</property>
+            <property name="dataSetMode">single</property>
+            <parameters>
+                <scalar-parameter name="Estatus" id="104">
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Estatus</property>
+                    <expression name="valueExpr">row["_id.estatus"]</expression>
+                    <expression name="labelExpr">row["Estatus"]</expression>
+                    <expression name="sortByColumn">dataSetRow["Estatus"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">string</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">pendiente</value>
+                    </simple-property-list>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+            </parameters>
+        </cascading-parameter-group>
+    </parameters>
     <data-sources>
         <data-mart-data-source name="Datawarehouse" id="4">
             <property name="datamartURL">Datawarehouse_ PCI</property>
             <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Estatus</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Estatus"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
-        <data-mart-data-set name="armando" id="5">
+        <data-mart-data-set name="Estatus" id="102">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.estatus</text-property>
+                    <text-property name="heading">_id.estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Datawarehouse</property>
+            <property name="dataObject">Estatus Cobranza</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.estatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Estatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+        <data-mart-data-set name="Join Armando - Nombres" id="105">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">folio</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">folio</text-property>
-                    <text-property name="heading">folio</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -34,7 +109,6 @@
                     <property name="columnName">telefono</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">telefono</text-property>
-                    <text-property name="heading">telefono</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -42,7 +116,6 @@
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">area</text-property>
-                    <text-property name="heading">area</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -50,7 +123,6 @@
                     <property name="columnName">cope</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">cope</text-property>
-                    <text-property name="heading">cope</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -58,7 +130,6 @@
                     <property name="columnName">distrito</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">distrito</text-property>
-                    <text-property name="heading">distrito</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -66,7 +137,6 @@
                     <property name="columnName">status_cob</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">status_cob</text-property>
-                    <text-property name="heading">status_cob</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -74,35 +144,20 @@
                     <property name="columnName">cliente</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">cliente</text-property>
-                    <text-property name="heading">cliente</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">est_cob_contra</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">est_cob_contra</text-property>
-                    <text-property name="heading">est_cob_contra</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">Mes</property>
-                    <property name="analysis">dimension</property>
-                </structure>
-                <structure>
-                    <property name="columnName">aerea</property>
-                    <property name="analysis">dimension</property>
-                </structure>
-                <structure>
-                    <property name="columnName">subterranea</property>
-                    <property name="analysis">dimension</property>
                 </structure>
                 <structure>
                     <property name="columnName">instalacion</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">instalacion</text-property>
-                    <text-property name="heading">instalacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">alfa</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">alfa</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -110,7 +165,38 @@
                     <property name="columnName">mes</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">mes</text-property>
-                    <text-property name="heading">mes</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">est_cob_contra</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">est_cob_contra</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Mes</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">aerea</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subterranea</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -154,38 +240,48 @@
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">est_cob_contra</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">Mes</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">aerea</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">subterranea</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
                         <property name="name">instalacion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">9</property>
+                        <property name="name">alfa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">est_cob_contra</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">aerea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">subterranea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Datawarehouse</property>
-            <property name="dataObject">Armando</property>
+            <property name="dataObject">Join Armando - Nombres</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -224,32 +320,42 @@
                 </structure>
                 <structure>
                     <property name="position">8</property>
-                    <property name="name">est_cob_contra</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">Mes</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">aerea</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
-                    <property name="name">subterranea</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
                     <property name="name">instalacion</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">9</property>
+                    <property name="name">alfa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
                     <property name="name">mes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">est_cob_contra</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">Mes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">aerea</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">subterranea</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">first_name</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -289,6 +395,9 @@
                             </cell>
                             <cell id="17">
                                 <text id="19">
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Reporte de producción]]></text-property>
                                 </text>
@@ -299,8 +408,8 @@
             </row>
             <row id="10">
                 <cell id="11">
-                    <table id="20">
-                        <property name="dataSet">armando</property>
+                    <table id="106">
+                        <property name="dataSet">Join Armando - Nombres</property>
                         <list-property name="boundDataColumns">
                             <structure>
                                 <property name="name">folio</property>
@@ -345,6 +454,24 @@
                                 <property name="dataType">string</property>
                             </structure>
                             <structure>
+                                <property name="name">instalacion</property>
+                                <text-property name="displayName">instalacion</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["instalacion"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">alfa</property>
+                                <text-property name="displayName">alfa</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["alfa"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mes</property>
+                                <text-property name="displayName">mes</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mes"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
                                 <property name="name">est_cob_contra</property>
                                 <text-property name="displayName">est_cob_contra</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["est_cob_contra"]</expression>
@@ -368,155 +495,168 @@
                                 <expression name="expression" type="javascript">dataSetRow["subterranea"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">first_name</property>
+                                <text-property name="displayName">first_name</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
                         </list-property>
-                        <property name="pageBreakInterval">100000</property>
-                        <column id="89"/>
-                        <column id="90"/>
-                        <column id="91"/>
-                        <column id="92"/>
-                        <column id="93"/>
-                        <column id="94"/>
-                        <column id="95"/>
-                        <column id="98"/>
-                        <column id="99"/>
-                        <column id="100"/>
-                        <column id="101"/>
+                        <property name="pageBreakInterval">1000000</property>
+                        <column id="185"/>
+                        <column id="186"/>
+                        <column id="187"/>
+                        <column id="188"/>
+                        <column id="189"/>
+                        <column id="190"/>
+                        <column id="191"/>
+                        <column id="193"/>
+                        <column id="195"/>
+                        <column id="196"/>
+                        <column id="197"/>
+                        <column id="198"/>
+                        <column id="199"/>
                         <header>
-                            <row id="21">
-                                <cell id="22">
-                                    <label id="25">
-                                        <text-property name="text">Teléfono</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="24">
-                                    <label id="23">
+                            <row id="107">
+                                <cell id="108">
+                                    <label id="109">
                                         <text-property name="text">Folio</text-property>
                                     </label>
                                 </cell>
-                                <cell id="26">
-                                    <label id="31">
-                                        <text-property name="text">Distrito</text-property>
+                                <cell id="110">
+                                    <label id="111">
+                                        <text-property name="text">Teléfono</text-property>
                                     </label>
                                 </cell>
-                                <cell id="28">
-                                    <label id="29">
-                                        <text-property name="text">COPE</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="30">
-                                    <label id="35">
-                                        <text-property name="text">Cliente</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="32">
-                                    <label id="27">
+                                <cell id="112">
+                                    <label id="113">
                                         <text-property name="text">Área</text-property>
                                     </label>
                                 </cell>
-                                <cell id="34">
-                                    <label id="45">
+                                <cell id="114">
+                                    <label id="115">
+                                        <text-property name="text">COPE</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="116">
+                                    <label id="117">
+                                        <text-property name="text">Distrito</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="118">
+                                    <label id="119">
+                                        <text-property name="text">Estatus de Cobranza PC</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="120">
+                                    <label id="121">
+                                        <text-property name="text">Cliente</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="124">
+                                    <label id="125">
+                                        <text-property name="text">Alfa</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="128">
+                                    <label id="129">
+                                        <text-property name="text">Estatus de Cobranza Contratista</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="130">
+                                    <label id="131">
+                                        <text-property name="text">Mes</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="132">
+                                    <label id="133">
                                         <text-property name="text">Aerea</text-property>
                                     </label>
                                 </cell>
-                                <cell id="40">
-                                    <label id="47">
+                                <cell id="134">
+                                    <label id="135">
                                         <text-property name="text">Subterránea</text-property>
                                     </label>
                                 </cell>
-                                <cell id="42">
-                                    <label id="43">
-                                        <text-property name="text">Mes de Liquidacion</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="44">
-                                    <label id="33">
-                                        <text-property name="text">Estatus Cobranza</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="46">
-                                    <label id="41">
-                                        <text-property name="text">Estatus Cobranza Contratista</text-property>
+                                <cell id="136">
+                                    <label id="137">
+                                        <text-property name="text">Contratista</text-property>
                                     </label>
                                 </cell>
                             </row>
                         </header>
                         <detail>
-                            <row id="48">
-                                <cell id="49">
-                                    <data id="52">
-                                        <property name="resultSetColumn">telefono</property>
-                                    </data>
-                                </cell>
-                                <cell id="51">
-                                    <data id="50">
+                            <row id="138">
+                                <cell id="139">
+                                    <data id="140">
                                         <property name="resultSetColumn">folio</property>
                                     </data>
                                 </cell>
-                                <cell id="53">
-                                    <data id="58">
-                                        <property name="resultSetColumn">distrito</property>
+                                <cell id="141">
+                                    <data id="142">
+                                        <property name="resultSetColumn">telefono</property>
                                     </data>
                                 </cell>
-                                <cell id="55">
-                                    <data id="56">
+                                <cell id="143">
+                                    <data id="144">
+                                        <property name="resultSetColumn">area</property>
+                                    </data>
+                                </cell>
+                                <cell id="145">
+                                    <data id="146">
                                         <property name="resultSetColumn">cope</property>
                                     </data>
                                 </cell>
-                                <cell id="57">
-                                    <data id="62">
+                                <cell id="147">
+                                    <data id="148">
+                                        <property name="resultSetColumn">distrito</property>
+                                    </data>
+                                </cell>
+                                <cell id="149">
+                                    <data id="150">
+                                        <property name="resultSetColumn">status_cob</property>
+                                    </data>
+                                </cell>
+                                <cell id="151">
+                                    <data id="152">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">cliente</property>
                                     </data>
                                 </cell>
-                                <cell id="59">
-                                    <data id="54">
-                                        <property name="resultSetColumn">area</property>
+                                <cell id="155">
+                                    <data id="156">
+                                        <property name="resultSetColumn">alfa</property>
                                     </data>
                                 </cell>
-                                <cell id="61">
-                                    <data id="72">
+                                <cell id="159">
+                                    <data id="160">
+                                        <property name="resultSetColumn">est_cob_contra</property>
+                                    </data>
+                                </cell>
+                                <cell id="161">
+                                    <data id="162">
+                                        <property name="resultSetColumn">Mes</property>
+                                    </data>
+                                </cell>
+                                <cell id="163">
+                                    <data id="164">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">aerea</property>
                                     </data>
                                 </cell>
-                                <cell id="67">
-                                    <data id="74">
+                                <cell id="165">
+                                    <data id="166">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">subterranea</property>
                                     </data>
                                 </cell>
-                                <cell id="69">
-                                    <data id="70">
-                                        <property name="resultSetColumn">Mes</property>
-                                    </data>
-                                </cell>
-                                <cell id="71">
-                                    <data id="60">
-                                        <property name="resultSetColumn">status_cob</property>
-                                    </data>
-                                </cell>
-                                <cell id="73">
-                                    <data id="68">
-                                        <property name="resultSetColumn">est_cob_contra</property>
+                                <cell id="167">
+                                    <data id="168">
+                                        <property name="resultSetColumn">first_name</property>
                                     </data>
                                 </cell>
                             </row>
                         </detail>
-                        <footer>
-                            <row id="75">
-                                <cell id="76"/>
-                                <cell id="77"/>
-                                <cell id="78"/>
-                                <cell id="79"/>
-                                <cell id="80"/>
-                                <cell id="81"/>
-                                <cell id="82"/>
-                                <cell id="85"/>
-                                <cell id="86"/>
-                                <cell id="87"/>
-                                <cell id="88"/>
-                            </row>
-                        </footer>
                     </table>
                 </cell>
             </row>
