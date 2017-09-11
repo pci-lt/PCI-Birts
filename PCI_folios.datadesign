@@ -7763,34 +7763,31 @@ var momento = "AM"&#13;
 if(minuto&lt;10){&#13;
 	minuto = "0" + minuto;&#13;
 }&#13;
-if(hora > 12){&#13;
-	hora = hora - 12;&#13;
-	momento = "PM";&#13;
-	}&#13;
+&#13;
 if(hora == -5){&#13;
-	hora = 7&#13;
+	hora = 19&#13;
 	momento = "PM"&#13;
 }&#13;
 if(hora == -4){&#13;
-	hora = 8&#13;
+	hora = 20&#13;
 	momento = "PM"&#13;
 }&#13;
 if(hora == -3){&#13;
-	hora = 9&#13;
+	hora = 21&#13;
 	momento = "PM"&#13;
 }&#13;
 if(hora == -2){&#13;
-	hora = 10&#13;
+	hora = 22&#13;
 	momento = "PM"&#13;
 }&#13;
 if(hora == -1){&#13;
-	hora = 8&#13;
+	hora = 20&#13;
 	momento = "PM"&#13;
 }&#13;
 if(hora&lt;10){&#13;
 	hora = "0" + hora;&#13;
 }&#13;
-var local = hora + ":" + minuto + " " + momento;&#13;
+var local = hora + ":" + minuto;&#13;
 local;</expression>
                     <property name="dataType">string</property>
                 </structure>
@@ -7825,6 +7822,13 @@ if(geo != null){&#13;
 }&#13;
 &#13;
 longitud</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">DifDate</property>
+                    <expression name="expression" type="javascript">var dif = BirtDateTime.diffDay(params["Fecha"].value, params["Hasta"].value)&#13;
+&#13;
+dif;</expression>
                     <property name="dataType">float</property>
                 </structure>
             </list-property>
@@ -7898,6 +7902,8 @@ longitud</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">geo</text-property>
                     <text-property name="heading">geo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Hora local</property>
@@ -7908,10 +7914,20 @@ longitud</expression>
                 <structure>
                     <property name="columnName">Longitud</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Latitud</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">DifDate</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -7975,6 +7991,11 @@ longitud</expression>
                     <structure>
                         <property name="position">12</property>
                         <property name="name">Latitud</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">DifDate</property>
                         <property name="dataType">float</property>
                     </structure>
                 </list-property>
@@ -8323,6 +8344,53 @@ else &#13;
 area;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Campo</property>
+                    <expression name="expression" type="javascript">var puesto = row["position"];&#13;
+var display = "";&#13;
+&#13;
+if(puesto.indexOf("Supervisor") != 1 || puesto.indexOf("Coordinador") != -1 || puesto.indexOf("Auxiliar Administrativo") || puesto.indexOf("Axiliar Call Center") != -1){&#13;
+	display = "Campo";&#13;
+}&#13;
+else if(puesto.indexOf("Auxiliar Administrativo") != -1 || puesto.indexOf("Portalero") != -1 || puesto.indexOf("Tecnico") != -1){&#13;
+	display = "Campo";&#13;
+}&#13;
+else if (puesto.indexOf("Almacenista") != -1 || puesto.indexOf("Asistente") != -1 || puesto.indexOf("Desarrollador") != -1 || puesto.indexOf("Gerente") != -1 ) {&#13;
+	display = "Oficina";&#13;
+}&#13;
+else if (puesto.indexOf("Instructor") != -1 || puesto.indexOf("Programador") != -1) {&#13;
+	display = "Oficina";&#13;
+}&#13;
+else{&#13;
+	display = "Desconocido";&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DiasOtor</property>
+                    <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
+var hasta = params["Hasta"].value;&#13;
+var dif = row["DifDate"];&#13;
+var fechas = [0];&#13;
+var count = 0;&#13;
+&#13;
+for (var i=0; i &lt; dif; i++) {&#13;
+	fechas[i] = BirtDateTime.dayOfWeek(desde);&#13;
+	desde = BirtDateTime.addDay(desde , 1);&#13;
+}&#13;
+&#13;
+for (var i = 0; i &lt; fechas.length; i++) {&#13;
+	if ((fechas[i] == 1 || fechas[i] == 7) &amp;&amp; row["Campo"] == "Oficina"){&#13;
+		count++&#13;
+	}&#13;
+	if (fechas[i] == 1 &amp;&amp; row["Campo"] == "Campo"){&#13;
+		count++&#13;
+	}&#13;
+}&#13;
+count;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -8397,6 +8465,37 @@ area;</expression>
                 <structure>
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Campo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">geo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">geo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Longitud</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Latitud</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">DiasOtor</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -8458,18 +8557,33 @@ area;</expression>
                     </structure>
                     <structure>
                         <property name="position">12</property>
+                        <property name="name">DifDate</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">14</property>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">15</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">Campo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">DiasOtor</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -8491,6 +8605,7 @@ area;</expression>
 <tns:Column>Asistencia Mensual::Hora local</tns:Column>
 <tns:Column>Asistencia Mensual::Longitud</tns:Column>
 <tns:Column>Asistencia Mensual::Latitud</tns:Column>
+<tns:Column>Asistencia Mensual::DifDate</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 <tns:Column>Nombres::position</tns:Column>
 </tns:selectColumns>
