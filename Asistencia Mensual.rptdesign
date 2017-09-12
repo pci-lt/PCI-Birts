@@ -262,10 +262,6 @@ display;</expression>
                     <property name="columnName">Campo</property>
                     <property name="analysis">dimension</property>
                 </structure>
-                <structure>
-                    <property name="columnName">DiasOtor</property>
-                    <property name="analysis">measure</property>
-                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -351,26 +347,21 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">17</property>
-                        <property name="name">DiasOtor</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">18</property>
                         <property name="name">Dia</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">19</property>
+                        <property name="position">18</property>
                         <property name="name">Time_Seconds</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">19</property>
                         <property name="name">Retardo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">21</property>
+                        <property name="position">20</property>
                         <property name="name">Click</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -458,11 +449,6 @@ display;</expression>
                     <property name="position">16</property>
                     <property name="name">DifDate</property>
                     <property name="dataType">float</property>
-                </structure>
-                <structure>
-                    <property name="position">17</property>
-                    <property name="name">DiasOtor</property>
-                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -1462,8 +1448,30 @@ dia;</expression>
                                         <structure>
                                             <property name="name">DiasOtor</property>
                                             <text-property name="displayName">DiasOtor</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["DiasOtor"]</expression>
+                                            <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
+var hasta = params["Hasta"].value;&#13;
+var dif = dataSetRow["DifDate"];&#13;
+var campo = dataSetRow["Campo"];&#13;
+if(campo == null){&#13;
+	campo == "Oficina"&#13;
+}&#13;
+var fechas = 0;&#13;
+var count = 0;&#13;
+&#13;
+for (var i=0; i &lt; dif; i++) {&#13;
+	fechas = BirtDateTime.dayOfWeek(desde);&#13;
+	if ((fechas == 1 || fechas == 7) &amp;&amp; (campo == "Oficina"  || campo == "Desconocido")){&#13;
+		count++;&#13;
+	}&#13;
+	if (fechas == 1 &amp;&amp; campo == "Campo"){&#13;
+		count++;&#13;
+	}&#13;
+	desde = BirtDateTime.addDay(desde , 1);&#13;
+}&#13;
+&#13;
+count;</expression>
                                             <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
                                             <property name="name">Dias Para Restar</property>
