@@ -1429,111 +1429,6 @@ dia;</expression>
                                             <expression name="expression" type="javascript">dataSetRow["Campo"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
-                                        <structure>
-                                            <property name="name">DifDate</property>
-                                            <text-property name="displayName">DifDate</text-property>
-                                            <expression name="expression" type="javascript">var dif = 0;&#13;
-var desde = params["Fecha"].value;&#13;
-var hasta = params["Hasta"].value&#13;
-dif = BirtDateTime.diffDay(desde, hasta)&#13;
-&#13;
-dif;</expression>
-                                            <property name="dataType">float</property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">DiasOtor</property>
-                                            <text-property name="displayName">DiasOtor</text-property>
-                                            <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
-var hasta = params["Hasta"].value;&#13;
-var dif = row["DifDate"];&#13;
-var campo = row["Campo"];&#13;
-if(campo == null){&#13;
-	campo == "Oficina"&#13;
-}&#13;
-var fechas = 0;&#13;
-var count = 0;&#13;
-&#13;
-for (var i=0; i &lt; dif; i++) {&#13;
-	fechas = BirtDateTime.dayOfWeek(desde);&#13;
-	if ((fechas == 1 || fechas == 7) &amp;&amp; (campo == "Oficina"  || campo == "Desconocido")){&#13;
-		count++;&#13;
-	}&#13;
-	if (fechas == 1 &amp;&amp; campo == "Campo"){&#13;
-		count++;&#13;
-	}&#13;
-	desde = BirtDateTime.addDay(desde , 1);&#13;
-}&#13;
-&#13;
-count;</expression>
-                                            <property name="dataType">integer</property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Dias Para Restar</property>
-                                            <text-property name="displayName">DPRest</text-property>
-                                            <expression name="expression" type="javascript">var campo = dataSetRow["Campo"];&#13;
-var creado = dataSetRow["created"];&#13;
-var dias = row["Dias a Pagar"];&#13;
-var resta = 0;&#13;
-creado = BirtDateTime.dayOfWeek(creado);&#13;
-&#13;
-if(campo == "Campo" &amp;&amp; creado == 1 )&#13;
-	resta = 1&#13;
-else if(campo == "Oficina" &amp;&amp; (creado == 1 || creado == 7))&#13;
-	resta = 1&#13;
-	&#13;
-resta;</expression>
-                                            <property name="dataType">integer</property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Dias Otorgador Reales</property>
-                                            <text-property name="displayName">DOReal</text-property>
-                                            <expression name="expression" type="javascript">row["DiasOtor"] - row["Sum Rest Dias"]</expression>
-                                            <property name="dataType">integer</property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Faltas</property>
-                                            <text-property name="displayName">Faltas</text-property>
-                                            <expression name="expression" type="javascript">row["DifDate"] - (row["Dias Laborados"]+row["Dias Otorgador Reales"])</expression>
-                                            <property name="dataType">integer</property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Sum Dias para Restar</property>
-                                            <text-property name="displayName">SDRest</text-property>
-                                            <property name="dataType">float</property>
-                                            <simple-property-list name="aggregateOn">
-                                                <value>Fecha</value>
-                                            </simple-property-list>
-                                            <property name="aggregateFunction">AVE</property>
-                                            <list-property name="arguments">
-                                                <structure>
-                                                    <property name="name">Expression</property>
-                                                    <expression name="value" type="javascript">row["Dias Para Restar"]</expression>
-                                                </structure>
-                                            </list-property>
-                                            <expression name="filterExpr" type="javascript">row["Dias Para Restar"] == 1</expression>
-                                            <property name="allowExport">true</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Sum Rest Dias</property>
-                                            <text-property name="displayName">SRDias</text-property>
-                                            <property name="dataType">float</property>
-                                            <simple-property-list name="aggregateOn">
-                                                <value>Usuarios</value>
-                                            </simple-property-list>
-                                            <property name="aggregateFunction">SUM</property>
-                                            <list-property name="arguments">
-                                                <structure>
-                                                    <property name="name">Expression</property>
-                                                    <expression name="value" type="javascript">row["Sum Dias para Restar"]</expression>
-                                                </structure>
-                                            </list-property>
-                                            <property name="allowExport">true</property>
-                                        </structure>
                                     </list-property>
                                     <property name="pageBreakInterval">100000000</property>
                                     <column id="585">
@@ -1675,9 +1570,6 @@ resta;</expression>
                                                 </cell>
                                                 <cell id="597">
                                                     <property name="textAlign">center</property>
-                                                    <data id="673">
-                                                        <property name="resultSetColumn">DifDate</property>
-                                                    </data>
                                                 </cell>
                                                 <cell id="668">
                                                     <data id="603">
@@ -1685,20 +1577,8 @@ resta;</expression>
                                                         <property name="resultSetColumn">Dias Laborados</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="676">
-                                                    <data id="681">
-                                                        <property name="paddingRight">5pt</property>
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Dias Otorgador Reales</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="685">
-                                                    <data id="690">
-                                                        <property name="paddingRight">5pt</property>
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Faltas</property>
-                                                    </data>
-                                                </cell>
+                                                <cell id="676"/>
+                                                <cell id="685"/>
                                                 <cell id="589">
                                                     <data id="526">
                                                         <property name="paddingRight">5pt</property>
