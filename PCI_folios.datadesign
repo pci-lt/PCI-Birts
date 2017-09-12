@@ -8372,22 +8372,20 @@ display;</expression>
                     <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
 var hasta = params["Hasta"].value;&#13;
 var dif = row["DifDate"];&#13;
-var fechas = new Array();&#13;
+var fechas = 0;&#13;
 var count = 0;&#13;
 &#13;
 for (var i=0; i &lt; dif; i++) {&#13;
-	fechas[i] = BirtDateTime.dayOfWeek(desde);&#13;
+	fechas = BirtDateTime.dayOfWeek(desde);&#13;
+	if ((fechas == 1 || fechas == 7) &amp;&amp; row["Campo"] == "Oficina"){&#13;
+		count++&#13;
+	}&#13;
+	if (fechas == 1 &amp;&amp; row["Campo"] == "Campo"){&#13;
+		count++&#13;
+	}&#13;
 	desde = BirtDateTime.addDay(desde , 1);&#13;
 }&#13;
 &#13;
-for (var i = 0; i &lt; fechas.length; i++) {&#13;
-	if ((fechas[i] == 1 || fechas[i] == 7) &amp;&amp; row["Campo"] == "Oficina"){&#13;
-		count++&#13;
-	}&#13;
-	if (fechas[i] == 1 &amp;&amp; row["Campo"] == "Campo"){&#13;
-		count++&#13;
-	}&#13;
-}&#13;
 count;</expression>
                     <property name="dataType">integer</property>
                 </structure>
@@ -8496,6 +8494,14 @@ count;</expression>
                 <structure>
                     <property name="columnName">DiasOtor</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">DifDate</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
