@@ -1446,9 +1446,10 @@ display;</expression>
                                             <property name="name">Faltas</property>
                                             <expression name="expression" type="javascript">var dias = row["Diferencia de dias"];&#13;
 var trabajo = row["Dias Laborados"];&#13;
+var otorgados = row["Dias Reales Otorgados"];&#13;
 var display = 0;&#13;
 &#13;
-display = dias - (trabajo);&#13;
+display = dias - (trabajo + otorgados);&#13;
 &#13;
 display;</expression>
                                             <property name="dataType">integer</property>
@@ -1502,6 +1503,52 @@ else if((fecha==1 || fecha==6) &amp;&amp; (campo == "Oficina" || campo =="Descon
 else{&#13;
 	display = 0;&#13;
 }&#13;
+&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Prom Dias Para Restar</property>
+                                            <text-property name="displayName">PDPRest</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Dias Para Restar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["Dias Para Restar"] == 1</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Sum Dias Para Restar</property>
+                                            <text-property name="displayName">SDPRest</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Prom Dias Para Restar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias Reales Otorgados</property>
+                                            <text-property name="displayName">DROtor</text-property>
+                                            <expression name="expression" type="javascript">var defecto = row["Dias Otorgados Default"];&#13;
+var resta = row["Sum Dias Para Restar"];&#13;
+var display = 0;&#13;
+&#13;
+display = defecto - resta;&#13;
 &#13;
 display;</expression>
                                             <property name="dataType">integer</property>
@@ -1661,7 +1708,7 @@ display;</expression>
                                                 <cell id="676">
                                                     <data id="693">
                                                         <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Dias Otorgados Default</property>
+                                                        <property name="resultSetColumn">Dias Reales Otorgados</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="685">
