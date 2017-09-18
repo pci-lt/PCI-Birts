@@ -533,7 +533,30 @@ display;</expression>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Data Set" id="507">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">division</property>
+                    <expression name="expression" type="javascript">var forma = row["_id.forma"];&#13;
+var display = "";&#13;
+&#13;
+if(forma == 11044){&#13;
+	display = "Metro";&#13;
+}&#13;
+else if(forma == 16343){&#13;
+	display = "Sur";&#13;
+}</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.forma</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.forma</text-property>
+                    <text-property name="heading">_id.forma</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.conexion</property>
                     <property name="analysis">measure</property>
@@ -574,34 +597,48 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">division</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.conexion</property>
+                        <property name="name">_id.forma</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
+                        <property name="name">_id.conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
                         <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                         <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">_id.status_cob</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">division</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -609,41 +646,48 @@ display;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.forma</property>
+                    <property name="nativeName">_id.forma</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.conexion</property>
                     <property name="nativeName">_id.conexion</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.cope</property>
                     <property name="nativeName">_id.cope</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">_id.status_cob</property>
                     <property name="nativeName">_id.status_cob</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.forma" , "_id.conexion" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -997,21 +1041,26 @@ resultado;</expression>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">first_name</property>
+                        <property name="name">division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">Contratista</property>
+                        <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">MArea</property>
+                        <property name="name">Contratista</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">MArea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">MCope</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -1029,6 +1078,7 @@ resultado;</expression>
 <tns:Column>Data Set::_id.cope</tns:Column>
 <tns:Column>Data Set::_id.status_cob</tns:Column>
 <tns:Column>Data Set::cantidad</tns:Column>
+<tns:Column>Data Set::division</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 </tns:selectColumns>
 <tns:joins>
