@@ -566,7 +566,7 @@ else if (nombre == "Felipe Sanchez")&#13;
 	empresa = "MBG Constructora S.A. de C.V."&#13;
 else if (nombre == "Olga Migdalia Garcia Peña")&#13;
 	empresa = "Sistelver S.A. de C.V."&#13;
-else if (nombre == "Fabio Leonardo Mendez Lopez" || nombre == "Jose Eutimio Perez Castillo" || nombre == "Juan Pablo Perez Damian" || nombre == "Lorenzo Ortiz Daza" || nombre == "Maria Concepcion Gonzalez Melchor" || nombre == "Oscar Rey Garciapiña Flores" || nombre == "Ramon Francisco Magaña Portilla" || nombre == "Juan Pablo Zagada" || nombre == "Aline Arlette Lozano" || nombre == "Blanca Nayeli Mujica Sarabia" || nombre == "Candido Herndan Hernández" || nombre == "Dante Ortiz Maldonado") &#13;
+else if (nombre == "Fabio Leonardo Mendez Lopez" || nombre == "Jose Eutimio Perez Castillo" || nombre == "Juan Pablo Perez Damian" || nombre == "Lorenzo Ortiz Daza" || nombre == "Maria Concepcion Gonzalez Melchor" || nombre == "Oscar Rey Garciapiña Flores" || nombre == "Ramon Francisco Magaña Portilla" || nombre == "Juan Pablo Zagada" || nombre == "Aline Arlette Lozano" || nombre == "Blanca Nayeli Mujica Sarabia" || nombre == "Candido Herndan Hernández" || nombre == "Dante Ortiz Maldonado")&#13;
 	empresa = nombre;&#13;
 else if (nombre == "Fernando Espinoza Flores") {&#13;
 	empresa = "Adriana Morales Miranda";&#13;
@@ -640,7 +640,10 @@ else if (nombre == "Gerardo Rivera Chavarria" || nombre == "Jose Angel Rivera Cr
 else if (nombre == null || nombre == "") {&#13;
 	empresa = "PC Industrial"&#13;
 }&#13;
-else &#13;
+else if (nombre == "Maria Garcia Olvera") {&#13;
+	empresa = "Elisur";&#13;
+}&#13;
+else&#13;
 	empresa = nombre + "*";&#13;
 &#13;
 empresa</expression>
@@ -7660,10 +7663,24 @@ longitud</expression>
                     </simple-property-list>
                 </structure>
                 <structure>
-                    <property name="operator">not-like</property>
+                    <property name="operator">ne</property>
                     <expression name="expr" type="javascript">row["user"]</expression>
                     <simple-property-list name="value1">
                         <value type="javascript">1259</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["user"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="javascript">1873</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["user"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="javascript">2625</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -7970,6 +7987,9 @@ log('query' + query);]]></method>
                 <structure>
                     <property name="name">area</property>
                     <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
 var area = position.split(" - ")&#13;
 var display = area[2];&#13;
 if(display == null || display == ""){&#13;
@@ -7982,6 +8002,9 @@ display;</expression>
                 <structure>
                     <property name="name">Campo</property>
                     <expression name="expression" type="javascript">var puesto = row["position"];&#13;
+if(puesto == null || puesto == ""){&#13;
+	puesto == "Desconocido";&#13;
+}&#13;
 var display = "";&#13;
 &#13;
 if(puesto.indexOf("Supervisor") != 1 || puesto.indexOf("Coordinador") != -1 || puesto.indexOf("Auxiliar Administrativo") || puesto.indexOf("Axiliar Call Center") != -1){&#13;
@@ -8060,20 +8083,6 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">first_name</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">first_name</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">position</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">position</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -8101,6 +8110,13 @@ display;</expression>
                 <structure>
                     <property name="columnName">Latitud</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">user</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">user</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -18786,28 +18802,18 @@ display;</expression>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">id</text-property>
                     <text-property name="heading">id</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">position</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">position</text-property>
                     <text-property name="heading">position</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">first_name</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">first_name</text-property>
                     <text-property name="heading">first_name</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">area</property>
-                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -18874,10 +18880,10 @@ display;</expression>
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="530" version="1.0" width="1116">&#13;
-&lt;control height="157" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
-&lt;control height="175" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
-&lt;control height="160" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
-&lt;control height="164" isHideable="true" isVisible="false" name="OutlineViewer" width="139"/>&#13;
+&lt;control height="154" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
+&lt;control height="179" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
+&lt;control height="159" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
+&lt;control height="163" isHideable="true" isVisible="false" name="OutlineViewer" width="125"/>&#13;
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
@@ -19026,27 +19032,40 @@ display;</expression>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
+                    <property name="alias">id_full</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">id</text-property>
+                    <text-property name="displayName">id_full</text-property>
+                    <text-property name="heading">id_full</text-property>
+                    <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">position</property>
+                    <property name="alias">puesto_total</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">position</text-property>
+                    <text-property name="displayName" key="puesto_total">puesto_total</text-property>
+                    <text-property name="heading">puesto_total</text-property>
+                    <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">area</property>
+                    <property name="alias">area_total</property>
                     <property name="analysis">dimension</property>
+                    <text-property name="displayName" key="area_total">area_total</text-property>
+                    <text-property name="heading">area_total</text-property>
+                    <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">first_name</property>
+                    <property name="alias">nombre_total</property>
                     <property name="analysis">dimension</property>
+                    <text-property name="displayName" key="nombre_total">nombre_total</text-property>
+                    <text-property name="heading">nombre_total</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -19101,27 +19120,41 @@ display;</expression>
                         <value>"Tecnicos PC Sureste"</value>
                     </simple-property-list>
                 </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>2625</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["id"]</expression>
+                    <simple-property-list name="value1">
+                        <value>1873</value>
+                    </simple-property-list>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">id</property>
+                        <property name="name">id_full</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">position</property>
+                        <property name="name">puesto_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">area</property>
+                        <property name="name">area_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">first_name</property>
+                        <property name="name">nombre_total</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
