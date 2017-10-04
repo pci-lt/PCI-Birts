@@ -7993,7 +7993,10 @@ if(position == null || position == ""){&#13;
 var area = position.split(" - ")&#13;
 var display = area[2];&#13;
 if(display == null || display == ""){&#13;
-	display = "Área desconocida"&#13;
+	display = "Área desconocida";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		display = row["area_total"];&#13;
+	}&#13;
 }&#13;
 &#13;
 display;</expression>
@@ -8002,12 +8005,11 @@ display;</expression>
                 <structure>
                     <property name="name">Campo</property>
                     <expression name="expression" type="javascript">var puesto = row["position"];&#13;
-if(puesto == null || puesto == ""){&#13;
-	puesto == "Desconocido";&#13;
-}&#13;
 var display = "";&#13;
-&#13;
-if(puesto.indexOf("Supervisor") != 1 || puesto.indexOf("Coordinador") != -1 || puesto.indexOf("Auxiliar Administrativo") || puesto.indexOf("Axiliar Call Center") != -1){&#13;
+if(puesto == null || puesto == ""){&#13;
+	display == "Desconocido";&#13;
+}&#13;
+else if(puesto.indexOf("Supervisor") != 1 || puesto.indexOf("Coordinador") != -1 || puesto.indexOf("Auxiliar Administrativo") || puesto.indexOf("Axiliar Call Center") != -1){&#13;
 	display = "Campo";&#13;
 }&#13;
 else if(puesto.indexOf("Auxiliar Administrativo") != -1 || puesto.indexOf("Portalero") != -1 || puesto.indexOf("Tecnico") != -1){&#13;
@@ -8022,6 +8024,33 @@ else if (puesto.indexOf("Instructor") != -1 || puesto.indexOf("Programador") != 
 else{&#13;
 	display = "Desconocido";&#13;
 }&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">registro</property>
+                    <expression name="expression" type="javascript">var folio = row["folio"];&#13;
+var display = "";&#13;
+if(folio == null || folio == "")&#13;
+	display = "Sin registro";&#13;
+else{&#13;
+	display = "Con registro";&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre</property>
+                    <expression name="expression" type="javascript">var nombre = row["first_name"];&#13;
+var nomvre = row["nombre_total"];&#13;
+var display = "";&#13;
+if( (nombre == null || nombre == "") &amp;&amp; (nomvre != null || nomvre != "" ) ){&#13;
+	display = nomvre;&#13;
+}&#13;
+else if( nombre != null || nombre != ""  ){&#13;
+	display = nombre;&#13;
+}&#13;
+&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
@@ -8120,6 +8149,46 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">position</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">position</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto_total</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area_total</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre_total</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">registro</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -8195,12 +8264,37 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">15</property>
-                        <property name="name">area</property>
+                        <property name="name">puesto_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">16</property>
+                        <property name="name">area_total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">nombre_total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
                         <property name="name">Campo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">registro</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">nombre</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -8208,6 +8302,7 @@ display;</expression>
             <simple-property-list name="inputDataSets">
                 <value>Asistencia Mensual</value>
                 <value>Nombres</value>
+                <value>Union Usuarios Asistencia</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -8226,6 +8321,9 @@ display;</expression>
 <tns:Column>Asistencia Mensual::Latitud</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 <tns:Column>Nombres::position</tns:Column>
+<tns:Column>Union Usuarios Asistencia::puesto_total</tns:Column>
+<tns:Column>Union Usuarios Asistencia::area_total</tns:Column>
+<tns:Column>Union Usuarios Asistencia::nombre_total</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Asistencia Mensual"/>
@@ -8236,6 +8334,17 @@ display;</expression>
 <tns:condition>
 <tns:leftColumn>Asistencia Mensual::user</tns:leftColumn>
 <tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>rightOuter</tns:type>
+<tns:dataSet Index="2" name="Union Usuarios Asistencia"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Asistencia Mensual::user</tns:leftColumn>
+<tns:rightColumn>Union Usuarios Asistencia::id_full</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -19731,6 +19840,9 @@ empresa</expression>
             <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017-08-01</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -19853,6 +19965,9 @@ empresa</expression>
             <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017-08-15</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
