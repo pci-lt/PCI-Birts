@@ -130,10 +130,10 @@ resultado;</expression>
                     <property name="name">Correctas</property>
                     <expression name="expression" type="javascript">var estatus = row["status_cob"];&#13;
 var display = "";&#13;
-if(((estatus == "aceptada" || estatus == "archivo_carga_masiva") || (estatus == "paco" || estatus == "estimacion")) || (estatus == "liberada" || estatus == "factura")){&#13;
+if(estatus == "aceptada" || estatus == "archivo_carga_masiva" || estatus == "paco" || estatus == "estimacion" || estatus == "liberada" || estatus == "factura" || estatus == "error_de_paco"){&#13;
 	display = "Aceptadas";&#13;
 }else{&#13;
-	if(estatus == "error"){&#13;
+	if(estatus == "error_validacion"){&#13;
 		display = "Rechazadas";&#13;
 	}else{&#13;
 		display = "Pendientes de validación";&#13;
@@ -219,6 +219,10 @@ display</expression>
                 <structure>
                     <property name="columnName">total</property>
                     <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Correctas</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
