@@ -465,14 +465,14 @@ display</expression>
                                             <property name="name">Count Contratista</property>
                                             <text-property name="displayName">CContra</text-property>
                                             <property name="dataType">integer</property>
-                                            <property name="aggregateFunction">COUNT</property>
+                                            <property name="aggregateFunction">COUNTDISTINCT</property>
                                             <list-property name="arguments">
                                                 <structure>
                                                     <property name="name">Expression</property>
                                                     <expression name="value" type="javascript">row["first_name"]</expression>
                                                 </structure>
                                             </list-property>
-                                            <property name="allowExport">true</property>
+                                            <property name="allowExport">false</property>
                                         </structure>
                                         <structure>
                                             <property name="name">_id.area</property>
@@ -505,7 +505,17 @@ display</expression>
                                             <property name="dataType">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="pageBreakInterval">10000</property>
+                                    <property name="pageBreakInterval">10000000</property>
+                                    <list-property name="filter">
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <expression name="expr" type="javascript">row["Cantidad_Completa"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                    </list-property>
                                     <column id="106">
                                         <property name="width">3.3645833333333335in</property>
                                     </column>
@@ -528,38 +538,20 @@ display</expression>
                                             </cell>
                                         </row>
                                     </header>
-                                    <group id="108">
-                                        <property name="groupName">Contratista</property>
-                                        <expression name="keyExpr" type="javascript">row["Empresa"]</expression>
-                                        <structure name="toc">
-                                            <expression name="expressionValue" type="javascript">row["Empresa"]</expression>
-                                        </structure>
-                                        <property name="hideDetail">true</property>
-                                        <list-property name="filter">
-                                            <structure>
-                                                <property name="operator">eq</property>
-                                                <expression name="expr" type="javascript">row["Cantidad_Completa"]</expression>
-                                                <simple-property-list name="value1">
-                                                    <value>0</value>
-                                                </simple-property-list>
-                                                <property name="updateAggregation">true</property>
-                                            </structure>
-                                        </list-property>
-                                        <header>
-                                            <row id="109">
-                                                <cell id="110">
-                                                    <data id="115">
-                                                        <property name="resultSetColumn">Empresa</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="270">
-                                                    <data id="274">
-                                                        <property name="resultSetColumn">first_name</property>
-                                                    </data>
-                                                </cell>
-                                            </row>
-                                        </header>
-                                    </group>
+                                    <detail>
+                                        <row id="288">
+                                            <cell id="289">
+                                                <data id="115">
+                                                    <property name="resultSetColumn">Empresa</property>
+                                                </data>
+                                            </cell>
+                                            <cell id="290">
+                                                <data id="274">
+                                                    <property name="resultSetColumn">first_name</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </detail>
                                     <footer>
                                         <row id="103">
                                             <cell id="104">
@@ -741,6 +733,16 @@ resultado;</expression>
                                         </structure>
                                     </list-property>
                                     <property name="pageBreakInterval">10000000</property>
+                                    <list-property name="filter">
+                                        <structure>
+                                            <property name="operator">gt</property>
+                                            <expression name="expr" type="javascript">row["Cantidad Real"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                    </list-property>
                                     <column id="280">
                                         <property name="width">2.96875in</property>
                                     </column>
@@ -792,9 +794,9 @@ resultado;</expression>
                                     </header>
                                     <group id="58">
                                         <property name="groupName">Contratista</property>
-                                        <expression name="keyExpr" type="javascript">row["Empresa"]</expression>
+                                        <expression name="keyExpr" type="javascript">row["first_name"]</expression>
                                         <structure name="toc">
-                                            <expression name="expressionValue" type="javascript">row["Empresa"]</expression>
+                                            <expression name="expressionValue" type="javascript">row["first_name"]</expression>
                                         </structure>
                                         <property name="hideDetail">false</property>
                                         <list-property name="sort">
@@ -802,16 +804,6 @@ resultado;</expression>
                                                 <expression name="key" type="javascript">row["Sum Contratista"]</expression>
                                                 <property name="direction">desc</property>
                                                 <property name="strength">-1</property>
-                                            </structure>
-                                        </list-property>
-                                        <list-property name="filter">
-                                            <structure>
-                                                <property name="operator">gt</property>
-                                                <expression name="expr" type="javascript">row["Cantidad Real"]</expression>
-                                                <simple-property-list name="value1">
-                                                    <value>0</value>
-                                                </simple-property-list>
-                                                <property name="updateAggregation">true</property>
                                             </structure>
                                         </list-property>
                                         <header>
