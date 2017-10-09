@@ -813,7 +813,7 @@
                                 </cell>
                                 <cell id="42">
                                     <label id="43">
-                                        <text-property name="text">Total</text-property>
+                                        <text-property name="text">Total estimado</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -902,6 +902,34 @@
                                     <cell id="130">
                                         <data id="597">
                                             <property name="resultSetColumn">division</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">drill-through</property>
+                                                    <property name="reportName">Detalle orden de servicio.rptdesign</property>
+                                                    <property name="targetWindow">_blank</property>
+                                                    <property name="targetFileType">report-design</property>
+                                                    <list-property name="paramBindings">
+                                                        <structure>
+                                                            <property name="paramName">Div_det</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["division"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="paramName">Año</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["year"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="paramName">Mes</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["mes"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                    </list-property>
+                                                </structure>
+                                            </list-property>
                                         </data>
                                     </cell>
                                     <cell id="136">
@@ -964,7 +992,7 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">4,3,2,1</property>
+                        <property name="__ac_group_collapse_level">5,4,3,2</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">11.604166666666666in</property>
                         <property name="dataSet">Join Pacos-Ordenes de compra- Precios-Nombres</property>
@@ -1103,9 +1131,6 @@
                                 <property name="name">Suma División</property>
                                 <text-property name="displayName">SDiv</text-property>
                                 <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>División</value>
-                                </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
                                     <structure>
@@ -1189,18 +1214,18 @@
                         <header>
                             <row id="664">
                                 <cell id="665">
+                                    <label id="670">
+                                        <text-property name="text">División</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="667">
                                     <label id="666">
                                         <text-property name="text">Año del PACO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="667">
+                                <cell id="669">
                                     <label id="668">
                                         <text-property name="text">Mes del PACO</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="669">
-                                    <label id="670">
-                                        <text-property name="text">División</text-property>
                                     </label>
                                 </cell>
                                 <cell id="671">
@@ -1225,6 +1250,29 @@
                                 </cell>
                             </row>
                         </header>
+                        <group id="1064">
+                            <property name="groupName">División</property>
+                            <expression name="keyExpr" type="javascript">row["division"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["division"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="1065">
+                                    <cell id="1066">
+                                        <data id="1081">
+                                            <property name="resultSetColumn">division</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1067"/>
+                                    <cell id="1068"/>
+                                    <cell id="1069"/>
+                                    <cell id="1070"/>
+                                    <cell id="1071"/>
+                                    <cell id="1072"/>
+                                </row>
+                            </header>
+                        </group>
                         <group id="781">
                             <property name="groupName">Año</property>
                             <expression name="keyExpr" type="javascript">row["year"]</expression>
@@ -1234,12 +1282,12 @@
                             <property name="hideDetail">false</property>
                             <header>
                                 <row id="782">
-                                    <cell id="783">
+                                    <cell id="783"/>
+                                    <cell id="784">
                                         <data id="794">
                                             <property name="resultSetColumn">year</property>
                                         </data>
                                     </cell>
-                                    <cell id="784"/>
                                     <cell id="785"/>
                                     <cell id="786"/>
                                     <cell id="1018"/>
@@ -1268,12 +1316,12 @@
                             <header>
                                 <row id="796">
                                     <cell id="797"/>
-                                    <cell id="798">
+                                    <cell id="798"/>
+                                    <cell id="799">
                                         <data id="808">
                                             <property name="resultSetColumn">Mes</property>
                                         </data>
                                     </cell>
-                                    <cell id="799"/>
                                     <cell id="800"/>
                                     <cell id="1019"/>
                                     <cell id="856"/>
@@ -1286,39 +1334,6 @@
                                             </structure>
                                             <property name="textAlign">right</property>
                                             <property name="resultSetColumn">Suma Mes</property>
-                                        </data>
-                                    </cell>
-                                </row>
-                            </header>
-                        </group>
-                        <group id="809">
-                            <property name="groupName">División</property>
-                            <expression name="keyExpr" type="javascript">row["division"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["division"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="810">
-                                    <cell id="811"/>
-                                    <cell id="812"/>
-                                    <cell id="813">
-                                        <data id="822">
-                                            <property name="resultSetColumn">division</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="814"/>
-                                    <cell id="1020"/>
-                                    <cell id="857"/>
-                                    <cell id="815">
-                                        <data id="838">
-                                            <property name="paddingRight">5pt</property>
-                                            <structure name="numberFormat">
-                                                <property name="category">Currency</property>
-                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
-                                            </structure>
-                                            <property name="textAlign">right</property>
-                                            <property name="resultSetColumn">Suma División</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -1432,7 +1447,7 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">4,3,2,1</property>
+                        <property name="__ac_group_collapse_level">5,4,3,2</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">11.635416666666666in</property>
                         <property name="dataSet">Join Pacos-Ordenes de compra- Precios-Nombres</property>
@@ -1571,9 +1586,6 @@
                                 <property name="name">Suma División</property>
                                 <text-property name="displayName">SDiv</text-property>
                                 <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>División</value>
-                                </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
                                     <structure>
@@ -1657,18 +1669,18 @@
                         <header>
                             <row id="866">
                                 <cell id="867">
+                                    <label id="872">
+                                        <text-property name="text">División</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="869">
                                     <label id="868">
                                         <text-property name="text">Año del PACO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="869">
+                                <cell id="871">
                                     <label id="870">
                                         <text-property name="text">Mes del PACO</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="871">
-                                    <label id="872">
-                                        <text-property name="text">División</text-property>
                                     </label>
                                 </cell>
                                 <cell id="873">
@@ -1693,6 +1705,40 @@
                                 </cell>
                             </row>
                         </header>
+                        <group id="1082">
+                            <property name="groupName">division</property>
+                            <expression name="keyExpr" type="javascript">row["division"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["division"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="1083">
+                                    <cell id="1084">
+                                        <data id="1099">
+                                            <property name="resultSetColumn">division</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1085"/>
+                                    <cell id="1086"/>
+                                    <cell id="1087"/>
+                                    <cell id="1088"/>
+                                    <cell id="1089"/>
+                                    <cell id="1090"/>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="1091">
+                                    <cell id="1092"/>
+                                    <cell id="1093"/>
+                                    <cell id="1094"/>
+                                    <cell id="1095"/>
+                                    <cell id="1096"/>
+                                    <cell id="1097"/>
+                                    <cell id="1098"/>
+                                </row>
+                            </footer>
+                        </group>
                         <group id="879">
                             <property name="groupName">Año</property>
                             <expression name="keyExpr" type="javascript">row["year"]</expression>
@@ -1702,12 +1748,12 @@
                             <property name="hideDetail">false</property>
                             <header>
                                 <row id="880">
-                                    <cell id="881">
+                                    <cell id="881"/>
+                                    <cell id="883">
                                         <data id="882">
                                             <property name="resultSetColumn">year</property>
                                         </data>
                                     </cell>
-                                    <cell id="883"/>
                                     <cell id="884"/>
                                     <cell id="885"/>
                                     <cell id="1028"/>
@@ -1736,12 +1782,12 @@
                             <header>
                                 <row id="890">
                                     <cell id="891"/>
-                                    <cell id="892">
+                                    <cell id="892"/>
+                                    <cell id="894">
                                         <data id="893">
                                             <property name="resultSetColumn">Mes</property>
                                         </data>
                                     </cell>
-                                    <cell id="894"/>
                                     <cell id="895"/>
                                     <cell id="1029"/>
                                     <cell id="896"/>
@@ -1754,39 +1800,6 @@
                                             </structure>
                                             <property name="textAlign">right</property>
                                             <property name="resultSetColumn">Suma Mes</property>
-                                        </data>
-                                    </cell>
-                                </row>
-                            </header>
-                        </group>
-                        <group id="899">
-                            <property name="groupName">División</property>
-                            <expression name="keyExpr" type="javascript">row["division"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["division"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="900">
-                                    <cell id="901"/>
-                                    <cell id="902"/>
-                                    <cell id="903">
-                                        <data id="904">
-                                            <property name="resultSetColumn">division</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="905"/>
-                                    <cell id="1030"/>
-                                    <cell id="906"/>
-                                    <cell id="907">
-                                        <data id="908">
-                                            <property name="paddingRight">5pt</property>
-                                            <structure name="numberFormat">
-                                                <property name="category">Currency</property>
-                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
-                                            </structure>
-                                            <property name="textAlign">right</property>
-                                            <property name="resultSetColumn">Suma División</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -1900,7 +1913,7 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">4,3,2,1</property>
+                        <property name="__ac_group_collapse_level">5,4,3,2</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">11.625in</property>
                         <property name="dataSet">Join Pacos-Ordenes de compra- Precios-Nombres</property>
@@ -2039,9 +2052,6 @@
                                 <property name="name">Suma División</property>
                                 <text-property name="displayName">SDiv</text-property>
                                 <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>División</value>
-                                </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
                                     <structure>
@@ -2125,18 +2135,18 @@
                         <header>
                             <row id="942">
                                 <cell id="943">
+                                    <label id="948">
+                                        <text-property name="text">División</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="945">
                                     <label id="944">
                                         <text-property name="text">Año del PACO</text-property>
                                     </label>
                                 </cell>
-                                <cell id="945">
+                                <cell id="947">
                                     <label id="946">
                                         <text-property name="text">Mes del PACO</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="947">
-                                    <label id="948">
-                                        <text-property name="text">División</text-property>
                                     </label>
                                 </cell>
                                 <cell id="949">
@@ -2161,6 +2171,40 @@
                                 </cell>
                             </row>
                         </header>
+                        <group id="1100">
+                            <property name="groupName">division</property>
+                            <expression name="keyExpr" type="javascript">row["division"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["division"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="1101">
+                                    <cell id="1102">
+                                        <data id="1117">
+                                            <property name="resultSetColumn">division</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1103"/>
+                                    <cell id="1104"/>
+                                    <cell id="1105"/>
+                                    <cell id="1106"/>
+                                    <cell id="1107"/>
+                                    <cell id="1108"/>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="1109">
+                                    <cell id="1110"/>
+                                    <cell id="1111"/>
+                                    <cell id="1112"/>
+                                    <cell id="1113"/>
+                                    <cell id="1114"/>
+                                    <cell id="1115"/>
+                                    <cell id="1116"/>
+                                </row>
+                            </footer>
+                        </group>
                         <group id="955">
                             <property name="groupName">Año</property>
                             <expression name="keyExpr" type="javascript">row["year"]</expression>
@@ -2170,12 +2214,12 @@
                             <property name="hideDetail">false</property>
                             <header>
                                 <row id="956">
-                                    <cell id="957">
+                                    <cell id="957"/>
+                                    <cell id="959">
                                         <data id="958">
                                             <property name="resultSetColumn">year</property>
                                         </data>
                                     </cell>
-                                    <cell id="959"/>
                                     <cell id="960"/>
                                     <cell id="961"/>
                                     <cell id="1038"/>
@@ -2204,12 +2248,12 @@
                             <header>
                                 <row id="966">
                                     <cell id="967"/>
-                                    <cell id="968">
+                                    <cell id="968"/>
+                                    <cell id="970">
                                         <data id="969">
                                             <property name="resultSetColumn">Mes</property>
                                         </data>
                                     </cell>
-                                    <cell id="970"/>
                                     <cell id="971"/>
                                     <cell id="1039"/>
                                     <cell id="972"/>
@@ -2222,39 +2266,6 @@
                                             </structure>
                                             <property name="textAlign">right</property>
                                             <property name="resultSetColumn">Suma Mes</property>
-                                        </data>
-                                    </cell>
-                                </row>
-                            </header>
-                        </group>
-                        <group id="975">
-                            <property name="groupName">División</property>
-                            <expression name="keyExpr" type="javascript">row["division"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["division"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="976">
-                                    <cell id="977"/>
-                                    <cell id="978"/>
-                                    <cell id="979">
-                                        <data id="980">
-                                            <property name="resultSetColumn">division</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="981"/>
-                                    <cell id="1040"/>
-                                    <cell id="982"/>
-                                    <cell id="983">
-                                        <data id="984">
-                                            <property name="paddingRight">5pt</property>
-                                            <structure name="numberFormat">
-                                                <property name="category">Currency</property>
-                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
-                                            </structure>
-                                            <property name="textAlign">right</property>
-                                            <property name="resultSetColumn">Suma División</property>
                                         </data>
                                     </cell>
                                 </row>
