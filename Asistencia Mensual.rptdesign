@@ -365,21 +365,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">19</property>
+                        <property name="name">vacaciones</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
                         <property name="name">Dia</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">21</property>
                         <property name="name">Time_Seconds</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">21</property>
+                        <property name="position">22</property>
                         <property name="name">Retardo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">22</property>
+                        <property name="position">23</property>
                         <property name="name">Click</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -477,6 +482,11 @@ display;</expression>
                     <property name="position">18</property>
                     <property name="name">nombre</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">vacaciones</property>
+                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -1232,9 +1242,9 @@ display;</expression>
             <row id="29">
                 <cell id="30">
                     <grid id="126">
-                        <property name="width">13.84375in</property>
+                        <property name="width">17.78125in</property>
                         <column id="127">
-                            <property name="width">13.84375in</property>
+                            <property name="width">17.78125in</property>
                         </column>
                         <row id="129">
                             <cell id="130">
@@ -1258,7 +1268,7 @@ display;</expression>
                                     </list-property>
                                     <property name="__ac_group_collapse_level">3,2,1</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">14.083333333333334in</property>
+                                    <property name="width">17.59375in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -1743,13 +1753,79 @@ display;</expression>
                                             <expression name="filterExpr" type="javascript">row["Faltas"] &lt;= 0 &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
                                             <property name="allowExport">true</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">Sum Domingos Laborados</property>
+                                            <text-property name="displayName">SDom</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Prom Domingos Lab"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Domingos a Pagar</property>
+                                            <text-property name="displayName">DaPagar</text-property>
+                                            <expression name="expression" type="javascript">var dia = 0;&#13;
+if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1 &amp;&amp; BirtDateTime.weekDay(dataSetRow["created"],1) == 1)&#13;
+	dia = 1;&#13;
+&#13;
+dia;</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Prom Domingos Lab</property>
+                                            <text-property name="displayName">PDL</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Domingos a Pagar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["Dias Para Restar"] == 1 &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">vacaciones</property>
+                                            <text-property name="displayName">vacaciones</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["vacaciones"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Max Vacaciones</property>
+                                            <text-property name="displayName">MVac</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">MAX</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["vacaciones"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
                                     </list-property>
                                     <property name="pageBreakInterval">100000000</property>
                                     <column id="585">
                                         <property name="width">2.0104166666666665in</property>
                                     </column>
                                     <column id="503">
-                                        <property name="width">2.53125in</property>
+                                        <property name="width">3in</property>
                                     </column>
                                     <column id="699">
                                         <property name="width">0.8958333333333334in</property>
@@ -1772,14 +1848,23 @@ display;</expression>
                                     <column id="688">
                                         <property name="width">0.5625in</property>
                                     </column>
+                                    <column id="808">
+                                        <property name="width">0.8020833333333334in</property>
+                                    </column>
+                                    <column id="800">
+                                        <property name="width">0.8645833333333334in</property>
+                                    </column>
+                                    <column id="816">
+                                        <property name="width">1.0625in</property>
+                                    </column>
                                     <column id="593">
                                         <property name="width">0.7083333333333334in</property>
                                     </column>
                                     <column id="504">
-                                        <property name="width">1.4791666666666667in</property>
+                                        <property name="width">1.8333333333333333in</property>
                                     </column>
                                     <column id="505">
-                                        <property name="width">0.7291666666666666in</property>
+                                        <property name="width">0.6875in</property>
                                     </column>
                                     <column id="563">
                                         <property name="width">0.9479166666666666in</property>
@@ -1829,6 +1914,21 @@ display;</expression>
                                             <cell id="683">
                                                 <label id="689">
                                                     <text-property name="text">Faltas.</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="802">
+                                                <label id="809">
+                                                    <text-property name="text">Domingos laborados</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="794">
+                                                <label id="801">
+                                                    <text-property name="text">Vacaciones</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="810">
+                                                <label id="817">
+                                                    <text-property name="text">Incapacidades</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="587">
@@ -1899,6 +1999,9 @@ display;</expression>
                                                 <cell id="667"/>
                                                 <cell id="675"/>
                                                 <cell id="684"/>
+                                                <cell id="803"/>
+                                                <cell id="795"/>
+                                                <cell id="811"/>
                                                 <cell id="588"/>
                                                 <cell id="569"/>
                                                 <cell id="570"/>
@@ -1948,6 +2051,9 @@ display;</expression>
                                                 <cell id="754"/>
                                                 <cell id="755"/>
                                                 <cell id="756"/>
+                                                <cell id="804"/>
+                                                <cell id="796"/>
+                                                <cell id="812"/>
                                                 <cell id="757"/>
                                                 <cell id="758"/>
                                                 <cell id="759"/>
@@ -2011,6 +2117,19 @@ display;</expression>
                                                         <property name="resultSetColumn">Faltas</property>
                                                     </data>
                                                 </cell>
+                                                <cell id="805">
+                                                    <data id="819">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Sum Domingos Laborados</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="797">
+                                                    <data id="821">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Max Vacaciones</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="813"/>
                                                 <cell id="589">
                                                     <data id="526">
                                                         <property name="paddingRight">5pt</property>
@@ -2042,6 +2161,9 @@ display;</expression>
                                                 <cell id="669"/>
                                                 <cell id="677"/>
                                                 <cell id="686"/>
+                                                <cell id="806"/>
+                                                <cell id="798"/>
+                                                <cell id="814"/>
                                                 <cell id="590"/>
                                                 <cell id="548">
                                                     <data id="487">
@@ -2070,6 +2192,9 @@ display;</expression>
                                             <cell id="670"/>
                                             <cell id="678"/>
                                             <cell id="687"/>
+                                            <cell id="807"/>
+                                            <cell id="799"/>
+                                            <cell id="815"/>
                                             <cell id="591"/>
                                             <cell id="486">
                                                 <data id="555">
@@ -2121,11 +2246,6 @@ link;</expression>
                             </cell>
                         </row>
                     </grid>
-                </cell>
-            </row>
-            <row id="702">
-                <cell id="703">
-                    <property name="textAlign">left</property>
                 </cell>
             </row>
         </grid>
