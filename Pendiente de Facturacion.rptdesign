@@ -955,7 +955,7 @@
                                         <property name="paddingRight">8pt</property>
                                         <property name="textAlign">right</property>
                                         <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Total pendiente por facturar]]></text-property>
+                                        <text-property name="content"><![CDATA[Total estimado de órdenes de servicio]]></text-property>
                                     </text>
                                 </cell>
                                 <cell id="72">
@@ -992,7 +992,7 @@
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">5,4,3,2</property>
+                        <property name="__ac_group_collapse_level">5,4,3,2,1</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">11.604166666666666in</property>
                         <property name="dataSet">Join Pacos-Ordenes de compra- Precios-Nombres</property>
@@ -1116,7 +1116,7 @@
                                 <text-property name="displayName">SContratista</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>Contratista</value>
+                                    <value>PACO</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -1151,7 +1151,7 @@
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Suma División"]</expression>
+                                        <expression name="value" type="javascript">row["Total"]</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -1167,7 +1167,7 @@
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Suma Mes"]</expression>
+                                        <expression name="value" type="javascript">row["Total"]</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -1177,6 +1177,35 @@
                                 <text-property name="displayName">folio</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
                                 <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Sum Division</property>
+                                <text-property name="displayName">SDiv</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Sum Tabla</property>
+                                <text-property name="displayName">Stab</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
@@ -1200,10 +1229,10 @@
                             <property name="width">1.4791666666666667in</property>
                         </column>
                         <column id="765">
-                            <property name="width">2.90625in</property>
+                            <property name="width">1.6145833333333333in</property>
                         </column>
                         <column id="1024">
-                            <property name="width">1.7708333333333333in</property>
+                            <property name="width">3.0625in</property>
                         </column>
                         <column id="861">
                             <property name="width">1.03125in</property>
@@ -1229,13 +1258,13 @@
                                     </label>
                                 </cell>
                                 <cell id="671">
-                                    <label id="672">
-                                        <text-property name="text">Contratista</text-property>
+                                    <label id="1025">
+                                        <text-property name="text">Número de Paco</text-property>
                                     </label>
                                 </cell>
                                 <cell id="1017">
-                                    <label id="1025">
-                                        <text-property name="text">Número de Paco</text-property>
+                                    <label id="672">
+                                        <text-property name="text">Contratista</text-property>
                                     </label>
                                 </cell>
                                 <cell id="854">
@@ -1269,7 +1298,17 @@
                                     <cell id="1069"/>
                                     <cell id="1070"/>
                                     <cell id="1071"/>
-                                    <cell id="1072"/>
+                                    <cell id="1072">
+                                        <data id="1118">
+                                            <property name="paddingRight">5pt</property>
+                                            <structure name="numberFormat">
+                                                <property name="category">Currency</property>
+                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">right</property>
+                                            <property name="resultSetColumn">Sum Division</property>
+                                        </data>
+                                    </cell>
                                 </row>
                             </header>
                         </group>
@@ -1340,10 +1379,10 @@
                             </header>
                         </group>
                         <group id="823">
-                            <property name="groupName">Contratista</property>
-                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                            <property name="groupName">PACO</property>
+                            <expression name="keyExpr" type="javascript">row["numero"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                                <expression name="expressionValue" type="javascript">row["numero"]</expression>
                             </structure>
                             <property name="hideDetail">false</property>
                             <header>
@@ -1352,8 +1391,14 @@
                                     <cell id="826"/>
                                     <cell id="827"/>
                                     <cell id="828">
-                                        <data id="836">
-                                            <property name="resultSetColumn">Compañia</property>
+                                        <data id="1026">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">numero</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">none</property>
+                                                </structure>
+                                            </list-property>
                                         </data>
                                     </cell>
                                     <cell id="1021"/>
@@ -1379,14 +1424,8 @@
                                 <cell id="708"/>
                                 <cell id="710"/>
                                 <cell id="1022">
-                                    <data id="1026">
-                                        <property name="textAlign">center</property>
-                                        <property name="resultSetColumn">numero</property>
-                                        <list-property name="action">
-                                            <structure>
-                                                <property name="linkType">none</property>
-                                            </structure>
-                                        </list-property>
+                                    <data id="836">
+                                        <property name="resultSetColumn">Compañia</property>
                                     </data>
                                 </cell>
                                 <cell id="859">
@@ -1421,9 +1460,27 @@
                                 <cell id="744"/>
                                 <cell id="745"/>
                                 <cell id="746"/>
-                                <cell id="1023"/>
-                                <cell id="860"/>
-                                <cell id="747"/>
+                                <cell id="1023">
+                                    <property name="colSpan">2</property>
+                                    <property name="rowSpan">1</property>
+                                    <text id="1119">
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Total de Pacos]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="747">
+                                    <data id="1120">
+                                        <property name="paddingRight">5pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">Sum Tabla</property>
+                                    </data>
+                                </cell>
                             </row>
                         </footer>
                     </table>

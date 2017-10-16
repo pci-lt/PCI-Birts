@@ -2294,31 +2294,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">fase</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
                         <property name="name">subtotal</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">9</property>
                         <property name="name">vsi</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">10</property>
                         <property name="name">Total</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">11</property>
                         <property name="name">mes</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">12</property>
                         <property name="name">estatus</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -2338,7 +2333,6 @@ display;</expression>
 <tns:Column>Estado Cuenta::_id.metros</tns:Column>
 <tns:Column>Estado Cuenta::cantidad</tns:Column>
 <tns:Column>Estado Cuenta::division</tns:Column>
-<tns:Column>Estado Cuenta::fase</tns:Column>
 <tns:Column>Precios::precio_pc</tns:Column>
 <tns:Column>Precios_1::precio_pc</tns:Column>
 </tns:selectColumns>
@@ -5046,7 +5040,7 @@ display;</expression>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1054000a030000000000002': 'liquidada',\r\n\t'answers.f1054000a030000000000012': {$in: ['validacion', 'aceptada', 'archivo_carga_masiva', 'error_validacion']}\r\n}},\r\n\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tyear: {$substr: ['$answers.f1054000a030000000000e14', 0, 4]},\r\n\tmonth: {$substr: ['$answers.f1054000a030000000000e14', 5,2]},\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\tprecio_contratista: '$answers.ccc00000000000000000c001',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.year" , "_id.month" , "_id.estatus_cob" , "_id.tipo_tarea" , "_id.tipo_instalacion" , "_id.metros" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\t'answers.f1054000a030000000000012': {$in: ['pendiente','validacion', 'aceptada', 'archivo_carga_masiva', 'error_validacion']}\r\n}},\r\n\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tyear: {$substr: ['$answers.f1054000a030000000000e14', 0, 4]},\r\n\tmonth: {$substr: ['$answers.f1054000a030000000000e14', 5,2]},\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\tprecio_contratista: '$answers.ccc00000000000000000c001',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.year" , "_id.month" , "_id.estatus_cob" , "_id.tipo_tarea" , "_id.tipo_instalacion" , "_id.metros" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -6748,7 +6742,7 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1054000a030000000000002': 'liquidada',\r\n\t'answers.f1054000a030000000000012': {$in: ['aceptada', 'validacion', 'archivo_carga_masiva', 'error_validacion']}\r\n}},\r\n\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconnection: '$connection_id',\r\n\tfecha:'$answers.f1054000a030000000000e14',\r\n\tforma: '$form_id',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tobs: '$answers.f1054000a030000000000005'\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "connection" , "fecha" , "forma" , "tipo_tarea" , "tipo_instalacion" , "metros" , "area" , "obs"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\t'answers.f1054000a030000000000012': {$in: ['pendiente','aceptada', 'validacion', 'archivo_carga_masiva', 'error_validacion']}\r\n}},\r\n\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconnection: '$connection_id',\r\n\tfecha:'$answers.f1054000a030000000000e14',\r\n\tforma: '$form_id',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tobs: '$answers.f1054000a030000000000005'\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "connection" , "fecha" , "forma" , "tipo_tarea" , "tipo_instalacion" , "metros" , "area" , "obs"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -7178,6 +7172,320 @@ log('query' + query);]]></method>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="FileShare" id="543">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">connection_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">connection_id</text-property>
+                    <text-property name="heading">connection_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">share_from_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">share_from_id</text-property>
+                    <text-property name="heading">share_from_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">file_shared_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">file_shared_id</text-property>
+                    <text-property name="heading">file_shared_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">item_ptr_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">item_ptr_id</text-property>
+                    <text-property name="heading">item_ptr_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <text-property name="heading">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">id_1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">owner_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">owner_id</text-property>
+                    <text-property name="heading">owner_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">connection_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">share_from_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">file_shared_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">item_ptr_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">id_1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">owner_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Infosync</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">connection_id</property>
+                    <property name="nativeName">connection_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">share_from_id</property>
+                    <property name="nativeName">share_from_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">file_shared_id</property>
+                    <property name="nativeName">file_shared_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">item_ptr_id</property>
+                    <property name="nativeName">item_ptr_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">first_name</property>
+                    <property name="nativeName">first_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">id_1</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">owner_id</property>
+                    <property name="nativeName">owner_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT "public"."files_shared_fileshared"."connection_id", "public"."files_shared_fileshared"."share_from_id",
+    "public"."files_shared_fileshared"."file_shared_id", "public"."files_shared_fileshared"."item_ptr_id",
+    "public"."users_customuser"."id", "public"."users_customuser"."first_name",
+    "public"."items_item"."id", "public"."items_item"."owner_id",
+    "public"."items_item"."name"
+    FROM
+         "public"."users_customuser" LEFT OUTER JOIN "public"."items_item" ON "public"."users_customuser"."id" = "public"."items_item"."owner_id" LEFT OUTER JOIN "public"."files_shared_fileshared" ON "public"."items_item"."id" = "public"."files_shared_fileshared"."share_from_id"
+    WHERE "public"."files_shared_fileshared"."share_from_id" = 1259
+  ]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
+&lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="FileShare" version="1.0">&#13;
+&lt;SQLStatement>SELECT &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;connection_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;file_shared_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;item_ptr_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;first_name&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;name&amp;quot;&amp;#x0A;    FROM&amp;#x0A;         &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot;&amp;#x0A;    WHERE &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot; = 1259&amp;#x0A;  &lt;/SQLStatement>&#13;
+&lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
+&lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
+&lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
+&lt;windowState height="530" version="1.0" width="1122">&#13;
+&lt;control height="170" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1095"/>&#13;
+&lt;control height="147" isHideable="true" isVisible="true" name="DesignViewer" width="1108"/>&#13;
+&lt;control height="175" isHideable="true" isVisible="true" name="GraphControl" width="1100"/>&#13;
+&lt;control height="179" isHideable="true" isVisible="false" name="OutlineViewer" width="137"/>&#13;
+&lt;/windowState>&#13;
+&lt;/SQLQueryBuilder></property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>file_shared_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>file_shared_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>file_shared_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>item_ptr_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>item_ptr_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>item_ptr_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>share_from_id</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>share_from_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>share_from_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>connection_id</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>connection_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>connection_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria>
+        <design:rowOrdering/>
+      </design:criteria>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <parameters>
         <cascading-parameter-group name="Estatus de cobranza" id="524">
@@ -7272,7 +7580,7 @@ log('query' + query);]]></method>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant"></value>
+                <value type="constant">Mayo</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -7287,7 +7595,7 @@ log('query' + query);]]></method>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">0</value>
+                <value type="constant">2017</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
