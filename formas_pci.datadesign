@@ -1351,21 +1351,24 @@ user;</expression>
     "public"."items_item"."name", "public"."users_customuser"."parent_id"
     FROM
          "public"."users_customuser" LEFT OUTER JOIN "public"."items_item" LEFT OUTER JOIN "public"."files_shared_fileshared" ON "public"."items_item"."id" = "public"."files_shared_fileshared"."item_ptr_id" ON "public"."users_customuser"."id" = "public"."items_item"."owner_id"
-    WHERE "public"."files_shared_fileshared"."share_from_id" = 1259
+    WHERE "public"."files_shared_fileshared"."share_from_id" IN (    SELECT "user_id"
+        FROM "public"."plans_license"
+        WHERE "public"."plans_license"."owner_id" = 1259 AND "user_id" IS NOT NULL)
+      AND "public"."items_item"."itype" = 'form'
   ]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="FileShare" version="1.0">&#13;
-&lt;SQLStatement>SELECT &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;connection_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;file_shared_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;item_ptr_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;first_name&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;name&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;parent_id&amp;quot;&amp;#x0A;    FROM&amp;#x0A;         &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;item_ptr_id&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot;&amp;#x0A;    WHERE &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot; = 1259&amp;#x0A;  &lt;/SQLStatement>&#13;
+&lt;SQLStatement>SELECT &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;connection_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;file_shared_id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;item_ptr_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;first_name&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot;,&amp;#x0A;    &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;name&amp;quot;, &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;parent_id&amp;quot;&amp;#x0A;    FROM&amp;#x0A;         &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot; LEFT OUTER JOIN &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;item_ptr_id&amp;quot; ON &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;.&amp;quot;id&amp;quot; = &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;owner_id&amp;quot;&amp;#x0A;    WHERE &amp;quot;public&amp;quot;.&amp;quot;files_shared_fileshared&amp;quot;.&amp;quot;share_from_id&amp;quot; IN (    SELECT &amp;quot;user_id&amp;quot;&amp;#x0A;        FROM &amp;quot;public&amp;quot;.&amp;quot;plans_license&amp;quot;&amp;#x0A;        WHERE &amp;quot;public&amp;quot;.&amp;quot;plans_license&amp;quot;.&amp;quot;owner_id&amp;quot; = 1259 AND &amp;quot;user_id&amp;quot; IS NOT NULL)&amp;#x0A;      AND &amp;quot;public&amp;quot;.&amp;quot;items_item&amp;quot;.&amp;quot;itype&amp;quot; = &amp;apos;form&amp;apos;&amp;#x0A;  &lt;/SQLStatement>&#13;
 &lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="530" version="1.0" width="1116">&#13;
-&lt;control height="167" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
-&lt;control height="152" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
-&lt;control height="173" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
-&lt;control height="177" isHideable="true" isVisible="false" name="OutlineViewer" width="114"/>&#13;
+&lt;control height="104" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
+&lt;control height="276" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
+&lt;control height="112" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
+&lt;control height="116" isHideable="true" isVisible="false" name="OutlineViewer" width="81"/>&#13;
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
@@ -1968,6 +1971,18 @@ user;</expression>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Fileshared - Formas" id="544">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Asistencia personal</property>
+                    <expression name="expression" type="javascript">var display = 0;&#13;
+if(row["name"] == "Asistencia de personal"){&#13;
+	display = 1;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">name</property>
@@ -2017,6 +2032,12 @@ user;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Asistencia personal</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -2049,6 +2070,11 @@ user;</expression>
                         <property name="position">6</property>
                         <property name="name">conexion</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Asistencia personal</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
