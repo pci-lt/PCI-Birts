@@ -370,21 +370,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">20</property>
+                        <property name="name">incapacidades</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
                         <property name="name">Dia</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">21</property>
+                        <property name="position">22</property>
                         <property name="name">Time_Seconds</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">22</property>
+                        <property name="position">23</property>
                         <property name="name">Retardo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">23</property>
+                        <property name="position">24</property>
                         <property name="name">Click</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -486,6 +491,11 @@ display;</expression>
                 <structure>
                     <property name="position">19</property>
                     <property name="name">vacaciones</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">incapacidades</property>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
@@ -1555,7 +1565,7 @@ var registro = dataSetRow["registro"]&#13;
 var display = 0;&#13;
 &#13;
 if(registro == "Con registro")&#13;
-	display = dias - (trabajo + otorgados);&#13;
+	display = dias - (trabajo + otorgados + row["Max Vacaciones"] + row["Max Incapacidades"]);&#13;
 &#13;
 display;</expression>
                                             <property name="dataType">integer</property>
@@ -1815,6 +1825,28 @@ dia;</expression>
                                                 <structure>
                                                     <property name="name">Expression</property>
                                                     <expression name="value" type="javascript">row["vacaciones"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">incapacidades</property>
+                                            <text-property name="displayName">incapacidades</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["incapacidades"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Max Incapacidades</property>
+                                            <text-property name="displayName">MInca</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">MAX</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["incapacidades"]</expression>
                                                 </structure>
                                             </list-property>
                                             <property name="allowExport">true</property>
@@ -2129,7 +2161,12 @@ dia;</expression>
                                                         <property name="resultSetColumn">Max Vacaciones</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="813"/>
+                                                <cell id="813">
+                                                    <data id="822">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Max Incapacidades</property>
+                                                    </data>
+                                                </cell>
                                                 <cell id="589">
                                                     <data id="526">
                                                         <property name="paddingRight">5pt</property>
@@ -2176,7 +2213,13 @@ dia;</expression>
                                                         <property name="resultSetColumn">created</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="549"/>
+                                                <cell id="549">
+                                                    <data id="823">
+                                                        <property name="paddingRight">5pt</property>
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Dias a Pagar</property>
+                                                    </data>
+                                                </cell>
                                                 <cell id="560"/>
                                             </row>
                                         </header>

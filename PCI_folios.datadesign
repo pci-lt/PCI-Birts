@@ -8313,21 +8313,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">19</property>
+                        <property name="name">incapacidades</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">21</property>
                         <property name="name">Campo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">21</property>
+                        <property name="position">22</property>
                         <property name="name">registro</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">22</property>
+                        <property name="position">23</property>
                         <property name="name">nombre</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -8338,6 +8343,7 @@ display;</expression>
                 <value>Nombres</value>
                 <value>Union Usuarios Asistencia</value>
                 <value>Vacaciones</value>
+                <value>Incapacidades</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -8360,6 +8366,7 @@ display;</expression>
 <tns:Column>Union Usuarios Asistencia::area_total</tns:Column>
 <tns:Column>Union Usuarios Asistencia::nombre_total</tns:Column>
 <tns:Column>Vacaciones::vacaciones</tns:Column>
+<tns:Column>Incapacidades::incapacidades</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Asistencia Mensual"/>
@@ -8392,6 +8399,17 @@ display;</expression>
 <tns:condition>
 <tns:leftColumn>Union Usuarios Asistencia::email</tns:leftColumn>
 <tns:rightColumn>Vacaciones::correo</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="4" name="Incapacidades"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Usuarios Asistencia::email</tns:leftColumn>
+<tns:rightColumn>Incapacidades::correo</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -14439,6 +14457,148 @@ log('query' + query);]]></method>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Carga Diaria Sur1" id="530">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.conexion</text-property>
+                    <text-property name="heading">_id.conexion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.area</text-property>
+                    <text-property name="heading">_id.area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantidad</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cantidad</text-property>
+                    <text-property name="heading">cantidad</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">_id.area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">_id.cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.conexion</property>
+                    <property name="nativeName">_id.conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id.area</property>
+                    <property name="nativeName">_id.area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16343,\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\tconexion: '$connection_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\r\n\r\n},\r\n\t\tcantidad:{$sum:1}\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.area" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,10000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>user</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>user</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>user</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Carga_Diaria_Sur_Nombres" id="495">
             <list-property name="columnHints">
                 <structure>
@@ -20030,6 +20190,214 @@ display;</expression>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>inicio</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>inicio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>inicio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>fin</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>fin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fin</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>correo</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>correo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>correo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Incapacidades" id="529">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">incapacidades</property>
+                    <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
+var hasta = params["Hasta"].value;&#13;
+var inicio = row["inicio"];&#13;
+var fin = row["fin"];&#13;
+var display = 0;&#13;
+if(BirtDateTime.diffDay(desde,inicio) >= 0 &amp;&amp; BirtDateTime.diffDay(hasta,fin) &lt;= 0){&#13;
+	display = BirtDateTime.diffDay(inicio, fin) +1;&#13;
+}&#13;
+else if(BirtDateTime.diffDay(desde,inicio) &lt;= 0 &amp;&amp; BirtDateTime.diffDay(hasta,fin) &lt;= 0){&#13;
+	display = BirtDateTime.diffDay(desde, fin) +1;&#13;
+}&#13;
+else if(BirtDateTime.diffDay(desde,inicio) >= 0 &amp;&amp; BirtDateTime.diffDay(hasta,fin) >= 0){&#13;
+	display = BirtDateTime.diffDay(inicio, hasta) +1;&#13;
+}&#13;
+else if(BirtDateTime.diffDay(desde,inicio) &lt;= 0 &amp;&amp; BirtDateTime.diffDay(hasta,fin) >= 0){&#13;
+	display = BirtDateTime.diffDay(inicio, fin) +1;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">inicio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">inicio</text-property>
+                    <text-property name="heading">inicio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fin</text-property>
+                    <text-property name="heading">fin</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">correo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">correo</text-property>
+                    <text-property name="heading">correo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">incapacidades</property>
+                    <property name="analysis">measure</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">inicio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">fin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">correo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">incapacidades</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[//pring logs
+importPackage(Packages.java.lang);
+function log(msg){
+    System.out.println(msg);
+}
+reportContext.setGlobalVariable('log', log);
+
+var query = this.queryText.toString();
+var new_query = "";
+var bookmark = "{$exists:false},";
+var hasta = params["Hasta"].value;
+
+	
+new_query = " 'answers.59de4d67b43fdd3bc9acd36a':{$lte: '" + hasta + "'}, ";	
+
+
+
+log('new query= ' + new_query)
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;
+
+log('query' + query);]]></method>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">inicio</property>
+                    <property name="nativeName">inicio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">fin</property>
+                    <property name="nativeName">fin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">correo</property>
+                    <property name="nativeName">correo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:19604,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.59de4d67b43fdd3bc9acd36a': {$exists: true},\r\n\t'answers.59e4a52cb43fdd103193aafd' : {$exists: true},\r\n}},\r\n\r\n{$project: {\t\r\n\t\r\n\tinicio: '$answers.59de4d67b43fdd3bc9acd36a',\r\n\tfin: '$answers.59de4d67b43fdd3bc9acd36b',\r\n\tcorreo: '$answers.59e4a52cb43fdd103193aafd',\r\n\t\r\n\r\n\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "inicio" , "fin" , "correo"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
