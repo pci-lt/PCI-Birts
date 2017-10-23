@@ -592,7 +592,7 @@ display;</expression>
     </page-setup>
     <body>
         <grid id="23">
-            <property name="width">15.614583333333334in</property>
+            <property name="width">17.90625in</property>
             <column id="24">
                 <property name="width">15.614583333333334in</property>
             </column>
@@ -648,9 +648,9 @@ display;</expression>
             <row id="458">
                 <cell id="459">
                     <grid id="446">
-                        <property name="width">12.21875in</property>
+                        <property name="width">15.5625in</property>
                         <column id="448">
-                            <property name="width">6.15625in</property>
+                            <property name="width">9.5in</property>
                         </column>
                         <column id="605">
                             <property name="width">6.0625in</property>
@@ -669,17 +669,16 @@ display;</expression>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Cuadro de honor]]></text-property>
                                 </text>
-                                <table id="222">
+                                <table id="824">
                                     <list-property name="userProperties">
                                         <structure>
                                             <property name="name">__ac_group_collapse_level</property>
                                             <property name="type">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="__ac_group_collapse_level">1</property>
-                                    <property name="marginTop">5pt</property>
+                                    <property name="__ac_group_collapse_level">3,2</property>
                                     <property name="marginLeft">12pt</property>
-                                    <property name="width">5.604166666666667in</property>
+                                    <property name="width">5.614583333333333in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
                                     <list-property name="boundDataColumns">
                                         <structure>
@@ -693,6 +692,47 @@ display;</expression>
                                             <text-property name="displayName">created</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["created"]</expression>
                                             <property name="dataType">date</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">check</property>
+                                            <text-property name="displayName">check</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["check"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Hora local</property>
+                                            <text-property name="displayName">Hora local</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Hora local"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">first_name</property>
+                                            <text-property name="displayName">first_name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Retardo</property>
+                                            <text-property name="displayName">Retardo</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["Retardo"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count User</property>
+                                            <text-property name="displayName">CUser</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada" &amp;&amp; row["Count Distinct"] == 1</expression>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
                                             <property name="name">hora</property>
@@ -719,24 +759,6 @@ display;</expression>
                                             <property name="dataType">integer</property>
                                         </structure>
                                         <structure>
-                                            <property name="name">check</property>
-                                            <text-property name="displayName">check</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["check"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Hora local</property>
-                                            <text-property name="displayName">Hora local</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["Hora local"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">first_name</property>
-                                            <text-property name="displayName">first_name</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
                                             <property name="name">position</property>
                                             <text-property name="displayName">position</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["position"]</expression>
@@ -753,6 +775,26 @@ display;</expression>
                                             <text-property name="displayName">Time_Seconds</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["Time_Seconds"]</expression>
                                             <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Mayus Check</property>
+                                            <text-property name="displayName">MCheck</text-property>
+                                            <expression name="expression" type="javascript">var area = dataSetRow["check"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+var resultado = '';&#13;
+var arr = area.split('_');&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
                                             <property name="name">geo</property>
@@ -773,29 +815,73 @@ display;</expression>
                                             <property name="dataType">float</property>
                                         </structure>
                                         <structure>
-                                            <property name="name">area</property>
-                                            <text-property name="displayName">area</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["area"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
-                                            <property name="name">Retardo</property>
-                                            <text-property name="displayName">Retardo</text-property>
-                                            <expression name="expression" type="javascript">dataSetRow["Retardo"]</expression>
-                                            <property name="dataType">string</property>
-                                        </structure>
-                                        <structure>
                                             <property name="name">Click</property>
                                             <text-property name="displayName">Click</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["Click"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
                                         <structure>
-                                            <property name="name">Count Retardos</property>
-                                            <text-property name="displayName">CRetar</text-property>
+                                            <property name="name">area</property>
+                                            <text-property name="displayName">area</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["area"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias Laborados</property>
+                                            <text-property name="displayName">Cdias</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Dias a Pagar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Distinct</property>
+                                            <text-property name="displayName">CD</text-property>
                                             <property name="dataType">integer</property>
                                             <simple-property-list name="aggregateOn">
-                                                <value>Nombre</value>
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["check"] == "entrada" &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Running Count Salida</property>
+                                            <text-property name="displayName">RCSal</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">dataSetRow["check"] == "salida" &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Entradas</property>
+                                            <text-property name="displayName">CDias</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
                                             </simple-property-list>
                                             <property name="aggregateFunction">COUNT</property>
                                             <list-property name="arguments">
@@ -804,7 +890,35 @@ display;</expression>
                                                     <expression name="value" type="javascript">row["folio"]</expression>
                                                 </structure>
                                             </list-property>
-                                            <expression name="filterExpr" type="javascript">dataSetRow["Retardo"] == "Retardo" &amp;&amp; dataSetRow["check"] == "entrada"</expression>
+                                            <expression name="filterExpr" type="javascript">row["check"] == "entrada" &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Count Salidas</property>
+                                            <text-property name="displayName">CSal</text-property>
+                                            <property name="dataType">integer</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">COUNT</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["folio"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["check"] == "salida" &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias a Pagar</property>
+                                            <text-property name="displayName">DAPag</text-property>
+                                            <expression name="expression" type="javascript">var dia = 0;&#13;
+if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1)&#13;
+	dia = 1;&#13;
+&#13;
+dia;</expression>
+                                            <property name="dataType">float</property>
                                             <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
@@ -812,6 +926,141 @@ display;</expression>
                                             <text-property name="displayName">Campo</text-property>
                                             <expression name="expression" type="javascript">dataSetRow["Campo"]</expression>
                                             <property name="dataType">string</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Diferencia de dias</property>
+                                            <text-property name="displayName">DifDias</text-property>
+                                            <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
+var hasta = params["Hasta"].value;&#13;
+var display = 0;&#13;
+&#13;
+	display = BirtDateTime.diffDay(desde, hasta) + 1;&#13;
+&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Faltas</property>
+                                            <expression name="expression" type="javascript">var dias = row["Diferencia de dias"];&#13;
+var trabajo = row["Dias Laborados"];&#13;
+var otorgados = row["Dias Reales Otorgados"];&#13;
+var registro = dataSetRow["registro"]&#13;
+var display = 0;&#13;
+&#13;
+if(registro == "Con registro")&#13;
+	display = dias - (trabajo + otorgados + row["Max Vacaciones"] + row["Max Incapacidades"]);&#13;
+&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias Otorgados Default</property>
+                                            <text-property name="displayName">DODef</text-property>
+                                            <expression name="expression" type="javascript">var desde = params["Fecha"].value;&#13;
+var campo = row["Campo"];&#13;
+var fecha = 0;&#13;
+var dia = "";&#13;
+var diferencia = row["Diferencia de dias"];&#13;
+var i = 0;&#13;
+var display = 0;&#13;
+var registro = dataSetRow["registro"];&#13;
+&#13;
+if(registro == "Con registro"){&#13;
+do{&#13;
+&#13;
+	fecha = BirtDateTime.weekDay(desde, 1);&#13;
+	if((fecha == 1 || fecha == 7) &amp;&amp; campo == "Oficina"){&#13;
+		display++;&#13;
+	}&#13;
+	else if (fecha == 1 &amp;&amp; campo == "Campo") {&#13;
+		display++;&#13;
+	}&#13;
+	fecha = 0;&#13;
+	desde = BirtDateTime.addDay(desde, 1);&#13;
+	i++;&#13;
+&#13;
+}while(i &lt; diferencia);&#13;
+&#13;
+}&#13;
+&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias Para Restar</property>
+                                            <text-property name="displayName">DPRest</text-property>
+                                            <expression name="expression" type="javascript">var creado = dataSetRow["created"];&#13;
+var campo = dataSetRow["Campo"];&#13;
+var display = 0;&#13;
+var fecha = 0;&#13;
+var registro = dataSetRow["registro"];&#13;
+&#13;
+if(registro == "Con registro"){&#13;
+	fecha = creado.getDay();&#13;
+&#13;
+	if(fecha == 0 &amp;&amp; campo == "Campo"){&#13;
+		display = 1;&#13;
+	}&#13;
+	else if( registro == "Con registro" &amp;&amp; (fecha==0 || fecha==6) &amp;&amp; (campo == "Oficina" || campo =="Desconocido")){&#13;
+		display = 1;&#13;
+	}&#13;
+	else{&#13;
+		display = 0;&#13;
+	}&#13;
+}&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Prom Dias Para Restar</property>
+                                            <text-property name="displayName">PDPRest</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Dias Para Restar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["Dias Para Restar"] == 1 &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Sum Dias Para Restar</property>
+                                            <text-property name="displayName">SDPRest</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Prom Dias Para Restar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Dias Reales Otorgados</property>
+                                            <text-property name="displayName">DROtor</text-property>
+                                            <expression name="expression" type="javascript">var defecto = row["Dias Otorgados Default"];&#13;
+var resta = row["Sum Dias Para Restar"];&#13;
+var registro = dataSetRow["registro"];&#13;
+var display = 0;&#13;
+if(registro == "Con registro")&#13;
+display = defecto - resta;&#13;
+&#13;
+display;</expression>
+                                            <property name="dataType">integer</property>
+                                            <property name="allowExport">true</property>
                                         </structure>
                                         <structure>
                                             <property name="name">user</property>
@@ -831,48 +1080,173 @@ display;</expression>
                                             <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
                                             <property name="dataType">string</property>
                                         </structure>
+                                        <structure>
+                                            <property name="name">Sum Domingos Laborados</property>
+                                            <text-property name="displayName">SDom</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">SUM</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Prom Domingos Lab"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Domingos a Pagar</property>
+                                            <text-property name="displayName">DaPagar</text-property>
+                                            <expression name="expression" type="javascript">var dia = 0;&#13;
+if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1 &amp;&amp; BirtDateTime.weekDay(dataSetRow["created"],1) == 1)&#13;
+	dia = 1;&#13;
+&#13;
+dia;</expression>
+                                            <property name="dataType">string</property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Prom Domingos Lab</property>
+                                            <text-property name="displayName">PDL</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Fecha</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">AVE</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["Domingos a Pagar"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <expression name="filterExpr" type="javascript">row["Dias Para Restar"] == 1 &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">vacaciones</property>
+                                            <text-property name="displayName">vacaciones</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["vacaciones"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Max Vacaciones</property>
+                                            <text-property name="displayName">MVac</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">MAX</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["vacaciones"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">incapacidades</property>
+                                            <text-property name="displayName">incapacidades</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["incapacidades"]</expression>
+                                            <property name="dataType">integer</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="name">Max Incapacidades</property>
+                                            <text-property name="displayName">MInca</text-property>
+                                            <property name="dataType">float</property>
+                                            <simple-property-list name="aggregateOn">
+                                                <value>Usuarios</value>
+                                            </simple-property-list>
+                                            <property name="aggregateFunction">MAX</property>
+                                            <list-property name="arguments">
+                                                <structure>
+                                                    <property name="name">Expression</property>
+                                                    <expression name="value" type="javascript">row["incapacidades"]</expression>
+                                                </structure>
+                                            </list-property>
+                                            <property name="allowExport">true</property>
+                                        </structure>
                                     </list-property>
-                                    <property name="pageBreakInterval">1000000000</property>
+                                    <property name="pageBreakInterval">100000000</property>
                                     <list-property name="filter">
                                         <structure>
                                             <property name="operator">eq</property>
-                                            <expression name="expr" type="javascript">row["check"]</expression>
+                                            <expression name="expr" type="javascript">row["Faltas"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"entrada"</value>
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <expression name="expr" type="javascript">row["registro"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">"Con registro"</value>
+                                            </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <expression name="expr" type="javascript">row["Count User"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
                                             </simple-property-list>
                                             <property name="updateAggregation">true</property>
                                         </structure>
                                     </list-property>
-                                    <column id="286">
-                                        <property name="width">3.625in</property>
-                                    </column>
-                                    <column id="609">
-                                        <property name="width">0.8229166666666666in</property>
-                                    </column>
-                                    <column id="638">
-                                        <property name="width">1.15625in</property>
+                                    <column id="967">
+                                        <property name="width">2.6458333333333335in</property>
                                     </column>
                                     <header>
-                                        <row id="223">
-                                            <cell id="224">
-                                                <label id="225">
+                                        <row id="825">
+                                            <cell id="826">
+                                                <label id="827">
                                                     <text-property name="text">Usuario</text-property>
-                                                </label>
-                                            </cell>
-                                            <cell id="606">
-                                                <label id="621">
-                                                    <text-property name="text">Retardos</text-property>
-                                                </label>
-                                            </cell>
-                                            <cell id="636">
-                                                <label id="639">
-                                                    <text-property name="text">Área</text-property>
                                                 </label>
                                             </cell>
                                         </row>
                                     </header>
-                                    <group id="612">
-                                        <property name="groupName">Nombre</property>
+                                    <group id="881">
+                                        <property name="groupName">Registros</property>
+                                        <expression name="keyExpr" type="javascript">row["registro"]</expression>
+                                        <structure name="toc">
+                                            <expression name="expressionValue" type="javascript">row["registro"]</expression>
+                                        </structure>
+                                        <property name="hideDetail">false</property>
+                                        <header>
+                                            <row id="882">
+                                                <list-property name="highlightRules">
+                                                    <structure>
+                                                        <property name="operator">eq</property>
+                                                        <property name="backgroundColor">#EF5350</property>
+                                                        <property name="color">#FFFFFF</property>
+                                                        <expression name="testExpr" type="javascript">row["registro"]</expression>
+                                                        <simple-property-list name="value1">
+                                                            <value type="javascript">"Sin registro"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                    <structure>
+                                                        <property name="operator">eq</property>
+                                                        <property name="backgroundColor">#388E3C</property>
+                                                        <property name="color">#FFFFFF</property>
+                                                        <expression name="testExpr" type="javascript">row["registro"]</expression>
+                                                        <simple-property-list name="value1">
+                                                            <value type="javascript">"Con registro"</value>
+                                                        </simple-property-list>
+                                                    </structure>
+                                                </list-property>
+                                                <cell id="883">
+                                                    <data id="885">
+                                                        <property name="resultSetColumn">registro</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </header>
+                                    </group>
+                                    <group id="900">
+                                        <property name="groupName">Usuarios</property>
                                         <expression name="keyExpr" type="javascript">row["nombre"]</expression>
                                         <structure name="toc">
                                             <expression name="expressionValue" type="javascript">row["nombre"]</expression>
@@ -880,44 +1254,40 @@ display;</expression>
                                         <property name="hideDetail">true</property>
                                         <list-property name="sort">
                                             <structure>
-                                                <expression name="key" type="javascript">row["Count Retardos"]</expression>
-                                                <property name="direction">asc</property>
+                                                <expression name="key" type="javascript">row["Count User"]</expression>
+                                                <property name="direction">desc</property>
                                                 <property name="strength">-1</property>
                                             </structure>
                                         </list-property>
-                                        <list-property name="filter">
-                                            <structure>
-                                                <property name="operator">eq</property>
-                                                <expression name="expr" type="javascript">row["Count Retardos"]</expression>
-                                                <simple-property-list name="value1">
-                                                    <value>0</value>
-                                                </simple-property-list>
-                                                <property name="updateAggregation">true</property>
-                                            </structure>
-                                        </list-property>
                                         <header>
-                                            <row id="613">
-                                                <cell id="614">
-                                                    <data id="305">
-                                                        <property name="fontWeight">bold</property>
+                                            <row id="901">
+                                                <cell id="902">
+                                                    <data id="904">
                                                         <property name="paddingLeft">10pt</property>
                                                         <property name="resultSetColumn">nombre</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="615">
-                                                    <data id="620">
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Count Retardos</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="637">
-                                                    <data id="640">
-                                                        <property name="resultSetColumn">area</property>
                                                     </data>
                                                 </cell>
                                             </row>
                                         </header>
                                     </group>
+                                    <group id="927">
+                                        <property name="groupName">Fecha</property>
+                                        <expression name="keyExpr" type="javascript">row["created"]</expression>
+                                        <structure name="toc">
+                                            <expression name="expressionValue" type="javascript">row["created"]</expression>
+                                        </structure>
+                                        <property name="hideDetail">false</property>
+                                        <header>
+                                            <row id="928">
+                                                <cell id="929"/>
+                                            </row>
+                                        </header>
+                                    </group>
+                                    <detail>
+                                        <row id="947">
+                                            <cell id="948"/>
+                                        </row>
+                                    </detail>
                                 </table>
                             </cell>
                             <cell id="604">
@@ -1757,7 +2127,7 @@ display;</expression>
                                             <list-property name="arguments">
                                                 <structure>
                                                     <property name="name">Expression</property>
-                                                    <expression name="value" type="javascript">row["registro"]</expression>
+                                                    <expression name="value" type="javascript">row["first_name"]</expression>
                                                 </structure>
                                             </list-property>
                                             <expression name="filterExpr" type="javascript">row["Faltas"] &lt;= 0 &amp;&amp; dataSetRow["registro"] == "Con registro"</expression>
@@ -2270,12 +2640,12 @@ dia;</expression>
                                                     <list-property name="action">
                                                         <structure>
                                                             <property name="linkType">hyperlink</property>
-                                                            <expression name="uri" type="javascript">var link = "https://www.google.com.mx/maps/place//@"&#13;
+                                                            <expression name="uri" type="javascript">var link = "https://maps.google.com/?q="&#13;
 var longitud = row["Longitud"];&#13;
 var latitud = row["Latitud"];&#13;
 var zoom = ",18z"&#13;
 &#13;
-link = link + longitud + ","+latitud+zoom;&#13;
+link = link + longitud + ","+latitud;&#13;
 &#13;
 link;</expression>
                                                             <property name="targetWindow">_blank</property>
