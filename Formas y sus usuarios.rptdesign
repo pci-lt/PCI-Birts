@@ -205,7 +205,7 @@ display;</expression>
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">4,5,3,2,1</property>
+                        <property name="__ac_group_collapse_level">5,6,4,3,2,1</property>
                         <property name="marginTop">5pt</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">7.875in</property>
@@ -291,7 +291,7 @@ if(formas == 1 &amp;&amp; forma == 1){&#13;
 }else{&#13;
 	display = licencias * 185&#13;
 }&#13;
-&#13;
+display = 0;&#13;
 display;</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
@@ -359,6 +359,40 @@ display;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Count Incapacidad</property>
+                                <text-property name="displayName">CIncap</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Usuarios</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["usuario"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["name"] == "Incapacidad"</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Vacaciones</property>
+                                <text-property name="displayName">CVac</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Usuarios</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["usuario"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["name"] == "Vacaciones Solicitud"</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">1000000000</property>
                         <list-property name="filter">
@@ -380,7 +414,7 @@ display;</expression>
                             </structure>
                             <structure>
                                 <property name="operator">is-true</property>
-                                <expression name="expr" type="javascript">row["Count Asistencia de Personal"] == 1 &amp;&amp; row["Count Formas"] == 1</expression>
+                                <expression name="expr" type="javascript">row["Count Asistencia de Personal"] == 1 &amp;&amp; row["Count Formas"] == 3 &amp;&amp; row["Count Incapacidad"] == 1 &amp;&amp; row["Count Vacaciones"] == 1</expression>
                                 <property name="updateAggregation">true</property>
                             </structure>
                         </list-property>
@@ -444,12 +478,7 @@ display;</expression>
                                             <property name="resultSetColumn">usuario</property>
                                         </data>
                                     </cell>
-                                    <cell id="84">
-                                        <data id="313">
-                                            <property name="paddingLeft">10pt</property>
-                                            <property name="resultSetColumn">Count Asistencia de Personal</property>
-                                        </data>
-                                    </cell>
+                                    <cell id="84"/>
                                     <cell id="25">
                                         <data id="30">
                                             <property name="textAlign">center</property>
@@ -639,10 +668,13 @@ display;</expression>
                                 <expression name="expression" type="javascript">var licencias = row["Count Licencias"];&#13;
 var forma = row["Count Formas"];&#13;
 var formas = row["Count Asistencia de Personal"];&#13;
+var nombre = dataSetRow["usuario"];&#13;
 var display = 0;&#13;
 if(formas == 1 &amp;&amp; forma == 1){&#13;
 	display = 0;&#13;
-}else{&#13;
+}else if (nombre == "Administración PClink"){&#13;
+	display = 185;&#13;
+}else {&#13;
 	display = licencias * 185&#13;
 }&#13;
 &#13;
@@ -713,6 +745,40 @@ display;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Count Vacaciones</property>
+                                <text-property name="displayName">CVac</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Usuarios</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["usuario"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">dataSetRow["name"] == "Vacaciones Solicitud"</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Incapacidad</property>
+                                <text-property name="displayName">CIncap</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Usuarios</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["usuario"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["name"] == "Incapacidad"</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">1000000000</property>
                         <list-property name="filter">
@@ -734,7 +800,7 @@ display;</expression>
                             </structure>
                             <structure>
                                 <property name="operator">is-false</property>
-                                <expression name="expr" type="javascript">row["Count Asistencia de Personal"] == 1 &amp;&amp; row["Count Formas"] == 1</expression>
+                                <expression name="expr" type="javascript">row["Count Asistencia de Personal"] == 1 &amp;&amp; row["Count Formas"] == 3 &amp;&amp; row["Count Incapacidad"] == 1 &amp;&amp; row["Count Vacaciones"] == 1</expression>
                                 <property name="updateAggregation">true</property>
                             </structure>
                         </list-property>
