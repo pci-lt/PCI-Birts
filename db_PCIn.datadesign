@@ -3481,8 +3481,14 @@ log('param month' + month);
 
 
 if(fecha != '' &amp;&amp; fecha != null){
-
-		var new_query = ", created_at: { $date: '"+ fecha + "'T05:00:00Z";
+		
+		var date_to = BirtDateTime.addDay(fecha, 1);
+		var year_to = BirtDateTime.year(date_to);
+		var month_to = BirtDateTime.month(date_to);
+		if(month_to < 10)
+			month_to = '0' + month_to;
+		var day_to = BirtDateTime.day(date_to);
+		var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
 
 
 }
@@ -5145,6 +5151,9 @@ month</expression>
             <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017-10-20</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
