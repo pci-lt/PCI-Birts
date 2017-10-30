@@ -3822,21 +3822,27 @@ display;</expression>
                 <structure>
                     <property name="name">year</property>
                     <expression name="expression" type="javascript">var first = row["yearmonth"];&#13;
+var longi = row["longitud"];&#13;
 var display = 0;&#13;
-if(first != null)&#13;
-display = parseInt(first.substring(0,4),10);&#13;
-&#13;
+if(first != null &amp;&amp; longi == 6){&#13;
+	display = parseInt(first.substring(0,4),10);&#13;
+}else if (first != null &amp;&amp; longi == 4){&#13;
+	display = "20" + parseInt(first.substring(0,2),10);&#13;
+}&#13;
 display;</expression>
-                    <property name="dataType">integer</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="name">month</property>
                     <expression name="expression" type="javascript">var first = row["yearmonth"];&#13;
+var longi = row["longitud"];&#13;
 var display = "13";&#13;
 &#13;
-if(first != null)&#13;
+if(first != null &amp;&amp; longi == 6){&#13;
 	display = parseInt(first.substring(4),10);&#13;
-&#13;
+}else if(first != null &amp;&amp; longi == 4){&#13;
+		display = parseInt(first.substring(2),10);&#13;
+}&#13;
 display;</expression>
                     <property name="dataType">integer</property>
                 </structure>
@@ -3850,6 +3856,19 @@ if(month == 0){&#13;
 }&#13;
 display;</expression>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">longitud</property>
+                    <expression name="expression" type="javascript">var numero = row["numero"];&#13;
+var display = 0;&#13;
+if(numero != null){&#13;
+	var inicio = numero.indexOf("-") + 1;&#13;
+	var fin = numero.indexOf("/");&#13;
+	display = fin - inicio&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
@@ -3877,7 +3896,7 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="columnName">year</property>
-                    <property name="analysis">measure</property>
+                    <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -3890,6 +3909,12 @@ display;</expression>
                 <structure>
                     <property name="columnName">Mes</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">longitud</property>
+                    <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -3915,7 +3940,7 @@ display;</expression>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">year</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -3926,6 +3951,11 @@ display;</expression>
                         <property name="position">6</property>
                         <property name="name">Mes</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">longitud</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -6219,7 +6249,7 @@ display;</expression>
                     <structure>
                         <property name="position">16</property>
                         <property name="name">year</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">17</property>
@@ -6233,11 +6263,16 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">19</property>
+                        <property name="name">longitud</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
                         <property name="name">Total</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">21</property>
                         <property name="name">estatus</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -6270,6 +6305,7 @@ display;</expression>
 <tns:Column>Pacos::year</tns:Column>
 <tns:Column>Pacos::month</tns:Column>
 <tns:Column>Pacos::Mes</tns:Column>
+<tns:Column>Pacos::longitud</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Paco-Orden de compra"/>
