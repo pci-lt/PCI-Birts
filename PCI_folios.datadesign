@@ -8704,6 +8704,28 @@ if(display == null || display == "" || display == "Puesto desconocido"){&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">departamento</property>
+                    <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
+var area = position.split(" - ")&#13;
+var display = area[5];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
+	display = "Departamento desconocido";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[5];&#13;
+		if(display == null || display == "")&#13;
+			display = "Departamento desconocido";&#13;
+	}&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -8872,6 +8894,10 @@ display;</expression>
                     <property name="columnName">cope</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="filter">
                 <structure>
@@ -9017,6 +9043,11 @@ display;</expression>
                     <structure>
                         <property name="position">27</property>
                         <property name="name">cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">departamento</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
