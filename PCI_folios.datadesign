@@ -8558,11 +8558,13 @@ if(position == null || position == ""){&#13;
 	position = "Puesto desconocido";&#13;
 }&#13;
 var area = position.split(" - ")&#13;
-var display = area[2];&#13;
-if(display == null || display == ""){&#13;
+var display = area[3];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
 	display = "Área desconocida";&#13;
 	if(row["folio"] == null || row["folio"] == ""){&#13;
-		display = row["area_total"];&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[3];&#13;
 	}&#13;
 }&#13;
 &#13;
@@ -8617,6 +8619,86 @@ if( (nombre == null || nombre == "") &amp;&amp; (nomvre != null || nomvre != "" 
 }&#13;
 else if( nombre != null || nombre != ""  ){&#13;
 	display = nombre;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">puesto</property>
+                    <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
+var area = position.split(" - ")&#13;
+var display = area[0];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
+	display = "Puesto desconocido";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[0];&#13;
+	}&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">division</property>
+                    <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
+var area = position.split(" - ")&#13;
+var display = area[1];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
+	display = "División desconocida";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[1];&#13;
+	}&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">subdireccion</property>
+                    <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
+var area = position.split(" - ")&#13;
+var display = area[2];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
+	display = "Subdirección desconocida";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[2];&#13;
+	}&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cope</property>
+                    <expression name="expression" type="javascript">var position = row["position"];&#13;
+if(position == null || position == ""){&#13;
+	position = "Puesto desconocido";&#13;
+}&#13;
+var area = position.split(" - ")&#13;
+var display = area[4];&#13;
+if(display == null || display == "" || display == "Puesto desconocido"){&#13;
+	display = "COPE desconocido";&#13;
+	if(row["folio"] == null || row["folio"] == ""){&#13;
+		var position_total = row["puesto_total"];&#13;
+		area = position_total.split(" - ");&#13;
+		display = area[4];&#13;
+	}&#13;
 }&#13;
 &#13;
 display;</expression>
@@ -8760,6 +8842,45 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">equipo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">incapacidades</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">division</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subdireccion</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["user"]</expression>
+                    <simple-property-list name="value1">
+                        <value>2626</value>
+                    </simple-property-list>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -8876,6 +8997,26 @@ display;</expression>
                     <structure>
                         <property name="position">23</property>
                         <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -19423,7 +19564,7 @@ month</expression>
                     <property name="name">area</property>
                     <expression name="expression" type="javascript">var position = row["position"];&#13;
 var area = position.split(" - ")&#13;
-var display = area[2];&#13;
+var display = area[3];&#13;
 if(display == null || display == ""){&#13;
 	display = "Área desconocida"&#13;
 }&#13;
@@ -19675,7 +19816,7 @@ display;</expression>
                     <property name="name">area</property>
                     <expression name="expression" type="javascript">var position = row["position"];&#13;
 var area = position.split(" - ")&#13;
-var display = area[2];&#13;
+var display = area[3];&#13;
 if(display == null || display == ""){&#13;
 	display = "Área desconocida"&#13;
 }&#13;
@@ -19708,6 +19849,10 @@ display;</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">email</text-property>
                     <text-property name="heading">email</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
