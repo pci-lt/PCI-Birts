@@ -51,41 +51,41 @@
                 <structure>
                     <property name="name">Estatus</property>
                     <expression name="expression" type="javascript">var area = row["_id.status_cob"];&#13;
-if(area == null){&#13;
-	area = "sin_estatus_de_cobranza";&#13;
+if(area == null || area == ""){&#13;
+	area = "Sin Estatus de cobranza";&#13;
 }&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
-}&#13;
-if(resultado=="Pendiente"){&#13;
+&#13;
+var resultado = "";&#13;
+&#13;
+if(area=="pendiente"){&#13;
 	resultado = "1.- Pendiente por reportar";&#13;
 }&#13;
-if(resultado == "Validacion"){&#13;
+else if(area == "validacion"){&#13;
 	resultado = "2.- En validación Carso";&#13;
 }&#13;
-if(resultado == "Aceptada"){&#13;
+else if(area == "aceptada"){&#13;
 	resultado = "3.- Producción Aceptada";&#13;
 }&#13;
-if(resultado == "Archivo Carga Masiva")&#13;
+else if(area == "archivo_carga_masiva")&#13;
 	resultado = "4.- MTF Generado";&#13;
-if(resultado == "Paco")&#13;
+else if(area == "paco")&#13;
 	resultado = "5.- Con PACO";&#13;
-if(resultado == "Estimacion")&#13;
+else if(area == "estimacion")&#13;
 	resultado = "6.- Estimación Generada";&#13;
-if(resultado == "Liberada")&#13;
+else if(area == "liberada")&#13;
 	resultado = "7.- Con OC de Carso";&#13;
-if(resultado == "Factura")&#13;
+else if(area == "factura")&#13;
 	resultado = "8.- Facturada a Carso";&#13;
-if(resultado == "Pagada")&#13;
+else if(area == "pagada")&#13;
 	resultado = "9.- Pagada por Carso";&#13;
-if(resultado == "Error")&#13;
+else if(area == "error_validacion")&#13;
 	resultado = "99.- Error de Validación";&#13;
+else if(area == "error_de_paco")&#13;
+	resultado = "98.- Error de Paco";&#13;
+else{&#13;
+	resultado = resultado;&#13;
+}&#13;
+&#13;
 resultado;</expression>
                     <property name="dataType">string</property>
                 </structure>
@@ -738,6 +738,18 @@ resultado;</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">_id.fecha_reportado</property>
+                                <text-property name="displayName">_id.fecha_reportado</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["_id.fecha_reportado"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mes</property>
+                                <text-property name="displayName">mes</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mes"]</expression>
+                                <property name="dataType">string</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">10000000</property>
