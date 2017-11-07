@@ -73,6 +73,24 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="Nombre" id="1150">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Asistencia Mensual</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["nombre"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["nombre"]</expression>
+            <expression name="sortByColumn">dataSetRow["nombre"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">nombre</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Folios" id="4">
@@ -1574,9 +1592,6 @@ dia;</expression>
                                     <column id="635">
                                         <property name="width">0.8229166666666666in</property>
                                     </column>
-                                    <column id="643">
-                                        <property name="width">1.1354166666666667in</property>
-                                    </column>
                                     <header>
                                         <row id="623">
                                             <cell id="624">
@@ -1587,11 +1602,6 @@ dia;</expression>
                                             <cell id="626">
                                                 <label id="627">
                                                     <text-property name="text">Retardos</text-property>
-                                                </label>
-                                            </cell>
-                                            <cell id="641">
-                                                <label id="644">
-                                                    <text-property name="text">Área</text-property>
                                                 </label>
                                             </cell>
                                         </row>
@@ -1635,11 +1645,6 @@ dia;</expression>
                                                         <property name="resultSetColumn">Count Retardos</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="642">
-                                                    <data id="645">
-                                                        <property name="resultSetColumn">area</property>
-                                                    </data>
-                                                </cell>
                                             </row>
                                         </header>
                                     </group>
@@ -1662,7 +1667,6 @@ dia;</expression>
                                                     </data>
                                                 </cell>
                                                 <cell id="656"/>
-                                                <cell id="657"/>
                                             </row>
                                         </header>
                                     </group>
@@ -1699,7 +1703,7 @@ dia;</expression>
                                             <property name="type">string</property>
                                         </structure>
                                     </list-property>
-                                    <property name="__ac_group_collapse_level">6,5,4,2,1,3</property>
+                                    <property name="__ac_group_collapse_level">6,4,2,1,3</property>
                                     <property name="marginLeft">12pt</property>
                                     <property name="width">19.083333333333332in</property>
                                     <property name="dataSet">Asistencia Mensual</property>
@@ -2100,7 +2104,7 @@ display;</expression>
                                             <text-property name="displayName">CUReg</text-property>
                                             <property name="dataType">integer</property>
                                             <simple-property-list name="aggregateOn">
-                                                <value>Area</value>
+                                                <value>Subdirección</value>
                                             </simple-property-list>
                                             <property name="aggregateFunction">COUNTDISTINCT</property>
                                             <list-property name="arguments">
@@ -2152,7 +2156,7 @@ display;</expression>
                                             <text-property name="displayName">CTUs</text-property>
                                             <property name="dataType">integer</property>
                                             <simple-property-list name="aggregateOn">
-                                                <value>Area</value>
+                                                <value>Subdirección</value>
                                             </simple-property-list>
                                             <property name="aggregateFunction">COUNTDISTINCT</property>
                                             <list-property name="arguments">
@@ -2168,7 +2172,7 @@ display;</expression>
                                             <text-property name="displayName">CCp</text-property>
                                             <property name="dataType">integer</property>
                                             <simple-property-list name="aggregateOn">
-                                                <value>Area</value>
+                                                <value>Subdirección</value>
                                             </simple-property-list>
                                             <property name="aggregateFunction">COUNTDISTINCT</property>
                                             <list-property name="arguments">
@@ -2345,6 +2349,11 @@ dia;</expression>
                                             </simple-property-list>
                                             <property name="updateAggregation">true</property>
                                         </structure>
+                                        <structure>
+                                            <expression name="expr" type="javascript">row["nombre"]</expression>
+                                            <property name="dynamicFilterParameter">Nombre</property>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
                                     </list-property>
                                     <column id="983">
                                         <property name="width">2.0104166666666665in</property>
@@ -2359,9 +2368,6 @@ dia;</expression>
                                         <property name="width">2.0104166666666665in</property>
                                     </column>
                                     <column id="503">
-                                        <property name="width">3in</property>
-                                    </column>
-                                    <column id="1146">
                                         <property name="width">3in</property>
                                     </column>
                                     <column id="699">
@@ -2413,32 +2419,27 @@ dia;</expression>
                                         <row id="470">
                                             <cell id="977">
                                                 <label id="1000">
-                                                    <text-property name="text">Dirección</text-property>
+                                                    <text-property name="text">División</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="984">
                                                 <label id="999">
-                                                    <text-property name="text">Subdirección</text-property>
+                                                    <text-property name="text">Célula</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="578">
                                                 <label id="586">
-                                                    <text-property name="text">Área</text-property>
+                                                    <text-property name="text">Departamento</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="991">
                                                 <label id="998">
-                                                    <text-property name="text">COPE</text-property>
+                                                    <text-property name="text">Puesto</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="471">
                                                 <label id="472">
                                                     <text-property name="text">Usuario</text-property>
-                                                </label>
-                                            </cell>
-                                            <cell id="1136">
-                                                <label id="1147">
-                                                    <text-property name="text">Departamento</text-property>
                                                 </label>
                                             </cell>
                                             <cell id="694">
@@ -2538,7 +2539,6 @@ dia;</expression>
                                                 <cell id="1050"/>
                                                 <cell id="1051"/>
                                                 <cell id="1052"/>
-                                                <cell id="1137"/>
                                                 <cell id="1053"/>
                                                 <cell id="1054"/>
                                                 <cell id="1055"/>
@@ -2577,11 +2577,30 @@ dia;</expression>
                                                 <cell id="1005"/>
                                                 <cell id="1006"/>
                                                 <cell id="1007"/>
-                                                <cell id="1138"/>
-                                                <cell id="1008"/>
-                                                <cell id="1009"/>
-                                                <cell id="1010"/>
-                                                <cell id="1011"/>
+                                                <cell id="1008">
+                                                    <data id="700">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Count Usuarios con Registros</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1009">
+                                                    <data id="782">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Count Total de Usuarios</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1010">
+                                                    <data id="793">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Count Cumplidos</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1011">
+                                                    <data id="784">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Diferencia de dias</property>
+                                                    </data>
+                                                </cell>
                                                 <cell id="1012"/>
                                                 <cell id="1013"/>
                                                 <cell id="1014"/>
@@ -2612,37 +2631,19 @@ dia;</expression>
                                                 <cell id="579">
                                                     <data id="1090">
                                                         <property name="fontSize">11pt</property>
+                                                        <property name="fontWeight">normal</property>
                                                         <property name="paddingLeft">12pt</property>
                                                         <property name="resultSetColumn">area</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="992"/>
                                                 <cell id="568"/>
-                                                <cell id="1139"/>
-                                                <cell id="695">
-                                                    <data id="700">
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Count Usuarios con Registros</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="775">
-                                                    <data id="782">
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Count Total de Usuarios</property>
-                                                    </data>
-                                                </cell>
+                                                <cell id="695"/>
+                                                <cell id="775"/>
                                                 <cell id="786">
                                                     <property name="textAlign">center</property>
-                                                    <data id="793">
-                                                        <property name="resultSetColumn">Count Cumplidos</property>
-                                                    </data>
                                                 </cell>
-                                                <cell id="596">
-                                                    <data id="784">
-                                                        <property name="textAlign">center</property>
-                                                        <property name="resultSetColumn">Diferencia de dias</property>
-                                                    </data>
-                                                </cell>
+                                                <cell id="596"/>
                                                 <cell id="667"/>
                                                 <cell id="675"/>
                                                 <cell id="684"/>
@@ -2677,7 +2678,6 @@ dia;</expression>
                                                     </data>
                                                 </cell>
                                                 <cell id="1097"/>
-                                                <cell id="1140"/>
                                                 <cell id="1098"/>
                                                 <cell id="1099"/>
                                                 <cell id="1100"/>
@@ -2734,7 +2734,6 @@ dia;</expression>
                                                         <property name="resultSetColumn">registro</property>
                                                     </data>
                                                 </cell>
-                                                <cell id="1141"/>
                                                 <cell id="752"/>
                                                 <cell id="776"/>
                                                 <cell id="787"/>
@@ -2777,12 +2776,6 @@ dia;</expression>
                                                     <data id="485">
                                                         <property name="paddingLeft">10pt</property>
                                                         <property name="resultSetColumn">nombre</property>
-                                                    </data>
-                                                </cell>
-                                                <cell id="1142">
-                                                    <data id="1148">
-                                                        <property name="paddingLeft">10pt</property>
-                                                        <property name="resultSetColumn">departamento</property>
                                                     </data>
                                                 </cell>
                                                 <cell id="696">
@@ -2864,7 +2857,6 @@ dia;</expression>
                                                 <cell id="581"/>
                                                 <cell id="995"/>
                                                 <cell id="547"/>
-                                                <cell id="1143"/>
                                                 <cell id="697"/>
                                                 <cell id="778"/>
                                                 <cell id="789"/>
@@ -2900,7 +2892,6 @@ dia;</expression>
                                             <cell id="582"/>
                                             <cell id="996"/>
                                             <cell id="484"/>
-                                            <cell id="1144"/>
                                             <cell id="698"/>
                                             <cell id="779"/>
                                             <cell id="790"/>
