@@ -139,6 +139,14 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">subdirección</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">direccion</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -175,6 +183,16 @@
                     <structure>
                         <property name="position">7</property>
                         <property name="name">Mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">subdirección</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">direccion</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -215,6 +233,16 @@
                 <structure>
                     <property name="position">7</property>
                     <property name="name">Mes</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">subdirección</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">direccion</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -925,7 +953,7 @@ titulo</expression>
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">2,1</property>
+                        <property name="__ac_group_collapse_level">4,3,2,1</property>
                         <property name="marginLeft">10pt</property>
                         <property name="width">11.145833333333334in</property>
                         <property name="dataSet">Produccion Fibra por Area</property>
@@ -1402,8 +1430,300 @@ resultado;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">cantidad_mensual</property>
+                                <text-property name="displayName">cantidad_mensual</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["cantidad_mensual"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">_id.month</property>
+                                <text-property name="displayName">_id.month</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["_id.month"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Mes</property>
+                                <text-property name="displayName">Mes</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Mes"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">subdirección</property>
+                                <text-property name="displayName">subdirección</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["subdirección"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">direccion</property>
+                                <text-property name="displayName">direccion</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["direccion"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma A0 Subdirección</property>
+                                <text-property name="displayName">SAS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo A0"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma A0 Dirección</property>
+                                <text-property name="displayName">SAD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo A0"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma D2 Subdirección</property>
+                                <text-property name="displayName">SDS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo D2"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma D2 Dirección</property>
+                                <text-property name="displayName">SDD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo D2"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TS Subdirección</property>
+                                <text-property name="displayName">STS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Column Binding"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TS Dirección</property>
+                                <text-property name="displayName">STD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Column Binding"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TV Subdirección</property>
+                                <text-property name="displayName">STVS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo TV"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TV Dirección</property>
+                                <text-property name="displayName">STVD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma TS"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma VSI Subdirección</property>
+                                <text-property name="displayName">SVS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo VSI"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma VSI Dirección</property>
+                                <text-property name="displayName">SVD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo VSI"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TK Subdirección</property>
+                                <text-property name="displayName">STS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo TK"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma TK Dirección</property>
+                                <text-property name="displayName">STKD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Tipo TK"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Cantidad Mensual Subdirección</property>
+                                <text-property name="displayName">SCMS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">dataSetRow["cantidad_mensual"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Cantidad Mensual Dirección</property>
+                                <text-property name="displayName">SCMD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">dataSetRow["cantidad_mensual"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Cantidad Anual Subdirección</property>
+                                <text-property name="displayName">SCAS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Cantidad Anual Dirección</property>
+                                <text-property name="displayName">SCAD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>División</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
+                        <column id="1232">
+                            <property name="width">1.7916666666666667in</property>
+                        </column>
+                        <column id="1226">
+                            <property name="width">1.7916666666666667in</property>
+                        </column>
                         <column id="916">
                             <property name="width">1.7916666666666667in</property>
                         </column>
@@ -1419,6 +1739,16 @@ resultado;</expression>
                         <header>
                             <row id="893">
                                 <property name="fontSize">12pt</property>
+                                <cell id="1227">
+                                    <label id="1234">
+                                        <text-property name="text">DIVISIÓN</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1221">
+                                    <label id="1233">
+                                        <text-property name="text">SUBDIRECCIÓN</text-property>
+                                    </label>
+                                </cell>
                                 <cell id="894">
                                     <label id="895">
                                         <text-property name="text">ÁREA</text-property>
@@ -1443,6 +1773,8 @@ resultado;</expression>
                             <row id="1081">
                                 <property name="fontSize">12pt</property>
                                 <property name="height">0.375in</property>
+                                <cell id="1228"/>
+                                <cell id="1222"/>
                                 <cell id="1082"/>
                                 <cell id="1172">
                                     <grid id="1123">
@@ -1521,6 +1853,200 @@ resultado;</expression>
                                 </cell>
                             </row>
                         </header>
+                        <group id="1251">
+                            <property name="groupName">División</property>
+                            <expression name="keyExpr" type="javascript">row["direccion"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["direccion"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="1252">
+                                    <cell id="1253">
+                                        <data id="1266">
+                                            <property name="resultSetColumn">direccion</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1254"/>
+                                    <cell id="1255"/>
+                                    <cell id="1256">
+                                        <grid id="1315">
+                                            <property name="width">1.8958333333333333in</property>
+                                            <column id="1316">
+                                                <property name="width">0.9270833333333334in</property>
+                                            </column>
+                                            <column id="1317">
+                                                <property name="width">0.96875in</property>
+                                            </column>
+                                            <row id="1318">
+                                                <cell id="1319">
+                                                    <data id="1320">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Suma Cantidad Mensual Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1321">
+                                                    <data id="1322">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Suma Cantidad Anual Dirección</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                    <cell id="1257"/>
+                                    <cell id="1258">
+                                        <grid id="1287">
+                                            <column id="1288">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1289">
+                                                <property name="width">0.84375in</property>
+                                            </column>
+                                            <column id="1290">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1291">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1292">
+                                                <property name="width">0.90625in</property>
+                                            </column>
+                                            <column id="1293"/>
+                                            <row id="1294">
+                                                <cell id="1295">
+                                                    <data id="1296">
+                                                        <property name="resultSetColumn">Suma A0 Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1297">
+                                                    <data id="1298">
+                                                        <property name="resultSetColumn">Suma D2 Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1299">
+                                                    <data id="1300">
+                                                        <property name="resultSetColumn">Suma TS Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1301">
+                                                    <data id="1302">
+                                                        <property name="resultSetColumn">Suma TV Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1303">
+                                                    <data id="1304">
+                                                        <property name="resultSetColumn">Suma VSI Dirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1305">
+                                                    <data id="1306">
+                                                        <property name="resultSetColumn">Suma TK Dirección</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
+                        <group id="1235">
+                            <property name="groupName">Subdirección</property>
+                            <expression name="keyExpr" type="javascript">row["subdirección"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["subdirección"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="1236">
+                                    <cell id="1237"/>
+                                    <cell id="1238">
+                                        <data id="1250">
+                                            <property name="resultSetColumn">subdirección</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="1239"/>
+                                    <cell id="1240">
+                                        <grid id="1307">
+                                            <property name="width">1.8958333333333333in</property>
+                                            <column id="1308">
+                                                <property name="width">0.9270833333333334in</property>
+                                            </column>
+                                            <column id="1309">
+                                                <property name="width">0.96875in</property>
+                                            </column>
+                                            <row id="1310">
+                                                <cell id="1311">
+                                                    <data id="1312">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Suma Cantidad Mensual Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1313">
+                                                    <data id="1314">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="resultSetColumn">Suma Cantidad Anual Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                    <cell id="1241"/>
+                                    <cell id="1242">
+                                        <grid id="1267">
+                                            <column id="1268">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1269">
+                                                <property name="width">0.84375in</property>
+                                            </column>
+                                            <column id="1270">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1271">
+                                                <property name="width">0.8541666666666666in</property>
+                                            </column>
+                                            <column id="1272">
+                                                <property name="width">0.90625in</property>
+                                            </column>
+                                            <column id="1273"/>
+                                            <row id="1274">
+                                                <cell id="1275">
+                                                    <data id="1276">
+                                                        <property name="resultSetColumn">Suma A0 Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1277">
+                                                    <data id="1278">
+                                                        <property name="resultSetColumn">Suma D2 Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1279">
+                                                    <data id="1280">
+                                                        <property name="resultSetColumn">Suma TS Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1281">
+                                                    <data id="1282">
+                                                        <property name="resultSetColumn">Suma TV Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1283">
+                                                    <data id="1284">
+                                                        <property name="resultSetColumn">Suma VSI Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="1285">
+                                                    <data id="1286">
+                                                        <property name="resultSetColumn">Suma TK Subdirección</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </grid>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
                         <group id="925">
                             <property name="groupName">Área</property>
                             <expression name="keyExpr" type="javascript">row["_id.area"]</expression>
@@ -1540,6 +2066,8 @@ resultado;</expression>
                                     <property name="fontWeight">bold</property>
                                     <property name="color">#000000</property>
                                     <property name="height">12pt</property>
+                                    <cell id="1229"/>
+                                    <cell id="1223"/>
                                     <cell id="927">
                                         <property name="colSpan">1</property>
                                         <property name="rowSpan">1</property>
@@ -1640,6 +2168,8 @@ resultado;</expression>
                             <header>
                                 <row id="1054">
                                     <property name="height">12pt</property>
+                                    <cell id="1230"/>
+                                    <cell id="1224"/>
                                     <cell id="1055"/>
                                     <cell id="1174"/>
                                     <cell id="1056">
@@ -1725,6 +2255,8 @@ resultado;</expression>
                         </group>
                         <footer>
                             <row id="1148">
+                                <cell id="1231"/>
+                                <cell id="1225"/>
                                 <cell id="1149">
                                     <text id="1153">
                                         <property name="paddingRight">10pt</property>

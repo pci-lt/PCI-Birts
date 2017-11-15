@@ -7517,40 +7517,50 @@ month</expression>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Asistencia Mensual" id="461">
             <list-property name="computedColumns">
                 <structure>
+                    <property name="name">created_at</property>
+                    <expression name="expression" type="javascript">var created = row["created"];&#13;
+var horario = new Date("October 29, 2017");&#13;
+var created2 = new Date(created.getFullYear(),created.getMonth(),created.getDate());&#13;
+var horario2 = new Date("April 1, 2018");&#13;
+var display = new Date("January 10, 1994 19:30:00");&#13;
+var verano = BirtDateTime.diffDay(horario, created);&#13;
+var invierno = BirtDateTime.diffDay(horario2, created);&#13;
+&#13;
+&#13;
+if(verano &lt; 0){&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+else if (verano > 0 &amp;&amp; invierno &lt; 0) {&#13;
+	display = "Horario Invierno - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-6);&#13;
+}&#13;
+else if (invierno > 0) {&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">created_only_date</property>
+                    <expression name="expression" type="javascript">row["created_at"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
                     <property name="name">Hora local</property>
-                    <expression name="expression" type="javascript">var hora = row["hora"]-6;&#13;
-var minuto = row["minuto"];&#13;
-var momento = "AM"&#13;
+                    <expression name="expression" type="javascript">var created = row["created_at"];&#13;
+var hora = created.getHours();&#13;
+var minu = created.getMinutes();&#13;
+var display ="";&#13;
+if(minu &lt; 10)&#13;
+	minu = '0' + minu&#13;
+if(hora &lt; 10) &#13;
+	hora = '0' + hora&#13;
 &#13;
-if(minuto&lt;10){&#13;
-	minuto = "0" + minuto;&#13;
-}&#13;
+display = hora + ":" + minu;&#13;
 &#13;
-if(hora == -5){&#13;
-	hora = 19&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -4){&#13;
-	hora = 20&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -3){&#13;
-	hora = 21&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -2){&#13;
-	hora = 22&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -1){&#13;
-	hora = 20&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora&lt;10){&#13;
-	hora = "0" + hora;&#13;
-}&#13;
-var local = hora + ":" + minuto;&#13;
-local;</expression>
+display;</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -7687,12 +7697,6 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Hora local</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">Longitud</property>
                     <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
@@ -7706,6 +7710,24 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="columnName">equipo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_at</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_only_date</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Hora local</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
@@ -7796,21 +7818,31 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">11</property>
+                        <property name="name">created_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">created_only_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">Hora local</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">14</property>
                         <property name="name">Longitud</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">15</property>
                         <property name="name">Latitud</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">16</property>
                         <property name="name">equipo</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -7861,7 +7893,7 @@ log('query' + query);]]></method>
                     <property name="name">created</property>
                     <property name="nativeName">created</property>
                     <property name="dataType">date-time</property>
-                    <property name="nativeDataType">9</property>
+                    <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
@@ -7913,7 +7945,7 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$start_date',\r\n\thora: {$hour: '$start_date'},\r\n\tminuto: {$minute: '$start_date'},\r\n\tdia: { $dayOfWeek: '$start_date' },\r\n\tcheck: {$ifNull: ['$answers.59679cbff851c210dd23d517', 'Desconocido']},\r\n\tgeo: '$geolocation',\r\n\tsistema: { $ifNull: ['$properties.device_properties.system', 'Desconocido'] },\r\n\ttoken:{ $ifNull: ['$properties.device_properties.phone_token','Sin Token']}\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "dia" , "check" , "geo" , "sistema" , "token"] , "numSkipDocuments" : 10000000 , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$start_date' }},\r\n\thora: {$hour: '$start_date'},\r\n\tminuto: {$minute: '$start_date'},\r\n\tdia: { $dayOfWeek: '$start_date' },\r\n\tcheck: {$ifNull: ['$answers.59679cbff851c210dd23d517', 'Desconocido']},\r\n\tgeo: '$geolocation',\r\n\tsistema: { $ifNull: ['$properties.device_properties.system', 'Desconocido'] },\r\n\ttoken:{ $ifNull: ['$properties.device_properties.phone_token','Sin Token']}\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "dia" , "check" , "geo" , "sistema" , "token"] , "numSkipDocuments" : 10000000 , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -8775,12 +8807,6 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Hora local</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -8889,18 +8915,44 @@ display;</expression>
                 <structure>
                     <property name="columnName">division</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">subdireccion</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">cope</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">departamento</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_at</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_only_date</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Hora local</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -8956,101 +9008,111 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">created_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">created_only_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">Hora local</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">12</property>
                         <property name="name">Longitud</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">13</property>
                         <property name="name">Latitud</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">14</property>
                         <property name="name">equipo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">15</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">16</property>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">17</property>
                         <property name="name">puesto_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">18</property>
                         <property name="name">area_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">19</property>
                         <property name="name">nombre_total</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">20</property>
                         <property name="name">vacaciones</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">19</property>
+                        <property name="position">21</property>
                         <property name="name">incapacidades</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">20</property>
+                        <property name="position">22</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">21</property>
+                        <property name="position">23</property>
                         <property name="name">Campo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">22</property>
+                        <property name="position">24</property>
                         <property name="name">registro</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">23</property>
+                        <property name="position">25</property>
                         <property name="name">nombre</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">24</property>
+                        <property name="position">26</property>
                         <property name="name">puesto</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">25</property>
+                        <property name="position">27</property>
                         <property name="name">division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">26</property>
+                        <property name="position">28</property>
                         <property name="name">subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">27</property>
+                        <property name="position">29</property>
                         <property name="name">cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">28</property>
+                        <property name="position">30</property>
                         <property name="name">departamento</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -9074,6 +9136,8 @@ display;</expression>
 <tns:Column>Asistencia Mensual::dia</tns:Column>
 <tns:Column>Asistencia Mensual::check</tns:Column>
 <tns:Column>Asistencia Mensual::geo</tns:Column>
+<tns:Column>Asistencia Mensual::created_at</tns:Column>
+<tns:Column>Asistencia Mensual::created_only_date</tns:Column>
 <tns:Column>Asistencia Mensual::Hora local</tns:Column>
 <tns:Column>Asistencia Mensual::Longitud</tns:Column>
 <tns:Column>Asistencia Mensual::Latitud</tns:Column>
@@ -9089,7 +9153,7 @@ display;</expression>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Asistencia Mensual"/>
 <tns:join>
-<tns:type>inner</tns:type>
+<tns:type>leftOuter</tns:type>
 <tns:dataSet Index="1" name="Nombres"/>
 <tns:on>
 <tns:condition>
@@ -19965,11 +20029,11 @@ display;</expression>
 &lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
-&lt;windowState height="546" version="1.0" width="1138">&#13;
-&lt;control height="153" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1111"/>&#13;
-&lt;control height="193" isHideable="true" isVisible="true" name="DesignViewer" width="1124"/>&#13;
-&lt;control height="162" isHideable="true" isVisible="true" name="GraphControl" width="1116"/>&#13;
-&lt;control height="166" isHideable="true" isVisible="false" name="OutlineViewer" width="105"/>&#13;
+&lt;windowState height="530" version="1.0" width="1116">&#13;
+&lt;control height="148" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
+&lt;control height="187" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
+&lt;control height="157" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
+&lt;control height="161" isHideable="true" isVisible="false" name="OutlineViewer" width="105"/>&#13;
 &lt;/windowState>&#13;
 &lt;/SQLQueryBuilder></property>
             </structure>
@@ -21233,7 +21297,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2017-10-11</value>
+                <value type="constant">2017-10-26</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -21358,7 +21422,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2017-10-24</value>
+                <value type="constant">2017-11-04</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

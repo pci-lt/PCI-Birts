@@ -3046,7 +3046,7 @@ createdPeriod == actualPeriod</expression>
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Mes</property>
-                    <expression name="expression" type="javascript">var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];&#13;
+                    <expression name="expression" type="javascript">var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"];&#13;
 var month = Integer.parseInt(row["_id.month"]);&#13;
 &#13;
 var mes = months[month-1];&#13;
@@ -3152,7 +3152,7 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="columnName">Mes</property>
-                    <property name="analysis">attribute</property>
+                    <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -3411,12 +3411,104 @@ log('query' + query);
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Mes</property>
-                    <expression name="expression" type="javascript">var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Noviembre", "Diciembre"];&#13;
+                    <expression name="expression" type="javascript">var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"];&#13;
 var month = row["_id.month"]&#13;
 &#13;
 var mes = months[month-1];&#13;
 &#13;
 mes</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">subdirección</property>
+                    <expression name="expression" type="javascript">var area = row["_id.area"];&#13;
+var display = "Subdirección desconocida";&#13;
+&#13;
+//Metro&#13;
+if(area == "acapulco" || area == "chilpancingo" || area == "morelos" || area == "cuernavaca"){&#13;
+	display = "GUERRERO-MORELOS";&#13;
+}&#13;
+else if (area == "balbuena" || area == "cuautitlan-morelos" || area == "ermita-tlahuac" || area == "satelite" || area == "texcoco-zaragoza" || area == "toluca") {&#13;
+	display = "METRO NORTE";&#13;
+}&#13;
+else if (area == "lindavista" || area == "lomas" || area == "mixcoac" || area == "sotelo" || area == "universidad" || area == "valle-san_juan") {&#13;
+	display = "METRO SUR";&#13;
+}&#13;
+&#13;
+//Norte&#13;
+else if (area == "matamoros" || area == "monterrey_i" || area == "monterrey_ii" || area == "monterrey_foraneo" || area == "nuevo_laredo" || area == "reynosa" || area == "sabinas" || area == "tampico" || area == "torreon") {&#13;
+	display = "MONTERREY";&#13;
+}&#13;
+else if (area == "aguascalientes" || area == "celaya" || area == "irapuato" || area == "leon" || area == "queretaro" || area == "san_luis_potosi" || area == "zacatecas") {&#13;
+	display = "QUERÉTARO";&#13;
+}&#13;
+&#13;
+//Occidente&#13;
+else if (area == "colima" || area == "guadalajara_centro" || area == "guadalajara_ote" || area == "guadalajara_pte" || area == "jalisco" || area == "morelia" || area == "puerto_vallarta" || area == "tepic" || area == "zamora") {&#13;
+	display = "GUADALAJARA";&#13;
+}&#13;
+else if (area == "cd_juarez" || area == "chihuahua" || area == "ciudad_obregon" || area == "culiacan" || area == "durango" || area == "hermosillo" || area == "la_paz" || area == "los_mochis" || area == "mazatlan" || area == "nogales") {&#13;
+	display = "HERMOSILLO";&#13;
+}&#13;
+&#13;
+//Sur&#13;
+else if (area == "oaxaca" || area == "pachuca" || area == "puebla" || area == "tlaxcala") {&#13;
+	display = "PUEBLA";&#13;
+}&#13;
+else if (area == "campeche" || area == "cancun" || area == "chiapas" || area == "quintana_roo"|| area == "tabasco" || area == "yucatan" || area == "villahermosa" || area == "merida" || area == "mérida" || area == "tuxtla_gutierrez") {&#13;
+	display = "SURESTE";&#13;
+}&#13;
+else if (area == "coatzacoalcos" || area == "cordoba" || area == "jalapa" || area == "poza_rica" || area == "veracruz") {&#13;
+	display = "VERACRUZ";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">direccion</property>
+                    <expression name="expression" type="javascript">var area = row["_id.area"];&#13;
+var display = "División desconocida";&#13;
+&#13;
+//Metro&#13;
+if(area == "acapulco" || area == "chilpancingo" || area == "morelos" || area == "cuernavaca"){&#13;
+	display = "METRO";&#13;
+}&#13;
+else if (area == "balbuena" || area == "cuautitlan-morelos" || area == "ermita-tlahuac" || area == "satelite" || area == "texcoco-zaragoza" || area == "toluca") {&#13;
+	display = "METRO";&#13;
+}&#13;
+else if (area == "lindavista" || area == "lomas" || area == "mixcoac" || area == "sotelo" || area == "universidad" || area == "valle-san_juan") {&#13;
+	display = "METRO";&#13;
+}&#13;
+&#13;
+//Norte&#13;
+else if (area == "matamoros" || area == "monterrey_i" || area == "monterrey_ii" || area == "monterrey_foraneo" || area == "nuevo_laredo" || area == "reynosa" || area == "sabinas" || area == "tampico" || area == "torreon") {&#13;
+	display = "NORTE";&#13;
+}&#13;
+else if (area == "aguascalientes" || area == "celaya" || area == "irapuato" || area == "leon" || area == "queretaro" || area == "san_luis_potosi" || area == "zacatecas") {&#13;
+	display = "NORTE";&#13;
+}&#13;
+&#13;
+//Occidente&#13;
+else if (area == "colima" || area == "guadalajara_centro" || area == "guadalajara_ote" || area == "guadalajara_pte" || area == "jalisco" || area == "morelia" || area == "puerto_vallarta" || area == "tepic" || area == "zamora") {&#13;
+	display = "OCCIDENTE";&#13;
+}&#13;
+else if (area == "cd_juarez" || area == "chihuahua" || area == "ciudad_obregon" || area == "culiacan" || area == "durango" || area == "hermosillo" || area == "la_paz" || area == "los_mochis" || area == "mazatlan" || area == "nogales") {&#13;
+	display = "OCCIDENTE";&#13;
+}&#13;
+&#13;
+//Sur&#13;
+else if (area == "oaxaca" || area == "pachuca" || area == "puebla" || area == "tlaxcala") {&#13;
+	display = "SUR";&#13;
+}&#13;
+else if (area == "campeche" || area == "cancun" || area == "chiapas" || area == "quintana_roo"|| area == "tabasco" || area == "yucatan" || area == "villahermosa" || area == "merida" || area == "mérida" || area == "tuxtla_gutierrez") {&#13;
+	display = "SUR";&#13;
+}&#13;
+else if (area == "coatzacoalcos" || area == "cordoba" || area == "jalapa" || area == "poza_rica" || area == "veracruz") {&#13;
+	display = "SUR";&#13;
+}&#13;
+&#13;
+display;</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -3475,6 +3567,14 @@ mes</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">subdirección</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">direccion</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -3512,6 +3612,16 @@ mes</expression>
                     <structure>
                         <property name="position">7</property>
                         <property name="name">Mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">subdirección</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">direccion</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -5206,9 +5316,6 @@ month</expression>
             <property name="isRequired">false</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="constant">2017-10-20</value>
-            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
