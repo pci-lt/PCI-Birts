@@ -7860,9 +7860,14 @@ var new_query = "";
 var bookmark = "{$exists:false},";
 var fecha = params["Fecha"].value;
 var hasta = params["Hasta"].value;
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+hasta = BirtDateTime.year(hasta) + "-" + BirtDateTime.month(hasta)+ "-" + dia;
 
 	
-new_query = " start_date: {$gte: {$date:'" + fecha + "T05:00:01Z-06:00'} , $lte:{$date:'" + hasta + "T23:59:59Z-06:00'} }, ";	
+new_query = " start_date: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 
 
 
@@ -8961,6 +8966,20 @@ display;</expression>
                     <expression name="expr" type="javascript">row["user"]</expression>
                     <simple-property-list name="value1">
                         <value>2626</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["division"]</expression>
+                    <simple-property-list name="value1">
+                        <value>""</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">ne</property>
+                    <expression name="expr" type="javascript">row["division"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"CFOAAS"</value>
                     </simple-property-list>
                 </structure>
             </list-property>
