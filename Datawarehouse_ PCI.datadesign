@@ -9021,18 +9021,83 @@ display;</expression>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Tabla plana cobre" id="555">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">División</property>
+                    <expression name="expression" type="javascript">var area = row["_id.division"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Subdirección</property>
+                    <expression name="expression" type="javascript">var area = row["_id.subdireccion"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Área</property>
+                    <expression name="expression" type="javascript">var area = row["_id.area"];&#13;
+if(area == null){&#13;
+	area = " ";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.division</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.division</text-property>
+                    <text-property name="heading">_id.division</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.subdireccion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.subdireccion</text-property>
+                    <text-property name="heading">_id.subdireccion</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id.area</text-property>
                     <text-property name="heading">_id.area</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.cope</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.cope</text-property>
-                    <text-property name="heading">_id.cope</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">_id.fecha</property>
@@ -9050,29 +9115,61 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">División</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Subdirección</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Área</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.cope</property>
+                        <property name="name">_id.subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">_id.area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">_id.fecha</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">División</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Subdirección</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Área</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -9080,34 +9177,41 @@ display;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.division</property>
+                    <property name="nativeName">_id.division</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id.subdireccion</property>
+                    <property name="nativeName">_id.subdireccion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
-                    <property name="name">_id.cope</property>
-                    <property name="nativeName">_id.cope</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.fecha</property>
                     <property name="nativeName">_id.fecha</property>
                     <property name="dataType">date</property>
                     <property name="nativeDataType">9</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:10540,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group: {_id:{\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tfecha: '$created_at',\r\n\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.cope" , "_id.fecha" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:10540,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group: {_id:{\r\n\tarea: { $ifNull: ['$answers.f1054000a0100000000000a2', 'Área desconocida']},\r\n\tcope: { $ifNull: ['$answers.f1054000a010000000000002', 'Cope desconodio' ]},\r\n\tdivision: { $ifNull: ['$answers.f1054000a0100000000000b2', 'División desconocida' ]},\r\n\tsubdireccion: { $ifNull: [ '$answers.f1054000a0100000000000c2', 'Subdirección desconocida' ]},\r\n\tfecha: '$created_at',\r\n\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.division" , "_id.subdireccion" , "_id.area" , "_id.fecha" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
