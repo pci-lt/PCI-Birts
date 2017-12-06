@@ -3653,7 +3653,8 @@ if(fecha != '' &amp;&amp; fecha != null){
 		if(month_to < 10)
 			month_to = '0' + month_to;
 		var day_to = BirtDateTime.day(date_to);
-		var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
+		//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
+		var new_query = "'answers.5a1eecfbb43fdd65914505a1': { $eq: '" + fecha + "' },";
 
 
 }
@@ -3683,7 +3684,8 @@ if(month != '' &amp;&amp; month != null){
 		month = '0' + month;
 	}
 	
-	new_query = "created_at: {$gte: {$date: '" + year + "-01-01T05:00:00Z'} , $lte: {$date: '" + year_to + "-" +month_to+ "-01T05:00:00Z'} },";
+	//new_query = "created_at: {$gte: {$date: '" + year + "-01-01T05:00:00Z'} , $lte: {$date: '" + year_to + "-" +month_to+ "-01T05:00:00Z'} },";
+	new_query = "'answers.5a1eecfbb43fdd65914505a1': { $gte: '" + year + "-01-01' , $lt: '" + year_to + "-" +month_to+ "-01' },";
 
 	var book2 = "['$_id.month', 5]";
     log('replace= ' + replace)
@@ -4251,7 +4253,7 @@ month</expression>
                     <structure>
                         <property name="position">1</property>
                         <property name="name">_id.date</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
@@ -4276,11 +4278,11 @@ month</expression>
                     <property name="position">1</property>
                     <property name="name">_id.date</property>
                     <property name="nativeName">_id.date</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">9</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:10540,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$created_at',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:10540,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$answers.5a1eecfbb43fdd65914505a1',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -5369,6 +5371,9 @@ month</expression>
                     <expression name="valueExpr">row["Year"]</expression>
                     <expression name="labelExpr">row["Year"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2017</value>
+                    </simple-property-list>
                     <property name="paramType">simple</property>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
@@ -5381,6 +5386,9 @@ month</expression>
                     <expression name="valueExpr">row["month"]</expression>
                     <expression name="labelExpr">row["Mes"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">12</value>
+                    </simple-property-list>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
                     <structure name="format"/>
