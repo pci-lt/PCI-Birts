@@ -213,6 +213,10 @@
                     <property name="columnName">Empresa</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -255,6 +259,11 @@
                         <property name="position">8</property>
                         <property name="name">Empresa</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -300,6 +309,11 @@
                     <property name="position">8</property>
                     <property name="name">Empresa</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">total</property>
+                    <property name="dataType">float</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -428,7 +442,7 @@ display;</expression>
                         </list-property>
                         <property name="__ac_group_collapse_level">1</property>
                         <property name="marginLeft">12pt</property>
-                        <property name="width">7.739583333333333in</property>
+                        <property name="width">9.21875in</property>
                         <property name="dataSet">Join Drill-Nombres</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -508,19 +522,57 @@ display;</expression>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">total</property>
+                                <text-property name="displayName">total</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["total"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma del Total</property>
+                                <text-property name="displayName">ST</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Contratista</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Total de Tabla</property>
+                                <text-property name="displayName">STT</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">1410065408</property>
                         <column id="61">
                             <property name="width">2.3645833333333335in</property>
                         </column>
                         <column id="88">
-                            <property name="width">1.7916666666666667in</property>
+                            <property name="width">2.3958333333333335in</property>
                         </column>
                         <column id="112">
-                            <property name="width">0.8854166666666666in</property>
+                            <property name="width">0.8541666666666666in</property>
+                        </column>
+                        <column id="128">
+                            <property name="width">0.9583333333333334in</property>
                         </column>
                         <column id="105">
-                            <property name="width">2.6979166666666665in</property>
+                            <property name="width">2.6354166666666665in</property>
                         </column>
                         <header>
                             <row id="23">
@@ -537,6 +589,11 @@ display;</expression>
                                 <cell id="108">
                                     <label id="27">
                                         <text-property name="text">Folio</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="124">
+                                    <label id="129">
+                                        <text-property name="text">Precio estimado</text-property>
                                     </label>
                                 </cell>
                                 <cell id="101">
@@ -592,6 +649,22 @@ display;</expression>
                                         </data>
                                     </cell>
                                     <cell id="109"/>
+                                    <cell id="125">
+                                        <data id="132">
+                                            <property name="paddingRight">5pt</property>
+                                            <structure name="numberFormat">
+                                                <property name="category">Currency</property>
+                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">right</property>
+                                            <property name="resultSetColumn">Suma del Total</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">none</property>
+                                                </structure>
+                                            </list-property>
+                                        </data>
+                                    </cell>
                                     <cell id="102"/>
                                 </row>
                             </header>
@@ -609,6 +682,22 @@ display;</expression>
                                                 <property name="linkType">hyperlink</property>
                                                 <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/"+row["_id"]</expression>
                                                 <property name="targetWindow">_blank</property>
+                                            </structure>
+                                        </list-property>
+                                    </data>
+                                </cell>
+                                <cell id="126">
+                                    <data id="130">
+                                        <property name="paddingRight">5pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">total</property>
+                                        <list-property name="action">
+                                            <structure>
+                                                <property name="linkType">none</property>
                                             </structure>
                                         </list-property>
                                     </data>
@@ -637,6 +726,22 @@ display;</expression>
                                     </data>
                                 </cell>
                                 <cell id="111"/>
+                                <cell id="127">
+                                    <data id="133">
+                                        <property name="paddingRight">5pt</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">Suma Total de Tabla</property>
+                                        <list-property name="action">
+                                            <structure>
+                                                <property name="linkType">none</property>
+                                            </structure>
+                                        </list-property>
+                                    </data>
+                                </cell>
                                 <cell id="104"/>
                             </row>
                         </footer>
