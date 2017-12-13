@@ -1608,18 +1608,68 @@ log('query' + query);]]></method>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Bolsa y usuarios" id="513">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">moda_tec</property>
+                    <expression name="expression" type="javascript">var tecnicos = row["no_tecnicos"];&#13;
+var display = 0;&#13;
+var cuenta = 0;&#13;
+var cuenta2 = 0;&#13;
+tecnicos = tecnicos.replace("[", "");&#13;
+tecnicos = tecnicos.replace("]", "");&#13;
+tecnicos = tecnicos.split(",");&#13;
+var longitud = tecnicos.length;&#13;
+if(longitud == 1){&#13;
+	display = tecnicos[0];&#13;
+}else{&#13;
+	var posicion = 0;&#13;
+	for(var i = 0; i&lt;longitud;i++){&#13;
+		var numero = tecnicos[i];&#13;
+		for(var j = 0; j &lt; longitud; j++){&#13;
+			if(numero == tecnicos[j]){&#13;
+				cuenta++;&#13;
+			}&#13;
+		}&#13;
+		if(cuenta > cuenta2){&#13;
+			cuenta2 = cuenta;&#13;
+			posicion = i;&#13;
+		}&#13;
+		cuenta = 0;&#13;
+	}&#13;
+&#13;
+	display = tecnicos[posicion];&#13;
+&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["no_tecnicos"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id.cope</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id.cope</text-property>
                     <text-property name="heading">_id.cope</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">no_tecnicos</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">no_tecnicos</text-property>
                     <text-property name="heading">no_tecnicos</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">moda_tec</property>
+                    <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -1635,7 +1685,12 @@ log('query' + query);]]></method>
                     <structure>
                         <property name="position">2</property>
                         <property name="name">no_tecnicos</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">moda_tec</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -1681,11 +1736,11 @@ log('query' + query);]]></method>
                     <property name="position">2</property>
                     <property name="name">no_tecnicos</property>
                     <property name="nativeName">no_tecnicos</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\nform_id:13048,\r\ndeleted_at:{$exists:false},\r\n'answers.f1074100a010000000000cc2': {$exists: true},\r\n\r\n}},\r\n\r\n{$group: {_id:{\r\ncope: { $toUpper: '$answers.f1074100a010000000000cc1' },\r\n\r\n},\r\nno_tecnicos: { $max: '$answers.f1074100a010000000000cc2' },\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "no_tecnicos"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\nform_id:13048,\r\ndeleted_at:{$exists:false},\r\n'answers.f1074100a010000000000cc2': {$exists: true},\r\n\r\n}},\r\n\r\n{$group: {_id:{\r\ncope: { $toUpper: '$answers.f1074100a010000000000cc1' },\r\n\r\n},\r\nno_tecnicos: { $push: '$answers.f1074100a010000000000cc2' },\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "no_tecnicos"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -1823,15 +1878,20 @@ log('query' + query);]]></method>
                     <structure>
                         <property name="position">9</property>
                         <property name="name">no_tecnicos</property>
-                        <property name="dataType">integer</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
+                        <property name="name">moda_tec</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">subdir_m</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">12</property>
                         <property name="name">div_m</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -1854,6 +1914,7 @@ log('query' + query);]]></method>
 <tns:Column>Bolsa cobre::cope</tns:Column>
 <tns:Column>Bolsa cobre::Activacion claro video</tns:Column>
 <tns:Column>Bolsa y usuarios::no_tecnicos</tns:Column>
+<tns:Column>Bolsa y usuarios::moda_tec</tns:Column>
 <tns:Column>Sub-Div-A-C::subdir_m</tns:Column>
 <tns:Column>Sub-Div-A-C::div_m</tns:Column>
 </tns:selectColumns>
