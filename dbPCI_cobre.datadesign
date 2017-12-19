@@ -107,7 +107,7 @@
             <property name="jarList">/Users/InfoSync/Documents/BRDPro/eclipse/plugins/com.actuate.data.oda.jdbc.drivers_23.0.0.v20131216/lib/postgresql/postgresql-9.2-1003.jdbc4.jar</property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
-            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
+            <property name="mongoURI">mongodb://127.0.0.1:27023/infosync_answers_client_1259</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
@@ -1694,35 +1694,6 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
-var fecha = params["Fecha Inicial"].value;
-
-
-var bookmark = "{$exists:false},";
-	
-	var date_to = BirtDateTime.addDay(fecha, 1);
-	var year_to = BirtDateTime.year(date_to);
-	var month_to = BirtDateTime.month(date_to);
-	if(month_to < 10)
-		month_to = '0' + month_to;
-	var day_to = BirtDateTime.day(date_to);
-//	var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
-	var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' }},";
-
-
-log('new query= ' + new_query)
-
-query = query.replace(bookmark, bookmark + new_query );
-this.queryText = query;
-
-log('query' + query);]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
