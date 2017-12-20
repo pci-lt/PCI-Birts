@@ -25,6 +25,9 @@
                     <expression name="valueExpr">row["year"]</expression>
                     <expression name="labelExpr">row["year"]</expression>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2017</value>
+                    </simple-property-list>
                     <property name="paramType">simple</property>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">true</property>
@@ -324,7 +327,7 @@
     </page-setup>
     <body>
         <grid id="7">
-            <property name="width">12.5625in</property>
+            <property name="width">14.208333333333334in</property>
             <column id="8">
                 <property name="width">12.5625in</property>
             </column>
@@ -374,9 +377,9 @@ display;</expression>
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">2,3,4,5,1</property>
-                        <property name="marginLeft">10pt</property>
-                        <property name="width">13.75in</property>
+                        <property name="__ac_group_collapse_level">2,3,5,6,1</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="width">13.989583333333334in</property>
                         <property name="dataSet">Join Union Produccion - Nombres</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -662,6 +665,173 @@ display;</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Suma Órdenes Contratista</property>
+                                <text-property name="displayName">SOC</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Contratista</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Contratista</property>
+                                <text-property name="displayName">CTC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Contratista</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Cope</property>
+                                <text-property name="displayName">CTC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Area</property>
+                                <text-property name="displayName">CTA</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Área</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Division</property>
+                                <text-property name="displayName">CTD</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Division</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Tecnología</property>
+                                <text-property name="displayName">CTT</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Tecnología</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count por Tecnico Total</property>
+                                <text-property name="displayName">CTT</text-property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.tecnico"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad tecnico contratista</property>
+                                <text-property name="displayName">PTC</text-property>
+                                <expression name="expression" type="javascript">row["Suma Órdenes Contratista"]/row["Count por Tecnico Contratista"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad tecnico cope</property>
+                                <text-property name="displayName">PTC</text-property>
+                                <expression name="expression" type="javascript">row["Suma Ordenes Cope"]/row["Count por Tecnico Cope"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad tecnico area</property>
+                                <text-property name="displayName">PTA</text-property>
+                                <expression name="expression" type="javascript">row["Suma Ordenes Area"]/row["Count por Tecnico Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad tecnico division</property>
+                                <text-property name="displayName">PTD</text-property>
+                                <expression name="expression" type="javascript">row["Suma Ordenes Division"]/row["Count por Tecnico Division"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad tecnico tecnología</property>
+                                <text-property name="displayName">PTT</text-property>
+                                <expression name="expression" type="javascript">row["Suma Ordenes Tecnología"]/row["Count por Tecnico Tecnología"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count fechas contratista</property>
+                                <text-property name="displayName">CFC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Contratista</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["_id.fecha"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Productividad por dia contratista</property>
+                                <text-property name="displayName">PDC</text-property>
+                                <expression name="expression" type="javascript">row["Suma Órdenes Contratista"]/row["Count fechas contratista"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">2147483647</property>
                         <column id="214">
@@ -676,20 +846,23 @@ display;</expression>
                         <column id="121">
                             <property name="width">2.0104166666666665in</property>
                         </column>
+                        <column id="297">
+                            <property name="width">1.635in</property>
+                        </column>
                         <column id="122">
                             <property name="width">3in</property>
                         </column>
                         <column id="123">
-                            <property name="width">1.6666666666666667in</property>
+                            <property name="width">0.90625in</property>
                         </column>
-                        <column id="124">
+                        <column id="261">
                             <property name="width">0.7395833333333334in</property>
                         </column>
-                        <column id="125">
-                            <property name="width">1.0208333333333333in</property>
+                        <column id="124">
+                            <property name="width">1.0625in</property>
                         </column>
-                        <column id="126">
-                            <property name="width">1.7395833333333333in</property>
+                        <column id="125">
+                            <property name="width">1.0625in</property>
                         </column>
                         <header>
                             <row id="76">
@@ -713,6 +886,11 @@ display;</expression>
                                         <text-property name="text">COPE</text-property>
                                     </label>
                                 </cell>
+                                <cell id="287">
+                                    <label id="92">
+                                        <text-property name="text">Compañia a la que pertenece el técnico</text-property>
+                                    </label>
+                                </cell>
                                 <cell id="83">
                                     <label id="84">
                                         <text-property name="text">Técnico</text-property>
@@ -723,19 +901,19 @@ display;</expression>
                                         <text-property name="text">Fecha de producción</text-property>
                                     </label>
                                 </cell>
+                                <cell id="253">
+                                    <label id="262">
+                                        <text-property name="text">No.de órdenes prod.</text-property>
+                                    </label>
+                                </cell>
                                 <cell id="87">
                                     <label id="88">
-                                        <text-property name="text">No.de órdenes prod.</text-property>
+                                        <text-property name="text">Productividad por técnico</text-property>
                                     </label>
                                 </cell>
                                 <cell id="89">
                                     <label id="90">
-                                        <text-property name="text">Productividad</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="91">
-                                    <label id="92">
-                                        <text-property name="text">Compañia a la que pertenece el técnico</text-property>
+                                        <text-property name="text">Productividad por día</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -757,12 +935,23 @@ display;</expression>
                                     <cell id="219"/>
                                     <cell id="220"/>
                                     <cell id="221"/>
+                                    <cell id="288"/>
                                     <cell id="222"/>
                                     <cell id="223"/>
-                                    <cell id="224">
+                                    <cell id="254">
                                         <data id="246">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Suma Ordenes Tecnología</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="224">
+                                        <data id="302">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad tecnico tecnología</property>
                                         </data>
                                     </cell>
                                     <cell id="225">
@@ -775,7 +964,6 @@ display;</expression>
                                             <property name="resultSetColumn">Productividad Tecnología</property>
                                         </data>
                                     </cell>
-                                    <cell id="226"/>
                                 </row>
                             </header>
                         </group>
@@ -798,12 +986,23 @@ display;</expression>
                                     </cell>
                                     <cell id="130"/>
                                     <cell id="131"/>
+                                    <cell id="289"/>
                                     <cell id="132"/>
                                     <cell id="133"/>
-                                    <cell id="134">
+                                    <cell id="255">
                                         <data id="245">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Suma Ordenes Division</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="134">
+                                        <data id="301">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad tecnico division</property>
                                         </data>
                                     </cell>
                                     <cell id="135">
@@ -816,7 +1015,6 @@ display;</expression>
                                             <property name="resultSetColumn">Productividad Division</property>
                                         </data>
                                     </cell>
-                                    <cell id="136"/>
                                 </row>
                             </header>
                         </group>
@@ -839,12 +1037,23 @@ display;</expression>
                                         </data>
                                     </cell>
                                     <cell id="151"/>
+                                    <cell id="290"/>
                                     <cell id="152"/>
                                     <cell id="153"/>
-                                    <cell id="154">
+                                    <cell id="256">
                                         <data id="244">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Suma Ordenes Area</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="154">
+                                        <data id="300">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad tecnico area</property>
                                         </data>
                                     </cell>
                                     <cell id="155">
@@ -857,7 +1066,6 @@ display;</expression>
                                             <property name="resultSetColumn">Productividad Area</property>
                                         </data>
                                     </cell>
-                                    <cell id="156"/>
                                 </row>
                             </header>
                         </group>
@@ -880,12 +1088,23 @@ display;</expression>
                                             <property name="resultSetColumn">cope</property>
                                         </data>
                                     </cell>
+                                    <cell id="291"/>
                                     <cell id="172"/>
                                     <cell id="173"/>
-                                    <cell id="174">
+                                    <cell id="257">
                                         <data id="243">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Suma Ordenes Cope</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="174">
+                                        <data id="299">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad tecnico cope</property>
                                         </data>
                                     </cell>
                                     <cell id="175">
@@ -898,7 +1117,56 @@ display;</expression>
                                             <property name="resultSetColumn">Productividad Cope</property>
                                         </data>
                                     </cell>
-                                    <cell id="176"/>
+                                </row>
+                            </header>
+                        </group>
+                        <group id="263">
+                            <property name="groupName">Contratista</property>
+                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="264">
+                                    <property name="textUnderline">underline</property>
+                                    <cell id="265"/>
+                                    <cell id="266"/>
+                                    <cell id="267"/>
+                                    <cell id="268"/>
+                                    <cell id="292">
+                                        <data id="286">
+                                            <property name="resultSetColumn">Compañia</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="269"/>
+                                    <cell id="270"/>
+                                    <cell id="271">
+                                        <data id="304">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Suma Órdenes Contratista</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="272">
+                                        <data id="298">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad tecnico contratista</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="273">
+                                        <data id="303">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Productividad por dia contratista</property>
+                                        </data>
+                                    </cell>
                                 </row>
                             </header>
                         </group>
@@ -915,18 +1183,20 @@ display;</expression>
                                     <cell id="189"/>
                                     <cell id="190"/>
                                     <cell id="191"/>
+                                    <cell id="293"/>
                                     <cell id="192">
                                         <data id="206">
                                             <property name="resultSetColumn">_id.tecnico</property>
                                         </data>
                                     </cell>
                                     <cell id="193"/>
-                                    <cell id="194">
+                                    <cell id="258">
                                         <data id="238">
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Suma Órdenes</property>
                                         </data>
                                     </cell>
+                                    <cell id="194"/>
                                     <cell id="195">
                                         <data id="107">
                                             <structure name="numberFormat">
@@ -935,11 +1205,6 @@ display;</expression>
                                             </structure>
                                             <property name="textAlign">center</property>
                                             <property name="resultSetColumn">Productividad por Técnico</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="196">
-                                        <data id="109">
-                                            <property name="resultSetColumn">Compañia</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -952,26 +1217,27 @@ display;</expression>
                                 <cell id="94"/>
                                 <cell id="96"/>
                                 <cell id="98"/>
+                                <cell id="294"/>
                                 <cell id="100"/>
                                 <cell id="102">
                                     <data id="105">
                                         <property name="paddingRight">5pt</property>
                                         <structure name="dateTimeFormat">
-                                            <property name="category">Long Date</property>
-                                            <property name="pattern">Long Date</property>
+                                            <property name="category">Custom</property>
+                                            <property name="pattern">MMM dd, yyyy</property>
                                         </structure>
                                         <property name="textAlign">right</property>
                                         <property name="resultSetColumn">_id.fecha</property>
                                     </data>
                                 </cell>
-                                <cell id="104">
+                                <cell id="259">
                                     <data id="103">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">cantidad</property>
                                     </data>
                                 </cell>
+                                <cell id="104"/>
                                 <cell id="106"/>
-                                <cell id="108"/>
                             </row>
                         </detail>
                         <footer>
@@ -980,14 +1246,16 @@ display;</expression>
                                 <cell id="111"/>
                                 <cell id="112"/>
                                 <cell id="113"/>
+                                <cell id="296"/>
                                 <cell id="114"/>
                                 <cell id="115"/>
-                                <cell id="116">
+                                <cell id="260">
                                     <data id="247">
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">Suma Ordenes Totales</property>
                                     </data>
                                 </cell>
+                                <cell id="116"/>
                                 <cell id="117">
                                     <data id="249">
                                         <structure name="numberFormat">
@@ -998,7 +1266,6 @@ display;</expression>
                                         <property name="resultSetColumn">Productividad Total</property>
                                     </data>
                                 </cell>
-                                <cell id="118"/>
                             </row>
                         </footer>
                     </table>
