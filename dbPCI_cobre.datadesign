@@ -1462,6 +1462,7 @@ reportContext.setGlobalVariable('log', log);
 
 var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
+var fecha2 = params["Fecha Final"].value;
 
 
 var bookmark = "{$exists:false},";
@@ -1473,7 +1474,7 @@ var bookmark = "{$exists:false},";
 		month_to = '0' + month_to;
 	var day_to = BirtDateTime.day(date_to);
 	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
-	var new_query = "'answers.5a1eecfbb43fdd65914505a1': {$eq: '" + fecha + "'},";
+	var new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
 
 
 log('new query= ' + new_query)
@@ -3065,6 +3066,21 @@ display;</expression>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="422">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2017-12-04</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="521">
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
             <property name="dataType">date</property>

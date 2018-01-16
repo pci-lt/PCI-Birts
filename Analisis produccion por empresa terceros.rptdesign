@@ -40,6 +40,32 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="436">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var time = new Date();&#13;
+var dd = time.getDate();&#13;
+var mm = time.getMonth()+1;&#13;
+var yy = time.getFullYear();&#13;
+&#13;
+if(dd&lt;10){&#13;
+	dd = '0' + dd;&#13;
+}&#13;
+if(mm&lt;10){&#13;
+	mm = '0' + mm&#13;
+}&#13;
+&#13;
+yy + '-' + mm + '-' + dd</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="dbPC_cobre" id="4">
@@ -50,6 +76,12 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="paramName">Fecha Inicial</property>
                     <simple-property-list name="expression">
                         <value type="javascript">params["Fecha Inicial"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Fecha Final"].value</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -257,6 +289,13 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="dataType">date</property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Otra Fecha</property>
+                    <text-property name="displayName">Otra Fecha</text-property>
+                    <expression name="expression" type="javascript">params["Fecha Final"].value</expression>
+                    <property name="dataType">date</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="7">
                 <property name="width">14.291666666666666in</property>
@@ -308,6 +347,31 @@ yy + '-' + mm + '-' + dd</value>
                                                 </structure>
                                                 <property name="textAlign">center</property>
                                                 <property name="resultSetColumn">Fecha</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="437">
+                                        <cell id="438">
+                                            <text id="441">
+                                                <property name="fontSize">14pt</property>
+                                                <property name="fontWeight">bold</property>
+                                                <property name="textAlign">center</property>
+                                                <property name="contentType">auto</property>
+                                                <text-property name="content"><![CDATA[al:]]></text-property>
+                                            </text>
+                                        </cell>
+                                    </row>
+                                    <row id="439">
+                                        <cell id="440">
+                                            <data id="444">
+                                                <property name="fontSize">14pt</property>
+                                                <property name="fontWeight">bold</property>
+                                                <structure name="dateTimeFormat">
+                                                    <property name="category">Long Date</property>
+                                                    <property name="pattern">Long Date</property>
+                                                </structure>
+                                                <property name="textAlign">center</property>
+                                                <property name="resultSetColumn">Otra Fecha</property>
                                             </data>
                                         </cell>
                                     </row>
