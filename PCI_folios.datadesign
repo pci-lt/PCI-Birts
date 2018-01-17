@@ -10363,6 +10363,244 @@ log('query' + query);
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Produccion tecnicos propios" id="552">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">división</property>
+                    <expression name="expression" type="javascript">var forma = row["_id.form_id"];&#13;
+var display = "";&#13;
+if(forma == 11044)&#13;
+	display = "Metro";&#13;
+else if(forma == 16343)&#13;
+	display = "Sur";&#13;
+	&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.form_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.form_id</text-property>
+                    <text-property name="heading">_id.form_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.fecha</text-property>
+                    <text-property name="heading">_id.fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.tecnico</text-property>
+                    <text-property name="heading">_id.tecnico</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantidad</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cantidad</text-property>
+                    <text-property name="heading">cantidad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">división</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.form_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">_id.fecha</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">_id.tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">división</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[//pring logs
+importPackage(Packages.java.lang);
+function log(msg){
+    System.out.println(msg);
+}
+reportContext.setGlobalVariable('log', log);
+
+var query = this.queryText.toString();
+var new_query = "";
+var bookmark = "{$exists:false},";
+var fecha = params["Fecha"].value;
+var hasta = params["Hasta"].value;
+
+	
+new_query = " 'answers.f1054000a030000000000e14': {$gte: '" + fecha + "' , $lte:'" + hasta + "' }, ";	
+
+
+
+log('new query= ' + new_query)
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;
+
+log('query' + query);]]></method>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.form_id</property>
+                    <property name="nativeName">_id.form_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id.fecha</property>
+                    <property name="nativeName">_id.fecha</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">_id.tecnico</property>
+                    <property name="nativeName">_id.tecnico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{ $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: { $in: [2072, 2073]},\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tform_id: '$form_id',\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.form_id" , "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.form_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.form_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.form_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.fecha</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.fecha</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.fecha</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tecnico</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tecnico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tecnico</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cantidad</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cantidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cantidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Tecnicos Metro" id="471">
             <list-property name="computedColumns">
                 <structure>
@@ -10524,10 +10762,10 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 2072,\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 2072,\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1</property>
+                <property name="stateContentAsString">false,1000000000</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -21592,7 +21830,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2017-11-15</value>
+                <value type="constant">2018-01-01</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -21717,7 +21955,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2017-11-21</value>
+                <value type="constant">2018-02-15</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
