@@ -2846,6 +2846,19 @@ display = BirtDateTime.diffDay(created, ahora);&#13;
 display;</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">CopeC</property>
+                    <expression name="expression" type="javascript">var cope= row["cope"];&#13;
+var display = "";&#13;
+if(cope == "" || cope == null){&#13;
+	display = "Cope Desconocido";&#13;
+}else{&#13;
+	display = cope&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -2893,18 +2906,34 @@ display;</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">folio</text-property>
                     <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">_id</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id</text-property>
                     <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">user</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">user</text-property>
+                    <text-property name="heading">user</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Dias Transcurridos</property>
                     <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CopeC</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -2947,8 +2976,18 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">8</property>
+                        <property name="name">user</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
                         <property name="name">Dias Transcurridos</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">CopeC</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -3003,8 +3042,15 @@ display;</expression>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">7</property>
                 </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">user</property>
+                    <property name="nativeName">user</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:13048,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1074100a010000000000cc2': {$exists: true},\r\n\t'answers.f1074100a010000000000005': 'error'\r\n\t\r\n}},\r\n\r\n{$project: {\t\r\n\tfolio: '$folio',\t\r\n\tfecha: '$created_at',\r\n\tcope: {$ifNull: ['$answers.f1074100a010000000000cc1', 'Cope desconocido']},\r\n\tarchivo: '$answers.f1074100a010000000000003',\r\n\tcomunicacion: '$answers.f1074100a010000000000002',\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "fecha" , "cope" , "archivo.file_url" , "archivo.file_name" , "comunicacion" , "folio" , "_id"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:13048,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1074100a010000000000cc2': {$exists: true},\r\n\t'answers.f1074100a010000000000005': 'error'\r\n\t\r\n}},\r\n\r\n{$project: {\t\r\n\tfolio: '$folio',\r\n\tuser: '$created_by_id',\r\n\tfecha: '$created_at',\r\n\tcope: {$ifNull: [ {$toUpper: '$answers.f1074100a010000000000cc1'} , 'Cope desconocido']},\r\n\tarchivo: '$answers.f1074100a010000000000003',\r\n\tcomunicacion: '$answers.f1074100a010000000000002',\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "fecha" , "cope" , "archivo.file_url" , "archivo.file_name" , "comunicacion" , "folio" , "_id" , "user"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -3063,6 +3109,176 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Data Set" id="522">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">archivo.file_url</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">archivo.file_url</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">archivo.file_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">archivo.file_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">comunicacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">comunicacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Dias Transcurridos</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">archivo.file_url</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">archivo.file_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">comunicacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Dias Transcurridos</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">CopeC</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">subdir_m</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">div_m</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Errores de carga</value>
+                <value>Nombres</value>
+                <value>Sub-Div-A-C</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Errores de carga::fecha</tns:Column>
+<tns:Column>Errores de carga::archivo.file_url</tns:Column>
+<tns:Column>Errores de carga::archivo.file_name</tns:Column>
+<tns:Column>Errores de carga::comunicacion</tns:Column>
+<tns:Column>Errores de carga::folio</tns:Column>
+<tns:Column>Errores de carga::_id</tns:Column>
+<tns:Column>Errores de carga::Dias Transcurridos</tns:Column>
+<tns:Column>Errores de carga::CopeC</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+<tns:Column>Sub-Div-A-C::area</tns:Column>
+<tns:Column>Sub-Div-A-C::subdir_m</tns:Column>
+<tns:Column>Sub-Div-A-C::div_m</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Errores de carga"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Errores de carga::user</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="2" name="Sub-Div-A-C"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Errores de carga::cope</tns:leftColumn>
+<tns:rightColumn>Sub-Div-A-C::cope</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="422">
