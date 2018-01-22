@@ -5906,42 +5906,18 @@ log('query' + query);]]></method>
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Hora local</property>
-                    <expression name="expression" type="javascript">var hora = row["hora"]-6;&#13;
-var minuto = row["minuto"];&#13;
-var momento = "AM"&#13;
+                    <expression name="expression" type="javascript">var created = row["created_at"];&#13;
+var hora = created.getHours();&#13;
+var minu = created.getMinutes();&#13;
+var display ="";&#13;
+if(minu &lt; 10)&#13;
+	minu = '0' + minu&#13;
+if(hora &lt; 10) &#13;
+	hora = '0' + hora&#13;
 &#13;
-if(minuto&lt;10){&#13;
-	minuto = "0" + minuto;&#13;
-}&#13;
-if(hora > 12){&#13;
-	hora = hora - 12;&#13;
-	momento = "PM";&#13;
-	}&#13;
-if(hora == -5){&#13;
-	hora = 7&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -4){&#13;
-	hora = 8&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -3){&#13;
-	hora = 9&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -2){&#13;
-	hora = 10&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora == -1){&#13;
-	hora = 8&#13;
-	momento = "PM"&#13;
-}&#13;
-if(hora&lt;10){&#13;
-	hora = "0" + hora;&#13;
-}&#13;
-var local = hora + ":" + minuto + " " + momento;&#13;
-local;</expression>
+display = hora + ":" + minu;&#13;
+&#13;
+display;</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -5977,6 +5953,36 @@ if(geo != null){&#13;
 longitud</expression>
                     <property name="dataType">float</property>
                 </structure>
+                <structure>
+                    <property name="name">created_at</property>
+                    <expression name="expression" type="javascript">var created = row["created"];&#13;
+var horario = new Date("October 29, 2017 02:00:00");&#13;
+var horario2 = new Date("April 1, 2018");&#13;
+var display = new Date("January 10, 1994 13:30:00");&#13;
+var verano = BirtDateTime.diffHour(horario, created);&#13;
+var invierno = BirtDateTime.diffHour(horario2, created);&#13;
+&#13;
+&#13;
+if(verano &lt; 0){&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+else if (verano > 0 &amp;&amp; invierno &lt; 0) {&#13;
+	display = "Horario Invierno - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-6);&#13;
+}&#13;
+else if (invierno > 0) {&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">created_at_only</property>
+                    <expression name="expression" type="javascript">row["created_at"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -5996,18 +6002,19 @@ longitud</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">user</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">user</text-property>
-                    <text-property name="heading">user</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">created</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">created</text-property>
                     <text-property name="heading">created</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">user</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">user</text-property>
+                    <text-property name="heading">user</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -6056,6 +6063,8 @@ longitud</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">autorizacion</text-property>
                     <text-property name="heading">autorizacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Hora local</property>
@@ -6075,6 +6084,14 @@ longitud</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">created_at</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_at_only</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -6091,13 +6108,13 @@ longitud</expression>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">user</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">created</property>
-                        <property name="dataType">date</property>
+                        <property name="name">user</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -6143,6 +6160,16 @@ longitud</expression>
                         <property name="position">13</property>
                         <property name="name">Latitud</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">created_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">created_at_only</property>
+                        <property name="dataType">date</property>
                     </structure>
                 </list-property>
             </structure>
@@ -6243,17 +6270,17 @@ log('query' + query);]]></method>
                 </structure>
                 <structure>
                     <property name="position">3</property>
+                    <property name="name">created</property>
+                    <property name="nativeName">created</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">user</property>
                     <property name="nativeName">user</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">created</property>
-                    <property name="nativeName">created</property>
-                    <property name="dataType">date</property>
-                    <property name="nativeDataType">9</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
@@ -6298,7 +6325,7 @@ log('query' + query);]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "created" , "check" , "comentarios" , "hora" , "minuto" , "geo" , "autorizacion"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$created_by_id',\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$start_date' }},\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "created" , "user" , "check" , "comentarios" , "hora" , "minuto" , "geo" , "autorizacion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -6531,13 +6558,13 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">user</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">created</property>
-                        <property name="dataType">date</property>
+                        <property name="name">user</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -6581,16 +6608,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">13</property>
+                        <property name="name">created_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">created_at_only</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">16</property>
                         <property name="name">position</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">17</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -6605,8 +6642,8 @@ display;</expression>
 <tns:selectColumns>
 <tns:Column>Asistencia Diaria::_id</tns:Column>
 <tns:Column>Asistencia Diaria::folio</tns:Column>
-<tns:Column>Asistencia Diaria::user</tns:Column>
 <tns:Column>Asistencia Diaria::created</tns:Column>
+<tns:Column>Asistencia Diaria::user</tns:Column>
 <tns:Column>Asistencia Diaria::check</tns:Column>
 <tns:Column>Asistencia Diaria::comentarios</tns:Column>
 <tns:Column>Asistencia Diaria::hora</tns:Column>
@@ -6615,6 +6652,8 @@ display;</expression>
 <tns:Column>Asistencia Diaria::Hora local</tns:Column>
 <tns:Column>Asistencia Diaria::Longitud</tns:Column>
 <tns:Column>Asistencia Diaria::Latitud</tns:Column>
+<tns:Column>Asistencia Diaria::created_at</tns:Column>
+<tns:Column>Asistencia Diaria::created_at_only</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 <tns:Column>Nombres::position</tns:Column>
 </tns:selectColumns>
@@ -21830,7 +21869,7 @@ log('query' + query);]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-01-01</value>
+                <value type="constant">2018-01-19</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

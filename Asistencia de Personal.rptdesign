@@ -40,6 +40,25 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="NombreII" id="256">
+            <text-property name="promptText">Nombre del empleado</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Join Asistencia - Nombres</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["first_name"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["first_name"]</expression>
+            <expression name="sortByColumn">dataSetRow["first_name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">first_name</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Folios" id="20">
@@ -159,7 +178,7 @@ yy + '-' + mm + '-' + dd</value>
                     <structure>
                         <property name="position">4</property>
                         <property name="name">created</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">date-time</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
@@ -216,6 +235,16 @@ yy + '-' + mm + '-' + dd</value>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">created_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">created_at_only</property>
+                        <property name="dataType">date</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Folios</property>
@@ -239,7 +268,7 @@ yy + '-' + mm + '-' + dd</value>
                 <structure>
                     <property name="position">4</property>
                     <property name="name">created</property>
-                    <property name="dataType">date</property>
+                    <property name="dataType">date-time</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
@@ -295,6 +324,16 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="position">15</property>
                     <property name="name">area</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">created_at</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">created_at_only</property>
+                    <property name="dataType">date</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -781,8 +820,33 @@ yy + '-' + mm + '-' + dd</value>
                                 <expression name="expression" type="javascript">dataSetRow["area"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">created_1</property>
+                                <text-property name="displayName">created</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["created"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                            <structure>
+                                <property name="name">created_at</property>
+                                <text-property name="displayName">created_at</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["created_at"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                            <structure>
+                                <property name="name">created_at_only</property>
+                                <text-property name="displayName">created_at_only</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["created_at_only"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
+                        <list-property name="filter">
+                            <structure>
+                                <expression name="expr" type="javascript">row["first_name"]</expression>
+                                <property name="dynamicFilterParameter">NombreII</property>
+                                <property name="updateAggregation">true</property>
+                            </structure>
+                        </list-property>
                         <column id="221">
                             <property name="width">2.6145833333333335in</property>
                         </column>
@@ -1123,6 +1187,13 @@ link;</expression>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
+                        <list-property name="filter">
+                            <structure>
+                                <expression name="expr" type="javascript">row["first_name"]</expression>
+                                <property name="dynamicFilterParameter">NombreII</property>
+                                <property name="updateAggregation">true</property>
+                            </structure>
+                        </list-property>
                         <column id="170">
                             <property name="width">2.6145833333333335in</property>
                         </column>
