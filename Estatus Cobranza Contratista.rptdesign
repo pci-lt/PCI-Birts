@@ -14,25 +14,25 @@
         </structure>
     </list-property>
     <parameters>
-        <cascading-parameter-group name="Contratistas" id="266">
-            <property name="dataSet">Join Contratista - Nombres</property>
-            <property name="dataSetMode">single</property>
-            <parameters>
-                <scalar-parameter name="Contratista" id="267">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">false</property>
-                    <property name="dataSetName">Join Contratista - Nombres</property>
-                    <expression name="valueExpr">row["_id.connection"]</expression>
-                    <expression name="labelExpr">row["Compañia"]</expression>
-                    <expression name="sortByColumn">dataSetRow["Compañia"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">integer</property>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-            </parameters>
-        </cascading-parameter-group>
+        <dynamic-filter-parameter name="Contratista" id="285">
+            <text-property name="promptText">Contratista</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Join Cobranza Contratista - Nombres</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["Compañia"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["Compañia"]</expression>
+            <expression name="sortByColumn">dataSetRow["Compañia"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">Compañia</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Datawarehouse" id="4">
@@ -56,6 +56,18 @@
                     <simple-property-list name="expression">
                         <value type="constant">2017</value>
                     </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">conexion</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Area</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Cope</property>
+                </structure>
+                <structure>
+                    <property name="paramName">cobranza</property>
                 </structure>
                 <structure>
                     <property name="paramName">Estatus</property>
@@ -83,9 +95,6 @@
                 </structure>
                 <structure>
                     <property name="paramName">Contratista</property>
-                    <simple-property-list name="expression">
-                        <value type="javascript">params["Contratista"].value</value>
-                    </simple-property-list>
                 </structure>
             </list-property>
         </data-mart-data-source>
@@ -255,51 +264,6 @@
                 </structure>
             </list-property>
         </data-mart-data-set>
-        <data-mart-data-set name="Join Contratista - Nombres" id="265">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">_id.connection</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">_id.connection</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">Compañia</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">_id.connection</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">Compañia</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Datawarehouse</property>
-            <property name="dataObject">Join Contratistas - Nombres</property>
-            <list-property name="selectedColumns">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">_id.connection</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">Compañia</property>
-                    <property name="dataType">string</property>
-                </structure>
-            </list-property>
-        </data-mart-data-set>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -398,7 +362,7 @@ date;</expression>
                                 <property name="type">string</property>
                             </structure>
                         </list-property>
-                        <property name="__ac_group_collapse_level">1,2,3,4</property>
+                        <property name="__ac_group_collapse_level">1,2,3,4,5</property>
                         <property name="marginLeft">12pt</property>
                         <property name="width">10.510416666666666in</property>
                         <property name="dataSet">Join Cobranza Contratista - Nombres</property>
@@ -590,6 +554,22 @@ resultado;</expression>
                                 <expression name="expression" type="javascript">dataSetRow["_id.conexion"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">Suma Estatus PCI</property>
+                                <text-property name="displayName">SEPC</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Estatus PC</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">276447232</property>
                         <list-property name="sort">
@@ -605,18 +585,23 @@ resultado;</expression>
                                 <expression name="expr" type="javascript">row["_id.estatus_contra"] == null || row["_id.estatus_contra"] == "" || row["_id.estatus_contra"] == "en_proceso"</expression>
                                 <property name="updateAggregation">true</property>
                             </structure>
+                            <structure>
+                                <expression name="expr" type="javascript">row["Compañia"]</expression>
+                                <property name="dynamicFilterParameter">Contratista</property>
+                                <property name="updateAggregation">true</property>
+                            </structure>
                         </list-property>
                         <column id="71">
-                            <property name="width">1.2395833333333333in</property>
+                            <property name="width">2.4166666666666665in</property>
                         </column>
                         <column id="72">
-                            <property name="width">1.8020833333333333in</property>
+                            <property name="width">1.0729166666666667in</property>
                         </column>
                         <column id="73">
-                            <property name="width">1.6979166666666667in</property>
+                            <property name="width">1.9375in</property>
                         </column>
                         <column id="74">
-                            <property name="width">3.0208333333333335in</property>
+                            <property name="width">2.3333333333333335in</property>
                         </column>
                         <column id="75">
                             <property name="width">1.9166666666666667in</property>
@@ -628,23 +613,23 @@ resultado;</expression>
                         <header>
                             <row id="33">
                                 <cell id="34">
+                                    <label id="41">
+                                        <text-property name="text">Compañía</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="36">
                                     <label id="35">
                                         <text-property name="text">División</text-property>
                                     </label>
                                 </cell>
-                                <cell id="36">
+                                <cell id="38">
                                     <label id="37">
                                         <text-property name="text">Área</text-property>
                                     </label>
                                 </cell>
-                                <cell id="38">
+                                <cell id="40">
                                     <label id="39">
                                         <text-property name="text">COPE</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="40">
-                                    <label id="41">
-                                        <text-property name="text">Compañía</text-property>
                                     </label>
                                 </cell>
                                 <cell id="42">
@@ -659,6 +644,36 @@ resultado;</expression>
                                 </cell>
                             </row>
                         </header>
+                        <group id="132">
+                            <property name="groupName">Compañia</property>
+                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="133">
+                                    <cell id="134">
+                                        <data id="149">
+                                            <property name="resultSetColumn">Compañia</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="135"/>
+                                    <cell id="136"/>
+                                    <cell id="137"/>
+                                    <cell id="138"/>
+                                    <cell id="139">
+                                        <data id="252">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="resultSetColumn">Suma Compañia</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
                         <group id="78">
                             <property name="groupName">Division</property>
                             <expression name="keyExpr" type="javascript">row["Division"]</expression>
@@ -668,12 +683,12 @@ resultado;</expression>
                             <property name="hideDetail">false</property>
                             <header>
                                 <row id="79">
-                                    <cell id="80">
+                                    <cell id="80"/>
+                                    <cell id="81">
                                         <data id="95">
                                             <property name="resultSetColumn">Division</property>
                                         </data>
                                     </cell>
-                                    <cell id="81"/>
                                     <cell id="82"/>
                                     <cell id="83"/>
                                     <cell id="84"/>
@@ -699,12 +714,12 @@ resultado;</expression>
                             <header>
                                 <row id="97">
                                     <cell id="98"/>
-                                    <cell id="99">
+                                    <cell id="99"/>
+                                    <cell id="100">
                                         <data id="113">
                                             <property name="resultSetColumn">Mayus Area</property>
                                         </data>
                                     </cell>
-                                    <cell id="100"/>
                                     <cell id="101"/>
                                     <cell id="102"/>
                                     <cell id="103">
@@ -730,12 +745,12 @@ resultado;</expression>
                                 <row id="115">
                                     <cell id="116"/>
                                     <cell id="117"/>
-                                    <cell id="118">
+                                    <cell id="118"/>
+                                    <cell id="119">
                                         <data id="131">
                                             <property name="resultSetColumn">Mayus Cope</property>
                                         </data>
                                     </cell>
-                                    <cell id="119"/>
                                     <cell id="120"/>
                                     <cell id="121">
                                         <data id="253">
@@ -749,31 +764,61 @@ resultado;</expression>
                                 </row>
                             </header>
                         </group>
-                        <group id="132">
-                            <property name="groupName">Compañia</property>
-                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                        <group id="286">
+                            <property name="groupName">Estatus PC</property>
+                            <expression name="keyExpr" type="javascript">row["Estatus"]</expression>
                             <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                                <expression name="expressionValue" type="javascript">row["Estatus"]</expression>
                             </structure>
-                            <property name="hideDetail">false</property>
+                            <property name="hideDetail">true</property>
                             <header>
-                                <row id="133">
-                                    <cell id="134"/>
-                                    <cell id="135"/>
-                                    <cell id="136"/>
-                                    <cell id="137">
-                                        <data id="149">
-                                            <property name="resultSetColumn">Compañia</property>
+                                <row id="287">
+                                    <cell id="288"/>
+                                    <cell id="289"/>
+                                    <cell id="290"/>
+                                    <cell id="291"/>
+                                    <cell id="292">
+                                        <data id="302">
+                                            <property name="resultSetColumn">Estatus</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">drill-through</property>
+                                                    <property name="reportName">Drill Contratistas.rptdesign</property>
+                                                    <property name="targetWindow">_blank</property>
+                                                    <property name="targetFileType">report-design</property>
+                                                    <list-property name="paramBindings">
+                                                        <structure>
+                                                            <property name="paramName">conexion</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["_id.conexion"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="paramName">Area</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["_id.area"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="paramName">Cope</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["_id.cope"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="paramName">cobranza</property>
+                                                            <simple-property-list name="expression">
+                                                                <value type="javascript">row["_id.estatus_pci"]</value>
+                                                            </simple-property-list>
+                                                        </structure>
+                                                    </list-property>
+                                                </structure>
+                                            </list-property>
                                         </data>
                                     </cell>
-                                    <cell id="138"/>
-                                    <cell id="139">
-                                        <data id="252">
-                                            <structure name="numberFormat">
-                                                <property name="category">Fixed</property>
-                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                            </structure>
-                                            <property name="resultSetColumn">Suma Compañia</property>
+                                    <cell id="293">
+                                        <data id="303">
+                                            <property name="resultSetColumn">Suma Estatus PCI</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -872,7 +917,7 @@ resultado;</expression>
                         <property name="marginTop">12pt</property>
                         <property name="paddingLeft">10pt</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Otros estatus]]></text-property>
+                        <text-property name="content"><![CDATA[Con órden de compra y/o pagado]]></text-property>
                     </text>
                     <table id="151">
                         <list-property name="userProperties">
@@ -1126,21 +1171,26 @@ resultado;</expression>
                                 <expression name="expr" type="javascript">row["_id.estatus_contra"] == null || row["_id.estatus_contra"] == "" || row["_id.estatus_contra"] == "en_proceso"</expression>
                                 <property name="updateAggregation">true</property>
                             </structure>
+                            <structure>
+                                <expression name="expr" type="javascript">row["Compañia"]</expression>
+                                <property name="dynamicFilterParameter">Contratista</property>
+                                <property name="updateAggregation">true</property>
+                            </structure>
                         </list-property>
                         <column id="249">
-                            <property name="width">1.2395833333333333in</property>
+                            <property name="width">2.4479166666666665in</property>
                         </column>
                         <column id="217">
-                            <property name="width">1.2395833333333333in</property>
+                            <property name="width">1.53125in</property>
                         </column>
                         <column id="218">
-                            <property name="width">1.8020833333333333in</property>
+                            <property name="width">1.28125in</property>
                         </column>
                         <column id="219">
-                            <property name="width">1.6979166666666667in</property>
+                            <property name="width">1.5729166666666667in</property>
                         </column>
                         <column id="220">
-                            <property name="width">2.25in</property>
+                            <property name="width">1.46875in</property>
                         </column>
                         <column id="221">
                             <property name="width">1.5in</property>
@@ -1152,28 +1202,28 @@ resultado;</expression>
                         <header>
                             <row id="152">
                                 <cell id="240">
+                                    <label id="160">
+                                        <text-property name="text">Compañía</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="153">
                                     <label id="251">
                                         <text-property name="text">Estatus de Contratista</text-property>
                                     </label>
                                 </cell>
-                                <cell id="153">
+                                <cell id="155">
                                     <label id="154">
                                         <text-property name="text">División</text-property>
                                     </label>
                                 </cell>
-                                <cell id="155">
+                                <cell id="157">
                                     <label id="156">
                                         <text-property name="text">Área</text-property>
                                     </label>
                                 </cell>
-                                <cell id="157">
+                                <cell id="159">
                                     <label id="158">
                                         <text-property name="text">COPE</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="159">
-                                    <label id="160">
-                                        <text-property name="text">Compañía</text-property>
                                     </label>
                                 </cell>
                                 <cell id="161">
@@ -1188,6 +1238,37 @@ resultado;</expression>
                                 </cell>
                             </row>
                         </header>
+                        <group id="192">
+                            <property name="groupName">Compañia</property>
+                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="193">
+                                    <cell id="245">
+                                        <data id="198">
+                                            <property name="resultSetColumn">Compañia</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="194"/>
+                                    <cell id="195"/>
+                                    <cell id="196"/>
+                                    <cell id="197"/>
+                                    <cell id="199"/>
+                                    <cell id="200">
+                                        <data id="256">
+                                            <structure name="numberFormat">
+                                                <property name="category">Fixed</property>
+                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="resultSetColumn">Suma Compañia</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
                         <group id="224">
                             <property name="groupName">Estatus</property>
                             <expression name="keyExpr" type="javascript">row["_id.estatus_contra"]</expression>
@@ -1197,12 +1278,12 @@ resultado;</expression>
                             <property name="hideDetail">false</property>
                             <header>
                                 <row id="225">
-                                    <cell id="241">
+                                    <cell id="241"/>
+                                    <cell id="226">
                                         <data id="239">
                                             <property name="resultSetColumn">MEstatus Contratista</property>
                                         </data>
                                     </cell>
-                                    <cell id="226"/>
                                     <cell id="227"/>
                                     <cell id="228"/>
                                     <cell id="229"/>
@@ -1229,12 +1310,12 @@ resultado;</expression>
                             <header>
                                 <row id="166">
                                     <cell id="242"/>
-                                    <cell id="167">
+                                    <cell id="167"/>
+                                    <cell id="169">
                                         <data id="168">
                                             <property name="resultSetColumn">Division</property>
                                         </data>
                                     </cell>
-                                    <cell id="169"/>
                                     <cell id="170"/>
                                     <cell id="171"/>
                                     <cell id="172"/>
@@ -1261,12 +1342,12 @@ resultado;</expression>
                                 <row id="175">
                                     <cell id="243"/>
                                     <cell id="176"/>
-                                    <cell id="177">
+                                    <cell id="177"/>
+                                    <cell id="179">
                                         <data id="178">
                                             <property name="resultSetColumn">Mayus Area</property>
                                         </data>
                                     </cell>
-                                    <cell id="179"/>
                                     <cell id="180"/>
                                     <cell id="181"/>
                                     <cell id="182">
@@ -1293,12 +1374,12 @@ resultado;</expression>
                                     <cell id="244"/>
                                     <cell id="185"/>
                                     <cell id="186"/>
-                                    <cell id="187">
+                                    <cell id="187"/>
+                                    <cell id="189">
                                         <data id="188">
                                             <property name="resultSetColumn">Mayus Cope</property>
                                         </data>
                                     </cell>
-                                    <cell id="189"/>
                                     <cell id="190"/>
                                     <cell id="191">
                                         <data id="257">
@@ -1307,37 +1388,6 @@ resultado;</expression>
                                                 <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                                             </structure>
                                             <property name="resultSetColumn">Suma Cope</property>
-                                        </data>
-                                    </cell>
-                                </row>
-                            </header>
-                        </group>
-                        <group id="192">
-                            <property name="groupName">Compañia</property>
-                            <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="193">
-                                    <cell id="245"/>
-                                    <cell id="194"/>
-                                    <cell id="195"/>
-                                    <cell id="196"/>
-                                    <cell id="197">
-                                        <data id="198">
-                                            <property name="resultSetColumn">Compañia</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="199"/>
-                                    <cell id="200">
-                                        <data id="256">
-                                            <structure name="numberFormat">
-                                                <property name="category">Fixed</property>
-                                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
-                                            </structure>
-                                            <property name="resultSetColumn">Suma Compañia</property>
                                         </data>
                                     </cell>
                                 </row>
