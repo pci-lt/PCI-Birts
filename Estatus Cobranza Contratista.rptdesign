@@ -290,7 +290,27 @@ date;</expression>
                     <property name="dataType">date-time</property>
                     <property name="allowExport">true</property>
                 </structure>
-                
+                <structure>
+                    <property name="name">contratista_encabezado</property>
+                    <text-property name="displayName">CE</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+var ayuda ="";&#13;
+var contratista = params["Contratista"].value;&#13;
+if(contratista != null || contratista != "" || contratista != "undefined"){&#13;
+	contratista = contratista.split("=");&#13;
+	var numero = contratista.length;&#13;
+	if(numero > 1){&#13;
+		ayuda = contratista[1]&#13;
+		ayuda = ayuda.replace(")","")&#13;
+		display = ayuda;&#13;
+	}else{&#13;
+		display = "Todos los contratistas"&#13;
+	}&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="7"/>
             <row id="8">
@@ -337,6 +357,20 @@ date;</expression>
                                                 </structure>
                                                 <property name="textAlign">center</property>
                                                 <property name="resultSetColumn">Fecha</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="304">
+                                        <cell id="305">
+                                            <data id="307">
+                                                <property name="fontSize">16pt</property>
+                                                <property name="fontWeight">bold</property>
+                                                <structure name="dateTimeFormat">
+                                                    <property name="category">Custom</property>
+                                                    <property name="pattern">dd 'de' MMMM 'del' yyyy 'a las' hh:mm a</property>
+                                                </structure>
+                                                <property name="textAlign">center</property>
+                                                <property name="resultSetColumn">contratista_encabezado</property>
                                             </data>
                                         </cell>
                                     </row>
