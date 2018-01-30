@@ -91,6 +91,13 @@ yy + '-' + mm + '-' + dd</value>
         <data-mart-data-set name="Join Bolsa - Num Tecnicos" id="5">
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">_id.estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">problemas cliente</property>
                     <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
@@ -127,9 +134,51 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">problemas cliente fibra</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">problemas tecnicos fibra</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">liquidadas fibra</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Activacion claro video fibra</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">no_tecnicos</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">no_tecnicos</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">moda_tec</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subdir_m</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">div_m</property>
+                    <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -138,128 +187,168 @@ yy + '-' + mm + '-' + dd</value>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">subdir_m</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">div_m</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">problemas cliente</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">problemas tecnicos</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">liquidadas</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">area</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">cope</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">Activacion claro video</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">no_tecnicos</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">cantidad</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
                         <property name="name">_id.estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
+                        <property name="position">2</property>
+                        <property name="name">problemas cliente</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">problemas tecnicos</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">liquidadas</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Activacion claro video</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">problemas cliente fibra</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">problemas tecnicos fibra</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">liquidadas fibra</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Activacion claro video fibra</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
                         <property name="position">12</property>
+                        <property name="name">no_tecnicos</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
                         <property name="name">moda_tec</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">subdir_m</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">div_m</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
             <property name="dataSource">dbPC_cobre</property>
-            <property name="dataObject">Join Bolsa - Tecnicos</property>
+            <property name="dataObject">Join Bolsa fibra y cobre - usuarios y DSAC</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">subdir_m</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">div_m</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">problemas cliente</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">problemas tecnicos</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">liquidadas</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">area</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">cope</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">Activacion claro video</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">no_tecnicos</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
-                    <property name="name">cantidad</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
                     <property name="name">_id.estatus</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
+                    <property name="position">2</property>
+                    <property name="name">problemas cliente</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">problemas tecnicos</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">liquidadas</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">area</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">cope</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">Activacion claro video</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">problemas cliente fibra</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">problemas tecnicos fibra</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">liquidadas fibra</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">Activacion claro video fibra</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
                     <property name="position">12</property>
+                    <property name="name">no_tecnicos</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
                     <property name="name">moda_tec</property>
                     <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">subdir_m</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">div_m</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">cantidad</property>
+                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -790,14 +879,14 @@ yy + '-' + mm + '-' + dd</value>
                             <structure>
                                 <property name="name">Rendimiento</property>
                                 <text-property name="displayName">rendimiento</text-property>
-                                <expression name="expression" type="javascript">row["Suma Liquidaciones Cobre"]/row["Max Tecnicos"]</expression>
+                                <expression name="expression" type="javascript">(row["Suma Liquidaciones Cobre"] + row["Suma Liquidaciones Fibra"])/row["Max Tecnicos"]</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">Bolsa Inicial</property>
                                 <text-property name="displayName">BIni</text-property>
-                                <expression name="expression" type="javascript">row["Maximo Bolsa"] - row["Suma Liquidaciones Cobre"] - row["Suma Problemas Totales Cobre"]</expression>
+                                <expression name="expression" type="javascript">row["Maximo Bolsa"] - row["Suma Liquidaciones Cobre"] - row["Suma Liquidaciones Fibra"]- row["Suma Problemas Totales Cobre"] - row["Suma totales problemas fibra"]</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -921,21 +1010,21 @@ yy + '-' + mm + '-' + dd</value>
                             <structure>
                                 <property name="name">Rendimiento por area</property>
                                 <text-property name="displayName">RPA</text-property>
-                                <expression name="expression" type="javascript">row["Suma Liquidadas Cobre Area"]/row["Suma Tecnicos Area"]</expression>
+                                <expression name="expression" type="javascript">(row["Suma Liquidadas Cobre Area"] + row["Suma Liquidaciones Fibra Area"])/row["Suma Tecnicos Area"]</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">Rendimiento por subdirección</property>
                                 <text-property name="displayName">RPS</text-property>
-                                <expression name="expression" type="javascript">row["Suma Liquidaciones Cobre Subdireccion"]/row["Suma Tecnicos Subdirección"]</expression>
+                                <expression name="expression" type="javascript">(row["Suma Liquidaciones Cobre Subdireccion"] + row["Suma Liquidaciones Fibra Dirección"]) /row["Suma Tecnicos Subdirección"]</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
                                 <property name="name">Rendimiento por división</property>
                                 <text-property name="displayName">RPD</text-property>
-                                <expression name="expression" type="javascript">row["Suma Liquidaciones Cobre Division"]/row["Suma Tecnicos División"]</expression>
+                                <expression name="expression" type="javascript">(row["Suma Liquidaciones Fibra Division"] + row["Suma Liquidaciones Cobre Division"]) /row["Suma Tecnicos División"]</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -1011,7 +1100,295 @@ yy + '-' + mm + '-' + dd</value>
                                 <expression name="expression" type="javascript">dataSetRow["_id.estatus"]</expression>
                                 <property name="dataType">string</property>
                             </structure>
+                            <structure>
+                                <property name="name">problemas cliente fibra</property>
+                                <text-property name="displayName">problemas cliente fibra</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["problemas cliente fibra"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">problemas tecnicos fibra</property>
+                                <text-property name="displayName">problemas tecnicos fibra</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["problemas tecnicos fibra"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">liquidadas fibra</property>
+                                <text-property name="displayName">liquidadas fibra</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["liquidadas fibra"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Activacion claro video fibra</property>
+                                <text-property name="displayName">Activacion claro video fibra</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Activacion claro video fibra"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Liquidaciones Fibra</property>
+                                <text-property name="displayName">SLF</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Liquidaciones Fibra Area</property>
+                                <text-property name="displayName">SLFA</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Liquidaciones Fibra Dirección</property>
+                                <text-property name="displayName">SLFD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Liquidaciones Fibra Division</property>
+                                <text-property name="displayName">SLFD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Division</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas cliente fibra</property>
+                                <text-property name="displayName">SPCF</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas cliente fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas cliente fibra area</property>
+                                <text-property name="displayName">SPCFA</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas cliente fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas cliente fibra subdireccion</property>
+                                <text-property name="displayName">SPCFS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas cliente fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas cliente fibra division</property>
+                                <text-property name="displayName">SPCFD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Division</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas cliente fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas tecnicos fibra</property>
+                                <text-property name="displayName">SPTF</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas tecnicos fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas tecnicos fibra area</property>
+                                <text-property name="displayName">SPTFA</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas tecnicos fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas tecnicos fibra subdirección</property>
+                                <text-property name="displayName">SPTFS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas tecnicos fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas tecnicos fibra division</property>
+                                <text-property name="displayName">SPTFD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Division</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["problemas tecnicos fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma totales problemas fibra</property>
+                                <text-property name="displayName">STPF</text-property>
+                                <expression name="expression" type="javascript">row["problemas cliente fibra"] + row["problemas tecnicos fibra"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas totales fibra cope</property>
+                                <text-property name="displayName">SPTFC</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>cope</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma totales problemas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas totales fibra area</property>
+                                <text-property name="displayName">SPTFA</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma totales problemas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas totales fibra subdirección</property>
+                                <text-property name="displayName">SPTFS</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>subdirección</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma totales problemas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma problemas totales fibra division</property>
+                                <text-property name="displayName">SPTFD</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Division</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma totales problemas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
+                        <property name="pageBreakInterval">100000000</property>
                         <column id="133">
                             <property name="width">0.6770833333333334in</property>
                         </column>
@@ -1061,6 +1438,7 @@ yy + '-' + mm + '-' + dd</value>
                             <property name="width">0.8854166666666666in</property>
                         </column>
                         <column id="182">
+                            <property name="textAlign">center</property>
                             <property name="width">0.4375in</property>
                         </column>
                         <column id="197">
@@ -1075,14 +1453,18 @@ yy + '-' + mm + '-' + dd</value>
                                 <cell id="426">
                                     <property name="colSpan">3</property>
                                     <property name="rowSpan">1</property>
+                                    <property name="backgroundColor">#A5D6A7</property>
                                     <label id="433">
+                                        <property name="color">#000000</property>
                                         <text-property name="text">Cobre</text-property>
                                     </label>
                                 </cell>
                                 <cell id="429">
                                     <property name="colSpan">3</property>
                                     <property name="rowSpan">1</property>
+                                    <property name="backgroundColor">#E6EE9C</property>
                                     <label id="434">
+                                        <property name="color">#000000</property>
                                         <text-property name="text">Fibra</text-property>
                                     </label>
                                 </cell>
@@ -1230,6 +1612,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="209">
                                         <property name="textAlign">center</property>
+                                        <data id="451">
+                                            <property name="resultSetColumn">Suma Liquidaciones Fibra Division</property>
+                                        </data>
                                     </cell>
                                     <cell id="210">
                                         <property name="textAlign">center</property>
@@ -1267,12 +1652,21 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="215">
                                         <property name="textAlign">center</property>
+                                        <data id="455">
+                                            <property name="resultSetColumn">Suma problemas cliente fibra division</property>
+                                        </data>
                                     </cell>
                                     <cell id="216">
                                         <property name="textAlign">center</property>
+                                        <data id="459">
+                                            <property name="resultSetColumn">Suma problemas tecnicos fibra division</property>
+                                        </data>
                                     </cell>
                                     <cell id="217">
                                         <property name="textAlign">center</property>
+                                        <data id="464">
+                                            <property name="resultSetColumn">Suma problemas totales fibra division</property>
+                                        </data>
                                     </cell>
                                     <cell id="218">
                                         <property name="textAlign">center</property>
@@ -1332,6 +1726,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="249">
                                         <property name="textAlign">center</property>
+                                        <data id="450">
+                                            <property name="resultSetColumn">Suma Liquidaciones Fibra Dirección</property>
+                                        </data>
                                     </cell>
                                     <cell id="250">
                                         <property name="textAlign">center</property>
@@ -1369,12 +1766,21 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="255">
                                         <property name="textAlign">center</property>
+                                        <data id="454">
+                                            <property name="resultSetColumn">Suma problemas cliente fibra subdireccion</property>
+                                        </data>
                                     </cell>
                                     <cell id="256">
                                         <property name="textAlign">center</property>
+                                        <data id="458">
+                                            <property name="resultSetColumn">Suma problemas tecnicos fibra subdirección</property>
+                                        </data>
                                     </cell>
                                     <cell id="257">
                                         <property name="textAlign">center</property>
+                                        <data id="463">
+                                            <property name="resultSetColumn">Suma problemas totales fibra subdirección</property>
+                                        </data>
                                     </cell>
                                     <cell id="258">
                                         <property name="textAlign">center</property>
@@ -1434,6 +1840,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="290">
                                         <property name="textAlign">center</property>
+                                        <data id="449">
+                                            <property name="resultSetColumn">Suma Liquidaciones Fibra Area</property>
+                                        </data>
                                     </cell>
                                     <cell id="291">
                                         <property name="textAlign">center</property>
@@ -1474,12 +1883,21 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="296">
                                         <property name="textAlign">center</property>
+                                        <data id="453">
+                                            <property name="resultSetColumn">Suma problemas cliente fibra area</property>
+                                        </data>
                                     </cell>
                                     <cell id="297">
                                         <property name="textAlign">center</property>
+                                        <data id="457">
+                                            <property name="resultSetColumn">Suma problemas tecnicos fibra area</property>
+                                        </data>
                                     </cell>
                                     <cell id="298">
                                         <property name="textAlign">center</property>
+                                        <data id="462">
+                                            <property name="resultSetColumn">Suma problemas totales fibra area</property>
+                                        </data>
                                     </cell>
                                     <cell id="299">
                                         <property name="textAlign">center</property>
@@ -1539,6 +1957,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="330">
                                         <property name="textAlign">center</property>
+                                        <data id="448">
+                                            <property name="resultSetColumn">Suma Liquidaciones Fibra</property>
+                                        </data>
                                     </cell>
                                     <cell id="331">
                                         <property name="textAlign">center</property>
@@ -1579,12 +2000,21 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="336">
                                         <property name="textAlign">center</property>
+                                        <data id="452">
+                                            <property name="resultSetColumn">Suma problemas cliente fibra</property>
+                                        </data>
                                     </cell>
                                     <cell id="337">
                                         <property name="textAlign">center</property>
+                                        <data id="456">
+                                            <property name="resultSetColumn">Suma problemas tecnicos fibra</property>
+                                        </data>
                                     </cell>
                                     <cell id="338">
                                         <property name="textAlign">center</property>
+                                        <data id="461">
+                                            <property name="resultSetColumn">Suma problemas totales fibra cope</property>
+                                        </data>
                                     </cell>
                                     <cell id="339">
                                         <property name="textAlign">center</property>
@@ -1633,6 +2063,9 @@ yy + '-' + mm + '-' + dd</value>
                                 </cell>
                                 <cell id="160">
                                     <property name="textAlign">center</property>
+                                    <data id="445">
+                                        <property name="resultSetColumn">liquidadas fibra</property>
+                                    </data>
                                 </cell>
                                 <cell id="165">
                                     <property name="textAlign">center</property>
@@ -1661,12 +2094,21 @@ yy + '-' + mm + '-' + dd</value>
                                 </cell>
                                 <cell id="188">
                                     <property name="textAlign">center</property>
+                                    <data id="446">
+                                        <property name="resultSetColumn">problemas cliente fibra</property>
+                                    </data>
                                 </cell>
                                 <cell id="184">
                                     <property name="textAlign">center</property>
+                                    <data id="447">
+                                        <property name="resultSetColumn">problemas tecnicos fibra</property>
+                                    </data>
                                 </cell>
                                 <cell id="180">
                                     <property name="textAlign">center</property>
+                                    <data id="460">
+                                        <property name="resultSetColumn">Suma totales problemas fibra</property>
+                                    </data>
                                 </cell>
                                 <cell id="195">
                                     <property name="textAlign">center</property>
