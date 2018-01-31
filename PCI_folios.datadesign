@@ -10431,9 +10431,63 @@ if(forma == 11044)&#13;
 	display = "Metro";&#13;
 else if(forma == 16343)&#13;
 	display = "Sur";&#13;
+else if(forma == 21953)&#13;
+	display = "Occidente";&#13;
+else if(forma == 21954)&#13;
+	display = "Norte";&#13;
 	&#13;
 display;</expression>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus</property>
+                    <expression name="expression" type="javascript">var area = row["_id.estatus"];&#13;
+if(area == null || area == ""){&#13;
+	resultado = "Sin Estatus de cobranza";&#13;
+}&#13;
+&#13;
+var resultado = "";&#13;
+&#13;
+if(area=="pendiente"){&#13;
+	resultado = "1.- Pendiente por reportar";&#13;
+}&#13;
+else if(area == "validacion"){&#13;
+	resultado = "2.- En validación Carso";&#13;
+}&#13;
+else if(area == "aceptada"){&#13;
+	resultado = "3.- Producción Aceptada";&#13;
+}&#13;
+else if(area == "archivo_carga_masiva")&#13;
+	resultado = "4.- MTF Generado";&#13;
+else if(area == "paco")&#13;
+	resultado = "5.- Con PACO";&#13;
+else if(area == "estimacion")&#13;
+	resultado = "6.- Estimación Generada";&#13;
+else if(area == "liberada")&#13;
+	resultado = "7.- Con OC de Carso";&#13;
+else if(area == "factura")&#13;
+	resultado = "8.- Facturada a Carso";&#13;
+else if(area == "pagada")&#13;
+	resultado = "9.- Pagada por Carso";&#13;
+else if(area == "error_validacion")&#13;
+	resultado = "99.- Error de Validación";&#13;
+else if(area == "error_de_paco")&#13;
+	resultado = "98.- Error de Paco";&#13;
+&#13;
+&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dilación</property>
+                    <expression name="expression" type="javascript">var date = new Date();&#13;
+var produccion = row["_id.fecha"];&#13;
+var display = 0&#13;
+if(produccion != null || produccion != "")&#13;
+	display = BirtDateTime.diffDay(produccion,date);&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
                 </structure>
             </list-property>
             <list-property name="columnHints">
@@ -10444,6 +10498,12 @@ display;</expression>
                     <text-property name="heading">_id.form_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.estatus</text-property>
+                    <text-property name="heading">_id.estatus</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">_id.fecha</property>
@@ -10473,7 +10533,16 @@ display;</expression>
                     <property name="columnName">división</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dilación</property>
+                    <property name="analysis">measure</property>
+                </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -10483,23 +10552,38 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.fecha</property>
+                        <property name="name">_id.estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.tecnico</property>
+                        <property name="name">_id.fecha</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">_id.tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">división</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">dilación</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -10538,27 +10622,34 @@ log('query' + query);]]></method>
                 </structure>
                 <structure>
                     <property name="position">2</property>
+                    <property name="name">_id.estatus</property>
+                    <property name="nativeName">_id.estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
                     <property name="name">_id.fecha</property>
                     <property name="nativeName">_id.fecha</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.tecnico</property>
                     <property name="nativeName">_id.tecnico</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{ $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: { $in: [2072, 2073]},\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tform_id: '$form_id',\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.form_id" , "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: { $in: [2072, 2073]},\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tform_id: '$form_id',\r\n\t\testatus: '$answers.f1054000a030000000000012',\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.form_id" , "_id.estatus" , "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
