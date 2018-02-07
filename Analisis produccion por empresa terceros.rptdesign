@@ -1029,54 +1029,6 @@ yy + '-' + mm + '-' + dd</value>
                                 <property name="allowExport">true</property>
                             </structure>
                             <structure>
-                                <property name="name">Suma Bolsa Inicial Area</property>
-                                <text-property name="displayName">SBIA</text-property>
-                                <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>area</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Bolsa Inicial"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Suma bolsa inicial subdirección</property>
-                                <text-property name="displayName">SBIS</text-property>
-                                <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>subdirección</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Bolsa Inicial"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Suma bolsa inicial división</property>
-                                <text-property name="displayName">SBID</text-property>
-                                <property name="dataType">float</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>Division</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Bolsa Inicial"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
                                 <property name="name">subdir_m</property>
                                 <text-property name="displayName">subdir_m</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["subdir_m"]</expression>
@@ -1387,6 +1339,92 @@ yy + '-' + mm + '-' + dd</value>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">Bolsa Inicial Area</property>
+                                <text-property name="displayName">BIA</text-property>
+                                <expression name="expression" type="javascript">row["Suma Bolsa Area"] - row["Suma Liquidaciones Fibra Area"] - row["Suma problemas totales fibra area"] - row["Suma Liquidadas Cobre Area"] - row["Suma Problemas Total Cobre Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Bolsa Final Subdirección</property>
+                                <text-property name="displayName">BFS</text-property>
+                                <expression name="expression" type="javascript">row["Suma bolsa subdirección"] - row["Suma Liquidaciones Cobre Subdireccion"] - row["Suma Total Problemas Cobre Subdireccion"] - row["Suma Liquidaciones Fibra Dirección"] - row["Suma problemas totales fibra subdirección"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Bolsa inicial division</property>
+                                <text-property name="displayName">SID</text-property>
+                                <expression name="expression" type="javascript">row["Suma bolsa división"] - row["Suma Liquidaciones Cobre Division"] - row["Suma Problemas Total Cobre Division"] - row["Suma Liquidaciones Fibra Division"] - row["Suma problemas totales fibra division"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Cantidad Total</property>
+                                <text-property name="displayName">SCT</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["cantidad"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Total Liquidadas</property>
+                                <text-property name="displayName">STL</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Liquidadas Fibra</property>
+                                <text-property name="displayName">SLF</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["liquidadas fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Totales Objeciones Cobre</property>
+                                <text-property name="displayName">STOC</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma Problemas Totales Cobre"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Objeciones fibra</property>
+                                <text-property name="displayName">SOF</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["Suma problemas cliente fibra"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
                         <column id="133">
@@ -1456,7 +1494,7 @@ yy + '-' + mm + '-' + dd</value>
                                     <property name="backgroundColor">#A5D6A7</property>
                                     <label id="433">
                                         <property name="color">#000000</property>
-                                        <text-property name="text">Cobre</text-property>
+                                        <text-property name="text">Objeciones cobre</text-property>
                                     </label>
                                 </cell>
                                 <cell id="429">
@@ -1465,7 +1503,7 @@ yy + '-' + mm + '-' + dd</value>
                                     <property name="backgroundColor">#E6EE9C</property>
                                     <label id="434">
                                         <property name="color">#000000</property>
-                                        <text-property name="text">Fibra</text-property>
+                                        <text-property name="text">Objeciones fibra</text-property>
                                     </label>
                                 </cell>
                                 <cell id="432"/>
@@ -1498,7 +1536,7 @@ yy + '-' + mm + '-' + dd</value>
                                 </cell>
                                 <cell id="149">
                                     <label id="153">
-                                        <text-property name="text">Bolsa</text-property>
+                                        <text-property name="text">Bolsa Inicial</text-property>
                                     </label>
                                 </cell>
                                 <cell id="154">
@@ -1558,7 +1596,7 @@ yy + '-' + mm + '-' + dd</value>
                                 </cell>
                                 <cell id="194">
                                     <label id="198">
-                                        <text-property name="text">Bolsa Inicial</text-property>
+                                        <text-property name="text">Bolsa Final</text-property>
                                     </label>
                                 </cell>
                             </row>
@@ -1670,8 +1708,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="218">
                                         <property name="textAlign">center</property>
-                                        <data id="403">
-                                            <property name="resultSetColumn">Suma bolsa inicial división</property>
+                                        <data id="467">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Bolsa inicial division</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -1784,8 +1823,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="258">
                                         <property name="textAlign">center</property>
-                                        <data id="402">
-                                            <property name="resultSetColumn">Suma bolsa inicial subdirección</property>
+                                        <data id="466">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Bolsa Final Subdirección</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -1901,8 +1941,9 @@ yy + '-' + mm + '-' + dd</value>
                                     </cell>
                                     <cell id="299">
                                         <property name="textAlign">center</property>
-                                        <data id="401">
-                                            <property name="resultSetColumn">Suma Bolsa Inicial Area</property>
+                                        <data id="465">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Bolsa Inicial Area</property>
                                         </data>
                                     </cell>
                                 </row>
@@ -2115,6 +2156,52 @@ yy + '-' + mm + '-' + dd</value>
                                 </cell>
                             </row>
                         </detail>
+                        <footer>
+                            <row id="468">
+                                <cell id="469"/>
+                                <cell id="470"/>
+                                <cell id="471"/>
+                                <cell id="472"/>
+                                <cell id="473"/>
+                                <cell id="474">
+                                    <data id="487">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Suma Cantidad Total</property>
+                                    </data>
+                                </cell>
+                                <cell id="475"/>
+                                <cell id="476">
+                                    <data id="488">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Suma Total Liquidadas</property>
+                                    </data>
+                                </cell>
+                                <cell id="477">
+                                    <data id="489">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Suma Liquidadas Fibra</property>
+                                    </data>
+                                </cell>
+                                <cell id="478"/>
+                                <cell id="479"/>
+                                <cell id="480"/>
+                                <cell id="481"/>
+                                <cell id="482">
+                                    <data id="490">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Suma Totales Objeciones Cobre</property>
+                                    </data>
+                                </cell>
+                                <cell id="483"/>
+                                <cell id="484"/>
+                                <cell id="485">
+                                    <data id="491">
+                                        <property name="resultSetColumn">Suma Objeciones fibra</property>
+                                    </data>
+                                </cell>
+                                <cell id="486"/>
+                            </row>
+                        </footer>
                     </table>
                 </cell>
             </row>
