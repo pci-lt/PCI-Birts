@@ -15296,6 +15296,23 @@ resultado;</expression>
                     <expression name="expression" type="javascript">BirtDateTime.year(row["_id.reportado"])</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">BirtDateTime.month(row["_id.reportado"])</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Mes</property>
+                    <expression name="expression" type="javascript">var month  = row["month"];&#13;
+var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];&#13;
+var display = "";&#13;
+if(month != null || month != 0){&#13;
+	display = months[month-1];&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -15309,6 +15326,14 @@ resultado;</expression>
                 <structure>
                     <property name="columnName">year</property>
                     <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Mes</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -15329,6 +15354,16 @@ resultado;</expression>
                         <property name="position">2</property>
                         <property name="name">year</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Mes</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -15387,6 +15422,23 @@ resultado;</expression>
                     <expression name="expression" type="javascript">BirtDateTime.year(row["_id.reportado"])</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">BirtDateTime.month(row["_id.reportado"])</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Mes</property>
+                    <expression name="expression" type="javascript">var month  = row["month"];&#13;
+var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];&#13;
+var display = "";&#13;
+if(month != null || month != 0){&#13;
+	display = months[month-1];&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -15400,6 +15452,20 @@ resultado;</expression>
                 <structure>
                     <property name="columnName">year</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Mes</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -15420,6 +15486,16 @@ resultado;</expression>
                         <property name="position">2</property>
                         <property name="name">year</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Mes</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -15487,6 +15563,16 @@ resultado;</expression>
                         <property name="name">year</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
@@ -15497,13 +15583,128 @@ resultado;</expression>
 <tns:Union xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_union.xsd" xmlns:tns="http://schemas.actuate.com/">
 <tns:DataSet Index="0" name="Año Cobre">
 <tns:Column name="year"/>
+<tns:Column name="Mes"/>
+<tns:Column name="month"/>
 </tns:DataSet>
 <tns:DataSet Index="1" name="Año Fibra">
 <tns:Column name="year"/>
+<tns:Column name="Mes"/>
+<tns:Column name="month"/>
 </tns:DataSet>
 </tns:Union>]]></xml-property>
         </derived-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Saturacion" id="598">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">estado</property>
+                    <expression name="expression" type="javascript">var cope = row["_id.cope"];&#13;
+var area = row["_id.area"];&#13;
+var display = "";&#13;
+&#13;
+if(area == "acapulco" || area == "chilpancingo"){&#13;
+	display = "Guerrero";&#13;
+}&#13;
+else if (area == "balbuena" || area == "ermita-tlahuac" || area == "lindavista" || area == "lomas" || area == "mixcoac" || area == "universidad" || area == "valle-san_juan" || area == "valle_san_juan") {&#13;
+	display = "Distrito Federal";&#13;
+}&#13;
+else if (area == "cuautitlan-morelos" &amp;&amp; cope == "morelos") {&#13;
+	display = "Morelos";&#13;
+}&#13;
+else if (area == "cuautitlan-morelos" &amp;&amp; cope != "morelos") {&#13;
+	display = "Mexico";&#13;
+}&#13;
+else if (area == "morelos" || area == "cuernavaca") {&#13;
+	display = "Morelos";&#13;
+}&#13;
+else if (area == "satelite" || area == "sotelo" || area == "texcoco-zaragoza" || area == "toluca") {&#13;
+	display = "Mexico";&#13;
+}&#13;
+else if (area == "aguascalientes") {&#13;
+	display = "Aguascalientes";&#13;
+}&#13;
+else if (area == "celaya" || area == "irapuato" || area == "leon") {&#13;
+	display = "Guanajuato";&#13;
+}&#13;
+else if (area == "ciudad_victoria" || area == "matamoros" || area == "nuevo_laredo" || area == "reynosa" || area == "tampico") {&#13;
+	display = "Tamaulipas";&#13;
+}&#13;
+else if (area == "monterrey_1" || area == "monterrey_2" || area == "monterrey_foraneo") {&#13;
+	display = "Nuevo Leon";&#13;
+}&#13;
+else if (area == "queretaro") {&#13;
+	display = "Queretaro";&#13;
+}&#13;
+else if (area == "sabinas" || area == "saltillo" || area == "torreon") {&#13;
+	display = "Coahuila";&#13;
+}&#13;
+else if (area == "san_luis_potosi") {&#13;
+	display = "San Luis Potosi"&#13;
+}&#13;
+else if (area == "zacatecas") {&#13;
+	display = "Zacatecas"&#13;
+}&#13;
+else if (area == "chihuahua" || area == "ciudad_juarez") {&#13;
+	display = "Chihuahua";&#13;
+}&#13;
+else if (area == "ciudad_obregon" || area == "nogales" || area == "hermosillo") {&#13;
+	display = "Sonora";&#13;
+}&#13;
+else if (area == "colima") {&#13;
+	display = "Colima";&#13;
+}&#13;
+else if (area == "culiacan" || area == "los_mochis" || area == "mazatlan" ) {&#13;
+	display = "Sinaloa";&#13;
+}&#13;
+else if (area == "durango") {&#13;
+	display = "Durango"&#13;
+}&#13;
+else if (area == "jalisco" || area == "guadalajara_centro" || area == "guadalajara_poniente" || area == "guadalajara_oriente" || area == "puerto_vallarta") {&#13;
+	display = "Jalisco";&#13;
+}&#13;
+else if (area == "la_paz") {&#13;
+	display = "Baja California Sur"&#13;
+}&#13;
+else if (area == "morelia" || area == "zamora") {&#13;
+	display = "Michoacan";&#13;
+}&#13;
+else if (area == "tepic") {&#13;
+	display = "Nayarit";&#13;
+}&#13;
+else if (area == "yucatan" || area == "merida") {&#13;
+	display = "Yucatan"&#13;
+}&#13;
+else if (area == "quintana_roo" || area == "cancun") {&#13;
+	display = "Quintana Roo";&#13;
+}&#13;
+else if (area == "campeche") {&#13;
+	display = "Campeche";&#13;
+}&#13;
+else if (area == "chiapas" || area == "tuxtla_gutierrez") {&#13;
+	display = "Chiapas";&#13;
+}&#13;
+else if (area == "coatzacoalcos" || area == "cordoba" || area == "jalapa" || area == "poza_rica" || area == "veracruz") {&#13;
+	display = "Veracruz";&#13;
+}&#13;
+else if (area == "oaxaca") {&#13;
+	display = "Oaxaca";&#13;
+}&#13;
+else if (area == "pachuca") {&#13;
+	display = "Hidalgo"&#13;
+}&#13;
+else if (area == "puebla") {&#13;
+	display = "Pueba";&#13;
+}&#13;
+else if (area == "tabasco" || area == "villahermosa") {&#13;
+	display = "Tabasco";&#13;
+}&#13;
+else if (area == "tlaxcala") {&#13;
+	display = "Tlaxcala";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id.area</property>
@@ -15533,6 +15734,10 @@ resultado;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estado</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -15556,6 +15761,11 @@ resultado;</expression>
                         <property name="position">4</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">estado</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
