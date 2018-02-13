@@ -14607,16 +14607,31 @@ reportContext.setGlobalVariable('log', log);
 
 var query = this.queryText.toString();
 var year = params["Año fibra y cobre"].value;
-var desde = params["Desde"].value;
-var hasta = params["Hasta"].value;
+var year_acumdia = params["year acumdia"].value
+var month = params["month acumdia"].value
 var bookmark = "{$exists:false},";
 
 if(year != null &amp;&amp; year != ""){
 	var year_to = year +1;
 	new_query = "'answers.f1054000a030000000000e14': {$gte: '" + year + "-01-01' , $lt: '" + year_to + "-01-01' },";
 }
-else if ((desde != null || desde != "") &amp;&amp; (hasta != null || hasta != "")) {
-	new_query = "'answers.f1054000a030000000000e14': {$gte: '" + desde + "' , $lt: '" + hasta + "' },";
+else if ((year_acumdia != null || year_acumdia != "") &amp;&amp; (month != null || month != "")) {
+	var year_to = year_acumdia;
+	var month_to = month + 1;
+	
+	if (month == 12) {
+		month_to = '01';
+		year_to = year_acumdia + 1;
+	}
+	
+	if (month < 10) {
+		month = '0' + month;
+	}
+	if (month_to < 10) {
+		month_to = '0' + month_to;
+	}
+	
+	new_query = "'answers.f1054000a030000000000e14': {$gte: '" + year_acumdia + "-" + month +"-01' , $lt: '" + year_to + "-"+ month_to + "-01' },";
 }
 
 
@@ -14871,16 +14886,31 @@ reportContext.setGlobalVariable('log', log);
 
 var query = this.queryText.toString();
 var year = params["Año fibra y cobre"].value;
-var desde = params["Desde"].value;
-var hasta = params["Hasta"].value;
+var year_acumdia = params["year acumdia"].value
+var month = params["month acumdia"].value
 var bookmark = "{$exists:false},";
 
 if(year != null &amp;&amp; year != ""){
 	var year_to = year +1;
 	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + year + "-01-01' , $lt: '" + year_to + "-01-01' },";
 }
-else if ((desde != null || desde != "") &amp;&amp; (hasta != null || hasta != "")) {
-	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + desde + "' , $lt: '" + hasta + "' },";
+else if ((year_acumdia != null || year_acumdia != "") &amp;&amp; (month != null || month != "")) {
+	var year_to = year_acumdia;
+	var month_to = month + 1;
+	
+	if (month == 12) {
+		month_to = '01';
+		year_to = year_acumdia + 1;
+	}
+	
+	if (month < 10) {
+		month = '0' + month;
+	}
+	if (month_to < 10) {
+		month_to = '0' + month_to;
+	}
+	
+	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + year_acumdia + "-" + month +"-01' , $lt: '" + year_to + "-"+ month_to + "-01' },";
 }
 
 
@@ -16111,6 +16141,37 @@ display;</expression>
                     <structure name="format">
                         <property name="category">Unformatted</property>
                     </structure>
+                </scalar-parameter>
+            </parameters>
+        </cascading-parameter-group>
+        <cascading-parameter-group name="Acumdia" id="599">
+            <property name="dataSet">Union Años fibra y cobre</property>
+            <property name="dataSetMode">single</property>
+            <parameters>
+                <scalar-parameter name="year acumdia" id="600">
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Union Años fibra y cobre</property>
+                    <expression name="valueExpr">row["year"]</expression>
+                    <expression name="labelExpr">row["year"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+                <scalar-parameter name="month acumdia" id="601">
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">false</property>
+                    <property name="dataSetName">Union Años fibra y cobre</property>
+                    <expression name="valueExpr">row["month"]</expression>
+                    <expression name="labelExpr">row["Mes"]</expression>
+                    <expression name="sortByColumn">dataSetRow["month"]</expression>
+                    <property name="sortDirection">asc</property>
+                    <property name="dataType">integer</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format"/>
                 </scalar-parameter>
             </parameters>
         </cascading-parameter-group>
