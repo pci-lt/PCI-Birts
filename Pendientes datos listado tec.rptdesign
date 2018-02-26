@@ -424,7 +424,7 @@
                     <structure>
                         <property name="position">7</property>
                         <property name="name">no_exp_tel</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
@@ -664,7 +664,7 @@
                 <structure>
                     <property name="position">7</property>
                     <property name="name">no_exp_tel</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">8</property>
@@ -914,16 +914,25 @@
                                 <grid id="500">
                                     <property name="marginTop">10pt</property>
                                     <property name="marginLeft">5pt</property>
-                                    <property name="width">3.4583333333333335in</property>
+                                    <property name="width">6.46875in</property>
                                     <column id="501">
                                         <property name="width">0.5208333333333334in</property>
                                     </column>
                                     <column id="502">
                                         <property name="width">2.9375in</property>
                                     </column>
+                                    <column id="612">
+                                        <property name="width">0.46875in</property>
+                                    </column>
+                                    <column id="621">
+                                        <property name="width">0.46875in</property>
+                                    </column>
+                                    <column id="626">
+                                        <property name="width">2.0729166666666665in</property>
+                                    </column>
                                     <row id="503">
                                         <cell id="504">
-                                            <property name="colSpan">2</property>
+                                            <property name="colSpan">5</property>
                                             <property name="rowSpan">1</property>
                                             <text id="512">
                                                 <property name="fontSize">12pt</property>
@@ -946,8 +955,20 @@
                                                 <text-property name="content"><![CDATA[Con datos]]></text-property>
                                             </text>
                                         </cell>
+                                        <cell id="610"/>
+                                        <cell id="618">
+                                            <property name="backgroundColor">#388E3C</property>
+                                        </cell>
+                                        <cell id="623">
+                                            <text id="629">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="contentType">auto</property>
+                                                <text-property name="content"><![CDATA[75%-100% datos registrados]]></text-property>
+                                            </text>
+                                        </cell>
                                     </row>
                                     <row id="509">
+                                        <property name="height">0.2708333333333333in</property>
                                         <cell id="510">
                                             <property name="backgroundColor">#D32F2F</property>
                                         </cell>
@@ -956,6 +977,32 @@
                                                 <property name="fontWeight">bold</property>
                                                 <property name="contentType">auto</property>
                                                 <text-property name="content"><![CDATA[Sin datos]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="611"/>
+                                        <cell id="619">
+                                            <property name="backgroundColor">#FDD835</property>
+                                        </cell>
+                                        <cell id="624">
+                                            <text id="628">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="contentType">auto</property>
+                                                <text-property name="content"><![CDATA[50%-75% datos registrados]]></text-property>
+                                            </text>
+                                        </cell>
+                                    </row>
+                                    <row id="613">
+                                        <cell id="614"/>
+                                        <cell id="615"/>
+                                        <cell id="616"/>
+                                        <cell id="620">
+                                            <property name="backgroundColor">#D32F2F</property>
+                                        </cell>
+                                        <cell id="625">
+                                            <text id="627">
+                                                <property name="fontWeight">bold</property>
+                                                <property name="contentType">auto</property>
+                                                <text-property name="content"><![CDATA[25%-50% datos registrado]]></text-property>
                                             </text>
                                         </cell>
                                     </row>
@@ -1290,6 +1337,951 @@ resultado;</expression>
                                 <text-property name="displayName">nombre completo</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["nombre completo"]</expression>
                                 <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Null Credencial PCI</property>
+                                <text-property name="displayName">CNCP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">dataSetRow["no_credencial"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Tecnicos Area</property>
+                                <text-property name="displayName">CTA</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Num Credencial</property>
+                                <text-property name="displayName">PNC</text-property>
+                                <expression name="expression" type="javascript">row["Count Null Credencial PCI"]/row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Expediente Telmex</property>
+                                <text-property name="displayName">CSET</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_exp_tel"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin RFC</property>
+                                <text-property name="displayName">CSR</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["rfc"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin NSS</property>
+                                <text-property name="displayName">CSN</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["nss"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Usuario PIC</property>
+                                <text-property name="displayName">CSU</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["pic_movil"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Fotografia</property>
+                                <text-property name="displayName">CSF</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["foto"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Supervisor</property>
+                                <text-property name="displayName">CSS</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["supervisor"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Telefono Supervisor</property>
+                                <text-property name="displayName">CSTS</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_supervisor"] == 0</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Correo</property>
+                                <text-property name="displayName">CSC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["correo_super"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Contratista</property>
+                                <text-property name="displayName">CSC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["contratista"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Subdireccion</property>
+                                <text-property name="displayName">CSS</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["subdireccion"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Cope</property>
+                                <text-property name="displayName">CSC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["cope"] == null </expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Especialidad</property>
+                                <text-property name="displayName">CSE</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["especialidad"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Estatus</property>
+                                <text-property name="displayName">CSE</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["estatus"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Boletinado</property>
+                                <text-property name="displayName">CSB</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["boletinado"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Puesto</property>
+                                <text-property name="displayName">CSP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["puesto"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Credencial PCI</property>
+                                <text-property name="displayName">CSCP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_cred_pci"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Fecha de Ingreso</property>
+                                <text-property name="displayName">CSFI</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["fecha_ingreso"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Certificacion Fibra</property>
+                                <text-property name="displayName">CSCF</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["fibra"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin NoFibra</property>
+                                <text-property name="displayName">SNF</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_fibra"] == null </expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Cobre</property>
+                                <text-property name="displayName">CSC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["cobre"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin NoCobre</property>
+                                <text-property name="displayName">SNC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_cobre"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Certificacion Redes</property>
+                                <text-property name="displayName">SCR</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["redes"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin NoRedes</property>
+                                <text-property name="displayName">SNR</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_redes"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Certificacion Antenas</property>
+                                <text-property name="displayName">SCA</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["antenas"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin NoAntenas</property>
+                                <text-property name="displayName">SNA</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["no_antenas"] == null</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Curso PICMovil</property>
+                                <text-property name="displayName">SCP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["pic_movil"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Curso Claro Video</property>
+                                <text-property name="displayName">SCC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["claro_video"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Marca</property>
+                                <text-property name="displayName">SM</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["marca"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Submarca</property>
+                                <text-property name="displayName">CSS</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["submarca"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Modelo</property>
+                                <text-property name="displayName">CSM</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["modelo"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Placas</property>
+                                <text-property name="displayName">CSP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["placas"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Color</property>
+                                <text-property name="displayName">CSC</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["color"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Rotulo</property>
+                                <text-property name="displayName">SR</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["rotulo"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Limpio</property>
+                                <text-property name="displayName">CSL</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["limpio"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Polarizado</property>
+                                <text-property name="displayName">CSP</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["polarizado"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Observaciones</property>
+                                <text-property name="displayName">CSO</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["observaciones"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Frente</property>
+                                <text-property name="displayName">CSF</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["frente"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Count Sin Lateral</property>
+                                <text-property name="displayName">CSL</text-property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Area</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <expression name="filterExpr" type="javascript">row["lateral"] == ''</expression>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Expediente Telmex</property>
+                                <text-property name="displayName">PET</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Expediente Telmex"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio RFC</property>
+                                <text-property name="displayName">PRFC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin RFC"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio NSS</property>
+                                <text-property name="displayName">PNSS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin NSS"]  / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Usuario Pic</property>
+                                <text-property name="displayName">PUP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Usuario PIC"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Fotografia</property>
+                                <text-property name="displayName">PF</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Fotografia"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Supervisor</property>
+                                <text-property name="displayName">PS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Supervisor"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Tel Supervisor</property>
+                                <text-property name="displayName">PTS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Telefono Supervisor"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Correo Supervisor</property>
+                                <text-property name="displayName">PCS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Correo"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Contratista</property>
+                                <text-property name="displayName">PC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Contratista"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Subdirección</property>
+                                <text-property name="displayName">PS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Subdireccion"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Cope</property>
+                                <text-property name="displayName">PC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Cope"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Especialidad</property>
+                                <text-property name="displayName">PE</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Especialidad"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Estatus</property>
+                                <text-property name="displayName">PE</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Estatus"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Boletinado</property>
+                                <text-property name="displayName">PB</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Boletinado"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Puesto</property>
+                                <text-property name="displayName">PP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Puesto"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Credencial PCI</property>
+                                <text-property name="displayName">PCP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Credencial PCI"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Fecha Ingreso</property>
+                                <text-property name="displayName">PFI</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Fecha de Ingreso"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Certificación Fibra</property>
+                                <text-property name="displayName">PCF</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Certificacion Fibra"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio No Cert Fibra</property>
+                                <text-property name="displayName">PNCF</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin NoFibra"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Certificacion Cobre</property>
+                                <text-property name="displayName">PCC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Cobre"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio NoCobre</property>
+                                <text-property name="displayName">PNC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin NoCobre"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Certificacion Redes</property>
+                                <text-property name="displayName">PCR</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Certificacion Redes"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio NoRedes</property>
+                                <text-property name="displayName">PNR</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin NoRedes"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Antenas</property>
+                                <text-property name="displayName">PA</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Certificacion Antenas"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio NoAntenas</property>
+                                <text-property name="displayName">PNA</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin NoAntenas"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Picmovil</property>
+                                <text-property name="displayName">PP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Curso PICMovil"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Curso Claro Video</property>
+                                <text-property name="displayName">PCCV</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Curso Claro Video"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Marca</property>
+                                <text-property name="displayName">PM</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Marca"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Submarca</property>
+                                <text-property name="displayName">PS</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Submarca"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Modelo</property>
+                                <text-property name="displayName">PM</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Modelo"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Placas</property>
+                                <text-property name="displayName">PP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Placas"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Color</property>
+                                <text-property name="displayName">PC</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Color"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Polarizado</property>
+                                <text-property name="displayName">PP</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Polarizado"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Observaciones</property>
+                                <text-property name="displayName">PO</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Observaciones"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio frente</property>
+                                <text-property name="displayName">PF</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Frente"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio Lateral</property>
+                                <text-property name="displayName">PL</text-property>
+                                <expression name="expression" type="javascript">row["Count Sin Lateral"] / row["Count Tecnicos Area"]</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Promedio del área</property>
+                                <text-property name="displayName">PDA</text-property>
+                                <expression name="expression" type="javascript">(row["Promedio Num Credencial"]+row["Promedio Expediente Telmex"]+row["Promedio RFC"]+row["Promedio NSS"]+row["Promedio Usuario Pic"]+row["Promedio Fotografia"]+row["Promedio Supervisor"]+row["Promedio Tel Supervisor"]+row["Promedio Correo Supervisor"]+row["Promedio Contratista"]+row["Promedio Subdirección"]+row["Promedio Cope"]+row["Promedio Especialidad"]+row["Promedio Estatus"]+row["Promedio Boletinado"]+row["Promedio Puesto"]+row["Promedio Credencial PCI"]+row["Promedio Fecha Ingreso"]+row["Promedio Certificación Fibra"]+row["Promedio No Cert Fibra"]+row["Promedio Certificacion Cobre"]+row["Promedio NoCobre"]+row["Promedio Certificacion Redes"]+row["Promedio NoRedes"]+row["Promedio Antenas"]+row["Promedio NoAntenas"]+row["Promedio Picmovil"]+row["Promedio Curso Claro Video"]+row["Promedio Marca"]+row["Promedio Submarca"]+row["Promedio Modelo"]+row["Promedio Placas"]+row["Promedio Color"]+row["Promedio Polarizado"]+row["Promedio Observaciones"]+row["Promedio frente"]+row["Promedio Lateral"])/32</expression>
+                                <property name="dataType">float</property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">-727379968</property>
@@ -1662,6 +2654,28 @@ resultado;</expression>
                                 <row id="403">
                                     <cell id="404"/>
                                     <cell id="494">
+                                        <list-property name="highlightRules">
+                                            <structure>
+                                                <property name="operator">is-true</property>
+                                                <property name="backgroundColor">#388E3C</property>
+                                                <property name="fontWeight">bold</property>
+                                                <property name="color">#FFFFFF</property>
+                                                <expression name="testExpr" type="javascript">row["Promedio del área"] >= 0 &amp;&amp; row["Promedio del área"] &lt;=0.499</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="operator">is-true</property>
+                                                <property name="backgroundColor">#FDD835</property>
+                                                <property name="fontWeight">bold</property>
+                                                <expression name="testExpr" type="javascript">row["Promedio del área"] >= 0.5 &amp;&amp; row["Promedio del área"] &lt;=0.749</expression>
+                                            </structure>
+                                            <structure>
+                                                <property name="operator">is-true</property>
+                                                <property name="backgroundColor">#D32F2F</property>
+                                                <property name="fontWeight">bold</property>
+                                                <property name="color">#FFFFFF</property>
+                                                <expression name="testExpr" type="javascript">row["Promedio del área"] >= 0.75 &amp;&amp; row["Promedio del área"] &lt;=1</expression>
+                                            </structure>
+                                        </list-property>
                                         <data id="491">
                                             <property name="resultSetColumn">area</property>
                                         </data>
@@ -1723,6 +2737,13 @@ resultado;</expression>
                                     <property name="backgroundColor">white</property>
                                     <data id="120">
                                         <property name="resultSetColumn">folio</property>
+                                        <list-property name="action">
+                                            <structure>
+                                                <property name="linkType">hyperlink</property>
+                                                <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/"+row["_id"]</expression>
+                                                <property name="targetWindow">_blank</property>
+                                            </structure>
+                                        </list-property>
                                     </data>
                                 </cell>
                                 <cell id="125">
@@ -1743,65 +2764,50 @@ resultado;</expression>
                                             </simple-property-list>
                                         </structure>
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_credencial"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="129">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_exp_tel"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="131">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["rfc"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="133">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["nss"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="135">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["pic_movil"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -1813,7 +2819,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["foto"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1821,12 +2827,12 @@ resultado;</expression>
                                 <cell id="139">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">not-match</property>
+                                            <property name="operator">ne</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["supervisor"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1839,7 +2845,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_supervisor"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">0</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1852,7 +2858,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["correo_super"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1860,65 +2866,50 @@ resultado;</expression>
                                 <cell id="145">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["contratista"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="149">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["subdireccion"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="153">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["cope"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="155">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["especialidad"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="157">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["estatus"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -1930,7 +2921,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["boletinado"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1938,39 +2929,30 @@ resultado;</expression>
                                 <cell id="161">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["puesto"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="163">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_cred_pci"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
                                 <cell id="165">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["fecha_ingreso"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -1982,7 +2964,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["fibra"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1990,13 +2972,10 @@ resultado;</expression>
                                 <cell id="169">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_fibra"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -2008,7 +2987,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["cobre"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2016,13 +2995,10 @@ resultado;</expression>
                                 <cell id="173">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_cobre"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -2034,7 +3010,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["redes"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2042,13 +3018,10 @@ resultado;</expression>
                                 <cell id="177">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_redes"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -2060,7 +3033,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["antenas"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2068,13 +3041,10 @@ resultado;</expression>
                                 <cell id="181">
                                     <list-property name="highlightRules">
                                         <structure>
-                                            <property name="operator">ne</property>
+                                            <property name="operator">is-not-null</property>
                                             <property name="backgroundColor">#388E3C</property>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["no_antenas"]</expression>
-                                            <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
-                                            </simple-property-list>
                                         </structure>
                                     </list-property>
                                 </cell>
@@ -2086,7 +3056,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["pic_movil"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2099,7 +3069,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["claro_video"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2112,7 +3082,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["marca"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2125,7 +3095,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["submarca"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2138,7 +3108,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["modelo"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2151,7 +3121,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["placas"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2164,7 +3134,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["color"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2177,7 +3147,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["rotulo"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2190,7 +3160,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["limpio"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2203,7 +3173,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["polarizado"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2216,7 +3186,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["observaciones"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2229,7 +3199,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["frente"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -2242,7 +3212,7 @@ resultado;</expression>
                                             <property name="color">#FFFFFF</property>
                                             <expression name="testExpr" type="javascript">row["lateral"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Desconocido"</value>
+                                                <value type="javascript">''</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
