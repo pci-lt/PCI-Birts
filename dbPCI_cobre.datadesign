@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -107,11 +107,16 @@
             <property name="jarList">/Users/InfoSync/Documents/BRDPro/eclipse/plugins/com.actuate.data.oda.jdbc.drivers_23.0.0.v20131216/lib/postgresql/postgresql-9.2-1003.jdbc4.jar</property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>useKerberosAuthentication</name>
+                    <value>false</value>
+                </ex-property>
+            </list-property>
             <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
-            <property name="useRequestSession">true</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -1440,14 +1445,7 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
 var fecha2 = params["Fecha Final"].value;
 
@@ -1463,13 +1461,9 @@ var bookmark = "{$exists:false},";
 	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
 	var new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
 
-
-log('new query= ' + new_query)
-
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
-
-log('query' + query);]]></method>
+]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -1830,14 +1824,7 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
 var fecha2 = params["Fecha Final"].value;
 
@@ -1854,12 +1841,10 @@ var bookmark = "{$exists:false},";
 	var new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
 
 
-log('new query= ' + new_query)
 
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
-
-log('query' + query);]]></method>
+]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -2552,7 +2537,7 @@ resultado;</expression>
                     <property name="name">Cope</property>
                     <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
 if(area == null || area == ""){&#13;
-	area = row["values"];&#13;
+	area = "cope_desconocido";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -2588,6 +2573,8 @@ resultado;</expression>
                 <structure>
                     <property name="columnName">Cope</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -2609,14 +2596,7 @@ resultado;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
 
 
@@ -2632,12 +2612,10 @@ var bookmark = "{$exists:false},";
 	var new_query = "'answers.5a1eecfbb43fdd65914505a1': { $eq: '" + fecha + "' },";
 
 
-log('new query= ' + new_query)
 
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
-
-log('query' + query);]]></method>
+]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>

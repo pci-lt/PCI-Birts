@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -55,7 +55,7 @@
     </parameters>
     <data-sources>
         <data-mart-data-source name="Datawarehouse" id="4">
-            <property name="datamartURL">Datawarehouse_ PCI</property>
+            <property name="datamartURL">account_1259/Resources/Datawarehouse_ PCI</property>
             <property name="accessType">transient</property>
             <list-property name="paramBindings">
                 <structure>
@@ -382,6 +382,32 @@ display;</expression>
                                 <expression name="expression" type="javascript">dataSetRow["monto"]</expression>
                                 <property name="dataType">float</property>
                             </structure>
+                            <structure>
+                                <property name="name">Count Ordenes</property>
+                                <text-property name="displayName">COrden</text-property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">dataSetRow["folio"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Montos</property>
+                                <text-property name="displayName">SMont</text-property>
+                                <property name="dataType">float</property>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["monto"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
                         <column id="75">
@@ -496,11 +522,26 @@ display;</expression>
                         </detail>
                         <footer>
                             <row id="65">
-                                <cell id="66"/>
+                                <cell id="66">
+                                    <data id="84">
+                                        <property name="paddingRight">10pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">Count Ordenes</property>
+                                    </data>
+                                </cell>
                                 <cell id="67"/>
                                 <cell id="69"/>
                                 <cell id="70"/>
-                                <cell id="71"/>
+                                <cell id="71">
+                                    <data id="85">
+                                        <structure name="numberFormat">
+                                            <property name="category">Currency</property>
+                                            <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">Suma Montos</property>
+                                    </data>
+                                </cell>
                                 <cell id="72"/>
                                 <cell id="73"/>
                             </row>

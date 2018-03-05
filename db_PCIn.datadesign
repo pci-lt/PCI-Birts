@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -118,11 +118,16 @@
             <property name="jarList">/Users/InfoSync/Documents/BRDPro/eclipse/plugins/com.actuate.data.oda.jdbc.drivers_23.0.0.v20131216/lib/postgresql/postgresql-9.2-1003.jdbc4.jar</property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>useKerberosAuthentication</name>
+                    <value>false</value>
+                </ex-property>
+            </list-property>
             <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
-            <property name="useRequestSession">true</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -3047,7 +3052,7 @@ createdPeriod == actualPeriod</expression>
                 <structure>
                     <property name="name">Mes</property>
                     <expression name="expression" type="javascript">var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre","Noviembre", "Diciembre"];&#13;
-var month = Integer.parseInt(row["_id.month"]);&#13;
+var month = parseInt(row["_id.month"]);&#13;
 &#13;
 var mes = months[month-1];&#13;
 &#13;
@@ -3206,36 +3211,26 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
 var month = params["Mes"].value;
 var year = params["Año"].value;
 
 var bookmark = "{$exists:false}";
 
-log('param month' + month);
+
 
 //var new_query = ",'answers.f1054000a030000000000e14':'";
 
 
 if(fecha != '' &amp;&amp; fecha != null){
-
 		var new_query = ",'answers.f1054000a030000000000e14':'"+ fecha + "'";
 		//var cant = "cantidad_mensual: {$sum:'$cant_mensual' },";
 		//query = query.replace(cant , "")
-		
-
 }
 
 if(month != '' &amp;&amp; month != null){
-	log(' entr al if \n');
+
 
 	var month_to = month;
 	var year_to = year;
@@ -3262,26 +3257,13 @@ if(month != '' &amp;&amp; month != null){
 
 	var book2 = "['$_id.month','05']";
 	var replace = "['$_id.month','"+ month +"']";
-    log('replace= ' + replace)
 	
 	query = query.replace(book2 , replace);
 
-
 }
 
-log('new query= ' + new_query)
-
 query = query.replace(bookmark, bookmark + new_query );
-this.queryText = query;
-
-log('query' + query);
-
-
-
-
-
-
-]]></method>
+this.queryText = query;]]></method>
             <property name="dataSource">Data Source</property>
             <list-property name="resultSet">
                 <structure>
@@ -3327,7 +3309,7 @@ log('query' + query);
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: { $in: [11044, 16343]},\r\n\tdeleted_at:{$exists:false},\r\n       'answers.f1054000a030000000000002':'liquidada'\r\n}},\r\n{$group: {_id:{\r\n\r\n\t\tarea:'$answers.f1054000a0100000000000a2',\r\n\t\tcope:'$answers.f1054000a010000000000002',\r\n\t\ttipo:'$answers.f1054000a010000000000021',\r\n\t\tfecha:'$answers.f1054000a030000000000e14',\r\n              month: {'$substr' : ['$answers.f1054000a030000000000e14', 5,2]}\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}},\r\n{$project:{\r\n\t\tarea:'$_id.area',\r\n\t\tcope:'$_id.cope',\r\n\t\ttipo:'$_id.tipo',\r\n\t\tcantidad: '$cantidad',\r\n\t\tmonth: '$_id.month',\r\n\t\tcant_mensual: {\r\n\t\t\t\t\t\t$cond: {\r\n\t\t\t\t\t\t\t\tif: {$eq:['$_id.month','05']}, then:'$cantidad',else:0  }\t}\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\t\tarea:'$_id.area',\r\n\t\tcope:'$_id.cope',\r\n\t\tmonth: '$_id.month',\r\n\t\ttipo:'$_id.tipo',\t\r\n},\r\n\t\tcantidad: {$sum:'$cantidad'},\r\n\t\tcantidad_mensual: {$sum:'$cant_mensual'}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.cope" , "_id.tipo" , "cantidad" , "cantidad_mensual" , "_id.month"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n       'answers.f1054000a030000000000002':'liquidada'\r\n}},\r\n{$group: {_id:{\r\n\r\n\t\tarea:'$answers.f1054000a0100000000000a2',\r\n\t\tcope:'$answers.f1054000a010000000000002',\r\n\t\ttipo:'$answers.f1054000a010000000000021',\r\n\t\tfecha:'$answers.f1054000a030000000000e14',\r\n              month: {'$substr' : ['$answers.f1054000a030000000000e14', 5,2]}\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}},\r\n{$project:{\r\n\t\tarea:'$_id.area',\r\n\t\tcope:'$_id.cope',\r\n\t\ttipo:'$_id.tipo',\r\n\t\tcantidad: '$cantidad',\r\n\t\tmonth: '$_id.month',\r\n\t\tcant_mensual: {\r\n\t\t\t\t\t\t$cond: {\r\n\t\t\t\t\t\t\t\tif: {$eq:['$_id.month','05']}, then:'$cantidad',else:0  }\t}\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\t\tarea:'$_id.area',\r\n\t\tcope:'$_id.cope',\r\n\t\tmonth: '$_id.month',\r\n\t\ttipo:'$_id.tipo',\t\r\n},\r\n\t\tcantidad: {$sum:'$cantidad'},\r\n\t\tcantidad_mensual: {$sum:'$cant_mensual'}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.cope" , "_id.tipo" , "cantidad" , "cantidad_mensual" , "_id.month"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -3626,25 +3608,12 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var fecha = params["Fecha Inicial"].value;
 var month = params["Mes Cobre"].value;
 var year = params["Año Cobre"].value;
 
 var bookmark = "{$exists:false},";
-
-log('param month' + month);
-
-
-
-
 if(fecha != '' &amp;&amp; fecha != null){
 		
 		var date_to = BirtDateTime.addDay(fecha, 1);
@@ -3662,8 +3631,6 @@ if(fecha != '' &amp;&amp; fecha != null){
 }
 
 if(month != '' &amp;&amp; month != null){
-	log(' entr al if \n');
-
 	var month_to = month;
 	var year_to = year;
 
@@ -3690,19 +3657,18 @@ if(month != '' &amp;&amp; month != null){
 	new_query = "'answers.5a1eecfbb43fdd65914505a1': { $gte: '" + year + "-01-01' , $lt: '" + year_to + "-" +month_to+ "-01' },";
 
 	var book2 = "['$_id.month', 5]";
-    log('replace= ' + replace)
+
 	
 	query = query.replace(book2 , replace);
 
 
 }
 
-log('new query= ' + new_query)
+
 
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
-
-log('query' + query);]]></method>
+]]></method>
             <property name="dataSource">Data Source</property>
             <list-property name="resultSet">
                 <structure>
@@ -5581,14 +5547,7 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var new_query = "";
 var bookmark = "{$exists:false},";
 var fecha = params["Fecha Inicial"].value;
@@ -5600,12 +5559,12 @@ new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date
 
 
 
-log('new query= ' + new_query)
+
 
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
 
-log('query' + query);]]></method>
+]]></method>
             <property name="dataSource">Data Source</property>
             <list-property name="resultSet">
                 <structure>
