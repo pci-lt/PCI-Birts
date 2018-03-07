@@ -27,6 +27,9 @@
                     <expression name="sortByColumn">dataSetRow["year"]</expression>
                     <property name="sortDirection">asc</property>
                     <property name="dataType">integer</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2018</value>
+                    </simple-property-list>
                     <property name="controlType">list-box</property>
                     <property name="fixedOrder">false</property>
                     <structure name="format">
@@ -35,10 +38,26 @@
                 </scalar-parameter>
             </parameters>
         </cascading-parameter-group>
+        <dynamic-filter-parameter name="Tipo de tecnología" id="797">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Join produccion fibra y cobre - CASD</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["Tipo"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["Tipo"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">Tipo</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Datawarehouse" id="4">
-            <property name="datamartURL">account_1259/Resources/Datawarehouse_ PCI</property>
+            <property name="datamartURL">Datawarehouse_ PCI</property>
             <property name="accessType">transient</property>
             <list-property name="paramBindings">
                 <structure>
@@ -169,6 +188,10 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Tipo</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -215,6 +238,11 @@
                     <structure>
                         <property name="position">9</property>
                         <property name="name">Subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Tipo</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -265,6 +293,11 @@
                 <structure>
                     <property name="position">9</property>
                     <property name="name">Subdireccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Tipo</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -400,7 +433,7 @@
                                     <property name="paddingTop">15pt</property>
                                     <property name="textAlign">left</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[Acumulado FTTH y cobre]]></text-property>
+                                    <text-property name="content"><![CDATA[Acumulado del año]]></text-property>
                                 </text>
                             </cell>
                         </row>
@@ -1550,8 +1583,21 @@
                     <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Diciembre"</expression>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Tipo</property>
+                    <text-property name="displayName">Tipo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000000</property>
+            <list-property name="filter">
+                <structure>
+                    <expression name="expr" type="javascript">row["Tipo"]</expression>
+                    <property name="dynamicFilterParameter">Tipo de tecnología</property>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
             <column id="321">
                 <property name="width">1.09375in</property>
             </column>
@@ -2307,7 +2353,11 @@
                     <cell id="293"/>
                     <cell id="295"/>
                     <cell id="297"/>
-                    <cell id="299"/>
+                    <cell id="299">
+                        <data id="798">
+                            <property name="resultSetColumn">Tipo</property>
+                        </data>
+                    </cell>
                     <cell id="733">
                         <data id="294">
                             <property name="resultSetColumn">cantidad</property>
