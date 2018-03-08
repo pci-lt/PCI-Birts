@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -20,13 +20,10 @@
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="javascript">var time = new Date();&#13;
-var dd = time.getDate();&#13;
+var dd = '01';&#13;
 var mm = time.getMonth()+1;&#13;
 var yy = time.getFullYear();&#13;
 &#13;
-if(dd&lt;10){&#13;
-	dd = '0' + dd;&#13;
-}&#13;
 if(mm&lt;10){&#13;
 	mm = '0' + mm&#13;
 }&#13;
@@ -66,6 +63,24 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="Tipo de tarea" id="493">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Join Bolsa - Num Tecnicos</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["Tipo"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["Tipo"]</expression>
+            <expression name="sortByColumn">dataSetRow["Tipo"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">Tipo</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="dbPC_cobre" id="4">
@@ -158,13 +173,6 @@ yy + '-' + mm + '-' + dd</value>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">no_tecnicos</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">no_tecnicos</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">moda_tec</property>
                     <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
@@ -242,28 +250,28 @@ yy + '-' + mm + '-' + dd</value>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">no_tecnicos</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">13</property>
                         <property name="name">moda_tec</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">13</property>
                         <property name="name">subdir_m</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">14</property>
                         <property name="name">div_m</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">15</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">Tipo</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -327,28 +335,28 @@ yy + '-' + mm + '-' + dd</value>
                 </structure>
                 <structure>
                     <property name="position">12</property>
-                    <property name="name">no_tecnicos</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">13</property>
                     <property name="name">moda_tec</property>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">13</property>
                     <property name="name">subdir_m</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
+                    <property name="position">14</property>
                     <property name="name">div_m</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">16</property>
+                    <property name="position">15</property>
                     <property name="name">cantidad</property>
                     <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">Tipo</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -421,7 +429,7 @@ yy + '-' + mm + '-' + dd</value>
                                                 <property name="fontWeight">bold</property>
                                                 <property name="textAlign">center</property>
                                                 <property name="contentType">auto</property>
-                                                <text-property name="content"><![CDATA[Órdenes de servicio del día: ]]></text-property>
+                                                <text-property name="content"><![CDATA[Análisis del día ]]></text-property>
                                             </text>
                                         </cell>
                                     </row>
@@ -879,7 +887,24 @@ yy + '-' + mm + '-' + dd</value>
                             <structure>
                                 <property name="name">Rendimiento</property>
                                 <text-property name="displayName">rendimiento</text-property>
-                                <expression name="expression" type="javascript">(row["Suma Liquidaciones Cobre"] + row["Suma Liquidaciones Fibra"])/row["Max Tecnicos"]</expression>
+                                <expression name="expression" type="javascript">var rendimiento = (row["Suma Liquidaciones Cobre"] + row["Suma Liquidaciones Fibra"])/row["Max Tecnicos"]&#13;
+var display =  0;&#13;
+var dia = 0;&#13;
+var habil = 0&#13;
+var desde = params["Fecha Inicial"].value;&#13;
+var hasta = params["Fecha Final"].value;&#13;
+var recorrido = desde;&#13;
+var diff = BirtDateTime.diffDay(desde, hasta)+ 1;&#13;
+for(var i = 0; i &lt; diff; i++){&#13;
+	dia = BirtDateTime.weekDay(recorrido,1);&#13;
+	if(dia != 1){&#13;
+		habil++&#13;
+	}&#13;
+	recorrido = BirtDateTime.addDay(recorrido,1);&#13;
+}&#13;
+display = rendimiento/habil;&#13;
+&#13;
+display;</expression>
                                 <property name="dataType">float</property>
                                 <property name="allowExport">true</property>
                             </structure>
@@ -1425,8 +1450,27 @@ yy + '-' + mm + '-' + dd</value>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">moda_tec</property>
+                                <text-property name="displayName">moda_tec</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["moda_tec"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Tipo</property>
+                                <text-property name="displayName">Tipo</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["Tipo"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
+                        <list-property name="filter">
+                            <structure>
+                                <expression name="expr" type="javascript">row["Tipo"]</expression>
+                                <property name="dynamicFilterParameter">Tipo de tarea</property>
+                                <property name="updateAggregation">true</property>
+                            </structure>
+                        </list-property>
                         <column id="133">
                             <property name="width">0.6770833333333334in</property>
                         </column>
@@ -2070,7 +2114,11 @@ yy + '-' + mm + '-' + dd</value>
                         <detail>
                             <row id="110">
                                 <cell id="111"/>
-                                <cell id="113"/>
+                                <cell id="113">
+                                    <data id="492">
+                                        <property name="resultSetColumn">Tipo</property>
+                                    </data>
+                                </cell>
                                 <cell id="115">
                                     <data id="435">
                                         <property name="resultSetColumn">_id.estatus</property>
