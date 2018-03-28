@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -152,6 +152,10 @@
                                 <property name="name">Mayus COPE</property>
                                 <text-property name="displayName">Mayus Cope</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "sin_cope";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
 var resultado = '';&#13;
 for (var i = 0; i &lt;arr.length;i++){&#13;
@@ -193,6 +197,13 @@ resultado;</expression>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000</property>
+                        <list-property name="sort">
+                            <structure>
+                                <expression name="key" type="javascript">row["promedio"]</expression>
+                                <property name="direction">desc</property>
+                                <property name="strength">-1</property>
+                            </structure>
+                        </list-property>
                         <column id="33">
                             <property name="width">2.625in</property>
                         </column>
@@ -260,6 +271,10 @@ resultado;</expression>
                                 </cell>
                                 <cell id="25">
                                     <data id="26">
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">promedio</property>
                                     </data>
@@ -298,6 +313,10 @@ resultado;</expression>
                                 </cell>
                                 <cell id="31">
                                     <data id="56">
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
                                         <property name="textAlign">center</property>
                                         <property name="resultSetColumn">Avg Total</property>
                                     </data>
