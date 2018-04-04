@@ -3850,5 +3850,819 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Fibra" id="577">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Subdireccion</property>
+                    <expression name="expression" type="javascript">var area = row["subdireccion"];&#13;
+if(area == null){&#13;
+	area = "desconocida";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Pago</property>
+                    <expression name="expression" type="javascript">var tarea = row["tarea"];&#13;
+var display = "";&#13;
+var tk = 0;&#13;
+var fc = 0;&#13;
+var voz = 0;&#13;
+var ts = 0;&#13;
+var tecnologia = "Fibra";&#13;
+&#13;
+if(tarea != null){&#13;
+	tk = tarea.indexOf("TK");&#13;
+	fc = tarea.indexOf("FC");&#13;
+	voz = tarea.indexOf("VOZ");&#13;
+	ts = tarea.indexOf("TS");&#13;
+}&#13;
+&#13;
+if (voz != -1) {&#13;
+	display = "Voz";&#13;
+}&#13;
+else if (tk != -1 || fc != -1 || ts != -1) {&#13;
+	display = "Migraciones";&#13;
+}&#13;
+else{&#13;
+	display = tecnologia;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Estatus</property>
+                    <expression name="expression" type="javascript">var estatus = row["estatus"];&#13;
+var display = "";&#13;
+&#13;
+if(estatus == "pendiente" || estatus == "validacion" || estatus == "error_validacion" || estatus == "archivo_carga_masiva"){&#13;
+	display = "Sin PACO";&#13;
+}&#13;
+else if(estatus == "paco" || estatus == "error_de_paco" || estatus == "estimacion"){&#13;
+	display = "Con PACO"&#13;
+}&#13;
+else if (estatus == "orden_de_compra"){&#13;
+	display = "Con orden de compra";&#13;
+}&#13;
+else if(estatus == "pagada"){&#13;
+	display = "Orden pagada a PCI";&#13;
+}&#13;
+else{&#13;
+	display = "Estatus no identificado";&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <text-property name="heading">tecnico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tarea</text-property>
+                    <text-property name="heading">tarea</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">subdireccion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subdireccion</text-property>
+                    <text-property name="heading">subdireccion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Subdireccion</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Pago</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tarea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var fecha = params["Fecha Inicial"].value;
+var fecha2 = params["Fecha Final"].value;
+
+
+var bookmark = "{$exists:false},";
+	
+	var date_to = BirtDateTime.addDay(fecha, 1);
+	var year_to = BirtDateTime.year(date_to);
+	var month_to = BirtDateTime.month(date_to);
+	if(month_to < 10)
+		month_to = '0' + month_to;
+	var day_to = BirtDateTime.day(date_to);
+	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
+	var new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;
+]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tecnico</property>
+                    <property name="nativeName">tecnico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tarea</property>
+                    <property name="nativeName">tarea</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">subdireccion</property>
+                    <property name="nativeName">subdireccion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project: {\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tarea</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tarea</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tarea</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.area</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.area</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tecnico</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tecnico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tecnico</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.subdireccion</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.subdireccion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.subdireccion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cantidad</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cantidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cantidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Cobre" id="578">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Subdireccion</property>
+                    <expression name="expression" type="javascript">var area = row["subdireccion"];&#13;
+var cope = row["area"];&#13;
+if(cope == "villahermosa")&#13;
+	area = cope;&#13;
+if(area == null){&#13;
+	area = "desconocido";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Pago</property>
+                    <expression name="expression" type="javascript">var tarea = row["tarea"];&#13;
+var display = "";&#13;
+var tk = 0;&#13;
+var fc = 0;&#13;
+var voz = 0;&#13;
+var ts = 0;&#13;
+var tecnologia = "Cobre";&#13;
+&#13;
+if(tarea != null){&#13;
+	tk = tarea.indexOf("TK");&#13;
+	fc = tarea.indexOf("FC");&#13;
+	voz = tarea.indexOf("VOZ");&#13;
+	ts = tarea.indexOf("TS");&#13;
+}&#13;
+&#13;
+if (voz != -1) {&#13;
+	display = "Voz";&#13;
+}&#13;
+else if (tk != -1 || fc != -1 || ts != -1) {&#13;
+	display = "Migraciones";&#13;
+}&#13;
+else{&#13;
+	display = tecnologia;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Estatus</property>
+                    <expression name="expression" type="javascript">var estatus = row["estatus"];&#13;
+var display = "";&#13;
+&#13;
+if(estatus == "pendiente" || estatus == "aceptada" || estatus == "archivo_carga_masiva"){&#13;
+	display = "Sin PACO";&#13;
+}&#13;
+else if(estatus == "paco" || estatus == "error_de_paco" || estatus == "estimacion"){&#13;
+	display = "Con PACO"&#13;
+}&#13;
+else if (estatus == "orden_de_compra" || estatus == "factura"){&#13;
+	display = "Con orden de compra";&#13;
+}&#13;
+else if(estatus == "pagada"){&#13;
+	display = "Orden pagada a PCI";&#13;
+}&#13;
+else if (estatus == "rechazo_telmex") {}&#13;
+else{&#13;
+	display = "Estatus no identificado";&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <text-property name="heading">tecnico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tarea</text-property>
+                    <text-property name="heading">tarea</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">subdireccion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subdireccion</text-property>
+                    <text-property name="heading">subdireccion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Subdireccion</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Pago</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tarea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var fecha = params["Fecha Inicial"].value;
+var fecha2 = params["Fecha Final"].value;
+
+
+var bookmark = "{$exists:false},";
+	
+	var date_to = BirtDateTime.addDay(fecha, 1);
+	var year_to = BirtDateTime.year(date_to);
+	var month_to = BirtDateTime.month(date_to);
+	if(month_to < 10)
+		month_to = '0' + month_to;
+	var day_to = BirtDateTime.day(date_to);
+	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
+	var new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;
+]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">tecnico</property>
+                    <property name="nativeName">tecnico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tarea</property>
+                    <property name="nativeName">tarea</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">subdireccion</property>
+                    <property name="nativeName">subdireccion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project:{\r\n\t\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tecnico</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tecnico</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tecnico</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.tarea</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.tarea</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.tarea</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.subdireccion</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.subdireccion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.subdireccion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.area</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.area</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cantidad</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cantidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cantidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.union" name="Union Cobre - Fibra" id="579">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Subdireccion</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">Subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Fibra</value>
+                <value>Cobre</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:Union xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_union.xsd" xmlns:tns="http://schemas.actuate.com/">
+<tns:DataSet Index="0" name="Fibra">
+<tns:Column name="_id"/>
+<tns:Column name="tecnico"/>
+<tns:Column name="Subdireccion"/>
+<tns:Column name="Pago"/>
+<tns:Column name="Estatus"/>
+</tns:DataSet>
+<tns:DataSet Index="1" name="Cobre">
+<tns:Column name="_id"/>
+<tns:Column name="tecnico"/>
+<tns:Column name="Subdireccion"/>
+<tns:Column name="Pago"/>
+<tns:Column name="Estatus"/>
+</tns:DataSet>
+</tns:Union>]]></xml-property>
+        </derived-data-set>
     </data-sets>
+    <parameters>
+        <scalar-parameter name="Fecha Inicial" id="580">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="581">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
 </datamart>
