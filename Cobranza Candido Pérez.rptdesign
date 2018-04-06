@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -578,7 +578,7 @@ display</expression>
       </outline>
      </label>
      <dataDefinition definition="row[&quot;folio&quot;]">
-      <grouping enabled="true" aggregateExpression="Count"/>
+      <grouping enabled="true" aggregateExpression="DistinctCount"/>
      </dataDefinition>
      <dataPoint separator=" / ">
       <components type="1"/>
@@ -778,7 +778,7 @@ display</expression>
                                 <simple-property-list name="aggregateOn">
                                     <value>Grupo</value>
                                 </simple-property-list>
-                                <property name="aggregateFunction">COUNT</property>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
@@ -790,12 +790,12 @@ display</expression>
                             <structure>
                                 <property name="name">Suma Total</property>
                                 <text-property name="displayName">STotal</text-property>
-                                <property name="dataType">float</property>
-                                <property name="aggregateFunction">SUM</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">COUNTDISTINCT</property>
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["Count Grupo"]</expression>
+                                        <expression name="value" type="javascript">row["folio"]</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -829,7 +829,7 @@ display</expression>
                                 <text-property name="displayName">Suma Pesos</text-property>
                                 <property name="dataType">float</property>
                                 <simple-property-list name="aggregateOn">
-                                    <value>Grupo</value>
+                                    <value>Folio</value>
                                 </simple-property-list>
                                 <property name="aggregateFunction">SUM</property>
                                 <list-property name="arguments">
@@ -851,6 +851,22 @@ display</expression>
                                 <text-property name="displayName">total</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Suma Pesos Categoria</property>
+                                <text-property name="displayName">SPC</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Grupo</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
@@ -928,6 +944,56 @@ display</expression>
                                     </cell>
                                     <cell id="476"/>
                                     <cell id="504">
+                                        <data id="542">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingRight">5pt</property>
+                                            <structure name="numberFormat">
+                                                <property name="category">Currency</property>
+                                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">right</property>
+                                            <property name="resultSetColumn">Suma Pesos Categoria</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="512"/>
+                                </row>
+                            </header>
+                        </group>
+                        <group id="529">
+                            <property name="groupName">Folio</property>
+                            <expression name="keyExpr" type="javascript">row["folio"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["folio"]</expression>
+                            </structure>
+                            <property name="hideDetail">true</property>
+                            <header>
+                                <row id="530">
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <property name="backgroundColor">#DCEDC8</property>
+                                            <property name="fontWeight">bold</property>
+                                            <expression name="testExpr" type="javascript">row["status_cob"]</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">"pagada"</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="531"/>
+                                    <cell id="532">
+                                        <data id="156">
+                                            <property name="paddingLeft">12pt</property>
+                                            <property name="resultSetColumn">folio</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">hyperlink</property>
+                                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
+                                                    <property name="targetWindow">_blank</property>
+                                                </structure>
+                                            </list-property>
+                                        </data>
+                                    </cell>
+                                    <cell id="533">
                                         <data id="510">
                                             <property name="fontWeight">bold</property>
                                             <property name="paddingRight">5pt</property>
@@ -939,7 +1005,12 @@ display</expression>
                                             <property name="resultSetColumn">Suma Pesos</property>
                                         </data>
                                     </cell>
-                                    <cell id="512"/>
+                                    <cell id="534">
+                                        <data id="517">
+                                            <property name="paddingLeft">12pt</property>
+                                            <property name="resultSetColumn">tipo</property>
+                                        </data>
+                                    </cell>
                                 </row>
                             </header>
                         </group>
@@ -958,16 +1029,8 @@ display</expression>
                                 </list-property>
                                 <cell id="153"/>
                                 <cell id="159">
-                                    <data id="156">
-                                        <property name="paddingLeft">12pt</property>
+                                    <data id="540">
                                         <property name="resultSetColumn">folio</property>
-                                        <list-property name="action">
-                                            <structure>
-                                                <property name="linkType">hyperlink</property>
-                                                <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
-                                                <property name="targetWindow">_blank</property>
-                                            </structure>
-                                        </list-property>
                                     </data>
                                 </cell>
                                 <cell id="505">
@@ -981,12 +1044,7 @@ display</expression>
                                         <property name="resultSetColumn">total</property>
                                     </data>
                                 </cell>
-                                <cell id="513">
-                                    <data id="517">
-                                        <property name="paddingLeft">12pt</property>
-                                        <property name="resultSetColumn">tipo</property>
-                                    </data>
-                                </cell>
+                                <cell id="513"/>
                             </row>
                         </detail>
                         <footer>
