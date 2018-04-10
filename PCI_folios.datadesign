@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -249,6 +249,7 @@
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
+            <property name="useRequestSession">false</property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="Mongo infosync" id="550">
             <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync</property>
@@ -8841,14 +8842,32 @@ if(position == null || position == ""){&#13;
 	position = "Puesto desconocido";&#13;
 }&#13;
 var area = position.split(" - ")&#13;
-var display = area[4];&#13;
-if(display == null || display == "" || display == "Puesto desconocido"){&#13;
-	display = "Empresa desconocida";&#13;
+var iniciales = area[4];&#13;
+if(iniciales == null || iniciales == "" || iniciales == "Puesto desconocido"){&#13;
+	iniciales = "Departamento desconocido";&#13;
 	if(row["folio"] == null || row["folio"] == ""){&#13;
 		var position_total = row["puesto_total"];&#13;
 		area = position_total.split(" - ");&#13;
-		display = area[4];&#13;
+		iniciales = area[4];&#13;
+		if(iniciales == null || iniciales == "")&#13;
+			iniciales = "Departamento desconocido";&#13;
 	}&#13;
+}&#13;
+var display = "Empresa desconocida";&#13;
+if(iniciales == "Empresa desconocida" || iniciales == null || iniciales == ""){&#13;
+	display = "Empresa desconocida"&#13;
+}&#13;
+else if (iniciales == "AI"){&#13;
+	display = "Accses IACON";&#13;
+}&#13;
+else if (iniciales == "AR") {&#13;
+	display = "Accses Redes";&#13;
+}&#13;
+else if (iniciales == "CR") {&#13;
+	display = "Crece";&#13;
+}&#13;
+else if (iniciales == "IA") {&#13;
+	display = "IACON"&#13;
 }&#13;
 &#13;
 display;</expression>
