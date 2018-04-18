@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -73,6 +73,23 @@ yy + '-' + mm + '-' + dd</value>
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="Empresa" id="1800">
+            <text-property name="promptText">Empresa</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Asistencia Mensual</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["Empresa"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["Empresa"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">Empresa</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Folios" id="4">
@@ -1425,8 +1442,13 @@ dia;</expression>
                                             <property name="operator">ne</property>
                                             <expression name="expr" type="javascript">row["nombre"]</expression>
                                             <simple-property-list name="value1">
-                                                <value type="javascript">"Aileen Viridiana Velazquez Buendia"</value>
+                                                <value type="javascript">"Aileen Viridiana Velazuqez Buendia"</value>
                                             </simple-property-list>
+                                            <property name="updateAggregation">true</property>
+                                        </structure>
+                                        <structure>
+                                            <expression name="expr" type="javascript">row["Empresa"]</expression>
+                                            <property name="dynamicFilterParameter">Empresa</property>
                                             <property name="updateAggregation">true</property>
                                         </structure>
                                     </list-property>
