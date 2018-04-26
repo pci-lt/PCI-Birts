@@ -1,78 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
-    <list-property name="propertyBindings">
-        <structure>
-            <property name="name">databaseName</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">username</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">password</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">URL</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">driverClass</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">jarList</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileName</property>
-            <property name="id">407</property>
-        </structure>
-        <structure>
-            <property name="name">OdaConnProfileStorePath</property>
-            <property name="id">407</property>
-        </structure>
-    </list-property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile" name="Infosync" id="407">
-            <list-property name="privateDriverProperties">
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.connectionProperties</name>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.oda.profile.db.provider.id</name>
-                    <value>org.eclipse.datatools.enablement.postgresql.connectionProfile</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.savePWD</name>
-                    <value>true</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.drivers.defnType</name>
-                    <value>com.actuate.data.oda.jdbc.dbprofile.postgresql_8_x.driverTemplate</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.driverDefinitionID</name>
-                    <value>DriverDefn.com.actuate.data.oda.jdbc.dbprofile.postgresql_8_x.driverTemplate.Actuate-bundled PostgreSQL Driver Default</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.version</name>
-                    <value>8.x</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.vendor</name>
-                    <value>postgres</value>
-                </ex-property>
-            </list-property>
-            <property name="databaseName">infosync</property>
-            <property name="username">infosync</property>
-            <encrypted-property name="password" encryptionID="jce">caab65efdde92e0b</encrypted-property>
-            <property name="URL">jdbc:postgresql://localhost:5434/infosync</property>
-            <property name="driverClass">org.postgresql.Driver</property>
-            <property name="jarList">/Users/InfoSync/Documents/BRDPro/eclipse/plugins/com.actuate.data.oda.jdbc.drivers_23.0.0.v20131216/lib/postgresql/postgresql-9.2-1003.jdbc4.jar</property>
-        </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
             <list-property name="privateDriverProperties">
                 <ex-property>
@@ -84,7 +13,27 @@
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
-            <property name="useRequestSession">false</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Infosync" id="585">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5434/infosync</property>
+            <property name="odaUser">infosync</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -338,7 +287,7 @@ resultado;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Nombres" id="426">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Nombres" id="426">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Usuario</property>
@@ -3934,6 +3883,12 @@ display;</expression>
                     <text-property name="heading">_id</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">tecnico</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">tecnico</text-property>
@@ -3986,41 +3941,46 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">tecnico</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">tarea</property>
+                        <property name="name">tecnico</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">area</property>
+                        <property name="name">tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">subdireccion</property>
+                        <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">estatus</property>
+                        <property name="name">subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">Subdireccion</property>
+                        <property name="name">estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">Pago</property>
+                        <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">Pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -4058,41 +4018,48 @@ this.queryText = query;
                 </structure>
                 <structure>
                     <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
                     <property name="name">tecnico</property>
                     <property name="nativeName">tecnico</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">tarea</property>
                     <property name="nativeName">tarea</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">area</property>
                     <property name="nativeName">area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">subdireccion</property>
                     <property name="nativeName">subdireccion</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">estatus</property>
                     <property name="nativeName">estatus</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project: {\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -4301,6 +4268,12 @@ display;</expression>
                     <text-property name="heading">_id</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">tecnico</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">tecnico</text-property>
@@ -4353,41 +4326,46 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">tecnico</property>
+                        <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">tarea</property>
+                        <property name="name">tecnico</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">subdireccion</property>
+                        <property name="name">tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">area</property>
+                        <property name="name">subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">estatus</property>
+                        <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">Subdireccion</property>
+                        <property name="name">estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">Pago</property>
+                        <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">Pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -4423,41 +4401,48 @@ this.queryText = query;
                 </structure>
                 <structure>
                     <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
                     <property name="name">tecnico</property>
                     <property name="nativeName">tecnico</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">tarea</property>
                     <property name="nativeName">tarea</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">subdireccion</property>
                     <property name="nativeName">subdireccion</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">6</property>
                     <property name="name">area</property>
                     <property name="nativeName">area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">7</property>
                     <property name="name">estatus</property>
                     <property name="nativeName">estatus</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project:{\r\n\t\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -4615,6 +4600,11 @@ this.queryText = query;
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
@@ -4629,6 +4619,7 @@ this.queryText = query;
 <tns:Column name="Subdireccion"/>
 <tns:Column name="Pago"/>
 <tns:Column name="Estatus"/>
+<tns:Column name="folio"/>
 </tns:DataSet>
 <tns:DataSet Index="1" name="Cobre">
 <tns:Column name="_id"/>
@@ -4636,6 +4627,7 @@ this.queryText = query;
 <tns:Column name="Subdireccion"/>
 <tns:Column name="Pago"/>
 <tns:Column name="Estatus"/>
+<tns:Column name="folio"/>
 </tns:DataSet>
 </tns:Union>]]></xml-property>
         </derived-data-set>

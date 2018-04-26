@@ -1,54 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile" name="Infosync" id="407">
+        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
             <list-property name="privateDriverProperties">
                 <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.connectionProperties</name>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.oda.profile.db.provider.id</name>
-                    <value>org.eclipse.datatools.enablement.postgresql.connectionProfile</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.savePWD</name>
-                    <value>true</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.drivers.defnType</name>
-                    <value>com.actuate.data.oda.jdbc.dbprofile.postgresql_8_x.driverTemplate</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.driverDefinitionID</name>
-                    <value>DriverDefn.com.actuate.data.oda.jdbc.dbprofile.postgresql_8_x.driverTemplate.Actuate-bundled PostgreSQL Driver Default</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.version</name>
-                    <value>8.x</value>
-                </ex-property>
-                <ex-property>
-                    <name>org.eclipse.datatools.connectivity.db.vendor</name>
-                    <value>postgres</value>
+                    <name>useKerberosAuthentication</name>
+                    <value>false</value>
                 </ex-property>
             </list-property>
-            <property name="databaseName">infosync</property>
-            <property name="username">infosync</property>
-            <encrypted-property name="password" encryptionID="jce">caab65efdde92e0b</encrypted-property>
-            <property name="URL">jdbc:postgresql://localhost:5434/infosync</property>
-            <property name="driverClass">org.postgresql.Driver</property>
-            <property name="jarList">/Users/InfoSync/Documents/BRDPro/eclipse/plugins/com.actuate.data.oda.jdbc.drivers_23.0.0.v20131216/lib/postgresql/postgresql-9.2-1003.jdbc4.jar</property>
-        </oda-data-source>
-        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
-            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
+            <property name="mongoURI">mongodb://127.0.0.1:27023/infosync_answers_client_1259</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">true</property>
-            <property name="useRequestSession">true</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Infosync" id="413">
+            <text-property name="displayName"></text-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5434/infosync</property>
+            <property name="odaUser">infosync</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Usuarios Admin" id="408">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usuarios Admin" id="408">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
@@ -256,7 +246,7 @@
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.dbprofile.sqbDataSet" name="Usuarios Tecnicos" id="409">
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Usuarios Tecnicos" id="409">
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">id</property>
@@ -757,18 +747,18 @@ resultado;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">foto.file_url</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">foto.file_url</text-property>
-                    <text-property name="heading">foto.file_url</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">observaciones</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">observaciones</text-property>
                     <text-property name="heading">observaciones</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">foto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">foto</text-property>
+                    <text-property name="heading">foto</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">nombre completo</property>
@@ -834,12 +824,12 @@ resultado;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">foto.file_url</property>
+                        <property name="name">observaciones</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">observaciones</property>
+                        <property name="name">foto</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -919,20 +909,20 @@ resultado;</expression>
                 </structure>
                 <structure>
                     <property name="position">9</property>
-                    <property name="name">foto.file_url</property>
-                    <property name="nativeName">foto.file_url</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
                     <property name="name">observaciones</property>
                     <property name="nativeName">observaciones</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">foto</property>
+                    <property name="nativeName">foto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.590a691bb43fdd0c2d2f3797': 'sí',\r\n\t\r\n}},\r\n{$project:{\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tapat: '$answers.f1216500a010000000000005',\r\n\tamat: '$answers.f1216500a010000000000006',\r\n\trfc: {$ifNull: ['$answers.f1216500a010000000000002', 'RFC desconocido']},\r\n\tarea: {$ifNull: ['$answers.590a34bab43fdd3c7678af0c', 'Area desconocida']},\r\n\tcope: {$ifNull:['$answers.590a395ff851c2100f7c671a', 'Cope desconocido']},\r\n\tpuesto: '$answers.58db0090b43fdd5c1419dae2',\r\n\tfoto: '$answers.58db01ccb43fdd5c1419dae4',\r\n\tobservaciones: '$answers.59120088f851c20ec95547d3',\r\n\r\n\r\n\r\n\r\n\t\r\n\t\r\n\t\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "nombre" , "apat" , "amat" , "rfc" , "area" , "cope" , "puesto" , "foto.file_url" , "observaciones"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.590a691bb43fdd0c2d2f3797': 'sí',\r\n\t\r\n}},\r\n{$project:{\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tapat: '$answers.f1216500a010000000000005',\r\n\tamat: '$answers.f1216500a010000000000006',\r\n\trfc: {$ifNull: ['$answers.f1216500a010000000000002', 'RFC desconocido']},\r\n\tarea: {$ifNull: ['$answers.590a34bab43fdd3c7678af0c', 'Area desconocida']},\r\n\tcope: {$ifNull:['$answers.590a395ff851c2100f7c671a', 'Cope desconocido']},\r\n\tpuesto: '$answers.58db0090b43fdd5c1419dae2',\r\n\tfoto: {$ifNull: ['$answers.58db01ccb43fdd5c1419dae4.file_url', '']},\r\n\tobservaciones: '$answers.59120088f851c20ec95547d3',\r\n\r\n\r\n\r\n\r\n\t\r\n\t\r\n\t\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "nombre" , "apat" , "amat" , "rfc" , "area" , "cope" , "puesto" , "observaciones" , "foto"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
