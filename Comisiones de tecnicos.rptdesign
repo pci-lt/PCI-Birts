@@ -97,10 +97,10 @@ name_tec = name_tec.toUpperCase();&#13;
 if(name_tec == "JOSE MANUEL PEREZ MENDEZ" || name_tec == "JESUS MANUEL RAMAYO HERNANDEZ" || name_tec == "ALEJANDRO RAMIREZ MADRIGAL") {&#13;
 	display = "Producción 1";&#13;
 }&#13;
-if(name_tec == "MISAEL ALVAREZ HERNANDEZ" || name_tec == "ALEJANDRO AYALA SANTOS" || name_tec == "JUAN ALBERTO CRUZ CORONILLA" || name_tec == "ANGEL CUEVAS VAZQUEZ" || name_tec == "ALLAN ENRIQUEZ TORRES" || name_tec == "MICHAEL STEVE ENRIQUEZ TORRES" || name_tec == "ALDO HABIT ESTRADA HERNANDEZ " || name_tec == "JOSE RICARDO HERNANDEZ GARCIA" || name_tec == "JOVANY JIMENEZ HERNANDEZ" || name_tec == "LUIS EDUARDO LEMUS SANTIAGO" || name_tec == "RAFAEL LOPEZ CHAVEZ" || name_tec == "VICENTE MALDONADO CORTES" || name_tec == "OSCAR MENDEZ LOPEZ" || name_tec == "MIGUEL ANGEL MORENO RUBALCAVA" || name_tec == "YAIR NIÑO SANTANA" || name_tec == "DAVID OCAMPO SOTO" || name_tec == "VICTOR MANUEL REYES RANGEL" || name_tec == "OSVALDO ROBLES GONZALEZ" || name_tec == "ISMAEL RODRIGUEZ ESTRADA" || name_tec == "ANDRES OSVALDO SANABRIA GARCIA" || name_tec == "MARTIN VAZQUEZ HUITZITL") {&#13;
+if(name_tec == "MISAEL ALVAREZ HERNANDEZ" || name_tec == "ALEJANDRO AYALA SANTOS" || name_tec == "JUAN ALBERTO CRUZ CORONILLA" || name_tec == "ANGEL CUEVAS VAZQUEZ" || name_tec == "ALLAN ENRIQUEZ TORRES" || name_tec == "MICHAEL STEVE ENRIQUEZ TORRES" || name_tec == "ALDO HABIT ESTRADA HERNANDEZ" || name_tec == "JOSE RICARDO HERNANDEZ GARCIA" || name_tec == "JOVANY JIMENEZ HERNANDEZ" || name_tec == "LUIS EDUARDO LEMUS SANTIAGO" || name_tec == "RAFAEL LOPEZ CHAVEZ" || name_tec == "VICENTE MALDONADO CORTES" || name_tec == "OSCAR MENDEZ LOPEZ" || name_tec == "MIGUEL ANGEL MORENO RUBALCAVA" || name_tec == "YAIR NIÑO SANTANA" || name_tec == "DAVID OCAMPO SOTO" || name_tec == "VICTOR MANUEL REYES RANGEL" || name_tec == "OSVALDO ROBLES GONZALEZ" || name_tec == "ISMAEL RODRIGUEZ ESTRADA" || name_tec == "ANDRES OSVALDO SANABRIA GARCIA" || name_tec == "MARTIN VAZQUEZ HUITZITL") {&#13;
 	display = "Producción 2";&#13;
 }&#13;
-if(name_tec == "JOSE MAURICIO KOBELKOWSKY TENORIO" || name_tec == "IRVING URIEL MARTINEZ YSAIZ" || name_tec == "ARTURO MENDIETA SAID" || name_tec == "MARIO MONZON PARRA" || name_tec == "ABDIEL ISAI OROZCO TRUJILLO " || name_tec == "CARLOS DAVID ORTEGA ALVAREZ" || name_tec == "URIEL ISMAEL RODRIGUEZ PEÑA" || name_tec == "ALDO ISAI SALAS MORALES") {&#13;
+if(name_tec == "JOSE MAURICIO KOBELKOWSKY TENORIO" || name_tec == "IRVING URIEL MARTINEZ YSAIZ" || name_tec == "ARTURO MENDIETA SAID" || name_tec == "MARIO MONZON PARRA" || name_tec == "ABDIEL ISAI OROZCO TRUJILLO" || name_tec == "CARLOS DAVID ORTEGA ALVAREZ" || name_tec == "URIEL ISMAEL RODRIGUEZ PEÑA" || name_tec == "ALDO ISAI SALAS MORALES" || name_tec == "JOEL AGUILAR GARCIA" || name_tec == "JOSE LUIS HERNANDEZ NAVA" || name_tec == "JUAN CARLOS FRANCO ROSAS" || name_tec == "LUIS DAVID FLORES BALANZARIO" || name_tec == "RICARDO AVILA RAMIREZ") {&#13;
 	display = "Producción 3";&#13;
 }&#13;
 &#13;
@@ -154,6 +154,11 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">7</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
                         <property name="name">Grupo</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -191,6 +196,11 @@ display;</expression>
                     <property name="position">6</property>
                     <property name="name">folio</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">fecha</property>
+                    <property name="dataType">date</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -379,7 +389,7 @@ display;</expression>
 var cantidad = row["Suma Cantidad Tecnico"];&#13;
 var display = 0;&#13;
 &#13;
-if(group == "Producción 1" || group == "Producción 2" || group == "Producción 3"){&#13;
+if(group == "Producción 1" || group == "Producción 2" || group == "Producción 3" || group == "Grupo no identificado"){&#13;
 	display = cantidad - 10;&#13;
 }&#13;
 if(display &lt; 0)&#13;
@@ -423,9 +433,10 @@ if (group == "Producción 2") {&#13;
 		display = 220.00;&#13;
 	}&#13;
 &#13;
+&#13;
 }&#13;
 else if (group == "Producción 3") {&#13;
-	if (count > 20) {&#13;
+	if (count > 10) {&#13;
 		if (payment == "Cobre") {&#13;
 			display = 180.00;&#13;
 		}&#13;
@@ -437,20 +448,24 @@ else if (group == "Producción 3") {&#13;
 		}&#13;
 	}&#13;
 }&#13;
-else if (group == "Producción 1" ) {&#13;
-	if (count > 20) {&#13;
+else if (group == "Producción 1" || group == "Grupo no identificado") {&#13;
+	if (count > 10) {&#13;
 		if (payment == "Cobre") {&#13;
 			display = 180.00;&#13;
 		}&#13;
-		else{&#13;
-			display = 0;&#13;
+		else if (payment == "Fibra") {&#13;
+			display = 280.00;&#13;
+		}&#13;
+		else if (payment == "Migraciones") {&#13;
+			display = 180.00;&#13;
 		}&#13;
 	}&#13;
 }&#13;
 &#13;
+&#13;
 display;</expression>
                     <property name="dataType">float</property>
-                    <property name="allowExport">true</property>
+                    <property name="allowExport">false</property>
                 </structure>
                 <structure>
                     <property name="name">Suma Cantidad a pagar</property>
@@ -476,7 +491,7 @@ display;</expression>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["A pagar"]</expression>
+                            <expression name="value" type="javascript">row["Importe a Pagar"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -499,8 +514,21 @@ display;</expression>
                     <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">-727379968</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["fecha"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
             <column id="40"/>
             <column id="41"/>
             <column id="42"/>
@@ -637,6 +665,7 @@ display;</expression>
                 <property name="hideDetail">false</property>
                 <header>
                     <row id="57">
+                        <property name="backgroundColor">#E8EAF6</property>
                         <cell id="58">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -709,6 +738,14 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
+                        <data id="122">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Long Date</property>
+                                <property name="pattern">Long Date</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
                     </cell>
                     <cell id="31">
                         <property name="borderBottomStyle">none</property>

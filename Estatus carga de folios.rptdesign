@@ -13,149 +13,126 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <scalar-parameter name="Fecha Inicial" id="14">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="15">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
     <data-sources>
-        <data-mart-data-source name="PCI_RRHH" id="4">
-            <property name="datamartURL">/account_1259/Resources/PCI_RRHH</property>
+        <data-mart-data-source name="db_version17" id="12">
+            <property name="datamartURL">/account_1259/Resources/db_version17</property>
             <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Fecha Inicial</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Fecha Inicial"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Fecha Final"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
-        <data-mart-data-set name="Boletinados" id="5">
+        <data-mart-data-set name="Union produccion aceptada y rechazada" id="13">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id</text-property>
-                    <text-property name="heading">_id</text-property>
+                    <property name="columnName">aceptada</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">aceptada</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">rfc</property>
+                    <property name="columnName">_id.rechazada</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">rfc</text-property>
-                    <text-property name="heading">rfc</text-property>
+                    <text-property name="displayName">_id.rechazada</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">puesto</property>
+                    <property name="columnName">first_name</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">puesto</text-property>
-                    <text-property name="heading">puesto</text-property>
+                    <text-property name="displayName">first_name</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">nombre completo</property>
+                    <property name="columnName">Compañia</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">cope_m</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">area_m</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">observaciones</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">observaciones</text-property>
-                    <text-property name="heading">observaciones</text-property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">foto</property>
-                        <property name="dataType">string</property>
+                        <property name="name">aceptada</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id</property>
-                        <property name="dataType">string</property>
+                        <property name="name">_id.rechazada</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">rfc</property>
+                        <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">puesto</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">nombre completo</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">cope_m</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">area_m</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">observaciones</property>
+                        <property name="name">Compañia</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">PCI_RRHH</property>
-            <property name="dataObject">Boletinados</property>
+            <property name="dataSource">db_version17</property>
+            <property name="dataObject">Join Produccion - Nombres</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">foto</property>
-                    <property name="dataType">string</property>
+                    <property name="name">aceptada</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">_id</property>
-                    <property name="dataType">string</property>
+                    <property name="name">_id.rechazada</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">rfc</property>
+                    <property name="name">first_name</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">puesto</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">5</property>
-                    <property name="name">nombre completo</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">6</property>
-                    <property name="name">cope_m</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
-                    <property name="name">area_m</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
-                    <property name="name">observaciones</property>
+                    <property name="name">Compañia</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -164,6 +141,80 @@
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="orientation">auto</property>
+            <page-header>
+                <grid id="4">
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">Column Binding</property>
+                            <expression name="expression" type="javascript">params["Fecha Inicial"].value</expression>
+                            <property name="dataType">date</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">Column Binding_1</property>
+                            <expression name="expression" type="javascript">params["Fecha Final"].value</expression>
+                            <property name="dataType">date</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                    </list-property>
+                    <column id="5">
+                        <property name="width">1.9375in</property>
+                    </column>
+                    <column id="6">
+                        <property name="width">5.90625in</property>
+                    </column>
+                    <row id="7">
+                        <cell id="8">
+                            <image id="10">
+                                <property name="height">48px</property>
+                                <property name="width">175px</property>
+                                <property name="source">embed</property>
+                                <property name="imageName">PCLink logo.png</property>
+                            </image>
+                        </cell>
+                        <cell id="9">
+                            <text id="11">
+                                <property name="fontSize">16pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">12pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Seguimiento carga de producción del:]]></text-property>
+                            </text>
+                            <data id="61">
+                                <property name="fontSize">16pt</property>
+                                <property name="fontWeight">bold</property>
+                                <structure name="dateTimeFormat">
+                                    <property name="category">Long Date</property>
+                                    <property name="pattern">Long Date</property>
+                                </structure>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Column Binding</property>
+                            </data>
+                            <text id="62">
+                                <property name="fontSize">16pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">12pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[al:]]></text-property>
+                            </text>
+                            <data id="63">
+                                <property name="fontSize">16pt</property>
+                                <property name="fontWeight">bold</property>
+                                <structure name="dateTimeFormat">
+                                    <property name="category">Long Date</property>
+                                    <property name="pattern">Long Date</property>
+                                </structure>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Column Binding_1</property>
+                            </data>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
             <page-footer>
                 <text id="3">
                     <property name="contentType">html</property>
@@ -173,365 +224,240 @@
         </simple-master-page>
     </page-setup>
     <body>
-        <grid id="6">
-            <column id="7"/>
-            <row id="8">
-                <cell id="9">
-                    <grid id="12">
-                        <column id="13">
-                            <property name="width">2.8125in</property>
-                        </column>
-                        <column id="14">
-                            <property name="width">5.0625in</property>
-                        </column>
-                        <row id="15">
-                            <cell id="16">
-                                <image id="18">
-                                    <property name="height">69px</property>
-                                    <property name="width">259px</property>
-                                    <property name="source">embed</property>
-                                    <property name="imageName">PCLink logo.png</property>
-                                </image>
-                            </cell>
-                            <cell id="17">
-                                <text-data id="107">
-                                    <property name="fontSize">16pt</property>
-                                    <property name="fontWeight">bold</property>
-                                    <property name="textAlign">center</property>
-                                    <expression name="valueExpr">var display = "Boletinados al "&#13;
-var date = new Date();&#13;
-var dia = date.getDate();&#13;
-var month = date.getMonth();&#13;
-var year = date.getFullYear();&#13;
-var months = ["Enero", "Febrero", "Marzo" , "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre","Octubre","Noviembre","Diciembre"];&#13;
-var mes = months[month];&#13;
+        <table id="16">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__ac_group_collapse_level</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="__ac_group_collapse_level">1</property>
+            <property name="marginLeft">12pt</property>
+            <property name="width">60%</property>
+            <property name="dataSet">Union produccion aceptada y rechazada</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">aceptada</property>
+                    <text-property name="displayName">aceptada</text-property>
+                    <expression name="expression" type="javascript">var aceptada = dataSetRow["aceptada"];&#13;
+var display = 0;&#13;
+if(aceptada == null || aceptada == "")&#13;
+	display = 0;&#13;
+else&#13;
+	display = aceptada;&#13;
 &#13;
-display = display + dia + " de " + mes + " del " + year;&#13;
 display;</expression>
-                                    <property name="contentType">html</property>
-                                </text-data>
-                            </cell>
-                        </row>
-                    </grid>
-                </cell>
-            </row>
-            <row id="10">
-                <cell id="11">
-                    <table id="20">
-                        <list-property name="userProperties">
-                            <structure>
-                                <property name="name">__ac_group_collapse_level</property>
-                                <property name="type">string</property>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">_id.rechazada</property>
+                    <text-property name="displayName">_id.rechazada</text-property>
+                    <expression name="expression" type="javascript">var rechazada = dataSetRow["_id.rechazada"];&#13;
+var display = 0;&#13;
+if(rechazada == null || rechazada == "")&#13;
+	display = 0;&#13;
+else&#13;
+	display = rechazada;&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">first_name</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Compañia</property>
+                    <text-property name="displayName">Compañia</text-property>
+                    <expression name="expression" type="javascript">var company = dataSetRow["Compañia"];&#13;
+var display = "";&#13;
+&#13;
+if(company == "" || company == null)&#13;
+	display = "Órdenes sin conexión";&#13;
+else&#13;
+	display = company;&#13;
+	&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Aceptada Compañia</property>
+                    <text-property name="displayName">SAC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["aceptada"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Rechazada Compañia</property>
+                    <text-property name="displayName">SRC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["_id.rechazada"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Folios Aceptados Total</property>
+                    <text-property name="displayName">SFAT</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["aceptada"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Folios Rechazados Total</property>
+                    <text-property name="displayName">SFRT</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["_id.rechazada"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">1316134912</property>
+            <column id="40">
+                <property name="width">40%</property>
+            </column>
+            <column id="41">
+                <property name="width">10%</property>
+            </column>
+            <column id="43">
+                <property name="width">10%</property>
+            </column>
+            <header>
+                <row id="17">
+                    <cell id="18">
+                        <label id="19">
+                            <text-property name="text">Compañia</text-property>
+                        </label>
+                    </cell>
+                    <cell id="20">
+                        <label id="21">
+                            <text-property name="text">Folios cargados con éxito</text-property>
+                        </label>
+                    </cell>
+                    <cell id="24">
+                        <label id="25">
+                            <text-property name="text">Folios rechazados/ con error</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="44">
+                <property name="groupName">Compañia</property>
+                <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
+                </structure>
+                <property name="hideDetail">true</property>
+                <header>
+                    <row id="45">
+                        <cell id="46">
+                            <data id="55">
+                                <property name="resultSetColumn">Compañia</property>
+                            </data>
+                        </cell>
+                        <cell id="47">
+                            <data id="56">
+                                <structure name="numberFormat">
+                                    <property name="category">Fixed</property>
+                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Suma Aceptada Compañia</property>
+                            </data>
+                        </cell>
+                        <cell id="49">
+                            <data id="57">
+                                <structure name="numberFormat">
+                                    <property name="category">Fixed</property>
+                                    <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Suma Rechazada Compañia</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+            <detail>
+                <row id="26">
+                    <cell id="27"/>
+                    <cell id="29">
+                        <data id="28">
+                            <property name="resultSetColumn">aceptada</property>
+                        </data>
+                    </cell>
+                    <cell id="33">
+                        <data id="30">
+                            <property name="resultSetColumn">_id.rechazada</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="35">
+                    <cell id="36">
+                        <text id="58">
+                            <property name="paddingRight">5pt</property>
+                            <property name="textAlign">right</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Totales]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="37">
+                        <data id="59">
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                             </structure>
-                        </list-property>
-                        <property name="__ac_group_collapse_level">1,2</property>
-                        <property name="marginLeft">12pt</property>
-                        <property name="width">10.583333333333334in</property>
-                        <property name="dataSet">Boletinados</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">_id</property>
-                                <text-property name="displayName">_id</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">rfc</property>
-                                <text-property name="displayName">rfc</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["rfc"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">puesto</property>
-                                <text-property name="displayName">puesto</text-property>
-                                <expression name="expression" type="javascript">var area = dataSetRow["puesto"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
-}&#13;
-area = area.toUpperCase();&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
-}&#13;
-resultado;</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">nombre completo</property>
-                                <text-property name="displayName">nombre completo</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["nombre completo"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">cope_m</property>
-                                <text-property name="displayName">cope_m</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["cope_m"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">area_m</property>
-                                <text-property name="displayName">area_m</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["area_m"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Count Cope</property>
-                                <text-property name="displayName">CC</text-property>
-                                <property name="dataType">integer</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>Cope</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">COUNTDISTINCT</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["_id"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Count Area</property>
-                                <text-property name="displayName">CA</text-property>
-                                <property name="dataType">integer</property>
-                                <simple-property-list name="aggregateOn">
-                                    <value>Area</value>
-                                </simple-property-list>
-                                <property name="aggregateFunction">COUNTDISTINCT</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["_id"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Count Total</property>
-                                <text-property name="displayName">CT</text-property>
-                                <property name="dataType">integer</property>
-                                <property name="aggregateFunction">COUNTDISTINCT</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["_id"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">observaciones</property>
-                                <text-property name="displayName">observaciones</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["observaciones"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">foto</property>
-                                <text-property name="displayName">foto</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["foto"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                        </list-property>
-                        <property name="pageBreakInterval">1000000000</property>
-                        <column id="59">
-                            <property name="width">1.40625in</property>
-                        </column>
-                        <column id="60">
-                            <property name="width">1.3541666666666667in</property>
-                        </column>
-                        <column id="61">
                             <property name="textAlign">center</property>
-                            <property name="width">0.9166666666666666in</property>
-                        </column>
-                        <column id="62">
-                            <property name="width">1.6979166666666667in</property>
-                        </column>
-                        <column id="63">
-                            <property name="width">1.8854166666666667in</property>
-                        </column>
-                        <column id="64">
-                            <property name="width">1.28125in</property>
-                        </column>
-                        <column id="65">
-                            <property name="width">2.0416666666666665in</property>
-                        </column>
-                        <column id="113">
-                            <property name="width">2.0416666666666665in</property>
-                        </column>
-                        <header>
-                            <row id="21">
-                                <cell id="22">
-                                    <label id="23">
-                                        <text-property name="text">Área</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="24">
-                                    <label id="25">
-                                        <text-property name="text">Cope</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="26">
-                                    <label id="29">
-                                        <text-property name="text">Cantidad de boletinados</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="28">
-                                    <label id="27">
-                                        <text-property name="text">Nombre del tecnico</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="30">
-                                    <label id="31">
-                                        <text-property name="text">Puesto</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="32">
-                                    <label id="33">
-                                        <text-property name="text">RFC</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="34">
-                                    <label id="35">
-                                        <text-property name="text">Imagen</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="108">
-                                    <label id="114">
-                                        <text-property name="text">Observaciones</text-property>
-                                    </label>
-                                </cell>
-                            </row>
-                        </header>
-                        <group id="66">
-                            <property name="groupName">Area</property>
-                            <expression name="keyExpr" type="javascript">row["area_m"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["area_m"]</expression>
+                            <property name="resultSetColumn">Suma Folios Aceptados Total</property>
+                        </data>
+                    </cell>
+                    <cell id="39">
+                        <data id="60">
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                             </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="67">
-                                    <cell id="68">
-                                        <data id="83">
-                                            <property name="resultSetColumn">area_m</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="69"/>
-                                    <cell id="70">
-                                        <data id="103">
-                                            <property name="resultSetColumn">Count Area</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="71"/>
-                                    <cell id="72"/>
-                                    <cell id="73"/>
-                                    <cell id="74"/>
-                                    <cell id="109"/>
-                                </row>
-                            </header>
-                        </group>
-                        <group id="84">
-                            <property name="groupName">Cope</property>
-                            <expression name="keyExpr" type="javascript">row["cope_m"]</expression>
-                            <structure name="toc">
-                                <expression name="expressionValue" type="javascript">row["cope_m"]</expression>
-                            </structure>
-                            <property name="hideDetail">false</property>
-                            <header>
-                                <row id="85">
-                                    <cell id="86"/>
-                                    <cell id="87">
-                                        <data id="101">
-                                            <property name="resultSetColumn">cope_m</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="88">
-                                        <data id="102">
-                                            <property name="resultSetColumn">Count Cope</property>
-                                        </data>
-                                    </cell>
-                                    <cell id="89"/>
-                                    <cell id="90"/>
-                                    <cell id="91"/>
-                                    <cell id="92"/>
-                                    <cell id="110"/>
-                                </row>
-                            </header>
-                        </group>
-                        <detail>
-                            <row id="36">
-                                <cell id="37"/>
-                                <cell id="39"/>
-                                <cell id="41"/>
-                                <cell id="43">
-                                    <data id="46">
-                                        <property name="resultSetColumn">nombre completo</property>
-                                        <list-property name="action">
-                                            <structure>
-                                                <property name="linkType">hyperlink</property>
-                                                <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
-                                                <property name="targetWindow">_blank</property>
-                                            </structure>
-                                        </list-property>
-                                    </data>
-                                </cell>
-                                <cell id="45">
-                                    <data id="42">
-                                        <property name="resultSetColumn">puesto</property>
-                                    </data>
-                                </cell>
-                                <cell id="47">
-                                    <data id="40">
-                                        <property name="resultSetColumn">rfc</property>
-                                    </data>
-                                </cell>
-                                <cell id="49">
-                                    <image id="104">
-                                        <property name="height">207px</property>
-                                        <property name="width">186px</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="111">
-                                    <data id="115">
-                                        <property name="resultSetColumn">observaciones</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="51">
-                                <cell id="52">
-                                    <property name="colSpan">2</property>
-                                    <property name="rowSpan">1</property>
-                                    <text id="105">
-                                        <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[Total de boletinados]]></text-property>
-                                    </text>
-                                </cell>
-                                <cell id="54">
-                                    <data id="106">
-                                        <property name="resultSetColumn">Count Total</property>
-                                    </data>
-                                </cell>
-                                <cell id="55"/>
-                                <cell id="56"/>
-                                <cell id="57"/>
-                                <cell id="58"/>
-                                <cell id="112"/>
-                            </row>
-                        </footer>
-                    </table>
-                </cell>
-            </row>
-        </grid>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Suma Folios Rechazados Total</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
     </body>
     <list-property name="images">
         <structure>
