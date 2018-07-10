@@ -19,14 +19,14 @@
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">var date = new Date();&#13;
-var day = date.getDate();&#13;
+                <value type="javascript">var date_today = new Date();&#13;
+var day = date_today.getDate();&#13;
 if(day &lt; 10)&#13;
 	day = '0' + day;&#13;
-var month = date.getMonth();&#13;
+var month = date_today.getMonth()+1;&#13;
 if(month &lt; 10)&#13;
 	month = '0' + month;&#13;
-var year = date.getFullYear();&#13;
+var year = date_today.getFullYear();&#13;
 &#13;
 var display = year + "-" + month + "-" + day;&#13;
 &#13;
@@ -44,14 +44,14 @@ display;</value>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="javascript">var date = new Date();&#13;
-var day = date.getDate();&#13;
+                <value type="javascript">var date_today = new Date();&#13;
+var day = date_today.getDate();&#13;
 if(day &lt; 10)&#13;
 	day = '0' + day;&#13;
-var month = date.getMonth();&#13;
+var month = date_today.getMonth()+1;&#13;
 if(month &lt; 10)&#13;
 	month = '0' + month;&#13;
-var year = date.getFullYear();&#13;
+var year = date_today.getFullYear();&#13;
 &#13;
 var display = year + "-" + month + "-" + day;&#13;
 &#13;
@@ -119,6 +119,14 @@ display;</expression>
                     <property name="columnName">Grupo</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Diff</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_mx</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -159,6 +167,21 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">8</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Diff</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">created_mx</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
                         <property name="name">Grupo</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -200,6 +223,21 @@ display;</expression>
                 <structure>
                     <property name="position">7</property>
                     <property name="name">fecha</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">created</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Diff</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">created_mx</property>
                     <property name="dataType">date</property>
                 </structure>
             </list-property>
@@ -280,7 +318,7 @@ display;</expression>
                 <cell id="91">
                     <text id="94">
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[Producción del ]]></text-property>
+                        <text-property name="content"><![CDATA[Carga de producción del ]]></text-property>
                     </text>
                 </cell>
                 <cell id="93"/>
@@ -520,6 +558,24 @@ display;</expression>
                     <expression name="expression" type="javascript">dataSetRow["fecha"]</expression>
                     <property name="dataType">date</property>
                 </structure>
+                <structure>
+                    <property name="name">Diff</property>
+                    <text-property name="displayName">Diff</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Diff"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">created</property>
+                    <text-property name="displayName">created</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["created"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">created_mx</property>
+                    <text-property name="displayName">created_mx</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["created_mx"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">-727379968</property>
             <list-property name="sort">
@@ -531,6 +587,9 @@ display;</expression>
             </list-property>
             <column id="40"/>
             <column id="41"/>
+            <column id="128"/>
+            <column id="135"/>
+            <column id="143"/>
             <column id="42"/>
             <column id="119"/>
             <column id="73"/>
@@ -557,6 +616,39 @@ display;</expression>
                         <property name="borderTopStyle">none</property>
                         <label id="19">
                             <text-property name="text">Técnico</text-property>
+                        </label>
+                    </cell>
+                    <cell id="123">
+                        <property name="backgroundColor">#7986CB</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="136">
+                            <text-property name="text">Fecha de liquidación de OS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="130">
+                        <property name="backgroundColor">#7986CB</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="129">
+                            <text-property name="text">Fecha de carga al sistema</text-property>
+                        </label>
+                    </cell>
+                    <cell id="138">
+                        <property name="backgroundColor">#7986CB</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="144">
+                            <text-property name="text">Diferencia de días entre carga y liquidación</text-property>
                         </label>
                     </cell>
                     <cell id="22">
@@ -629,6 +721,24 @@ display;</expression>
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
                         </cell>
+                        <cell id="124">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="131">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="139">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="48">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -681,6 +791,24 @@ display;</expression>
                                 <property name="resultSetColumn">_id.tecnico</property>
                             </data>
                         </cell>
+                        <cell id="125">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="132">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="140">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="60">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -713,7 +841,7 @@ display;</expression>
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
                             <data id="81">
-                                <property name="paddingRight">24pt</property>
+                                <property name="paddingRight">12pt</property>
                                 <structure name="numberFormat">
                                     <property name="category">Currency</property>
                                     <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
@@ -727,6 +855,17 @@ display;</expression>
             </group>
             <detail>
                 <row id="26">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">gt</property>
+                            <property name="backgroundColor">#FFCDD2</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">row["Diff"]</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">15</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
                     <cell id="27">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
@@ -738,6 +877,12 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="126">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
                         <data id="122">
                             <structure name="dateTimeFormat">
                                 <property name="category">Long Date</property>
@@ -745,6 +890,30 @@ display;</expression>
                             </structure>
                             <property name="textAlign">center</property>
                             <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                    <cell id="133">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="137">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Long Date</property>
+                                <property name="pattern">Long Date</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">created_mx</property>
+                        </data>
+                    </cell>
+                    <cell id="141">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="145">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Diff</property>
                         </data>
                     </cell>
                     <cell id="31">
@@ -790,7 +959,7 @@ display;</expression>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                         <data id="78">
-                            <property name="paddingRight">24pt</property>
+                            <property name="paddingRight">12pt</property>
                             <structure name="numberFormat">
                                 <property name="category">Currency</property>
                                 <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
@@ -804,7 +973,7 @@ display;</expression>
             <footer>
                 <row id="35">
                     <cell id="36">
-                        <property name="colSpan">5</property>
+                        <property name="colSpan">8</property>
                         <property name="rowSpan">1</property>
                         <property name="backgroundColor">#7986CB</property>
                         <property name="color">#FFFFFF</property>
@@ -818,7 +987,7 @@ display;</expression>
                         <property name="backgroundColor">#7986CB</property>
                         <property name="color">#FFFFFF</property>
                         <data id="83">
-                            <property name="paddingRight">24pt</property>
+                            <property name="paddingRight">12pt</property>
                             <structure name="numberFormat">
                                 <property name="category">Currency</property>
                                 <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v20150710-0101 Build &lt;4.2.3.v20150710-0101></property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -54,7 +54,7 @@
     </parameters>
     <data-sources>
         <data-mart-data-source name="Data Source" id="4">
-            <property name="datamartURL">PCI_folios</property>
+            <property name="datamartURL">/account_1259/Resources/PCI_folios</property>
             <property name="accessType">transient</property>
             <list-property name="paramBindings">
                 <structure>
@@ -876,7 +876,7 @@ display</expression>
                                 <list-property name="arguments">
                                     <structure>
                                         <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["total"]</expression>
+                                        <expression name="value" type="javascript">row["Max total"]</expression>
                                     </structure>
                                 </list-property>
                                 <property name="allowExport">true</property>
@@ -898,6 +898,22 @@ display</expression>
                                 <text-property name="displayName">total</text-property>
                                 <expression name="expression" type="javascript">dataSetRow["total"]</expression>
                                 <property name="dataType">float</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Max total</property>
+                                <text-property name="displayName">MT</text-property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>Folio</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">MAX</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["total"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
                         <property name="pageBreakInterval">100000000</property>
@@ -990,6 +1006,49 @@ display</expression>
                                 </row>
                             </header>
                         </group>
+                        <group id="529">
+                            <property name="groupName">Folio</property>
+                            <expression name="keyExpr" type="javascript">row["folio"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["folio"]</expression>
+                            </structure>
+                            <property name="hideDetail">true</property>
+                            <header>
+                                <row id="530">
+                                    <cell id="531"/>
+                                    <cell id="532">
+                                        <data id="156">
+                                            <property name="paddingLeft">12pt</property>
+                                            <property name="resultSetColumn">folio</property>
+                                            <list-property name="action">
+                                                <structure>
+                                                    <property name="linkType">hyperlink</property>
+                                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
+                                                    <property name="targetWindow">_blank</property>
+                                                </structure>
+                                            </list-property>
+                                        </data>
+                                    </cell>
+                                    <cell id="533">
+                                        <data id="542">
+                                            <property name="paddingRight">8pt</property>
+                                            <structure name="numberFormat">
+                                                <property name="category">Currency</property>
+                                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                            </structure>
+                                            <property name="textAlign">right</property>
+                                            <property name="resultSetColumn">Max total</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="534">
+                                        <data id="512">
+                                            <property name="paddingLeft">10pt</property>
+                                            <property name="resultSetColumn">tipo</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
                         <detail>
                             <row id="152">
                                 <list-property name="highlightRules">
@@ -1005,16 +1064,8 @@ display</expression>
                                 </list-property>
                                 <cell id="153"/>
                                 <cell id="159">
-                                    <data id="156">
-                                        <property name="paddingLeft">12pt</property>
+                                    <data id="540">
                                         <property name="resultSetColumn">folio</property>
-                                        <list-property name="action">
-                                            <structure>
-                                                <property name="linkType">hyperlink</property>
-                                                <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
-                                                <property name="targetWindow">_blank</property>
-                                            </structure>
-                                        </list-property>
                                     </data>
                                 </cell>
                                 <cell id="500">
@@ -1028,12 +1079,7 @@ display</expression>
                                         <property name="resultSetColumn">total</property>
                                     </data>
                                 </cell>
-                                <cell id="508">
-                                    <data id="512">
-                                        <property name="paddingLeft">10pt</property>
-                                        <property name="resultSetColumn">tipo</property>
-                                    </data>
-                                </cell>
+                                <cell id="508"/>
                             </row>
                         </detail>
                         <footer>

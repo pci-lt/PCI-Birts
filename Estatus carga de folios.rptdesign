@@ -61,23 +61,15 @@
         <data-mart-data-set name="Union produccion aceptada y rechazada" id="13">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">aceptada</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">aceptada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.rechazada</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.rechazada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">first_name</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Compañia</property>
+                    <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -92,21 +84,26 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">aceptada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.rechazada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">rechazada</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">Compañia</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -117,21 +114,26 @@
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">aceptada</property>
-                    <property name="dataType">integer</property>
+                    <property name="name">_id</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">_id.rechazada</property>
-                    <property name="dataType">integer</property>
+                    <property name="name">folio</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
+                    <property name="name">rechazada</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
                     <property name="name">first_name</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">Compañia</property>
                     <property name="dataType">string</property>
                 </structure>
@@ -237,23 +239,21 @@
             <property name="dataSet">Union produccion aceptada y rechazada</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">aceptada</property>
-                    <text-property name="displayName">aceptada</text-property>
-                    <expression name="expression" type="javascript">var aceptada = dataSetRow["aceptada"];&#13;
-var display = 0;&#13;
-if(aceptada == null || aceptada == "")&#13;
-	display = 0;&#13;
-else&#13;
-	display = aceptada;&#13;
-&#13;
-display;</expression>
-                    <property name="dataType">integer</property>
-                    <property name="allowExport">true</property>
+                    <property name="name">_id</property>
+                    <text-property name="displayName">_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">_id.rechazada</property>
-                    <text-property name="displayName">_id.rechazada</text-property>
-                    <expression name="expression" type="javascript">var rechazada = dataSetRow["_id.rechazada"];&#13;
+                    <property name="name">folio</property>
+                    <text-property name="displayName">folio</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">rechazada</property>
+                    <text-property name="displayName">rechazada</text-property>
+                    <expression name="expression" type="javascript">var rechazada = dataSetRow["rechazada"];&#13;
 var display = 0;&#13;
 if(rechazada == null || rechazada == "")&#13;
 	display = 0;&#13;
@@ -286,8 +286,24 @@ display;</expression>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">Suma Aceptada Compañia</property>
-                    <text-property name="displayName">SAC</text-property>
+                    <property name="name">Count Folios Exito Compañia</property>
+                    <text-property name="displayName">CFEC</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["folio"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Rechazada Folio Compañia</property>
+                    <text-property name="displayName">SRFC</text-property>
                     <property name="dataType">float</property>
                     <simple-property-list name="aggregateOn">
                         <value>Compañia</value>
@@ -296,49 +312,33 @@ display;</expression>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["aceptada"]</expression>
+                            <expression name="value" type="javascript">row["rechazada"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">Suma Rechazada Compañia</property>
-                    <text-property name="displayName">SRC</text-property>
-                    <property name="dataType">float</property>
-                    <simple-property-list name="aggregateOn">
-                        <value>Compañia</value>
-                    </simple-property-list>
-                    <property name="aggregateFunction">SUM</property>
+                    <property name="name">Suma Folios Exito Total</property>
+                    <text-property name="displayName">SFET</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["_id.rechazada"]</expression>
+                            <expression name="value" type="javascript">row["folio"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
-                    <property name="name">Suma Folios Aceptados Total</property>
-                    <text-property name="displayName">SFAT</text-property>
+                    <property name="name">Suma Folios Rechazados</property>
+                    <text-property name="displayName">SFR</text-property>
                     <property name="dataType">float</property>
                     <property name="aggregateFunction">SUM</property>
                     <list-property name="arguments">
                         <structure>
                             <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["aceptada"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Suma Folios Rechazados Total</property>
-                    <text-property name="displayName">SFRT</text-property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["_id.rechazada"]</expression>
+                            <expression name="value" type="javascript">row["rechazada"]</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
@@ -379,32 +379,33 @@ display;</expression>
                 <structure name="toc">
                     <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
                 </structure>
-                <property name="hideDetail">true</property>
+                <property name="hideDetail">false</property>
                 <header>
                     <row id="45">
+                        <property name="textAlign">left</property>
                         <cell id="46">
                             <data id="55">
                                 <property name="resultSetColumn">Compañia</property>
                             </data>
                         </cell>
                         <cell id="47">
-                            <data id="56">
+                            <data id="64">
                                 <structure name="numberFormat">
                                     <property name="category">Fixed</property>
                                     <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                                 </structure>
                                 <property name="textAlign">center</property>
-                                <property name="resultSetColumn">Suma Aceptada Compañia</property>
+                                <property name="resultSetColumn">Count Folios Exito Compañia</property>
                             </data>
                         </cell>
                         <cell id="49">
-                            <data id="57">
+                            <data id="65">
                                 <structure name="numberFormat">
                                     <property name="category">Fixed</property>
                                     <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                                 </structure>
                                 <property name="textAlign">center</property>
-                                <property name="resultSetColumn">Suma Rechazada Compañia</property>
+                                <property name="resultSetColumn">Suma Rechazada Folio Compañia</property>
                             </data>
                         </cell>
                     </row>
@@ -415,14 +416,18 @@ display;</expression>
                     <cell id="27"/>
                     <cell id="29">
                         <data id="28">
-                            <property name="resultSetColumn">aceptada</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">folio</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
-                    <cell id="33">
-                        <data id="30">
-                            <property name="resultSetColumn">_id.rechazada</property>
-                        </data>
-                    </cell>
+                    <cell id="33"/>
                 </row>
             </detail>
             <footer>
@@ -436,23 +441,23 @@ display;</expression>
                         </text>
                     </cell>
                     <cell id="37">
-                        <data id="59">
+                        <data id="66">
                             <structure name="numberFormat">
                                 <property name="category">Fixed</property>
                                 <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                             </structure>
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">Suma Folios Aceptados Total</property>
+                            <property name="resultSetColumn">Suma Folios Exito Total</property>
                         </data>
                     </cell>
                     <cell id="39">
-                        <data id="60">
+                        <data id="67">
                             <structure name="numberFormat">
                                 <property name="category">Fixed</property>
                                 <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
                             </structure>
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">Suma Folios Rechazados Total</property>
+                            <property name="resultSetColumn">Suma Folios Rechazados</property>
                         </data>
                     </cell>
                 </row>

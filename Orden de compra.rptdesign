@@ -15,12 +15,47 @@
     </list-property>
     <data-sources>
         <data-mart-data-source name="db_version17" id="4">
-            <property name="datamartURL">db_version17</property>
+            <property name="datamartURL">/account_1259/Resources/db_version17</property>
             <property name="accessType">transient</property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Join OC - OS Fibra" id="5">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">PDF</property>
+                    <expression name="expression" type="javascript">var display = "S.A.";&#13;
+&#13;
+if (row["pdf"] != "Sin Archivo"){&#13;
+	display = "PDF"&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">XML</property>
+                    <expression name="expression" type="javascript">var display = "S.A.";&#13;
+&#13;
+if (row["xml"] != "Sin Archivo"){&#13;
+	display = "XML"&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">B2B</property>
+                    <expression name="expression" type="javascript">var display = "S.A.";&#13;
+&#13;
+if (row["b2b"] != "Sin Archivo"){&#13;
+	display = "B2B"&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">OC::_id</property>
@@ -84,6 +119,18 @@
                     <text-property name="displayName">_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PDF</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">XML</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">B2B</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -151,6 +198,41 @@
                     <structure>
                         <property name="position">13</property>
                         <property name="name">OS Fibra::_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">xml</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">b2b</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">Grupo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">PDF</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">XML</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">B2B</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -223,6 +305,26 @@
                     <property name="name">OS Fibra::_id</property>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">xml</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">pdf</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">b2b</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">Grupo</property>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
         </data-mart-data-set>
     </data-sets>
@@ -272,7 +374,7 @@
                     <property name="type">string</property>
                 </structure>
             </list-property>
-            <property name="__ac_group_collapse_level">1,2,3,4</property>
+            <property name="__ac_group_collapse_level">2,3,4,5,1</property>
             <property name="color">#000000</property>
             <property name="borderBottomStyle">none</property>
             <property name="borderLeftStyle">none</property>
@@ -616,6 +718,112 @@
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">xml</property>
+                    <text-property name="displayName">xml</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["xml"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pdf</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pdf"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">b2b</property>
+                    <text-property name="displayName">b2b</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["b2b"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Grupo</property>
+                    <text-property name="displayName">Grupo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Grupo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PDF</property>
+                    <text-property name="displayName">PDF</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PDF"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">XML</property>
+                    <text-property name="displayName">XML</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["XML"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">B2B</property>
+                    <text-property name="displayName">B2B</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["B2B"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Grupo Subtotal</property>
+                    <text-property name="displayName">SGS</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Grupo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Max Subtotal"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Grupo Descuento</property>
+                    <text-property name="displayName">SGD</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Grupo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Max Descuento"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Grupo IVA</property>
+                    <text-property name="displayName">SGI</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Grupo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Max IVA"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Grupo Total</property>
+                    <text-property name="displayName">SGT</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Grupo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Max Total"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1316134912</property>
             <column id="406"/>
@@ -625,6 +833,9 @@
             <column id="411"/>
             <column id="412"/>
             <column id="413"/>
+            <column id="581"/>
+            <column id="589"/>
+            <column id="573"/>
             <column id="414"/>
             <column id="415"/>
             <column id="416"/>
@@ -708,6 +919,39 @@
                             <text-property name="text">Total</text-property>
                         </label>
                     </cell>
+                    <cell id="574">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="590">
+                            <property name="color">#000000</property>
+                            <text-property name="text">PDF</text-property>
+                        </label>
+                    </cell>
+                    <cell id="582">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="591">
+                            <property name="color">#000000</property>
+                            <text-property name="text">XML</text-property>
+                        </label>
+                    </cell>
+                    <cell id="566">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="592">
+                            <property name="color">#000000</property>
+                            <text-property name="text">B2B</text-property>
+                        </label>
+                    </cell>
                     <cell id="355">
                         <property name="backgroundColor">#9CCC65</property>
                         <property name="borderBottomStyle">none</property>
@@ -743,6 +987,135 @@
                     </cell>
                 </row>
             </header>
+            <group id="596">
+                <property name="groupName">Grupo</property>
+                <expression name="keyExpr" type="javascript">row["Grupo"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["Grupo"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="597">
+                        <cell id="598">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="625">
+                                <property name="resultSetColumn">Grupo</property>
+                            </data>
+                        </cell>
+                        <cell id="599">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="600">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="601">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="628">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Suma Grupo Subtotal</property>
+                            </data>
+                        </cell>
+                        <cell id="602">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="630">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Suma Grupo Descuento</property>
+                            </data>
+                        </cell>
+                        <cell id="603">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="632">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Suma Grupo IVA</property>
+                            </data>
+                        </cell>
+                        <cell id="604">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="633">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">Suma Grupo Total</property>
+                            </data>
+                        </cell>
+                        <cell id="605">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="606">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="607">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="608">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="609">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="610">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                    </row>
+                </header>
+            </group>
             <group id="419">
                 <property name="groupName">Contratista</property>
                 <expression name="keyExpr" type="javascript">row["Compañia"]</expression>
@@ -760,6 +1133,7 @@
                             <property name="borderTopStyle">none</property>
                             <data id="448">
                                 <property name="fontWeight">normal</property>
+                                <property name="paddingLeft">12pt</property>
                                 <property name="resultSetColumn">Compañia</property>
                             </data>
                         </cell>
@@ -845,6 +1219,90 @@
                                 </structure>
                                 <property name="textAlign">right</property>
                                 <property name="resultSetColumn">Suma Contratista Total</property>
+                            </data>
+                        </cell>
+                        <cell id="575">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="593">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">PDF</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">hyperlink</property>
+                                        <expression name="uri" type="javascript">var display = "";&#13;
+&#13;
+if(row["PDF"] != "S.A."){&#13;
+	display = row["pdf"];&#13;
+}&#13;
+&#13;
+display;</expression>
+                                        <property name="targetWindow">_blank</property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="583">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="594">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">XML</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">hyperlink</property>
+                                        <expression name="uri" type="javascript">var display = "";&#13;
+&#13;
+if(row["XML"] != "S.A."){&#13;
+	display = row["xml"];&#13;
+}&#13;
+&#13;
+display;</expression>
+                                        <property name="targetWindow">_blank</property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="567">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="595">
+                                <property name="paddingRight">5pt</property>
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="textAlign">right</property>
+                                <property name="resultSetColumn">B2B</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">hyperlink</property>
+                                        <expression name="uri" type="javascript">var display = "";&#13;
+&#13;
+if(row["B2B"] != "S.A."){&#13;
+	display = row["b2b"];&#13;
+}&#13;
+&#13;
+display;</expression>
+                                        <property name="targetWindow">_blank</property>
+                                    </structure>
+                                </list-property>
                             </data>
                         </cell>
                         <cell id="429">
@@ -973,6 +1431,24 @@
                                 <property name="resultSetColumn">Max Total</property>
                             </data>
                         </cell>
+                        <cell id="576">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="584">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="568">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="459">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -1040,6 +1516,24 @@
                             <property name="borderTopStyle">none</property>
                         </cell>
                         <cell id="488">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="577">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="585">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="569">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
                             <property name="borderRightStyle">none</property>
@@ -1120,6 +1614,24 @@
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
                         </cell>
+                        <cell id="578">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="586">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="570">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="519">
                             <property name="borderBottomStyle">none</property>
                             <property name="borderLeftStyle">none</property>
@@ -1183,6 +1695,24 @@
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="380">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="579">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="587">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="571">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
@@ -1332,6 +1862,30 @@
                             <property name="textAlign">right</property>
                             <property name="resultSetColumn">Suma Total Total</property>
                         </data>
+                    </cell>
+                    <cell id="580">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="color">#000000</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="588">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="color">#000000</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="572">
+                        <property name="backgroundColor">#9CCC65</property>
+                        <property name="color">#000000</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="401">
                         <property name="backgroundColor">#9CCC65</property>

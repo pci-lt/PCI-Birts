@@ -392,7 +392,7 @@ else if (nombre == "Juan Carlos Solares Sandoval") {&#13;
 	empresa = "Sertel";&#13;
 }&#13;
 else if(nombre == "Juan Manuel Prieto Alvarez"){&#13;
-	empresa = "SIJ";&#13;
+	empresa = "SIC";&#13;
 }&#13;
 else if (nombre == "Javier Castillo Pantoja") {&#13;
 	empresa = "Javier Alejandro Castillo Pantoja";&#13;
@@ -13069,10 +13069,16 @@ display;</expression>
                     <property name="name">vsi</property>
                     <expression name="expression" type="javascript">var tarea = row["tarea"];&#13;
 var display = "";&#13;
-var ti = tarea.indexOf("TI");&#13;
-var tk = tarea.indexOf("TK");&#13;
-var fc = tarea.indexOf("FC");&#13;
 &#13;
+var ti = "";&#13;
+var tk = "";&#13;
+var fc = "";&#13;
+&#13;
+if(tarea != null){&#13;
+	ti = tarea.indexOf("TI");&#13;
+	tk = tarea.indexOf("TK");&#13;
+	fc = tarea.indexOf("FC");&#13;
+}&#13;
 if(ti != -1 || tk != -1 || fc != -1 || tarea == "TS VOZ" || tarea == "MIGRACIÓN VOZ" ){&#13;
 	display = "NO"&#13;
 }&#13;
@@ -13149,6 +13155,7 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -13193,14 +13200,7 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
-            <method name="beforeOpen"><![CDATA[//pring logs
-importPackage(Packages.java.lang);
-function log(msg){
-    System.out.println(msg);
-}
-reportContext.setGlobalVariable('log', log);
-
-var query = this.queryText.toString();
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var connection = params["conexion"].value;
 var area = params["Area"].value;
 var cope = params["Cope"].value;
@@ -13230,12 +13230,12 @@ if (cobranza != null || cobranza != "") {
 
 
 
-log('new query= ' + new_query)
+
 
 query = query.replace(bookmark, bookmark + new_query );
 this.queryText = query;
 
-log('query' + query);
+
 
 
 
@@ -13288,7 +13288,7 @@ log('query' + query);
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$project: {\r\n\t\r\n\tfolio: '$folio',\r\n\tfechas: '$answers.f1054000a030000000000e14',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tinstalacion: '$answers.f1054000a020000000000004',\r\n\tmetraje: '$answers.f1054000a0200000000000d7',\r\n\t\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "fechas" , "tarea" , "instalacion" , "metraje"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$project: {\r\n\t\r\n\tfolio: '$folio',\r\n\tfechas: '$answers.f1054000a030000000000e14',\r\n\ttarea: { $ifNull: ['$answers.f1054000a010000000000021', 'na']},\r\n\tinstalacion: '$answers.f1054000a020000000000004',\r\n\tmetraje: '$answers.f1054000a0200000000000d7',\r\n\t\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "fechas" , "tarea" , "instalacion" , "metraje"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>

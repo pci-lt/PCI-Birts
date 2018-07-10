@@ -333,7 +333,7 @@ else if (nombre == "Juan Gomez Hernandez") {&#13;
 	empresa = "Alejandro Leal";&#13;
 }&#13;
 else if (nombre == "Nichdali Najera Peralta" || nombre == "Oralia Neri Valenzo") {&#13;
-	empresa = "Saturno";&#13;
+	empresa = "Saturno Metro";&#13;
 }&#13;
 else if (nombre == "Paulina Rosas Soto") {&#13;
 	empresa = "Comunicación Digital Aries";&#13;
@@ -381,7 +381,7 @@ else if (nombre == "Juan Carlos Solares Sandoval") {&#13;
 	empresa = "Sertel";&#13;
 }&#13;
 else if(nombre == "Juan Manuel Prieto Alvarez"){&#13;
-	empresa = "SIJ";&#13;
+	empresa = "SIC";&#13;
 }&#13;
 else if (nombre == "Javier Castillo Pantoja") {&#13;
 	empresa = "Javier Alejandro Castillo Pantoja";&#13;
@@ -403,6 +403,15 @@ else if (nombre == "Adolfo Torres Ocampo") {&#13;
 }&#13;
 else if (nombre == "Herdan") {&#13;
 	empresa = "Herdán S.A. de C.V."&#13;
+}&#13;
+else if (nombre == "Diana Lidia Reyes García") {&#13;
+	empresa = "ITESA"&#13;
+}&#13;
+else if (nombre == "Carlos Hernandez Garcia" || nombre == "Guadalupe Avalos Sánchez" || nombre == "Ernesto Ramirez Enriquez" || nombre == "Graciela Delgado Rivera" || nombre == "Humberto Nicolas Escobar" || nombre == "Jesus Antonio Zatarain Osuna" || nombre == "Jesus Mario Castro Young" || nombre == "Jesus Muñoz Ibarra" || nombre == "Oscar Armando Gastelum Romero") {&#13;
+	empresa = "AVASAN"&#13;
+}&#13;
+else if (nombre == "Luis Gerardo Rodriguez Lopez") {&#13;
+	empresa = "MAQTEL"&#13;
 }&#13;
 else if (nombre == "Blanca Saldaña Solares" || nombre == "Janet Gomez Marquez") {&#13;
 	empresa = "AMSITEL"&#13;
@@ -2324,6 +2333,28 @@ display;</expression>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="OC" id="572">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Grupo</property>
+                    <expression name="expression" type="javascript">var b2b = row["b2b"];&#13;
+var pdf = row["pdf"];&#13;
+var xml = row["xml"];&#13;
+var display = "";&#13;
+&#13;
+if (b2b == "Sin Archivo" &amp;&amp; pdf == "Sin Archivo" &amp;&amp; xml == "Sin Archivo") {&#13;
+	display = "Sin Archivos";&#13;
+}&#13;
+else if (b2b != "Sin Archivo" &amp;&amp; pdf != "Sin Archivo" &amp;&amp; xml != "Sin Archivo") {&#13;
+	display = "Con archivos completos"&#13;
+}&#13;
+else{&#13;
+	display = "Con archivos parciales"&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">_id</property>
@@ -2401,6 +2432,34 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">xml</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">xml</text-property>
+                    <text-property name="heading">xml</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <text-property name="heading">pdf</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">b2b</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">b2b</text-property>
+                    <text-property name="heading">b2b</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Grupo</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -2449,6 +2508,26 @@ display;</expression>
                         <property name="position">9</property>
                         <property name="name">descuento</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">xml</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">b2b</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Grupo</property>
+                        <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
@@ -2517,8 +2596,29 @@ display;</expression>
                     <property name="dataType">float</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">xml</property>
+                    <property name="nativeName">xml</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">pdf</property>
+                    <property name="nativeName">pdf</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">b2b</property>
+                    <property name="nativeName">b2b</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:19620,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f19620000000000000000fc8':'por_pagar',\r\n}},\r\n{ $unwind: '$answers.f1962000000000000000fc10' },\r\n{$project: {\t\r\n\toc: '$folio',\r\n\tconexion: '$connection_id',\r\n\tfolio: '$answers.f1962000000000000000fc10.f19620000000000000001fc1',\r\n\tcantidad: '$answers.f19620000000000000000fc9',\r\n\tdescuento: '$answers.f19620000000000000000f7c',\r\n\tsubtotal: '$answers.f19620000000000000000f7a',\r\n\tiva: '$answers.f19620000000000000000f7b',\r\n\ttotal: '$answers.f19620000000000000000fc7',\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "oc" , "folio" , "conexion" , "cantidad" , "subtotal" , "iva" , "total" , "descuento"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:19620,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f19620000000000000000fc8':'por_pagar',\r\n}},\r\n{ $unwind: '$answers.f1962000000000000000fc10' },\r\n{$project: {\t\r\n\toc: '$folio',\r\n\tconexion: '$connection_id',\r\n\tfolio: '$answers.f1962000000000000000fc10.f19620000000000000001fc1',\r\n\tcantidad: '$answers.f19620000000000000000fc9',\r\n\tdescuento: '$answers.f19620000000000000000f7c',\r\n\tsubtotal: '$answers.f19620000000000000000f7a',\r\n\tiva: '$answers.f19620000000000000000f7b',\r\n\ttotal: '$answers.f19620000000000000000fc7',\r\n\txml: { $ifNull: ['$answers.f19620000000000000000fc2.file_url', 'Sin Archivo' ]},\r\n\tpdf: { $ifNull: ['$answers.f19620000000000000000fc3.file_url', 'Sin Archivo' ]},\r\n\tb2b: { $ifNull: ['$answers.5a96f809b43fdd6231dc0ede.file_url', 'Sin Archivo' ]},\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "oc" , "folio" , "conexion" , "cantidad" , "subtotal" , "iva" , "total" , "descuento" , "xml" , "pdf" , "b2b"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -3083,26 +3183,46 @@ resultado;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">OS Fibra::_id</property>
+                        <property name="name">xml</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">Area</property>
+                        <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">Cope</property>
+                        <property name="name">b2b</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">first_name</property>
+                        <property name="name">Grupo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">13</property>
+                        <property name="name">OS Fibra::_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">Cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
                         <property name="name">Compañia</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -3124,6 +3244,10 @@ resultado;</expression>
 <tns:Column>OC::iva</tns:Column>
 <tns:Column>OC::total</tns:Column>
 <tns:Column>OC::descuento</tns:Column>
+<tns:Column>OC::xml</tns:Column>
+<tns:Column>OC::pdf</tns:Column>
+<tns:Column>OC::b2b</tns:Column>
+<tns:Column>OC::Grupo</tns:Column>
 <tns:Column>OS Fibra::_id</tns:Column>
 <tns:Column>OS Fibra::Area</tns:Column>
 <tns:Column>OS Fibra::Cope</tns:Column>
@@ -3945,6 +4069,15 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <text-property name="heading">created</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">Subdireccion</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -4008,42 +4141,48 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">11</property>
                         <property name="name">Pago</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">12</property>
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
-var fecha = params["Fecha Inicial"].value;
-var fecha2 = params["Fecha Final"].value;
-
-
+var new_query = "";
 var bookmark = "{$exists:false},";
+var fecha = params["Fecha Inicial"].value;
+var hasta = params["Fecha Final"].value;
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+
 	
-	var date_to = BirtDateTime.addDay(fecha, 1);
-	var year_to = BirtDateTime.year(date_to);
-	var month_to = BirtDateTime.month(date_to);
-	if(month_to < 10)
-		month_to = '0' + month_to;
-	var day_to = BirtDateTime.day(date_to);
-	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
-	var new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+
 
 
 
 query = query.replace(bookmark, bookmark + new_query );
-this.queryText = query;
-]]></method>
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -4102,8 +4241,15 @@ this.queryText = query;
                     <property name="dataType">date</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">created</property>
+                    <property name="nativeName">created</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha" , "created"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -4374,6 +4520,15 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <text-property name="heading">created</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">Subdireccion</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -4437,40 +4592,48 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">9</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
                         <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">11</property>
                         <property name="name">Pago</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">12</property>
                         <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
-var fecha = params["Fecha Inicial"].value;
-var fecha2 = params["Fecha Final"].value;
-
-
+var new_query = "";
 var bookmark = "{$exists:false},";
+var fecha = params["Fecha Inicial"].value;
+var hasta = params["Fecha Final"].value;
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+
 	
-	var date_to = BirtDateTime.addDay(fecha, 1);
-	var year_to = BirtDateTime.year(date_to);
-	var month_to = BirtDateTime.month(date_to);
-	if(month_to < 10)
-		month_to = '0' + month_to;
-	var day_to = BirtDateTime.day(date_to);
-	//var new_query = "created_at: {$gte: {$date:'"+ fecha + "T05:00:01Z' } , $lte : { $date: '" + year_to + "-" + month_to + "-" + day_to + "T06:00:01Z' }},";
-	var new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + fecha + "' , $lte: '" + fecha2 + "'},";
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+
+
+
 
 query = query.replace(bookmark, bookmark + new_query );
-this.queryText = query;
-]]></method>
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -4529,8 +4692,15 @@ this.queryText = query;
                     <property name="dataType">date</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">created</property>
+                    <property name="nativeName">created</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727]},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha" , "created"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -4653,12 +4823,102 @@ this.queryText = query;
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.union" name="Union Cobre - Fibra" id="579">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Diff</property>
+                    <expression name="expression" type="javascript">BirtDateTime.diffDay(row["fecha"],row["created_mx"])</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">created_mx</property>
+                    <expression name="expression" type="javascript">var created = row["created"];&#13;
+var horario = new Date("October 29, 2017 02:00:00");&#13;
+var created2 = new Date(created.getFullYear(),created.getMonth(),created.getDate());&#13;
+var horario2 = new Date("April 1, 2018");&#13;
+var display = new Date("January 10, 1994 13:30:00");&#13;
+var verano = BirtDateTime.diffHour(horario, created);&#13;
+var invierno = BirtDateTime.diffHour(horario2, created);&#13;
+&#13;
+&#13;
+if(verano &lt; 0){&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+else if (verano > 0 &amp;&amp; invierno &lt; 0) {&#13;
+	display = "Horario Invierno - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-6);&#13;
+}&#13;
+else if (invierno > 0) {&#13;
+	display = "Horario Verano - CDMX"&#13;
+	display = BirtDateTime.addHour(created,-5);&#13;
+}&#13;
+display;</expression>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">Subdireccion</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Diff</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Pago</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_mx</property>
+                    <property name="analysis">dimension</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -4698,6 +4958,21 @@ this.queryText = query;
                         <property name="name">fecha</property>
                         <property name="dataType">date</property>
                     </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Diff</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">created_mx</property>
+                        <property name="dataType">date</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
@@ -4714,6 +4989,7 @@ this.queryText = query;
 <tns:Column name="Estatus"/>
 <tns:Column name="folio"/>
 <tns:Column name="fecha"/>
+<tns:Column name="created"/>
 </tns:DataSet>
 <tns:DataSet Index="1" name="Cobre">
 <tns:Column name="_id"/>
@@ -4723,6 +4999,7 @@ this.queryText = query;
 <tns:Column name="Estatus"/>
 <tns:Column name="folio"/>
 <tns:Column name="fecha"/>
+<tns:Column name="created"/>
 </tns:DataSet>
 </tns:Union>]]></xml-property>
         </derived-data-set>
@@ -5846,33 +6123,41 @@ else if (diffDay >= 180) {&#13;
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Produccion Aceptada" id="587">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">_id.conexion</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">_id.conexion</text-property>
-                    <text-property name="heading">_id.conexion</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">aceptada</property>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
                     <property name="analysis">measure</property>
-                    <text-property name="displayName">aceptada</text-property>
-                    <text-property name="heading">aceptada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
                 </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.conexion</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">aceptada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">float</property>
                     </structure>
                 </list-property>
             </structure>
@@ -5902,20 +6187,27 @@ this.queryText = query;]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">_id.conexion</property>
-                    <property name="nativeName">_id.conexion</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">aceptada</property>
-                    <property name="nativeName">aceptada</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: {$in: [11044,16343,21953,21954,10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group: {_id:{\r\n\tconexion: '$connection_id'\r\n\t},\r\n\taceptada: {$sum:1},\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "aceptada"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: {$in: [11044,16343,21953,21954,10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$project: {\r\n\t\tfolio: '$folio',\r\n\t\tconexion: '$connection_id',\r\n\r\n\t\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "conexion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100000000</property>
@@ -5977,16 +6269,22 @@ this.queryText = query;]]></method>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Produccion rechazada" id="588">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">_id.conexion</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">_id.conexion</text-property>
-                    <text-property name="heading">_id.conexion</text-property>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">_id.rechazada</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.rechazada</text-property>
-                    <text-property name="heading">_id.rechazada</text-property>
+                    <property name="columnName">rechazada</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">rechazada</text-property>
+                    <text-property name="heading">rechazada</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -5994,12 +6292,17 @@ this.queryText = query;]]></method>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.conexion</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.rechazada</property>
+                        <property name="name">rechazada</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">conexion</property>
                         <property name="dataType">integer</property>
                     </structure>
                 </list-property>
@@ -6030,20 +6333,27 @@ this.queryText = query;]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">_id.conexion</property>
-                    <property name="nativeName">_id.conexion</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">rechazada</property>
+                    <property name="nativeName">rechazada</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
-                    <property name="name">_id.rechazada</property>
-                    <property name="nativeName">_id.rechazada</property>
+                    <property name="position">3</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: 13048,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1074100a010000000000a13' : { $gt: 0 },\r\n}},\r\n\r\n{$project:{ _id: {\r\n\tconexion: '$connection_id',\r\n\trechazada: '$answers.f1074100a010000000000a13',\r\n}}\r\n}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.rechazada"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: 13048,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1074100a010000000000a13' : { $gt: 0 },\r\n}},\r\n\r\n{$project:{ \r\n\tconexion: '$connection_id',\r\n\trechazada: '$answers.f1074100a010000000000a13',\r\n}\r\n}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "rechazada" , "conexion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -6103,38 +6413,27 @@ this.queryText = query;]]></method>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.union" name="Union produccion aceptada - rechazada" id="589">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">_id.conexion</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">_id.conexion</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">aceptada</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">aceptada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.conexion</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">aceptada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.rechazada</property>
-                        <property name="dataType">string</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">rechazada</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -6145,31 +6444,19 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:Union xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_union.xsd" xmlns:tns="http://schemas.actuate.com/">
 <tns:DataSet Index="0" name="Produccion Aceptada">
-<tns:Column name="_id.conexion"/>
-<tns:Column name="aceptada"/>
+<tns:Column name="_id"/>
+<tns:Column name="folio"/>
+<tns:Column name="conexion"/>
 </tns:DataSet>
 <tns:DataSet Index="1" name="Produccion rechazada">
-<tns:Column name="_id.conexion"/>
-<tns:Column name="_id.rechazada"/>
+<tns:Column name="_id"/>
+<tns:Column name="rechazada"/>
+<tns:Column name="conexion"/>
 </tns:DataSet>
 </tns:Union>]]></xml-property>
         </derived-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Produccion - Nombres" id="590">
             <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">aceptada</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">aceptada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">_id.rechazada</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.rechazada</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
                 <structure>
                     <property name="columnName">first_name</property>
                     <property name="analysis">dimension</property>
@@ -6188,21 +6475,26 @@ this.queryText = query;]]></method>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">aceptada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.rechazada</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">rechazada</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">Compañia</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -6215,8 +6507,9 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
 <tns:selectColumns>
-<tns:Column>Union produccion aceptada - rechazada::aceptada</tns:Column>
-<tns:Column>Union produccion aceptada - rechazada::_id.rechazada</tns:Column>
+<tns:Column>Union produccion aceptada - rechazada::_id</tns:Column>
+<tns:Column>Union produccion aceptada - rechazada::folio</tns:Column>
+<tns:Column>Union produccion aceptada - rechazada::rechazada</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 <tns:Column>Nombres::Compañia</tns:Column>
 </tns:selectColumns>
@@ -6227,7 +6520,7 @@ this.queryText = query;]]></method>
 <tns:dataSet Index="1" name="Nombres"/>
 <tns:on>
 <tns:condition>
-<tns:leftColumn>Union produccion aceptada - rechazada::_id.conexion</tns:leftColumn>
+<tns:leftColumn>Union produccion aceptada - rechazada::conexion</tns:leftColumn>
 <tns:rightColumn>Nombres::id</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
@@ -6236,6 +6529,359 @@ this.queryText = query;]]></method>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Outdoor" id="595">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Especialidad</property>
+                    <expression name="expression" type="javascript">var area = row["especialidad"];&#13;
+if(area == null){&#13;
+	area = "";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Estatus</property>
+                    <expression name="expression" type="javascript">var area = row["est_pci"];&#13;
+if(area == null){&#13;
+	area = "";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">region</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">region</text-property>
+                    <text-property name="heading">region</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zona</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">zona</text-property>
+                    <text-property name="heading">zona</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">especialidad</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">especialidad</text-property>
+                    <text-property name="heading">especialidad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">est_pci</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">est_pci</text-property>
+                    <text-property name="heading">est_pci</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Especialidad</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">zona</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">especialidad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">est_pci</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Especialidad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var new_query = "";
+var bookmark = "{$exists:false},";
+var fecha = params["Fecha Inicial"].value;
+var hasta = params["Fecha Final"].value;
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+
+	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">region</property>
+                    <property name="nativeName">region</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">zona</property>
+                    <property name="nativeName">zona</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">especialidad</property>
+                    <property name="nativeName">especialidad</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">est_pci</property>
+                    <property name="nativeName">est_pci</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [25366]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\t\r\n\tregion: '$answers.5aa1526db43fdd72b238b764',\r\n\tzona: '$answers.5aa1526db43fdd72b238b765',\r\n\tespecialidad: '$answers.5aa1526db43fdd72b238b762',\r\n\test_pci: '$answers.5ab28c59f851c263fe8137aa',\r\n\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "region" , "zona" , "especialidad" , "est_pci"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>region</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>region</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>zona</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>zona</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>zona</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>especialidad</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>especialidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>especialidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>est_pci</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>est_pci</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>est_pci</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="580">
@@ -6244,7 +6890,7 @@ this.queryText = query;]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-05-01</value>
+                <value type="constant">2018-06-01</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -6259,7 +6905,22 @@ this.queryText = query;]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-05-22</value>
+                <value type="constant">2018-06-28</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Telefonos" id="593">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">6566823915</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
