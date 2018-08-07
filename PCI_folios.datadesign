@@ -284,12 +284,6 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">_id.fecha_reportado</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id.fecha_reportado</text-property>
-                    <text-property name="heading">_id.fecha_reportado</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id.area</text-property>
@@ -341,31 +335,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.fecha_reportado</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
                         <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">4</property>
                         <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">5</property>
                         <property name="name">_id.status_cob</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">6</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">7</property>
                         <property name="name">division</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -385,48 +374,41 @@ display;</expression>
                     <property name="name">_id.conexion</property>
                     <property name="nativeName">_id.conexion</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">1</property>
+                    <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">_id.fecha_reportado</property>
-                    <property name="nativeName">_id.fecha_reportado</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">4</property>
                     <property name="name">_id.cope</property>
                     <property name="nativeName">_id.cope</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">5</property>
                     <property name="name">_id.status_cob</property>
                     <property name="nativeName">_id.status_cob</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">6</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\tfecha_reportado: '$answers.f1054000a030000000000e14',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.forma" , "_id.conexion" , "_id.fecha_reportado" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\tfecha_reportado: '$answers.f1054000a030000000000e14',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.forma" , "_id.conexion" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2124,7 +2106,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico'\r\n}},\r\n\r\n{$project: {\t\r\n\t\tarea:'$answers.590a34bab43fdd3c7678af0c',\r\n\t\tespecialidad: '$answers.58db1fb8f851c269dedd27f2',\r\n\t\tdivision: '$answers.f1216500a010000000000011',\r\n\t\tcope: '$answers.590a395ff851c2100f7c671a'\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tarea:'$area',\r\n\t\tespecialidad:'$especialidad',\r\n\t\tdivision:'$division',\r\n\t\tcope:'$cope'\r\n\r\n},\r\n\t\tcantidad: {$sum:1}\r\n\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.especialidad" , "_id.area" , "_id.division" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2347,7 +2329,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'supervisor'\r\n}},\r\n\r\n{$project: {\t\r\n\t\tarea:'$answers.590a34bab43fdd3c7678af0c',\r\n\t\tespecialidad: '$answers.58db1fb8f851c269dedd27f2',\r\n\t\tdivision: '$answers.f1216500a010000000000011',\r\n\t\tcope: '$answers.590a395ff851c2100f7c671a'\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tarea:'$area',\r\n\t\tespecialidad:'$especialidad',\r\n\t\tdivision:'$division',\r\n\t\tcope:'$cope'\r\n\r\n},\r\n\t\tcantidad: {$sum:1}\r\n\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.especialidad" , "_id.area" , "_id.division" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2570,7 +2552,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'coordinador'\r\n}},\r\n\r\n{$project: {\t\r\n\t\tarea:'$answers.590a34bab43fdd3c7678af0c',\r\n\t\tespecialidad: '$answers.58db1fb8f851c269dedd27f2',\r\n\t\tdivision: '$answers.f1216500a010000000000011',\r\n\t\tcope: '$answers.590a395ff851c2100f7c671a'\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tarea:'$area',\r\n\t\tespecialidad:'$especialidad',\r\n\t\tdivision:'$division',\r\n\t\tcope:'$cope'\r\n\r\n},\r\n\t\tcantidad: {$sum:1}\r\n\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.especialidad" , "_id.area" , "_id.division" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3055,7 +3037,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico'\r\n}},\r\n\r\n{$project:{\r\n\t\r\n\tfolio : '$folio',\r\n\tfibra:'$answers.590cdf33f851c25926110725',\r\n\tcobre:'$answers.590cdf33f851c25926110726',\r\n\tantenas:'$answers.59289efdb43fdd5d59125af0',\r\n\tredes: '$answers.59289efdb43fdd5d59125aee',\r\n\tdivision: '$answers.f1216500a010000000000011',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tap_pat: '$answers.f1216500a010000000000005',\r\n\tap_mat: '$answers.f1216500a010000000000006',\r\n\tcontratista: '$answers.590a2a71b43fdd3c7678af07',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tcope: '$answers.590a395ff851c2100f7c671a'\r\n\t\r\n\t\r\n\t\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "division" , "fibra" , "cobre" , "antenas" , "redes" , "nombre" , "ap_pat" , "ap_mat" , "contratista" , "area" , "cope"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3158,7 +3140,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico'\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tcontratista:'$answers.590a2a71b43fdd3c7678af07',\r\n\t\tespecialidad: '$answers.58db1fb8f851c269dedd27f2'\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.contratista" , "_id.especialidad" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3323,7 +3305,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:13822,\r\n\tdeleted_at:{$exists:0},\r\n\r\n}},\r\n{$project:{\r\n\ttelefono: '$answers.591c8031b43fdd2041e0c6ca',\r\n\tactivacion:'$answers.591c7001b43fdd204011c5c7',\r\n\tforma_activacion:'$answers.593af3ceb43fdd40b11829be',\r\n\tfolio_act:'$answers.591c7001b43fdd204011c5ca',\r\n\trazon: '$answers.59401684b43fdd14e5902b56',\r\n\tcomentarios: '$answers.591c7001b43fdd204011c5c8'\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "activacion" , "razon" , "forma_activacion" , "folio_act" , "comentarios" , "telefono"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3510,7 +3492,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11653,\r\n\tdeleted_at:{$exists:0},\r\n\r\n}},\r\n{$group: {_id:{\r\n\t\tarea: '$answers.58c84a1ef851c27ca91b3b72',\r\n\t\tcontratista: '$answers.58c84dd1b43fdd4483d92ce6'\r\n\t},\r\n\t\tcantidad: {$sum:1}\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.contratista" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3697,7 +3679,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11669,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\t\tcope: '$answers.59441fa0b43fdd70ade1e7ad',\r\n\t\t\r\n\t},\r\n\t\tpromedio: { $avg : '$points' },\r\n\t\tcantidad: {$sum :1}\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "promedio" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,10000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3884,7 +3866,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:15016,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$group: {_id:{\r\n\t\tcope: '$answers.f1166900a010000000000006'\r\n\t\t\r\n\t},\r\n\t\tpromedio: { $avg : '$points' },\r\n\t\tcantidad: {$sum :1}\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "promedio" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -4290,7 +4272,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\tconexion: '$connection_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\r\n\r\n},\r\n\t\tcantidad:{$sum:1}\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.area" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,10000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -4706,7 +4688,7 @@ empresa</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tconexion: '$connection_id',\r\n\tusuario: '$user_id',\r\n\tupdate: '$updated_at',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tape_p: '$answers.f1216500a010000000000005',\r\n\tape_m: '$answers.f1216500a010000000000006'\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "flattenCollections" : true , "selectedFields" : [ "_id" , "usuario" , "update" , "nombre" , "ape_p" , "ape_m"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -5146,7 +5128,7 @@ month</expression>
                     <property name="nativeDataType">9</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1399,\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$created_at',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n\tconnection_id: 1399,\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$created_at',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -5498,7 +5480,7 @@ this.queryText = query;
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1399,\r\n\r\n}},\r\n{$project:{\r\n\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002: 'liquidada',\r\n\tconnection_id: 1399,\r\n\r\n}},\r\n{$project:{\r\n\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -6234,7 +6216,7 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$created_by_id',\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$start_date' }},\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "created" , "user" , "check" , "comentarios" , "hora" , "minuto" , "geo" , "autorizacion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -7378,7 +7360,7 @@ display;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico',\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n  \tcontratista: '$answers.590a2a71b43fdd3c7678af07',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tcolor: '$answers.590cc33cb43fdd113635f82c',\r\n\tcalcomanias: '$answers.590b77cfb43fdd356ce61de6',\r\n\t\r\n  \r\n  camisa: '$answers.590b7489f851c2331d4dbe3f',\r\n  botas: '$answers.590b7489f851c2331d4dbe41',\r\n  limpieza: '$answers.590b7489f851c2331d4dbe42',\r\n\r\n\tmanual: '$answers.591e56ecb43fdd291ee0ed48', \r\n\tcompa: '$answers.590cd3e9f851c25927f4cbcb',\r\n\tsmart_class: '$answers.590cd3e9f851c25927f4cbcd',\r\n\tsmart_gold: '$answers.590cd3e9f851c25927f4cbcf',\r\n\tcolt_250: '$answers.590cd3e9f851c25927f4cbd1',\r\n\tcolt_350: '$answers.590cd3e9f851c25927f4cbd3',\r\n\tpotencia: '$answers.590b79ccb43fdd0c2d2f37b6',\r\n\troto_marti: '$answers.590b8948f851c2528959f210',\r\n \tdes_cruz: '$answers.590b8948f851c2528959f211',\r\n \tdes_plan: '$answers.5911f1f1f851c20ec95547cc',\r\n \tbrocas: '$answers.590b8948f851c2528959f212',\r\n \tmartillo_una: '$answers.590b8948f851c2528959f213',\r\n \tcorte_pinzas: '$answers.590b8948f851c2528959f214',\r\n \tpunta_pinza: '$answers.590ce558f851c2592611072d',\r\n \telec_pinza: '$answers.5910b5c9f851c20ab687d771',\r\n \tguia: '$answers.590b8948f851c2528959f215',\r\n \theza_key: '$answers.590b8948f851c2528959f216',\r\n \tesca_3_5: '$answers.590b8948f851c2528959f218',\r\n \tesca_7_5: '$answers.5910b5c9f851c20ab687d772',\r\n\tcinta_herra: '$answers.590b8948f851c2528959f219',\r\n \tporta_herra: '$answers.5910b5c9f851c20ab687d773',\r\n \tbandola: '$answers.590b8948f851c2528959f21a',\r\n \tpluma: '$answers.5911f1f1f851c20ec95547cd',\r\n \tentorchador: '$answers.590b8948f851c2528959f21b',\r\n \tpuntas_prueb: '$answers.590b8948f851c2528959f21c',\r\n \tampli: '$answers.590b8948f851c2528959f21d',\r\n \tmicrotel: '$answers.590b8948f851c2528959f21e',\r\n  \r\n  casco: '$answers.59120034b43fdd6f3bcea230',\r\n  chaleco: '$answers.59120034b43fdd6f3bcea231',\r\n  guantes: '$answers.59120034b43fdd6f3bcea232',\r\n  conos: '$answers.59120034b43fdd6f3bcea233',\r\n  banderilla: '$answers.59120034b43fdd6f3bcea234',\r\n  \r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "contratista" , "area" , "compa" , "smart_gold" , "colt_250" , "colt_350" , "potencia" , "camisa" , "botas" , "limpieza" , "manual" , "smart_class" , "roto_marti" , "des_cruz" , "des_plan" , "brocas" , "martillo_una" , "corte_pinzas" , "punta_pinza" , "elec_pinza" , "guia" , "heza_key" , "esca_3_5" , "esca_7_5" , "cinta_herra" , "porta_herra" , "bandola" , "pluma" , "entorchador" , "puntas_prueb" , "ampli" , "microtel" , "casco" , "chaleco" , "guantes" , "conos" , "banderilla" , "color" , "calcomanias"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -8072,7 +8054,7 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$created_by_id',\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$start_date' }},\r\n\thora: {$hour: '$start_date'},\r\n\tminuto: {$minute: '$start_date'},\r\n\tdia: { $dayOfWeek: '$start_date' },\r\n\tcheck: {$ifNull: ['$answers.59679cbff851c210dd23d517', 'Desconocido']},\r\n\tgeo: '$geolocation',\r\n\tsistema: { $ifNull: ['$properties.device_properties.system', 'Desconocido'] },\r\n\ttoken:{ $ifNull: ['$properties.device_properties.phone_token','Sin Token']},\r\n\tfecha: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "dia" , "check" , "geo" , "sistema" , "token" , "_id" , "fecha"] , "numSkipDocuments" : 10000000 , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -8557,7 +8539,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tcheck: {$ifNull: ['$answers.59679cbff851c210dd23d517', 'Desconocido']},\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "check" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -9522,7 +9504,7 @@ display;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12353,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.58e56c57f851c219bf302301',\r\n\ttipo_tarea:'$answers.596e78aff851c2178be5a665',\r\n\tfo_solicitud:'$answers.58e56c57f851c219bf3022fe',\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "conexion" , "area" , "tipo_tarea" , "fo_solicitud" , "_id"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -9989,10 +9971,10 @@ this.queryText = query;
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000013',\r\n\tstatus_ord: '$answers.f1054000a030000000000002'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "status_cob" , "folio" , "area" , "cope" , "tipo" , "status_ord" , "error"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002: 'liquidada',\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000013',\r\n\tstatus_ord: '$answers.f1054000a030000000000002'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "status_cob" , "folio" , "area" , "cope" , "tipo" , "status_ord" , "error"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -10145,7 +10127,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "{\r\n\tdistinct:'form_answer',\r\n\tkey:'connection_id',\r\n\tquery:{ form_id: 11044 }\r\n\r\n}" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "RUN_DB_COMMAND" , "flattenCollections" : true , "selectedFields" : [ "values"]}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -10682,7 +10664,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: { $in: [2072, 2073]},\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tform_id: '$form_id',\r\n\t\testatus: '$answers.f1054000a030000000000012',\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.form_id" , "_id.estatus" , "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -10937,7 +10919,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 2072,\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tfecha: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.fecha" , "_id.tecnico" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -11080,7 +11062,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:16343,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 2073,\r\n\r\n}},\r\n\r\n{$group: {_id:{\r\n\t\tdate: { $ifNull: [ '$answers.f1054000a030000000000e14', 'Sin fecha de reportado' ] },\r\n\t\ttecnico : { $ifNull: [ '$answers.f1054000a02000000000fa04', 'Órdenes sin técnico' ] },\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "flattenCollections" : true , "selectedFields" : [ "_id.tecnico" , "_id.date" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -11581,7 +11563,7 @@ full;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12165,\r\n\tanswers.590a4761f851c20e60ac168c : 'activo',\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.58db0090b43fdd5c1419dae2 : 'tecnico',\r\n\tanswers.590a2a71b43fdd3c7678af07: 'pc_industrial'\r\n}},\r\n\r\n{$project: {\t\r\n\t\tnombre: '$answers.f1216500a010000000000004',\r\n\t\tapepat: '$answers.f1216500a010000000000005',\r\n\t\tapemat: '$answers.f1216500a010000000000006',\r\n\t\tcontratista: '$answers.590a2a71b43fdd3c7678af07',\r\n\t\tdivision: '$answers.f1216500a010000000000011',\r\n\t\tarea:'$answers.590a34bab43fdd3c7678af0c',\r\n\t\tfibra: '$answers.590cdf33f851c25926110725',\r\n\t\tcobre: '$answers.590cdf33f851c25926110726',\r\n\t\tredes: '$answers.59289efdb43fdd5d59125aee',\r\n\t\tantenas: '$answers.59289efdb43fdd5d59125af0',\r\n\r\n\t\tsubmarca: '$answers.5919e87bf851c278f5bfabab',\r\n\t\tmodelo: { $ifNull: [ '$answers.590cc33cb43fdd113635f82b', 'desconocido' ] },\r\n\t\tplacas: '$answers.590b77cfb43fdd356ce61de4',\r\n\t\tcolor: { $ifNull: [ '$answers.590cc33cb43fdd113635f82c', 'desconocido' ] },\r\n\t\tcalcomanias: { $ifNull: [ '$answers.590b77cfb43fdd356ce61de6', 'desconocido' ] },\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "nombre" , "apepat" , "contratista" , "division" , "area" , "fibra" , "cobre" , "redes" , "antenas" , "apemat" , "placas" , "submarca" , "modelo" , "color" , "calcomanias"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -11999,7 +11981,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tconnection_id: 2072,\r\n\tdeleted_at:{$exists:false},\r\n\t\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "created" , "check" , "comentarios" , "hora" , "minuto" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -12437,7 +12419,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tconnection_id: 2073,\r\n\tdeleted_at:{$exists:false},\r\n\t\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tcheck: '$answers.59679cbff851c210dd23d517',\r\n\tautorizacion: '$answers.59679e17b43fdd022965634a',\r\n\tcomentarios: '$answers.59679cbff851c210dd23d518',\r\n\tgeo: '$geolocation',\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "created" , "check" , "comentarios" , "hora" , "minuto" , "geo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -13231,10 +13213,10 @@ this.queryText = query;
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1675,\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_tarea" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002: 'liquidada',\r\n\tconnection_id: 1675,\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\ttipo:'$answers.f1054000a010000000000021',\r\n\terror: '$answers.f1054000a030000000000e13',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tstatus_ord: '$answers.f1054000a030000000000002',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "area" , "cope" , "tipo" , "status_cob" , "status_ord" , "tipo_tarea" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -13704,7 +13686,7 @@ month</expression>
                     <property name="nativeDataType">9</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1675,\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$created_at',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1675,\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$created_at',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -13969,7 +13951,7 @@ display;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\t'answers.f1054000a030000000000012' : {$in: ['error_validacion','error_de_paco']},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\terror: { $toLower: '$answers.f1054000a030000000000e13'},\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "conexion" , "area" , "cope" , "error" , "status_cob"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -14613,7 +14595,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:13622,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n\r\n{$project: {\t\r\n\t\r\n\tuser: '$user_id',\r\n\tfolio : '$folio',\r\n\tfecha: '$created_at',\r\n\ttipo_orden: '$answers.591321b0f851c20ecb5a1eac',\r\n\tdilacion: '$answers.591321b0f851c20ecb5a1eae',\r\n\tarea: '$answers.591321b0f851c20ecb5a1eaf',\r\n\tcope: '$answers.591321b0f851c20ecb5a1eb0',\r\n\ttelefono: '$answers.591321b0f851c20ecb5a1eaa',\r\n\testatus: '$answers.591321b0f851c20ecb5a1eb3',\r\n\torden: '$answers.591321b0f851c20ecb5a1eab',\r\n\ttipo: '$answers.591321b0f851c20ecb5a1ea8'\r\n\r\n\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "user" , "dilacion" , "area" , "cope" , "telefono" , "estatus" , "fecha" , "orden" , "tipo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -15634,7 +15616,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16343,\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\tconexion: '$connection_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\r\n\r\n},\r\n\t\tcantidad:{$sum:1}\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.area" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,10000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -15776,7 +15758,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16343,\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n\r\n}},\r\n{$group: {_id:{\r\n\r\n\tconexion: '$connection_id',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\r\n\r\n},\r\n\t\tcantidad:{$sum:1}\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion" , "_id.area" , "_id.cope" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,10000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -15955,7 +15937,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "{\r\n\tdistinct:'form_answer',\r\n\tkey:'connection_id',\r\n\tquery:{ form_id: 11044 }\r\n\r\n}" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "RUN_DB_COMMAND" , "flattenCollections" : true , "selectedFields" : [ "values"]}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -16102,7 +16084,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "{\r\n\tdistinct:'form_answer',\r\n\tkey:'connection_id',\r\n\tquery:{ form_id: 16343 }\r\n\r\n}" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "RUN_DB_COMMAND" , "flattenCollections" : true , "selectedFields" : [ "values"]}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -16495,7 +16477,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tanswers.f1054000a010000000000008 : 'metro',\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: '$connection_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico: '$answers.f1054000a040000000000001',\r\n\ttel_tec: '$answers.f1054000a040000000000002',\r\n\testatus: '$answers.f0121460a1000000000000e1',\r\n\tagendado: '$answers.f1054000a010000000000011'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conection" , "folio" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created" , "agendado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -17111,7 +17093,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tanswers.f1054000a010000000000008 : 'norte',\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: '$connection_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico:{ $ifNull: ['$answers.f1054000a040000000000001', 'Sin asignar']},\r\n\ttel_tec: { $ifNull: ['$answers.f1054000a040000000000002', 'Sin especificar']},\r\n\testatus: '$answers.f0121460a1000000000000e1',\r\n\tagendado: '$answers.f1054000a010000000000011'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conection" , "folio" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created" , "agendado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -17553,7 +17535,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tanswers.f1054000a010000000000008 : 'occidente',\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: '$connection_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico:{ $ifNull: ['$answers.f1054000a040000000000001', 'Sin asignar']},\r\n\ttel_tec: { $ifNull: ['$answers.f1054000a040000000000002', 'Sin especificar']},\r\n\testatus: '$answers.f0121460a1000000000000e1',\r\n\tagendado: '$answers.f1054000a010000000000011'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conection" , "folio" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created" , "agendado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -17992,7 +17974,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:12146,\r\n\tanswers.f1054000a010000000000008 : 'sur',\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tconection: {$ifNull: [ '$connection_id', 1259 ]},\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: '$answers.f1054000a010000000000012',\r\n\tcope: '$answers.f1054000a010000000000099',\r\n\tarea: '$answers.f1054000a010000000000009',\r\n\ttecnico:{ $ifNull: ['$answers.f1054000a040000000000001', 'Sin asignar']},\r\n\ttel_tec: { $ifNull: ['$answers.f1054000a040000000000002', 'Sin especificar']},\r\n\testatus: '$answers.f0121460a1000000000000e1',\r\n\tagendado: '$answers.f1054000a010000000000011'\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "conection" , "hora" , "cope" , "area" , "tecnico" , "tel_tec" , "estatus" , "created" , "agendado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -18918,7 +18900,7 @@ local;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:16126,\r\n\tdeleted_at:{$exists:true},\r\n\r\n}},\r\n{$project:{\r\n\r\n\tuser: '$user_id',\r\n\tfolio: '$folio',\r\n\tcreated: '$created_at',\r\n\thora: {$hour: '$created_at'},\r\n\tminuto: {$minute: '$created_at'},\r\n\tsemana: { $week: '$created_at' },\r\n\tdia: { $dayOfWeek: '$created_at' },\r\n\tborrado: '$deleted_at',\r\n\tborrado_por: '$deleted_by'\r\n\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "user" , "created" , "hora" , "minuto" , "semana" , "dia" , "borrado" , "borrado_por"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -19487,10 +19469,10 @@ this.queryText = query;
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at : {$exists:false},\r\n\tconnection_id : 1937,\r\n\tanswers.f1054000a030000000000012: { $in: [\"paco\", \"estimacion\", \"liberada\", \"factura\", \"pendiente\", \"validacion\", \"aceptada\", \"archivo_carga_masiva\", \"error_validacion\", \"error_de_paco\", \"pagada\"]},\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "estatus_cob" , "tipo_tarea" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at : {$exists:false},\r\n\tconnection_id : 1937,\r\n\tanswers.f1054000a030000000000002: 'liquidada',\r\n\tanswers.f1054000a030000000000012: { $in: [\"paco\", \"estimacion\", \"liberada\", \"factura\", \"pendiente\", \"validacion\", \"aceptada\", \"archivo_carga_masiva\", \"error_validacion\", \"error_de_paco\", \"pagada\"]},\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\testatus_cob: '$answers.f1054000a030000000000012',\r\n\ttipo_tarea: '$answers.f1054000a010000000000021',\r\n\ttipo_instalacion: '$answers.f1054000a020000000000004',\r\n\tmetros: '$answers.f1054000a0200000000000d7'\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "estatus_cob" , "tipo_tarea" , "tipo_instalacion" , "metros"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -19677,7 +19659,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:14620,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$project:{\r\n  producto: '$answers.abc00000000000000000a001',\r\n  precio_contratista: '$answers.ccc00000000000000000c001',\r\n  precio_pc: '$answers.bbb00000000000000000b001'\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "producto" , "precio_contratista" , "precio_pc"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -20010,7 +19992,7 @@ month</expression>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1937,\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$answers.f1054000a030000000000e14',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:11044,\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: 1937,\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$answers.f1054000a030000000000e14',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -21051,7 +21033,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: { $in: [11044,16343]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\tcomentarios: '$answers.f1054000a030000000000005',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tinstalacion: '$answers.f1054000a020000000000004',\r\n\tmetraje: '$answers.f1054000a0200000000000d7',\r\n\t\r\n\r\n\r\n}}\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "status_cob" , "folio" , "cope" , "comentarios" , "tarea" , "instalacion" , "metraje"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -21795,7 +21777,7 @@ this.queryText = query;
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:19604,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.59de4d67b43fdd3bc9acd36a': {$exists: true},\r\n\t'answers.59e4a52cb43fdd103193aafd' : {$exists: true},\r\n}},\r\n\r\n{$project: {\t\r\n\t\r\n\tinicio: '$answers.59de4d67b43fdd3bc9acd36a',\r\n\tfin: '$answers.59de4d67b43fdd3bc9acd36b',\r\n\tcorreo: '$answers.59e4a52cb43fdd103193aafd',\r\n\t\r\n\r\n\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "inicio" , "fin" , "correo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,1000</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">

@@ -6599,21 +6599,20 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="name">Estatus PCI</property>
-                    <expression name="expression" type="javascript">var area = row["_id.est_pc"];&#13;
-if(area == null){&#13;
-	area = "sin_estatus";&#13;
+                    <expression name="expression" type="javascript">var estatus = row["_id.estatus"];&#13;
+var display = "";&#13;
+&#13;
+if (estatus == "realizado" || estatus == "validado" ) {&#13;
+	display = "Ejecutados";&#13;
+}else if (estatus == "inicio" || estatus == "cotizado" || estatus == "autorizado_por_gerente" || estatus == "autorizado_por_gerente_en_proceso" || estatus == "") {&#13;
+	display = "Pendiente de seguimiento";&#13;
+}else if (estatus == "rechazado") {&#13;
+	display = "Rechazado";&#13;
+}else{&#13;
+	display = "Estatus no identificado"&#13;
 }&#13;
-area = area.toUpperCase();&#13;
-var arr = area.split('_');&#13;
-var resultado = '';&#13;
-for (var i = 0; i &lt;arr.length;i++){&#13;
-var te =  (new Packages.java.lang.String(arr[i]));&#13;
-	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
-	if (i &lt; arr.length - 1) {&#13;
-		resultado = resultado + ' ';&#13;
-	}&#13;
-}&#13;
-resultado;</expression>
+&#13;
+display;</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -6936,6 +6935,363 @@ this.queryText = query;]]></method>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Outdoor cliente" id="610">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Especialidad</property>
+                    <expression name="expression" type="javascript">var area = row["_id.especialidad"]&#13;
+if(area == null){&#13;
+	area = "";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Estatus</property>
+                    <expression name="expression" type="javascript">var area = row["_id.estatus"];&#13;
+if(area == null){&#13;
+	area = "";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Region</property>
+                    <expression name="expression" type="javascript">var region = row["_id.region"];&#13;
+var display = "";&#13;
+&#13;
+if (region == "r1") {&#13;
+	display = "R1 - Abel Palomeque";&#13;
+}else if (region =="r2") {&#13;
+	display = "R2 - Jose Luis Cornejo";&#13;
+}else if (region == "r3") {&#13;
+	display = "R3 - Salvador Velazquez Salinas";&#13;
+}else if (region == "r4") {&#13;
+	display = "R4 - Juan Salvador Figueroa Alcaraz";&#13;
+}else if (region == "r5") {&#13;
+	display = "R5 - Hugo Enrrique Alejandre";&#13;
+}else if (region == "r6") {&#13;
+	display = "R6 - Ramón Valladolid";&#13;
+}else if (region == "r7") {&#13;
+	display = "R7 - Alan Caudillo";&#13;
+}else if (region == "r8") {&#13;
+	display = "R8 - Bruno Salinas Ayala";&#13;
+}else if (region == "r9") {&#13;
+	display = "R9 - Maria Del Rocio Cervantes Luna";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.region</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.region</text-property>
+                    <text-property name="heading">_id.region</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.especialidad</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.especialidad</text-property>
+                    <text-property name="heading">_id.especialidad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.estatus</text-property>
+                    <text-property name="heading">_id.estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cantidad</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">cantidad</text-property>
+                    <text-property name="heading">cantidad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Especialidad</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Region</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">_id.especialidad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">_id.estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">cantidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Especialidad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var new_query = "";
+var bookmark = "{$exists:false},";
+var fecha = params["Fecha Inicial"].value;
+var hasta = params["Fecha Final"].value;
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+
+	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.region</property>
+                    <property name="nativeName">_id.region</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id.especialidad</property>
+                    <property name="nativeName">_id.especialidad</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">_id.estatus</property>
+                    <property name="nativeName">_id.estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">cantidad</property>
+                    <property name="nativeName">cantidad</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [24552]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.5a860a9ef851c27234e95c85 : {$exists:true},\r\n}},\r\n{$group:{ _id: {\r\n\t\r\n\tregion: '$answers.5a860a9ef851c27234e95c7f',\r\n\tespecialidad: '$answers.5a860a9ef851c27234e95c67',\r\n\testatus: '$answers.5a860a9ef851c27234e95c85',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.region" , "_id.especialidad" , "_id.estatus" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>region</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>region</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>region</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>zona</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>zona</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>zona</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>especialidad</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>especialidad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>especialidad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>est_pci</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>est_pci</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>est_pci</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Drill Outdoor" id="606">
             <list-property name="columnHints">
                 <structure>
@@ -7075,6 +7431,567 @@ if (region != null &amp;&amp; region != "") {
 }
 if (estatus != null &amp;&amp; estatus != "" ) {
 	new_query = new_query + "'answers.5a860a9ef851c27234e95c75' : '" + estatus + "',";
+}
+if (especialidad != null &amp;&amp; especialidad != "") {
+	new_query = new_query + "'answers.5a860a9ef851c27234e95c67' : '" + especialidad + "',";
+}
+
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">desc</property>
+                    <property name="nativeName">desc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">sitio</property>
+                    <property name="nativeName">sitio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">equipo</property>
+                    <property name="nativeName">equipo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">zona</property>
+                    <property name="nativeName">zona</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [24552]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\tdesc: '$answers.5a860a9ef851c27234e95c66',\r\n\tsitio: '$answers.5a860a9ef851c27234e95c69',\r\n\tequipo: '$answers.5a860a9ef851c27234e95c6a',\r\n\tzona: '$answers.5a860a9ef851c27234e95c6c',\r\n\tmes: '$answers.5a860a9ef851c27234e95c6e',\r\n\testatus: '$answers.5a860a9ef851c27234e95c75',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "desc" , "sitio" , "equipo" , "zona" , "mes" , "estatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>desc</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>desc</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>desc</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sitio</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sitio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sitio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>equipo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>equipo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>equipo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>zona</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>zona</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>zona</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>mes</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>mes</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mes</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estatus</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>estatus</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estatus</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_ini</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_ini</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_ini</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_cot</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_cot</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_cot</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_auto</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_auto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_auto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_asig</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_asig</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_asig</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_ejec_pen</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_ejec_pen</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_ejec_pen</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_ejec</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_ejec</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_ejec</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_val_coor</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_val_coor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_val_coor</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>f_vali</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>f_vali</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>f_vali</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Drill Outdoor Cliente" id="611">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">desc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">desc</text-property>
+                    <text-property name="heading">desc</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sitio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">sitio</text-property>
+                    <text-property name="heading">sitio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">equipo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">equipo</text-property>
+                    <text-property name="heading">equipo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zona</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">zona</text-property>
+                    <text-property name="heading">zona</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">mes</text-property>
+                    <text-property name="heading">mes</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">desc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">sitio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">equipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">zona</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var new_query = "";
+var bookmark = "{$exists:false},";
+var fecha = params["Fecha Inicial"].value;
+var hasta = params["Fecha Final"].value;
+
+var region = params["Region"].value;
+var estatus = params["Estatus"].value;
+var especialidad = params["Especialidad"].value;
+
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+
+	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+
+if (region != null &amp;&amp; region != "") {
+	new_query = new_query + "'answers.5a860a9ef851c27234e95c7f' : '" + region + "',";
+}
+if (estatus != null &amp;&amp; estatus != "" ) {
+	new_query = new_query + "'answers.5a860a9ef851c27234e95c85' : '" + estatus + "',";
 }
 if (especialidad != null &amp;&amp; especialidad != "") {
 	new_query = new_query + "'answers.5a860a9ef851c27234e95c67' : '" + especialidad + "',";
