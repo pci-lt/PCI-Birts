@@ -229,6 +229,16 @@
                         <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Compañia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Filiales</property>
@@ -282,6 +292,16 @@
                 <structure>
                     <property name="position">10</property>
                     <property name="name">Subdireccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">Compañia</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">first_name</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -464,7 +484,7 @@
                     <property name="type">string</property>
                 </structure>
             </list-property>
-            <property name="__ac_group_collapse_level">1,2,3,5,6</property>
+            <property name="__ac_group_collapse_level">1,2,3,6,7,5,4</property>
             <property name="marginLeft">24pt</property>
             <property name="dataSet">Join produccion fibra y cobre - CASD</property>
             <list-property name="boundDataColumns">
@@ -1605,6 +1625,258 @@
                     <expression name="expression" type="javascript">dataSetRow["Tipo"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">first_name</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+var user = dataSetRow["first_name"];&#13;
+&#13;
+if(user == "" || user == null){&#13;
+	display = "Contratista no identificado";&#13;
+}else{&#13;
+	display = user;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Compañia</property>
+                    <text-property name="displayName">Compañia</text-property>
+                    <expression name="expression" type="javascript">var company = dataSetRow["Compañia"];&#13;
+var display = "";&#13;
+&#13;
+if(company == "" || company == null){&#13;
+	display = "Contratista no identificado";&#13;
+}else {&#13;
+	display = company&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Company</property>
+                    <text-property name="displayName">SN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Enero Company</property>
+                    <text-property name="displayName">SEC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Enero"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Febrero Company</property>
+                    <text-property name="displayName">SFN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Febrero"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Marzo Company</property>
+                    <text-property name="displayName">SMC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Marzo"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Abril Company</property>
+                    <text-property name="displayName">SAC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Abril"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Mayo Company</property>
+                    <text-property name="displayName">SMC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Mayo"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Junio Company</property>
+                    <text-property name="displayName">SJN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Junio"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Julio Company</property>
+                    <text-property name="displayName">SJC</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Julio"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Agosto Company</property>
+                    <text-property name="displayName">SAN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Agosto"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Septiembre Company</property>
+                    <text-property name="displayName">SSN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Septiembre"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Octubre Company</property>
+                    <text-property name="displayName">SON</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Octubre"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Noviembre Company</property>
+                    <text-property name="displayName">SNN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Noviembre"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Diciembre Company</property>
+                    <text-property name="displayName">SDN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Company</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Mes"] == "Diciembre"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000000</property>
             <list-property name="filter">
@@ -1624,6 +1896,9 @@
                 <property name="width">2.0104166666666665in</property>
             </column>
             <column id="324">
+                <property name="width">1.625in</property>
+            </column>
+            <column id="844">
                 <property name="width">1.625in</property>
             </column>
             <column id="735">
@@ -1698,6 +1973,11 @@
                     <cell id="280">
                         <label id="281">
                             <text-property name="text">Cope</text-property>
+                        </label>
+                    </cell>
+                    <cell id="836">
+                        <label id="845">
+                            <text-property name="text">Contratista</text-property>
                         </label>
                     </cell>
                     <cell id="727">
@@ -1786,6 +2066,7 @@
                         <cell id="333"/>
                         <cell id="334"/>
                         <cell id="335"/>
+                        <cell id="837"/>
                         <cell id="728">
                             <data id="445">
                                 <structure name="numberFormat">
@@ -1923,6 +2204,7 @@
                         </cell>
                         <cell id="356"/>
                         <cell id="357"/>
+                        <cell id="838"/>
                         <cell id="729">
                             <data id="444">
                                 <structure name="numberFormat">
@@ -2063,6 +2345,7 @@
                             </data>
                         </cell>
                         <cell id="379"/>
+                        <cell id="839"/>
                         <cell id="730">
                             <data id="443">
                                 <structure name="numberFormat">
@@ -2189,7 +2472,7 @@
                 <structure name="toc">
                     <expression name="expressionValue" type="javascript">row["Cope"]</expression>
                 </structure>
-                <property name="hideDetail">true</property>
+                <property name="hideDetail">false</property>
                 <header>
                     <row id="397">
                         <cell id="398"/>
@@ -2200,6 +2483,7 @@
                                 <property name="resultSetColumn">Cope</property>
                             </data>
                         </cell>
+                        <cell id="840"/>
                         <cell id="731">
                             <data id="442">
                                 <structure name="numberFormat">
@@ -2320,6 +2604,92 @@
                     </row>
                 </header>
             </group>
+            <group id="846">
+                <property name="groupName">Company</property>
+                <expression name="keyExpr" type="javascript">row["first_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["first_name"]</expression>
+                </structure>
+                <property name="hideDetail">true</property>
+                <header>
+                    <row id="847">
+                        <cell id="848"/>
+                        <cell id="849"/>
+                        <cell id="850"/>
+                        <cell id="851"/>
+                        <cell id="852">
+                            <data id="902">
+                                <property name="resultSetColumn">first_name</property>
+                            </data>
+                        </cell>
+                        <cell id="853">
+                            <data id="886">
+                                <property name="resultSetColumn">Suma Company</property>
+                            </data>
+                        </cell>
+                        <cell id="854">
+                            <data id="888">
+                                <property name="resultSetColumn">Suma Enero Company</property>
+                            </data>
+                        </cell>
+                        <cell id="855">
+                            <data id="889">
+                                <property name="resultSetColumn">Suma Febrero Company</property>
+                            </data>
+                        </cell>
+                        <cell id="856">
+                            <data id="890">
+                                <property name="resultSetColumn">Suma Marzo Company</property>
+                            </data>
+                        </cell>
+                        <cell id="857">
+                            <data id="891">
+                                <property name="resultSetColumn">Suma Abril Company</property>
+                            </data>
+                        </cell>
+                        <cell id="858">
+                            <data id="892">
+                                <property name="resultSetColumn">Suma Mayo Company</property>
+                            </data>
+                        </cell>
+                        <cell id="859">
+                            <data id="893">
+                                <property name="resultSetColumn">Suma Junio Company</property>
+                            </data>
+                        </cell>
+                        <cell id="860">
+                            <data id="894">
+                                <property name="resultSetColumn">Suma Julio Company</property>
+                            </data>
+                        </cell>
+                        <cell id="861">
+                            <data id="897">
+                                <property name="resultSetColumn">Suma Agosto Company</property>
+                            </data>
+                        </cell>
+                        <cell id="862">
+                            <data id="898">
+                                <property name="resultSetColumn">Suma Septiembre Company</property>
+                            </data>
+                        </cell>
+                        <cell id="863">
+                            <data id="899">
+                                <property name="resultSetColumn">Suma Octubre Company</property>
+                            </data>
+                        </cell>
+                        <cell id="864">
+                            <data id="900">
+                                <property name="resultSetColumn">Suma Noviembre Company</property>
+                            </data>
+                        </cell>
+                        <cell id="865">
+                            <data id="901">
+                                <property name="resultSetColumn">Suma Diciembre Company</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
             <group id="418">
                 <property name="groupName">Mes</property>
                 <expression name="keyExpr" type="javascript">row["Mes"]</expression>
@@ -2340,6 +2710,7 @@
                         <cell id="421"/>
                         <cell id="422"/>
                         <cell id="423"/>
+                        <cell id="841"/>
                         <cell id="732">
                             <data id="441">
                                 <structure name="numberFormat">
@@ -2374,6 +2745,7 @@
                             <property name="resultSetColumn">Tipo</property>
                         </data>
                     </cell>
+                    <cell id="842"/>
                     <cell id="733">
                         <data id="294">
                             <property name="resultSetColumn">cantidad</property>
@@ -2407,6 +2779,7 @@
                             <text-property name="content"><![CDATA[Total de ordenes]]></text-property>
                         </text>
                     </cell>
+                    <cell id="843"/>
                     <cell id="734">
                         <data id="446">
                             <structure name="numberFormat">

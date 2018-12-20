@@ -316,6 +316,12 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">_id.fecha_reportado</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.fecha_reportado</text-property>
+                    <text-property name="heading">_id.fecha_reportado</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">division</property>
                     <property name="analysis">dimension</property>
                 </structure>
@@ -355,6 +361,11 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">7</property>
+                        <property name="name">_id.fecha_reportado</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
                         <property name="name">division</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -404,8 +415,15 @@ display;</expression>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">_id.fecha_reportado</property>
+                    <property name="nativeName">_id.fecha_reportado</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\tfecha_reportado: '$answers.f1054000a030000000000e14',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.forma" , "_id.conexion" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n\r\n}},\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\tfecha_reportado: '$answers.f1054000a030000000000e14',\r\n\tarea:'$answers.f1054000a0100000000000a2',\r\n\tcope:'$answers.f1054000a010000000000002',\r\n\tstatus_cob: '$answers.f1054000a030000000000012',\r\n\r\n  },\r\n  \t\tcantidad: {$sum:1}\t\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.forma" , "_id.conexion" , "_id.area" , "_id.cope" , "_id.status_cob" , "cantidad" , "_id.fecha_reportado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -8845,53 +8863,38 @@ if(position == null || position == ""){&#13;
 	position = "Puesto desconocido";&#13;
 }&#13;
 var area = position.split(" - ")&#13;
-var display = area[5];&#13;
+var display = area[4];&#13;
 if(display == null || display == "" || display == "Puesto desconocido"){&#13;
-	display = "Departamento desconocido";&#13;
+	display = "COPE desconocido";&#13;
 	if(row["folio"] == null || row["folio"] == ""){&#13;
 		var position_total = row["puesto_total"];&#13;
 		area = position_total.split(" - ");&#13;
-		display = area[5];&#13;
-		if(display == null || display == "")&#13;
-			display = "Departamento desconocido";&#13;
+		display = area[4];&#13;
 	}&#13;
 }&#13;
+&#13;
 &#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="name">Empresa</property>
-                    <expression name="expression" type="javascript">var position = row["position"];&#13;
-if(position == null || position == ""){&#13;
-	position = "Puesto desconocido";&#13;
-}&#13;
-var area = position.split(" - ")&#13;
-var iniciales = area[4];&#13;
-if(iniciales == null || iniciales == "" || iniciales == "Puesto desconocido"){&#13;
-	iniciales = "Departamento desconocido";&#13;
-	if(row["folio"] == null || row["folio"] == ""){&#13;
-		var position_total = row["puesto_total"];&#13;
-		area = position_total.split(" - ");&#13;
-		iniciales = area[4];&#13;
-		if(iniciales == null || iniciales == "")&#13;
-			iniciales = "Departamento desconocido";&#13;
-	}&#13;
-}&#13;
-var display = "Empresa desconocida";&#13;
-if(iniciales == "Empresa desconocida" || iniciales == null || iniciales == ""){&#13;
+                    <expression name="expression" type="javascript">var iniciales = row["departamento"];&#13;
+var display = "Empresa desconocida"&#13;
+&#13;
+if (iniciales == "Empresa desconocida" || iniciales == null || iniciales == ""){&#13;
 	display = "Empresa desconocida"&#13;
 }&#13;
-else if (iniciales == "AI"){&#13;
+else if (iniciales == "AI" || iniciales == " AI" || iniciales == "AI " || iniciales ==" AI "){&#13;
 	display = "Accses IACON";&#13;
 }&#13;
-else if (iniciales == "AR") {&#13;
+else if (iniciales == "AR" || iniciales == " AR" || iniciales == "AR " || iniciales == " AR ") {&#13;
 	display = "Accses Redes";&#13;
 }&#13;
-else if (iniciales == "CR") {&#13;
+else if (iniciales == "CR" || iniciales == " CR" || iniciales == "CR " || iniciales == " CR ") {&#13;
 	display = "Crece";&#13;
 }&#13;
-else if (iniciales == "IA") {&#13;
+else if (iniciales == "IA" || iniciales == " IA" || iniciales == " IA" || iniciales == " IA ") {&#13;
 	display = "IACON"&#13;
 }&#13;
 &#13;
@@ -9093,6 +9096,21 @@ display;</expression>
                 <structure>
                     <property name="columnName">Empresa</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha_mx</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -20415,7 +20433,7 @@ display;</expression>
     "public"."users_customuser"."first_name", "public"."users_customuser"."email"
     FROM
          "public"."users_customuser" JOIN "public"."plans_license" ON "public"."users_customuser"."id" = "public"."plans_license"."user_id"
-    WHERE "public"."plans_license"."connection_id" IN (2072, 2073, 2071)
+    WHERE "public"."plans_license"."connection_id" IN (2072, 2073, 2071,1929)
   ]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>

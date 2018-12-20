@@ -224,6 +224,16 @@
                         <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Compañia</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Filiales</property>
@@ -277,6 +287,16 @@
                 <structure>
                     <property name="position">10</property>
                     <property name="name">Subdireccion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">first_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">Compañia</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -479,7 +499,7 @@
                     <property name="type">string</property>
                 </structure>
             </list-property>
-            <property name="__ac_group_collapse_level">1,2,3,6,4</property>
+            <property name="__ac_group_collapse_level">1,2,3,6,4,5</property>
             <property name="marginLeft">12pt</property>
             <property name="width">95%</property>
             <property name="dataSet">Join produccion fibra y cobre - CASD</property>
@@ -3163,6 +3183,581 @@
                     <expression name="expression" type="javascript">dataSetRow["Tipo"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">first_name</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+var user = dataSetRow["first_name"];&#13;
+&#13;
+if(user == "" || user == null){&#13;
+	display = "Contratista no identificado";&#13;
+}else{&#13;
+	display = user;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Compañia</property>
+                    <text-property name="displayName">Compañia</text-property>
+                    <expression name="expression" type="javascript">var company = dataSetRow["Compañia"];&#13;
+var display = "";&#13;
+&#13;
+if(company == "" || company == null){&#13;
+	display = "Contratista no identificado";&#13;
+}else {&#13;
+	display = company&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Company</property>
+                    <text-property name="displayName">SN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 1 Company</property>
+                    <text-property name="displayName">1N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 1</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 2 Company</property>
+                    <text-property name="displayName">2N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 2</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 3 Company</property>
+                    <text-property name="displayName">3N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 3</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 4 Company</property>
+                    <text-property name="displayName">4N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 4</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 5 Company</property>
+                    <text-property name="displayName">5N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 5</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 6 Company</property>
+                    <text-property name="displayName">6N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 6</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 7 Company</property>
+                    <text-property name="displayName">7N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 7</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 8 Company</property>
+                    <text-property name="displayName">8N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 8</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 9 Company</property>
+                    <text-property name="displayName">9N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 9</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 10 Company</property>
+                    <text-property name="displayName">10N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 10</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 11 Company</property>
+                    <text-property name="displayName">11N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 11</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 12 Company</property>
+                    <text-property name="displayName">12N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 12</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 13 Company</property>
+                    <text-property name="displayName">13N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 13</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 14 Company</property>
+                    <text-property name="displayName">14N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 14</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 15 Company</property>
+                    <text-property name="displayName">15N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 15</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 16 Company</property>
+                    <text-property name="displayName">16N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 16</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 17 Company</property>
+                    <text-property name="displayName">17N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 17</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 18 Company</property>
+                    <text-property name="displayName">18N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 18</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 19 Company</property>
+                    <text-property name="displayName">19N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 19</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 20 Company</property>
+                    <text-property name="displayName">20N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 20</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 21 Company</property>
+                    <text-property name="displayName">21N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 21</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 22 Comapany</property>
+                    <text-property name="displayName">22N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 22</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 23 Company</property>
+                    <text-property name="displayName">23N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 23</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 24 Company</property>
+                    <text-property name="displayName">24N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 24</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 25 Company</property>
+                    <text-property name="displayName">25N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 25</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 26 Company</property>
+                    <text-property name="displayName">26N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 26</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 27 Company</property>
+                    <text-property name="displayName">27N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 27</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 28 Company</property>
+                    <text-property name="displayName">28N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 28</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 29 Company</property>
+                    <text-property name="displayName">29N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 29</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 30 Company</property>
+                    <text-property name="displayName">30N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 30</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma 31 Company</property>
+                    <text-property name="displayName">31N</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Compañia</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["cantidad"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["day"] == 31</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000000</property>
             <list-property name="filter">
@@ -3183,6 +3778,9 @@
             </column>
             <column id="324">
                 <property name="width">0.8854166666666666in</property>
+            </column>
+            <column id="1245">
+                <property name="width">1.625in</property>
             </column>
             <column id="326">
                 <property name="textAlign">center</property>
@@ -3382,6 +3980,11 @@ display;</expression>
                             <text-property name="text">Cope</text-property>
                         </label>
                     </cell>
+                    <cell id="1236">
+                        <label id="1246">
+                            <text-property name="text">Contratista</text-property>
+                        </label>
+                    </cell>
                     <cell id="284">
                         <label id="285">
                             <text-property name="text">Cantidad</text-property>
@@ -3561,6 +4164,7 @@ display;</expression>
                         <cell id="333"/>
                         <cell id="334"/>
                         <cell id="335"/>
+                        <cell id="1237"/>
                         <cell id="337">
                             <data id="445">
                                 <structure name="numberFormat">
@@ -3745,6 +4349,7 @@ display;</expression>
                         </cell>
                         <cell id="356"/>
                         <cell id="357"/>
+                        <cell id="1238"/>
                         <cell id="359">
                             <data id="444">
                                 <structure name="numberFormat">
@@ -3930,6 +4535,7 @@ display;</expression>
                             </data>
                         </cell>
                         <cell id="379"/>
+                        <cell id="1239"/>
                         <cell id="381">
                             <data id="443">
                                 <structure name="numberFormat">
@@ -4103,7 +4709,7 @@ display;</expression>
                 <structure name="toc">
                     <expression name="expressionValue" type="javascript">row["Cope"]</expression>
                 </structure>
-                <property name="hideDetail">true</property>
+                <property name="hideDetail">false</property>
                 <header>
                     <row id="397">
                         <cell id="398"/>
@@ -4114,6 +4720,7 @@ display;</expression>
                                 <property name="resultSetColumn">Cope</property>
                             </data>
                         </cell>
+                        <cell id="1240"/>
                         <cell id="403">
                             <data id="442">
                                 <structure name="numberFormat">
@@ -4281,6 +4888,187 @@ display;</expression>
                     </row>
                 </header>
             </group>
+            <group id="1084">
+                <property name="groupName">Compañia</property>
+                <expression name="keyExpr" type="javascript">row["first_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["first_name"]</expression>
+                </structure>
+                <property name="hideDetail">true</property>
+                <header>
+                    <row id="1085">
+                        <cell id="1086"/>
+                        <cell id="1087"/>
+                        <cell id="1088"/>
+                        <cell id="1089"/>
+                        <cell id="1241">
+                            <data id="1235">
+                                <property name="resultSetColumn">first_name</property>
+                            </data>
+                        </cell>
+                        <cell id="1090">
+                            <data id="1248">
+                                <property name="resultSetColumn">Suma Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1091">
+                            <data id="1249">
+                                <property name="resultSetColumn">Suma 1 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1092">
+                            <data id="1250">
+                                <property name="resultSetColumn">Suma 2 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1093">
+                            <data id="1251">
+                                <property name="resultSetColumn">Suma 3 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1094">
+                            <data id="1252">
+                                <property name="resultSetColumn">Suma 4 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1095">
+                            <data id="1253">
+                                <property name="resultSetColumn">Suma 5 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1096">
+                            <data id="1254">
+                                <property name="resultSetColumn">Suma 6 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1097">
+                            <data id="1255">
+                                <property name="resultSetColumn">Suma 7 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1098">
+                            <data id="1256">
+                                <property name="resultSetColumn">Suma 8 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1099">
+                            <data id="1257">
+                                <property name="resultSetColumn">Suma 9 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1100">
+                            <data id="1258">
+                                <property name="resultSetColumn">Suma 10 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1101">
+                            <data id="1259">
+                                <property name="resultSetColumn">Suma 11 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1102">
+                            <data id="1260">
+                                <property name="resultSetColumn">Suma 12 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1103">
+                            <data id="1261">
+                                <property name="resultSetColumn">Suma 13 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1104">
+                            <data id="1262">
+                                <property name="resultSetColumn">Suma 14 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1105">
+                            <data id="1263">
+                                <property name="resultSetColumn">Suma 15 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1106">
+                            <data id="1264">
+                                <property name="resultSetColumn">Suma 16 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1107">
+                            <data id="1265">
+                                <property name="resultSetColumn">Suma 17 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1108">
+                            <data id="1266">
+                                <property name="resultSetColumn">Suma 18 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1109">
+                            <data id="1267">
+                                <property name="resultSetColumn">Suma 19 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1110">
+                            <data id="1268">
+                                <property name="resultSetColumn">Suma 20 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1111">
+                            <data id="1269">
+                                <property name="resultSetColumn">Suma 21 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1112">
+                            <data id="1270">
+                                <property name="resultSetColumn">Suma 22 Comapany</property>
+                            </data>
+                        </cell>
+                        <cell id="1113">
+                            <data id="1271">
+                                <property name="resultSetColumn">Suma 23 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1114">
+                            <data id="1272">
+                                <property name="resultSetColumn">Suma 24 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1115">
+                            <data id="1273">
+                                <property name="resultSetColumn">Suma 25 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1116">
+                            <data id="1274">
+                                <property name="resultSetColumn">Suma 26 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1117">
+                            <data id="1275">
+                                <property name="resultSetColumn">Suma 27 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1118">
+                            <data id="1276">
+                                <property name="resultSetColumn">Suma 28 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1119">
+                            <data id="1277">
+                                <property name="resultSetColumn">Suma 29 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1120">
+                            <data id="1278">
+                                <property name="resultSetColumn">Suma 30 Company</property>
+                            </data>
+                        </cell>
+                        <cell id="1121">
+                            <data id="1279">
+                                <property name="resultSetColumn">Suma 31 Company</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
             <detail>
                 <row id="292">
                     <cell id="293"/>
@@ -4291,6 +5079,7 @@ display;</expression>
                             <property name="resultSetColumn">Tipo</property>
                         </data>
                     </cell>
+                    <cell id="1243"/>
                     <cell id="303"/>
                     <cell id="505"/>
                     <cell id="686"/>
@@ -4331,6 +5120,7 @@ display;</expression>
                     <cell id="313"/>
                     <cell id="314"/>
                     <cell id="315"/>
+                    <cell id="1244"/>
                     <cell id="317">
                         <data id="482">
                             <structure name="numberFormat">
