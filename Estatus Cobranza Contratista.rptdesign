@@ -33,6 +33,42 @@
                 <value>eq</value>
             </simple-property-list>
         </dynamic-filter-parameter>
+        <scalar-parameter name="División" id="635">
+            <text-property name="promptText">División</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">Metro</property>
+                    <property name="label">Metro</property>
+                </structure>
+                <structure>
+                    <property name="value">Sur</property>
+                    <property name="label">Sur</property>
+                </structure>
+                <structure>
+                    <property name="value">Occidente</property>
+                    <property name="label">Occidente</property>
+                </structure>
+                <structure>
+                    <property name="value">Norte</property>
+                    <property name="label">Norte</property>
+                </structure>
+                <structure>
+                    <property name="value">Todas</property>
+                    <property name="label">Todas las divisiones</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Datawarehouse" id="4">
@@ -70,6 +106,12 @@
                     <property name="paramName">cobranza</property>
                 </structure>
                 <structure>
+                    <property name="paramName">Desde</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Hasta</property>
+                </structure>
+                <structure>
                     <property name="paramName">Estatus</property>
                 </structure>
                 <structure>
@@ -94,7 +136,19 @@
                     </simple-property-list>
                 </structure>
                 <structure>
-                    <property name="paramName">Contratista</property>
+                    <property name="paramName">Año fibra y cobre</property>
+                </structure>
+                <structure>
+                    <property name="paramName">year acumdia</property>
+                </structure>
+                <structure>
+                    <property name="paramName">month acumdia</property>
+                </structure>
+                <structure>
+                    <property name="paramName">División</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["División"].value</value>
+                    </simple-property-list>
                 </structure>
             </list-property>
         </data-mart-data-source>
@@ -290,27 +344,6 @@ date;</expression>
                     <property name="dataType">date-time</property>
                     <property name="allowExport">true</property>
                 </structure>
-                <structure>
-                    <property name="name">contratista_encabezado</property>
-                    <text-property name="displayName">CE</text-property>
-                    <expression name="expression" type="javascript">var display = "";&#13;
-var ayuda ="";&#13;
-var contratista = params["Contratista"].value;&#13;
-if(contratista != null || contratista != "" || contratista != "undefined"){&#13;
-	contratista = contratista.split("=");&#13;
-	var numero = contratista.length;&#13;
-	if(numero > 1){&#13;
-		ayuda = contratista[1]&#13;
-		ayuda = ayuda.replace(")","")&#13;
-		display = ayuda;&#13;
-	}else{&#13;
-		display = "Todos los contratistas"&#13;
-	}&#13;
-}&#13;
-display;</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
             </list-property>
             <column id="7"/>
             <row id="8">
@@ -332,50 +365,7 @@ display;</expression>
                                     <property name="imageName">PCLink logo.png</property>
                                 </image>
                             </cell>
-                            <cell id="19">
-                                <grid id="21">
-                                    <column id="22"/>
-                                    <row id="24">
-                                        <cell id="25">
-                                            <text id="30">
-                                                <property name="fontSize">16pt</property>
-                                                <property name="fontWeight">bold</property>
-                                                <property name="textAlign">center</property>
-                                                <property name="contentType">auto</property>
-                                                <text-property name="content"><![CDATA[Estatus de Cobranza de Contratistas al día:]]></text-property>
-                                            </text>
-                                        </cell>
-                                    </row>
-                                    <row id="27">
-                                        <cell id="28">
-                                            <data id="31">
-                                                <property name="fontSize">16pt</property>
-                                                <property name="fontWeight">bold</property>
-                                                <structure name="dateTimeFormat">
-                                                    <property name="category">Custom</property>
-                                                    <property name="pattern">dd 'de' MMMM 'del' yyyy 'a las' hh:mm a</property>
-                                                </structure>
-                                                <property name="textAlign">center</property>
-                                                <property name="resultSetColumn">Fecha</property>
-                                            </data>
-                                        </cell>
-                                    </row>
-                                    <row id="304">
-                                        <cell id="305">
-                                            <data id="307">
-                                                <property name="fontSize">16pt</property>
-                                                <property name="fontWeight">bold</property>
-                                                <structure name="dateTimeFormat">
-                                                    <property name="category">Custom</property>
-                                                    <property name="pattern">dd 'de' MMMM 'del' yyyy 'a las' hh:mm a</property>
-                                                </structure>
-                                                <property name="textAlign">center</property>
-                                                <property name="resultSetColumn">contratista_encabezado</property>
-                                            </data>
-                                        </cell>
-                                    </row>
-                                </grid>
-                            </cell>
+                            <cell id="19"/>
                         </row>
                     </grid>
                 </cell>
@@ -527,8 +517,8 @@ display;</expression>
                                 <property name="name">Mayus Area</property>
                                 <text-property name="displayName">MArea</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.area"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
+if(area == null || area == ""){&#13;
+	area = "sin_area";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -548,8 +538,8 @@ resultado;</expression>
                                 <property name="name">Mayus Cope</property>
                                 <text-property name="displayName">MCope</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.cope"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
+if(area == null || area == ""){&#13;
+	area = "sin_cope";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -685,7 +675,7 @@ resultado;</expression>
                             <structure name="toc">
                                 <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
                             </structure>
-                            <property name="hideDetail">false</property>
+                            <property name="hideDetail">true</property>
                             <header>
                                 <row id="133">
                                     <cell id="134">
@@ -1108,8 +1098,8 @@ resultado;</expression>
                                 <property name="name">MEstatus Contratista</property>
                                 <text-property name="displayName">MEC</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.estatus_contra"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
+if(area == null || area == ""){&#13;
+	area = "sin_estatus";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -1129,8 +1119,8 @@ resultado;</expression>
                                 <property name="name">Mayus Area</property>
                                 <text-property name="displayName">MArea</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.area"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
+if(area == null || area == ""){&#13;
+	area = "sin_area";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -1150,8 +1140,8 @@ resultado;</expression>
                                 <property name="name">Mayus Cope</property>
                                 <text-property name="displayName">MCope</text-property>
                                 <expression name="expression" type="javascript">var area = dataSetRow["_id.cope"];&#13;
-if(area == null){&#13;
-	area = " ";&#13;
+if(area == null || area == ""){&#13;
+	area = "sin_cope";&#13;
 }&#13;
 area = area.toUpperCase();&#13;
 var arr = area.split('_');&#13;
@@ -1279,7 +1269,7 @@ resultado;</expression>
                             <structure name="toc">
                                 <expression name="expressionValue" type="javascript">row["Compañia"]</expression>
                             </structure>
-                            <property name="hideDetail">false</property>
+                            <property name="hideDetail">true</property>
                             <header>
                                 <row id="193">
                                     <cell id="245">

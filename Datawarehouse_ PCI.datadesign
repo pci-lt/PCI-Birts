@@ -12452,7 +12452,7 @@ display;</expression>
                     <property name="name">Estatus</property>
                     <expression name="expression" type="javascript">var area = row["_id.estatus_pci"];&#13;
 if(area == null || area == ""){&#13;
-	area = "Sin Estatus de cobranza";&#13;
+	area = "Sin_Estatus_de_cobranza";&#13;
 }&#13;
 &#13;
 var resultado = "Sin Estatus de Cobranza";&#13;
@@ -12638,7 +12638,7 @@ display;</expression>
                     <structure>
                         <property name="position">8</property>
                         <property name="name">_id.conexion</property>
-                        <property name="dataType">float</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
@@ -12657,6 +12657,24 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var division = params["División"].value;
+var bookmark = "form_id: {$in: [11044,16343,21953,21954]},";
+var new_query = "form_id: {$in: [11044,16343,21953,21954]},";
+
+
+if (division == "Metro") {
+	new_query = "form_id: {$in: [11044]},";
+}else if (division == "Sur") {
+	new_query = "form_id: {$in: [16343]},";
+}else if (division == "Norte") {
+	new_query = "form_id: {$in: [21954]},";
+}else if (division == "Occidente") {
+	new_query = "form_id: {$in: [21953]},"
+}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -12712,21 +12730,21 @@ display;</expression>
                     <property name="position">8</property>
                     <property name="name">_id.conexion</property>
                     <property name="nativeName">_id.conexion</property>
-                    <property name="dataType">float</property>
-                    <property name="nativeDataType">1</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
                     <property name="name">_id.forma</property>
                     <property name="nativeName">_id.forma</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">1</property>
+                    <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n}},\r\n\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\testatus_contra: {$ifNull: ['$answers.f1054000a030000000000013', '']},\r\n\testatus_pci: '$answers.f1054000a030000000000012',\r\n\tarea: { $ifNull: ['$answers.f1054000a0100000000000a2', 'Área desconocida']},\r\n\tcope: { $ifNull: ['$answers.f1054000a010000000000002', 'Cope desconodio' ]},\r\n\tdivision: { $ifNull: ['$answers.f1054000a0100000000000b2', 'División desconocida' ]},\r\n\tsubdireccion: { $ifNull: [ '$answers.f1054000a0100000000000c2', 'Subdirección desconocida' ]},\r\n\r\n\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.estatus_contra" , "_id.estatus_pci" , "_id.area" , "_id.cope" , "_id.division" , "_id.subdireccion" , "cantidad" , "_id.conexion" , "_id.forma"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002 : { $in: ['liquidada']},\r\n}},\r\n\r\n{$group: {_id:{\r\n\tforma: '$form_id',\r\n\tconexion: '$connection_id',\r\n\testatus_contra: {$ifNull: ['$answers.f1054000a030000000000013', '']},\r\n\testatus_pci: '$answers.f1054000a030000000000012',\r\n\tarea: { $ifNull: ['$answers.f1054000a0100000000000a2', 'Área_desconocida']},\r\n\tcope: { $ifNull: ['$answers.f1054000a010000000000002', 'Cope_desconodio' ]},\r\n\tdivision: { $ifNull: ['$answers.f1054000a0100000000000b2', 'División_desconocida' ]},\r\n\tsubdireccion: { $ifNull: [ '$answers.f1054000a0100000000000c2', 'Subdirección_desconocida' ]},\r\n\r\n\r\n\t},\r\n\tcantidad: {$sum:1}\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.estatus_contra" , "_id.estatus_pci" , "_id.area" , "_id.cope" , "_id.division" , "_id.subdireccion" , "cantidad" , "_id.conexion" , "_id.forma"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -12947,6 +12965,39 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="columnName">Compañia</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.estatus_pci</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.estatus_pci</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.division</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.division</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.conexion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
@@ -18267,5 +18318,41 @@ display;</expression>
                 </scalar-parameter>
             </parameters>
         </cascading-parameter-group>
+        <scalar-parameter name="División" id="635">
+            <text-property name="promptText">División</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">Metro</property>
+                    <property name="label">Metro</property>
+                </structure>
+                <structure>
+                    <property name="value">Sur</property>
+                    <property name="label">Sur</property>
+                </structure>
+                <structure>
+                    <property name="value">Occidente</property>
+                    <property name="label">Occidente</property>
+                </structure>
+                <structure>
+                    <property name="value">Norte</property>
+                    <property name="label">Norte</property>
+                </structure>
+                <structure>
+                    <property name="value">Todas</property>
+                    <property name="label">Todas las divisiones</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
 </datamart>

@@ -4237,7 +4237,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
 
 
 
@@ -4770,7 +4770,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
 
 
 
@@ -4996,9 +4996,9 @@ this.queryText = query;]]></method>
                 <structure>
                     <property name="name">created_mx</property>
                     <expression name="expression" type="javascript">var created = row["created"];&#13;
-var horario = new Date("October 29, 2017 02:00:00");&#13;
+var horario = new Date("October 28, 2018 02:00:00");&#13;
 var created2 = new Date(created.getFullYear(),created.getMonth(),created.getDate());&#13;
-var horario2 = new Date("April 1, 2018");&#13;
+var horario2 = new Date("April 7, 2019 02:00:00");&#13;
 var display = new Date("January 10, 1994 13:30:00");&#13;
 var verano = BirtDateTime.diffHour(horario, created);&#13;
 var invierno = BirtDateTime.diffHour(horario2, created);&#13;
@@ -8684,9 +8684,6 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-	new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -8697,9 +8694,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -8738,7 +8735,7 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{_id: {\t\r\n\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.cope" , "_id.estatus" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -8959,15 +8956,9 @@ this.queryText = query;]]></method>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
-var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-
-	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -8978,9 +8969,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -9019,7 +9010,7 @@ this.queryText = query;]]></method>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{ _id: {\t\r\n\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.cope" , "_id.estatus" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -9435,9 +9426,7 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-	new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-}else if(base == "crea"){
+
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -9448,9 +9437,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -9732,11 +9721,6 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-
-	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -9747,9 +9731,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -10553,9 +10537,6 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-	new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -10566,9 +10547,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -10821,11 +10802,6 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-
-	new_query = "'answers.5a1eecfbb43fdd65914505a1': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -10836,9 +10812,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -11496,9 +11472,6 @@ var base = params["Fecha base"].value;
 var bookmark = "{$exists:false},";
 var new_query = "";
 
-if(base == "liq"){
-	new_query = "'answers.f1054000a02000000000fa02': {$gte: '" + date_one + "' , $lte: '" + date_two + "' },";
-}else if(base == "crea"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -11509,9 +11482,9 @@ if(base == "liq"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " start_date: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 	
-}
+
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -11862,6 +11835,30 @@ resultado;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var date_one = params["Fecha Inicial"].value;
+var date_two = params["Fecha Final"].value;
+var base = params["Fecha base"].value;
+var bookmark = "{$exists:false},";
+var new_query = "";
+
+	var hasta = date_two
+	hasta = BirtDateTime.addDay(hasta, 1);
+	var dia = BirtDateTime.day(hasta);
+	var month = BirtDateTime.month(hasta);
+	if(dia < 10)
+		dia = '0' + dia;
+	if(month<10)
+		month = '0' + month
+	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -12111,7 +12108,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " start_date: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+new_query = " created_at : {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 
 
 
@@ -12322,7 +12319,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " start_date: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 
 
 
@@ -15080,6 +15077,363 @@ resultado;</expression>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Pagadas contratista" id="631">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Division</property>
+                    <expression name="expression" type="javascript">var form = row["forma"];&#13;
+var display = "";&#13;
+&#13;
+if(form == 11044){&#13;
+	display = "Metro";&#13;
+}else if (form == 16343){&#13;
+	display = "Sur";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">forma</property>
+                    <text-property name="displayName">forma</text-property>
+                    <text-property name="heading">forma</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tarea</text-property>
+                    <text-property name="heading">tarea</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <text-property name="heading">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">instalacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">instalacion</text-property>
+                    <text-property name="heading">instalacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">metraje</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">metraje</text-property>
+                    <text-property name="heading">metraje</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">forma</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">tarea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">instalacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">metraje</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">forma</property>
+                    <property name="nativeName">forma</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">tarea</property>
+                    <property name="nativeName">tarea</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">fecha</property>
+                    <property name="nativeName">fecha</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">instalacion</property>
+                    <property name="nativeName">instalacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">metraje</property>
+                    <property name="nativeName">metraje</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.f1054000a030000000000013': 'pagada',\r\n}},\r\n{$project: {\r\n\r\n\tfolio: '$folio',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tinstalacion: '$answers.f1054000a020000000000004',\r\n\tmetraje: '$answers.f1054000a0200000000000d7',\r\n\tforma: '$form_id',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "forma" , "tarea" , "estatus" , "fecha" , "instalacion" , "metraje"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tarea</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tarea</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tarea</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estatus</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>estatus</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estatus</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>fecha</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>fecha</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fecha</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>instalacion</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>instalacion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>instalacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>metraje</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>metraje</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>metraje</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="580">
@@ -15088,7 +15442,7 @@ resultado;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-08-01</value>
+                <value type="constant">2018-12-26</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -15103,7 +15457,7 @@ resultado;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-08-03</value>
+                <value type="constant">2019-01-10</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
