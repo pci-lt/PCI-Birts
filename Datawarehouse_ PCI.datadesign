@@ -9,10 +9,10 @@
                     <value>false</value>
                 </ex-property>
             </list-property>
-            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
+            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=120&amp;maxIdleTimeMS=120</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
-            <property name="socketKeepAlive">true</property>
+            <property name="socketKeepAlive">false</property>
         </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="Mongo infosync" id="550">
             <list-property name="privateDriverProperties">
@@ -7973,6 +7973,12 @@ display;</expression>
             </list-property>
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">inicio</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">inicio</text-property>
@@ -8001,25 +8007,31 @@ display;</expression>
                     <property name="analysis">measure</property>
                 </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">inicio</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">fin</property>
+                        <property name="name">inicio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">correo</property>
+                        <property name="name">fin</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">correo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">vacaciones</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -8029,27 +8041,34 @@ display;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">inicio</property>
                     <property name="nativeName">inicio</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">fin</property>
                     <property name="nativeName">fin</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">correo</property>
                     <property name="nativeName">correo</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:19673,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.59d3a81bb43fdd0ca9c93202' : 'aprobada',\r\n\r\n}},\r\n\r\n{$project: {\t\r\n\t\r\n\tinicio: '$answers.59d3ab9af851c27ec6036a69',\r\n\tfin: '$answers.59d3ab9af851c27ec6036a6a',\r\n\tcorreo: '$answers.59d3cb63b43fdd58ae822ad8',\r\n\t\r\n\r\n\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "inicio" , "fin" , "correo"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:19672,\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.5a04c281f851c270cfba72fa' : 'autorizada',\r\n\r\n}},\r\n\r\n{$project: {\t\r\n\t\r\n\tinicio: '$answers.59d3a7d1b43fdd58b103f708',\r\n\tfin: '$answers.59d3a7d1b43fdd58b103f709',\r\n\tcorreo: '$answers.59d3a7d1b43fdd58b103f706',\r\n\t\r\n\r\n\r\n\r\n\t\t\r\n}}\r\n\r\n\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "inicio" , "fin" , "correo"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000000000</property>
@@ -15520,7 +15539,7 @@ display;</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\tanswers.f1054000a030000000000002: 'liquidada',\r\n}},\r\n{$group: {_id:{\r\n\t\treportado:'$answers.5a1eecfbb43fdd65914505a1', \r\n  },\r\n  \tcantidad: {$sum:1},\r\n  }}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.reportado"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1000000000</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">

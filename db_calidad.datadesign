@@ -118,10 +118,12 @@
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
 
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -133,6 +135,10 @@ var new_query = "";
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
 	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.f1054000a02000000000fa02' : {$gte: '" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
 
 
@@ -393,9 +399,12 @@ this.queryText = query;]]></method>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
+
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -407,8 +416,11 @@ var new_query = "";
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
 	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
-
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -859,9 +871,12 @@ resultado;</expression>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
+
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -872,9 +887,12 @@ var new_query = "";
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.f1054000a02000000000fa02' : {$gte: '" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
-
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -1152,9 +1170,12 @@ this.queryText = query;]]></method>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
+
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -1165,9 +1186,12 @@ var new_query = "";
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
-
 
 
 query = query.replace(bookmark, bookmark + new_query );
@@ -1987,10 +2011,12 @@ this.queryText = query;]]></method>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
 
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -2001,7 +2027,11 @@ var new_query = "";
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.f1054000a02000000000fa02' : {$gte: '" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
 
 
@@ -2251,10 +2281,12 @@ this.queryText = query;]]></method>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
 
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -2265,7 +2297,11 @@ var new_query = "";
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";
+	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
 
 
@@ -2742,8 +2778,33 @@ var te =  (new Packages.java.lang.String(arr[i]));&#13;
 resultado;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Cope</property>
+                    <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "no data";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
@@ -2766,6 +2827,10 @@ resultado;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="filter"/>
             <list-property name="parameters"/>
@@ -2773,17 +2838,27 @@ resultado;</expression>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
+                        <property name="name">_id.area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                         <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -2792,20 +2867,27 @@ resultado;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [12165]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.590a34bab43fdd3c7678af0c' : {$exists:true},\r\n\t'answers.590a4761f851c20e60ac168c':'activo',\r\n\r\n}},\r\n\r\n{$group:{_id: {\t\r\n\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [12165]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.590a34bab43fdd3c7678af0c' : {$exists:true},\r\n\t'answers.590a4761f851c20e60ac168c':'activo',\r\n\r\n}},\r\n\r\n{$group:{_id: {\t\r\n\r\n\tcope: '$answers.590a395ff851c2100f7c671a',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "_id.area" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -2929,8 +3011,33 @@ if (metros > 3 &amp;&amp; metros != null) {&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Cope</property>
+                    <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "sin_cope";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
@@ -2991,48 +3098,62 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.estatus</property>
+                        <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.metros</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">_id.estatus</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">_id.metros</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">_id.adicional</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">8</property>
                         <property name="name">Metraje</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">9</property>
                         <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -3040,10 +3161,12 @@ display;</expression>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
 
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -3055,6 +3178,10 @@ var new_query = "";
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
 	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.f1054000a02000000000fa02' : {$gte: '" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
 
 
@@ -3064,41 +3191,48 @@ this.queryText = query;]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">_id.estatus</property>
                     <property name="nativeName">_id.estatus</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.metros</property>
                     <property name="nativeName">_id.metros</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">_id.adicional</property>
-                    <property name="nativeName">_id.adicional</property>
-                    <property name="dataType">integer</property>
+                    <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
+                    <property name="name">_id.adicional</property>
+                    <property name="nativeName">_id.adicional</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{_id: {\t\r\n\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\tmetros: '$answers.f1054000a0200000000000d7',\r\n\tadicional: '$answers.f1054000a020000000000bd7',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.estatus" , "_id.metros" , "_id.adicional" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{_id: {\t\r\n\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\tmetros: '$answers.f1054000a0200000000000d7',\r\n\tadicional: '$answers.f1054000a020000000000bd7',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "_id.area" , "_id.estatus" , "_id.metros" , "_id.adicional" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -3275,8 +3409,33 @@ if (metros > 3 &amp;&amp; metros != null) {&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Cope</property>
+                    <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
@@ -3321,38 +3480,52 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.estatus</property>
+                        <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">_id.estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">_id.metraje</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -3360,10 +3533,12 @@ display;</expression>
             <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
 var date_one = params["Fecha Inicial"].value;
 var date_two = params["Fecha Final"].value;
+var base = params["Base"].value;
 
 var bookmark = "{$exists:false},";
 var new_query = "";
 
+if( base == "creacion"){
 	var hasta = date_two
 	hasta = BirtDateTime.addDay(hasta, 1);
 	var dia = BirtDateTime.day(hasta);
@@ -3375,6 +3550,10 @@ var new_query = "";
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
 	new_query = " created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+}
+if (base == "liquidada") {
+	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
+}
 	
 
 
@@ -3384,34 +3563,41 @@ this.queryText = query;]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">_id.estatus</property>
                     <property name="nativeName">_id.estatus</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.metraje</property>
                     <property name="nativeName">_id.metraje</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n\r\n{$group:{ _id: {\t\r\n\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\tmetraje: '$answers.f1054000a020000000000007',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.estatus" , "_id.metraje" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n\r\n{$group:{ _id: {\t\r\n\t\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\testatus: '$answers.f1054000a030000000000002',\r\n\tmetraje: '$answers.f1054000a020000000000007',\r\n\r\n},\r\n\tcantidad: {$sum:1},\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "_id.area" , "_id.estatus" , "_id.metraje" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -3578,8 +3764,33 @@ var te =  (new Packages.java.lang.String(arr[i]));&#13;
 resultado;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Cope</property>
+                    <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
@@ -3612,38 +3823,52 @@ resultado;</expression>
                     <property name="columnName">Area</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">_id.fibra</property>
+                        <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">_id.cobre</property>
+                        <property name="name">_id.fibra</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
+                        <property name="name">_id.cobre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">Especialidad</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">7</property>
                         <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -3652,34 +3877,41 @@ resultado;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">_id.fibra</property>
                     <property name="nativeName">_id.fibra</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">4</property>
                     <property name="name">_id.cobre</property>
                     <property name="nativeName">_id.cobre</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">5</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n    form_id: {$in: [12165]},\r\n    deleted_at:{$exists:false},\r\n    'answers.590a4761f851c20e60ac168c' : 'activo',\r\n\r\n}},\r\n\r\n{$group: { _id:{\r\n\r\n    area: '$answers.590a34bab43fdd3c7678af0c',\r\n    fibra: {$ifNull: ['$answers.f1216500a010000000000009','']},\r\n    cobre: {$ifNull: ['$answers.f1216500a010000000000010','']},\r\n},\r\n\tcantidad: {$sum:1},\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "_id.fibra" , "_id.cobre" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n    form_id: {$in: [12165]},\r\n    deleted_at:{$exists:false},\r\n    'answers.590a4761f851c20e60ac168c' : 'activo',\r\n\r\n}},\r\n\r\n{$group: { _id:{\r\n    \r\n    cope: '$answers.590a395ff851c2100f7c671a',\r\n    area: '$answers.590a34bab43fdd3c7678af0c',\r\n    fibra: {$ifNull: ['$answers.f1216500a010000000000009','']},\r\n    cobre: {$ifNull: ['$answers.f1216500a010000000000010','']},\r\n},\r\n\tcantidad: {$sum:1},\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "_id.area" , "_id.fibra" , "_id.cobre" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -4993,21 +5225,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">Mes</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">Mes</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">Orden</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">5</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">6</property>
                         <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -5021,6 +5258,7 @@ display;</expression>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
 <tns:selectColumns>
 <tns:Column>Errores de carga::Total</tns:Column>
+<tns:Column>Errores de carga::Cope</tns:Column>
 <tns:Column>Errores de carga::Mes</tns:Column>
 <tns:Column>Errores de carga::Orden</tns:Column>
 <tns:Column>Area-Cope::area</tns:Column>
@@ -5063,8 +5301,33 @@ var te =  (new Packages.java.lang.String(arr[i]));&#13;
 resultado;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Cope</property>
+                    <expression name="expression" type="javascript">var area = row["_id.cope"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
                 <structure>
                     <property name="columnName">_id.area</property>
                     <property name="analysis">dimension</property>
@@ -5085,22 +5348,37 @@ resultado;</expression>
                     <property name="columnName">Area</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id.area</property>
+                        <property name="name">_id.cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
+                        <property name="name">_id.area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
                         <property name="name">cantidad</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                         <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -5132,20 +5410,27 @@ this.queryText = query;]]></method>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="nativeName">_id.cope</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
                     <property name="name">_id.area</property>
                     <property name="nativeName">_id.area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">2</property>
+                    <property name="position">3</property>
                     <property name="name">cantidad</property>
                     <property name="nativeName">cantidad</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n    form_id:{$in: [11669]},\r\n    deleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{_id: { \r\n\r\n    area: '$answers.5a21bf99f851c264c1dd6aa2',\r\n\r\n},\r\n    cantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.area" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n    form_id:{$in: [11669]},\r\n    deleted_at:{$exists:false},\r\n}},\r\n\r\n{$group:{_id: { \r\n\r\n   cope: '$answers.59441fa0b43fdd70ade1e7ad',\r\n    area: '$answers.5a21bf99f851c264c1dd6aa2',\r\n\r\n},\r\n    cantidad: {$sum:1},\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope" , "_id.area" , "cantidad"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -5399,11 +5684,16 @@ this.queryText = query;]]></method>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">area</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
                         <property name="name">_id.area</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -5417,6 +5707,7 @@ this.queryText = query;]]></method>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
 <tns:selectColumns>
 <tns:Column>Vetec Cobre::cantidad</tns:Column>
+<tns:Column>Vetec Cobre::Cope</tns:Column>
 <tns:Column>Area-Cope::area</tns:Column>
 <tns:Column>Area-Cope::_id.area</tns:Column>
 </tns:selectColumns>
@@ -5460,6 +5751,21 @@ this.queryText = query;]]></method>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant">2019-01-31</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Base" id="639">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

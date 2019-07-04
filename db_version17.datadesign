@@ -4103,16 +4103,16 @@ resultado;</expression>
                     <text-property name="heading">cope</text-property>
                 </structure>
                 <structure>
-                    <property name="columnName">pdf</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">pdf</text-property>
-                    <text-property name="heading">pdf</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">clave</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">clave</text-property>
                     <text-property name="heading">clave</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <text-property name="heading">pdf</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">Subdireccion</property>
@@ -4192,12 +4192,12 @@ resultado;</expression>
                     </structure>
                     <structure>
                         <property name="position">11</property>
-                        <property name="name">pdf</property>
+                        <property name="name">clave</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">12</property>
-                        <property name="name">clave</property>
+                        <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -4237,7 +4237,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " created_at: {$gte: {$date:'" + fecha + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:00Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 
 
 
@@ -4318,20 +4318,20 @@ this.queryText = query;]]></method>
                 </structure>
                 <structure>
                     <property name="position">11</property>
-                    <property name="name">pdf</property>
-                    <property name="nativeName">pdf</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">10</property>
-                </structure>
-                <structure>
-                    <property name="position">12</property>
                     <property name="name">clave</property>
                     <property name="nativeName">clave</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">pdf</property>
+                    <property name="nativeName">pdf</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: '$answers.5a8aefa7b43fdd100602f7be.file_url',\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha" , "created" , "cope" , "pdf" , "clave"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5a8aefa7b43fdd100602f7be.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha" , "created" , "cope" , "clave" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -4770,7 +4770,7 @@ if(month<10)
 hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 
 	
-new_query = " created_at: {$gte: {$date:'" + fecha + "T06:00:01Z'} , $lte:{$date:'" + hasta + "T05:59:59Z'} }, ";	
+new_query = " created_at: {$gte: {$date:'" + fecha + "T05:00:01Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
 
 
 
@@ -4864,7 +4864,7 @@ this.queryText = query;]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "clave" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha" , "created" , "cope" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea:'$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "clave" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha" , "created" , "cope" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -15442,7 +15442,7 @@ display;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2018-12-26</value>
+                <value type="constant">2019-01-01</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -15457,7 +15457,7 @@ display;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2019-01-10</value>
+                <value type="constant">2019-04-11</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
