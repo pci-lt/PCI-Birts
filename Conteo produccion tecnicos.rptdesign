@@ -44,23 +44,6 @@
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="javascript">var display = "";&#13;
-var date = new Date();&#13;
-var day = date.getDate();&#13;
-var month = date.getMonth();&#13;
-if (month &lt;10) {&#13;
-	month = '0' + month;&#13;
-}&#13;
-var year = date.getFullYear();&#13;
-if (day >= 10 &amp;&amp; day &lt;= 26) {&#13;
-	display = year+ month + "/10";&#13;
-}else if (day &lt; 10 || day > 25) {&#13;
-	display = year + month + "/26";&#13;
-}&#13;
-&#13;
-display;</value>
-            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -72,24 +55,6 @@ display;</value>
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="javascript">var display = "";&#13;
-var date = new Date();&#13;
-var day = date.getDate();&#13;
-var month = date.getMonth();&#13;
-&#13;
-if (month &lt;10) {&#13;
-	month = '0' + month;&#13;
-}&#13;
-var year = date.getFullYear();&#13;
-if (day >= 10 &amp;&amp; day &lt; 26) {&#13;
-	display = year + month + "/25";&#13;
-}else if (day &lt; 10 || day > 25) {&#13;
-	display = year + month + "/10";&#13;
-}&#13;
-&#13;
-display;</value>
-            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -266,7 +231,7 @@ display;</value>
                     <structure>
                         <property name="position">5</property>
                         <property name="name">fecha</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">date</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
@@ -341,7 +306,7 @@ display;</value>
                 <structure>
                     <property name="position">5</property>
                     <property name="name">fecha</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">date</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
@@ -629,6 +594,32 @@ display;</expression>
                     <text-property name="displayName">Area</text-property>
                     <expression name="expression" type="javascript">dataSetRow["Area"]</expression>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Total de Folios</property>
+                    <text-property name="displayName">TF</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["_id"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Conteo Tecnicos</property>
+                    <text-property name="displayName">CT</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["tecnico"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
             <property name="pageBreakInterval">1000000</property>
@@ -1129,10 +1120,17 @@ display;</expression>
                     <cell id="105">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <text id="266">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Total de folios]]></text-property>
+                        </text>
                     </cell>
                     <cell id="106">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <data id="267">
+                            <property name="resultSetColumn">Total de Folios</property>
+                        </data>
                     </cell>
                     <cell id="107">
                         <property name="backgroundColor">#1A237E</property>
@@ -1141,10 +1139,17 @@ display;</expression>
                     <cell id="108">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <text id="268">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Número de técnicos]]></text-property>
+                        </text>
                     </cell>
                     <cell id="223">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <data id="269">
+                            <property name="resultSetColumn">Conteo Tecnicos</property>
+                        </data>
                     </cell>
                     <cell id="218">
                         <property name="backgroundColor">#1A237E</property>

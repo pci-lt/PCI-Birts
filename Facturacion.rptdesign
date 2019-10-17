@@ -13,10 +13,80 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <scalar-parameter name="División" id="1388">
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">metro</property>
+                    <property name="label">Metro</property>
+                </structure>
+                <structure>
+                    <property name="value">sur</property>
+                    <property name="label">Sur</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
     <data-sources>
         <data-mart-data-source name="db_sep2018" id="12">
             <property name="datamartURL">/account_1259/Resources/db_sep2018</property>
             <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Fecha Inicial</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">2019-07-26</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">2019-08-10</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Folios</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">5554241538,7266881493,7262622880</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">publisher</property>
+                </structure>
+                <structure>
+                    <property name="paramName">tecnico</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Division</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["División"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">OC</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">6115056-1259-5</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Base</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">creacion</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
@@ -270,6 +340,7 @@
                                 <property name="fontWeight">bold</property>
                                 <expression name="valueExpr">var display = "Estatus de órdenes de compra"&#13;
 var date = new Date();&#13;
+var division = params["División"].value&#13;
 date = BirtDateTime.addHour(date, -5)&#13;
 var day = date.getDate();&#13;
 var month = date.getMonth();&#13;
@@ -282,7 +353,7 @@ if (hour &lt; 10)&#13;
 	hour = '0' + hour;&#13;
 var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];&#13;
 &#13;
-display = display + " al día " + day + " de " + months[month] + " de " + year + " a las " + hour + ":" + minutes;&#13;
+display = display + " al día " + day + " de " + months[month] + " de " + year + " a las " + hour + ":" + minutes + "  División: " + division;&#13;
 &#13;
 display;</expression>
                                 <property name="contentType">html</property>
@@ -1052,6 +1123,12 @@ resultado;</expression>
                                             <property name="paramName">OC</property>
                                             <simple-property-list name="expression">
                                                 <value type="javascript">row["folio"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">Division</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["División"].value</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -1940,6 +2017,12 @@ resultado;</expression>
                                             <property name="paramName">OC</property>
                                             <simple-property-list name="expression">
                                                 <value type="javascript">row["folio"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">Division</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["División"].value</value>
                                             </simple-property-list>
                                         </structure>
                                     </list-property>
@@ -3497,6 +3580,891 @@ resultado;</expression>
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="986">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <text id="1389">
+            <property name="backgroundColor">#1A237E</property>
+            <property name="fontFamily">"Verdana"</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#FFFFFF</property>
+            <property name="marginTop">24pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Pagado]]></text-property>
+        </text>
+        <table id="1453">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__ac_group_collapse_level</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="__ac_group_collapse_level">1</property>
+            <property name="dataSet">Join Facturación - Nombres</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">_id</property>
+                    <text-property name="displayName">_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">descuento</property>
+                    <text-property name="displayName">descuento</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["descuento"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">subtotal</property>
+                    <text-property name="displayName">subtotal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["subtotal"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">iva</property>
+                    <text-property name="displayName">iva</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["iva"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">total</property>
+                    <text-property name="displayName">total</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">xml</property>
+                    <text-property name="displayName">xml</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["xml"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pdf</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pdf"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">b2b</property>
+                    <text-property name="displayName">b2b</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["b2b"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">est_pay</property>
+                    <text-property name="displayName">est_pay</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["est_pay"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">first_name</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PDF</property>
+                    <text-property name="displayName">PDF</text-property>
+                    <expression name="expression" type="javascript">"PDF"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">XML</property>
+                    <text-property name="displayName">XML</text-property>
+                    <expression name="expression" type="javascript">"XML"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">B2B</property>
+                    <text-property name="displayName">B2B</text-property>
+                    <expression name="expression" type="javascript">"B2B"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Subtotal</property>
+                    <text-property name="displayName">SS</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Conexion</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["subtotal"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma IVA</property>
+                    <text-property name="displayName">SIVA</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Conexion</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["iva"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Descuento</property>
+                    <text-property name="displayName">SD</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Conexion</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["descuento"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Total</property>
+                    <text-property name="displayName">ST</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Conexion</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["total"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">folio</property>
+                    <text-property name="displayName">folio</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACOS</property>
+                    <text-property name="displayName">PC</text-property>
+                    <expression name="expression" type="javascript">"Ver Pacos"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">flag</property>
+                    <text-property name="displayName">flag</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["flag"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Subtotal General</property>
+                    <text-property name="displayName">SSG</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["subtotal"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma IVA General</property>
+                    <text-property name="displayName">SIG</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["iva"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Total General</property>
+                    <text-property name="displayName">STG</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["total"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Ver Folios</property>
+                    <text-property name="displayName">CF</text-property>
+                    <expression name="expression" type="javascript">"Ver Folios"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">1000000</property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="javascript">"pagada"</value>
+                    </simple-property-list>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
+            <column id="1539"/>
+            <column id="1540">
+                <property name="textAlign">right</property>
+            </column>
+            <column id="1541">
+                <property name="textAlign">right</property>
+            </column>
+            <column id="1542">
+                <property name="textAlign">right</property>
+            </column>
+            <column id="1543">
+                <property name="textAlign">right</property>
+            </column>
+            <column id="1544"/>
+            <column id="1545"/>
+            <column id="1546"/>
+            <column id="1547">
+                <property name="textAlign">center</property>
+            </column>
+            <column id="1548">
+                <property name="textAlign">center</property>
+            </column>
+            <column id="1549">
+                <property name="textAlign">center</property>
+            </column>
+            <column id="1550">
+                <property name="textAlign">center</property>
+            </column>
+            <header>
+                <row id="1454">
+                    <cell id="1455">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1456">
+                            <text-property name="text">Conexión</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1457">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1458">
+                            <text-property name="text">Subtotal</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1459">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1460">
+                            <text-property name="text">IVA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1461">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1462">
+                            <text-property name="text">Descuento</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1463">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1464">
+                            <text-property name="text">Total</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1465">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1466">
+                            <text-property name="text">PDF factura</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1467">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1468">
+                            <text-property name="text">XML factura</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1469">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1470">
+                            <text-property name="text">B2B</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1471">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1472">
+                            <text-property name="text">Estatus de pago</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1473">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1474">
+                            <text-property name="text">Listado de PACOS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1475">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1476">
+                            <text-property name="text">Listado de folios</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1477">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="1478">
+                            <text-property name="text">Fecha de carga factura</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="1479">
+                <property name="groupName">Conexion</property>
+                <expression name="keyExpr" type="javascript">row["first_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["first_name"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="1480">
+                        <property name="backgroundColor">#BBDEFB</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="color">#000000</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <cell id="1481">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="1482">
+                                <property name="color">#000000</property>
+                                <property name="resultSetColumn">first_name</property>
+                            </data>
+                        </cell>
+                        <cell id="1483">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="1484">
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Subtotal</property>
+                            </data>
+                        </cell>
+                        <cell id="1485">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="1486">
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma IVA</property>
+                            </data>
+                        </cell>
+                        <cell id="1487">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1488">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="1489">
+                                <structure name="numberFormat">
+                                    <property name="category">Currency</property>
+                                    <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Total</property>
+                            </data>
+                        </cell>
+                        <cell id="1490">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1491">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1492">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1493">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1494">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1495">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="1496">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+            <detail>
+                <row id="1497">
+                    <property name="borderBottomColor">#BDBDBD</property>
+                    <property name="borderBottomStyle">dotted</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <cell id="1498">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1499">
+                            <property name="color">#8BC34A</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">folio</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1500">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1501">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">subtotal</property>
+                        </data>
+                    </cell>
+                    <cell id="1502">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1503">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">iva</property>
+                        </data>
+                    </cell>
+                    <cell id="1504">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1505">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">descuento</property>
+                        </data>
+                    </cell>
+                    <cell id="1506">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1507">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">total</property>
+                        </data>
+                    </cell>
+                    <cell id="1508">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1509">
+                            <property name="color">#8BC34A</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">PDF</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["pdf"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1510">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1511">
+                            <property name="color">#8BC34A</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">XML</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["xml"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1512">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1513">
+                            <property name="color">#8BC34A</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">B2B</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["b2b"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1514">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1515">
+                            <property name="resultSetColumn">est_pay</property>
+                        </data>
+                    </cell>
+                    <cell id="1516">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1517">
+                            <property name="resultSetColumn">PACOS</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">Detalle Facturacion.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">OC</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["folio"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1518">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1519">
+                            <property name="resultSetColumn">Ver Folios</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">Detalle Facturacion Folio.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">OC</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["folio"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">Division</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">params["División"].value</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="1520">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1521">
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1522">
+                    <cell id="1523">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text id="1524">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Totales]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1525">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1526">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">Suma Subtotal General</property>
+                        </data>
+                    </cell>
+                    <cell id="1527">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1528">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">Suma IVA General</property>
+                        </data>
+                    </cell>
+                    <cell id="1529">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1530">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="1531">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">Suma Total General</property>
+                        </data>
+                    </cell>
+                    <cell id="1532">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1533">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1534">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1535">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1536">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1537">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="1538">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>

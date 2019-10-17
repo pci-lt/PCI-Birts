@@ -2193,7 +2193,7 @@ resultado;</expression>
                                             <property name="name">Dias a Pagar</property>
                                             <text-property name="displayName">DAPag</text-property>
                                             <expression name="expression" type="javascript">var dia = 0;&#13;
-if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1)&#13;
+if(row["Count Entradas"] >=1 || row["Count Salidas"] >=1)&#13;
 	dia = 1;&#13;
 &#13;
 dia;</expression>
@@ -2245,7 +2245,9 @@ var display = 0;&#13;
 &#13;
 if(registro == "Con registro")&#13;
 	display = dias - (trabajo + otorgados + row["Max Vacaciones"] + row["Max Incapacidades"]);&#13;
-&#13;
+if(display &lt; 0)&#13;
+	display = 0;&#13;
+	&#13;
 display;</expression>
                                             <property name="dataType">integer</property>
                                             <property name="allowExport">true</property>
@@ -2462,7 +2464,7 @@ display;</expression>
                                             <property name="name">Domingos a Pagar</property>
                                             <text-property name="displayName">DaPagar</text-property>
                                             <expression name="expression" type="javascript">var dia = 0;&#13;
-if(row["Count Entradas"] >=1 &amp;&amp; row["Count Salidas"] >=1 &amp;&amp; BirtDateTime.weekDay(dataSetRow["created"],1) == 1)&#13;
+if((row["Count Entradas"] >=1 || row["Count Salidas"] >=1) &amp;&amp; BirtDateTime.weekDay(dataSetRow["created"],1) == 1)&#13;
 	dia = 1;&#13;
 &#13;
 dia;</expression>
