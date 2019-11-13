@@ -5136,9 +5136,13 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="name">metraje</property>
-                    <expression name="expression" type="javascript">if(row["adic"] == null || row["adic"] == "")&#13;
-adic = 0;&#13;
-row["metr"] + row["adic"]</expression>
+                    <expression name="expression" type="javascript">var metraje = row["metr"];&#13;
+var adicional = row["adic"];&#13;
+var display = 0;&#13;
+&#13;
+display = parseInt(metraje) + parseInt(adicional);&#13;
+&#13;
+display</expression>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
@@ -8007,6 +8011,12 @@ display;</expression>
                     <text-property name="heading">pdf4</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">pdf</property>
                     <property name="analysis">dimension</property>
                 </structure>
@@ -8041,6 +8051,11 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">6</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -8097,8 +8112,15 @@ this.queryText = query;]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tpdf2: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url',{$ifNull:['$answers.5ad13e8cf851c220dd0eb769.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e30f851c2271179f823.file_url','']},\r\n\tpdf4: { $ifNull: ['$answers.5a623e30f851c2271179f824.file_url','']},\r\n\r\n\r\n\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "pdf2" , "pdf3" , "pdf4"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tpdf2: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url',{$ifNull:['$answers.5ad13e8cf851c220dd0eb769.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e30f851c2271179f823.file_url','']},\r\n\tpdf4: { $ifNull: ['$answers.5a623e30f851c2271179f824.file_url','']},\r\n\r\n\r\n\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "pdf2" , "pdf3" , "pdf4" , "conexion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -8548,11 +8570,16 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">33</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">34</property>
+                        <property name="position">35</property>
                         <property name="name">PDF</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -8597,6 +8624,7 @@ display;</expression>
 <tns:Column>Detalle Folios::m26</tns:Column>
 <tns:Column>Detalle Folios::Tipo</tns:Column>
 <tns:Column>Folios Cobre::_id</tns:Column>
+<tns:Column>Folios Cobre::conexion</tns:Column>
 <tns:Column>Folios Cobre::pdf</tns:Column>
 </tns:selectColumns>
 <tns:joins>

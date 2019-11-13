@@ -44,6 +44,9 @@
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2019-10-25</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -55,6 +58,9 @@
             <property name="valueType">static</property>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2019-11-10</value>
+            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
             <property name="controlType">text-box</property>
@@ -144,6 +150,33 @@
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Union Fibra - Cobre" id="7">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Plusvalia</property>
+                    <expression name="expression" type="javascript">var tec = row["tec"]&#13;
+var metraje = row["metraje"]&#13;
+var display = 0;&#13;
+&#13;
+if (tec == "Cobre") {&#13;
+	if (metraje >= 0 &amp;&amp; metraje &lt;= 50) {&#13;
+		display = 0;&#13;
+	}else if (metraje >= 51 &amp;&amp; metraje &lt;= 100) {&#13;
+		display = 1;&#13;
+	}else if (metraje >= 101 &amp;&amp; metraje &lt;= 150) {&#13;
+		display = 2;&#13;
+	}else if (metraje >= 151 &amp;&amp; metraje &lt;= 200) {&#13;
+		display = 3;&#13;
+	}else if (metraje >= 201 &amp;&amp; metraje &lt;= 250) {&#13;
+		display = 4;&#13;
+	}else if (metraje >= 251 &amp;&amp; metraje &lt;= 300) {&#13;
+		display = 5;&#13;
+	}else if (metraje >= 301) {&#13;
+		display = 6;&#13;
+	}&#13;
+}</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">Cope</property>
@@ -204,6 +237,10 @@
                     <text-property name="displayName">_id.folio</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Plusvalia</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
@@ -277,6 +314,11 @@
                         <property name="position">14</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">Plusvalia</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -621,6 +663,12 @@ display;</expression>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Plusvalia</property>
+                    <text-property name="displayName">Plusvalia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Plusvalia"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000</property>
             <list-property name="sort">
@@ -637,6 +685,7 @@ display;</expression>
             <column id="224"/>
             <column id="219"/>
             <column id="230"/>
+            <column id="274"/>
             <column id="116"/>
             <column id="255">
                 <list-property name="visibility">
@@ -730,6 +779,18 @@ display;</expression>
                         <text id="231">
                             <property name="contentType">auto</property>
                             <text-property name="content"><![CDATA[Metraje]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="270">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text id="275">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Plusvalías]]></text-property>
                         </text>
                     </cell>
                     <cell id="83">
@@ -889,6 +950,13 @@ display;</expression>
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
                         </cell>
+                        <cell id="271">
+                            <property name="borderBottomStyle">dashed</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="146">
                             <property name="borderBottomStyle">dashed</property>
                             <property name="borderBottomWidth">thin</property>
@@ -1033,6 +1101,17 @@ display;</expression>
                             <property name="resultSetColumn">metraje</property>
                         </data>
                     </cell>
+                    <cell id="272">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="276">
+                            <property name="marginLeft">5pt</property>
+                            <property name="marginRight">5pt</property>
+                            <property name="resultSetColumn">Plusvalia</property>
+                        </data>
+                    </cell>
                     <cell id="98">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
@@ -1156,6 +1235,10 @@ display;</expression>
                         <property name="color">#FFFFFF</property>
                     </cell>
                     <cell id="229">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="273">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
                     </cell>
