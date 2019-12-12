@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="units">in</property>
+    <property name="theme">ThemesReportItems31.Modern</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">/ThemesReportItems31.rptlibrary</property>
+            <property name="namespace">ThemesReportItems31</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="Estatus" id="11">
+            <property name="valueType">static</property>
+            <property name="sortBy">label</property>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">todos</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">activo</property>
+                    <property name="label">Activo</property>
+                </structure>
+                <structure>
+                    <property name="value">baja</property>
+                    <property name="label">Baja</property>
+                </structure>
+                <structure>
+                    <property name="value">todos</property>
+                    <property name="label">Todos los estatus</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Cope" id="4">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">SPlaza</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["_id.cope"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["_id.cope"]</expression>
+            <expression name="sortByColumn">dataSetRow["_id.cope"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Departamento" id="8">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">SDepartamento</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["_id.departamento"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["_id.departamento"]</expression>
+            <expression name="sortByColumn">dataSetRow["_id.departamento"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Puesto" id="10">
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">SPuesto</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["_id.puesto"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["_id.puesto"]</expression>
+            <expression name="sortByColumn">dataSetRow["_id.puesto"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="db_rrhh" id="5">
+            <property name="datamartURL">/account_1259/Resources/PCI_RRHH</property>
+            <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">folio</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">8446769-1259</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Plaza</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Cope"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">estatus</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Estatus"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Departamento</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Departamento"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Puesto</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Puesto"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+        </data-mart-data-source>
+    </data-sources>
+    <data-sets>
+        <data-mart-data-set name="SPlaza" id="6">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.cope</text-property>
+                    <text-property name="heading">_id.cope</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_rrhh</property>
+            <property name="dataObject">SPlaza</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.cope</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+        <data-mart-data-set name="SDepartamento" id="7">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.departamento</text-property>
+                    <text-property name="heading">_id.departamento</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_rrhh</property>
+            <property name="dataObject">SDepartamento</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.departamento</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+        <data-mart-data-set name="SPuesto" id="9">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.puesto</text-property>
+                    <text-property name="heading">_id.puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_rrhh</property>
+            <property name="dataObject">SPuesto</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.puesto</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+        <data-mart-data-set name="Busqueda general" id="12">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <text-property name="heading">nombre</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">empresa</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">empresa</text-property>
+                    <text-property name="heading">empresa</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fingreso</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fingreso</text-property>
+                    <text-property name="heading">fingreso</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">jefe</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">jefe</text-property>
+                    <text-property name="heading">jefe</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">contrato</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">contrato</text-property>
+                    <text-property name="heading">contrato</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">co_personal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">co_personal</text-property>
+                    <text-property name="heading">co_personal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">co_empresarial</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">co_empresarial</text-property>
+                    <text-property name="heading">co_empresarial</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">telefono</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <text-property name="heading">telefono</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <text-property name="heading">puesto</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">empresa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">fingreso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">jefe</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">contrato</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">co_personal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">co_empresarial</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_rrhh</property>
+            <property name="dataObject">Busqueda general</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">nombre</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">empresa</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">fingreso</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">jefe</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">contrato</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">co_personal</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">co_empresarial</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">telefono</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">puesto</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">folio</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="13">
+            <property name="dataSet">Busqueda general</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">_id</property>
+                    <text-property name="displayName">_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">empresa</property>
+                    <text-property name="displayName">empresa</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["empresa"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">fingreso</property>
+                    <text-property name="displayName">fingreso</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fingreso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">jefe</property>
+                    <text-property name="displayName">jefe</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["jefe"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">contrato</property>
+                    <text-property name="displayName">contrato</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["contrato"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">co_personal</property>
+                    <text-property name="displayName">co_personal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["co_personal"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">co_empresarial</property>
+                    <text-property name="displayName">co_empresarial</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["co_empresarial"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">telefono</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["telefono"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">puesto</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["puesto"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Count Distinct Empleado</property>
+                    <text-property name="displayName">CDE</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["_id"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Expediente</property>
+                    <text-property name="displayName">Exp</text-property>
+                    <expression name="expression" type="javascript">"Ver expediente"</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">folio</property>
+                    <text-property name="displayName">folio</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">1000000</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["nombre"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
+            <column id="68"/>
+            <column id="69"/>
+            <column id="70"/>
+            <column id="71"/>
+            <column id="73"/>
+            <column id="74"/>
+            <column id="75"/>
+            <column id="76"/>
+            <column id="82"/>
+            <header>
+                <row id="14">
+                    <cell id="17">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="18">
+                            <text-property name="text">Nombre</text-property>
+                        </label>
+                    </cell>
+                    <cell id="19">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="20">
+                            <text-property name="text">Empresa</text-property>
+                        </label>
+                    </cell>
+                    <cell id="21">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="22">
+                            <text-property name="text">Fecha de ingreso</text-property>
+                        </label>
+                    </cell>
+                    <cell id="23">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="24">
+                            <text-property name="text">Jefe directo</text-property>
+                        </label>
+                    </cell>
+                    <cell id="27">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="28">
+                            <text-property name="text">Correo personal</text-property>
+                        </label>
+                    </cell>
+                    <cell id="29">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="30">
+                            <text-property name="text">Correo empresarial</text-property>
+                        </label>
+                    </cell>
+                    <cell id="31">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="32">
+                            <text-property name="text">Teléfono</text-property>
+                        </label>
+                    </cell>
+                    <cell id="33">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="34">
+                            <text-property name="text">Puesto</text-property>
+                        </label>
+                    </cell>
+                    <cell id="79">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="83">
+                            <text-property name="text">Expediente</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="35">
+                    <cell id="38">
+                        <data id="39">
+                            <property name="resultSetColumn">nombre</property>
+                        </data>
+                    </cell>
+                    <cell id="40">
+                        <data id="41">
+                            <property name="resultSetColumn">empresa</property>
+                        </data>
+                    </cell>
+                    <cell id="42">
+                        <data id="43">
+                            <property name="resultSetColumn">fingreso</property>
+                        </data>
+                    </cell>
+                    <cell id="44">
+                        <data id="45">
+                            <property name="resultSetColumn">jefe</property>
+                        </data>
+                    </cell>
+                    <cell id="48">
+                        <data id="49">
+                            <property name="resultSetColumn">co_personal</property>
+                        </data>
+                    </cell>
+                    <cell id="50">
+                        <data id="51">
+                            <property name="resultSetColumn">co_empresarial</property>
+                        </data>
+                    </cell>
+                    <cell id="52">
+                        <data id="53">
+                            <property name="resultSetColumn">telefono</property>
+                        </data>
+                    </cell>
+                    <cell id="54">
+                        <data id="55">
+                            <property name="resultSetColumn">puesto</property>
+                        </data>
+                    </cell>
+                    <cell id="80">
+                        <data id="84">
+                            <property name="resultSetColumn">Expediente</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">Expediente empleado.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">Folio</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["folio"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="56">
+                    <cell id="58">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <text id="77">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Número de empleado]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="61">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <data id="78">
+                            <property name="resultSetColumn">Count Distinct Empleado</property>
+                        </data>
+                    </cell>
+                    <cell id="63">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="64">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="65">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="66">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="81">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

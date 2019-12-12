@@ -4865,7 +4865,7 @@ if( base == "creacion"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = "created_at: {$gte: {$date:'" + date_one + "T05:00:00Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = "created_at: {$gte: {$date:'" + date_one + "T07:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
 }
 if (base == "liquidada") {
 	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
@@ -5464,7 +5464,7 @@ if( base == "creacion"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = "created_at: {$gte: {$date:'" + date_one + "T05:00:00Z'} , $lte:{$date:'" + hasta + "T07:00:00Z'} }, ";	
+	new_query = "created_at: {$gte: {$date:'" + date_one + "T07:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
 }
 
 if (base == "liquidada") {
@@ -6147,11 +6147,17 @@ this.queryText = query;]]></method>
                         <property name="name">_id.folio</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
                 <value>Union Cobre - Fibra</value>
                 <value>Busqueda Folios</value>
+                <value>No Factible</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -6170,6 +6176,7 @@ this.queryText = query;]]></method>
 <tns:Column>Union Cobre - Fibra::Division</tns:Column>
 <tns:Column>Union Cobre - Fibra::Area</tns:Column>
 <tns:Column>Busqueda Folios::_id.folio</tns:Column>
+<tns:Column>No Factible::observaciones</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Union Cobre - Fibra"/>
@@ -6180,6 +6187,17 @@ this.queryText = query;]]></method>
 <tns:condition>
 <tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
 <tns:rightColumn>Busqueda Folios::_id.os</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="2" name="No Factible"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
+<tns:rightColumn>No Factible::folio</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -10757,6 +10775,116 @@ this.queryText = query;]]></method>
           </design:attributes>
           <design:usageHints>
             <design:label>clave</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="No Factible" id="649">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">observaciones</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">observaciones</text-property>
+                    <text-property name="heading">observaciones</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">observaciones</property>
+                    <property name="nativeName">observaciones</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:49124,\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n\r\n{$project:{\r\n\r\n\tfolio:'$answers.5dc981a2707bf539aa900f27',\r\n\tobservaciones: '$answers.5dc981a2707bf539aa900f29',\r\n\t\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "folio" , "observaciones"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>observaciones</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>observaciones</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>observaciones</design:label>
             <design:formattingHints>
               <design:displaySize>-1</design:displaySize>
             </design:formattingHints>
