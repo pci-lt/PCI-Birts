@@ -80,18 +80,6 @@
         </structure>
     </list-property>
     <data-sources>
-        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="Data Source" id="4">
-            <list-property name="privateDriverProperties">
-                <ex-property>
-                    <name>useKerberosAuthentication</name>
-                    <value>false</value>
-                </ex-property>
-            </list-property>
-            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259</property>
-            <property name="ignoreURI">false</property>
-            <property name="serverPort">27017</property>
-            <property name="socketKeepAlive">true</property>
-        </oda-data-source>
         <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Infosync" id="516">
             <list-property name="privateDriverProperties">
                 <ex-property>
@@ -112,6 +100,18 @@
             <property name="odaDriverClass">org.postgresql.Driver</property>
             <property name="odaURL">jdbc:postgresql://localhost:5434/infosync</property>
             <property name="odaUser">infosync</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>useKerberosAuthentication</name>
+                    <value>false</value>
+                </ex-property>
+            </list-property>
+            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=120&amp;maxIdleTimeMS=120</property>
+            <property name="ignoreURI">false</property>
+            <property name="serverPort">27017</property>
+            <property name="socketKeepAlive">true</property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -1745,20 +1745,6 @@ createdPeriod == actualPeriod</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">max</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">max</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">sum</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">sum</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">empleados::first_name</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -1771,7 +1757,12 @@ createdPeriod == actualPeriod</expression>
                     <property name="compressed">false</property>
                 </structure>
             </list-property>
-            <list-property name="filter"/>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">is-not-null</property>
+                    <expression name="expr" type="javascript">row["user_id"]</expression>
+                </structure>
+            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -1836,17 +1827,12 @@ createdPeriod == actualPeriod</expression>
                     </structure>
                     <structure>
                         <property name="position">13</property>
-                        <property name="name">max</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">Data Set_1::first_name</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">14</property>
-                        <property name="name">sum</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">15</property>
-                        <property name="name">Data Set_1::first_name</property>
+                        <property name="name">last</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -1854,7 +1840,7 @@ createdPeriod == actualPeriod</expression>
             <simple-property-list name="inputDataSets">
                 <value>connectios</value>
                 <value>Data Set</value>
-                <value>Activities1</value>
+                <value>Data Set1</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -1871,9 +1857,8 @@ createdPeriod == actualPeriod</expression>
 <tns:Column>empleados::last_login</tns:Column>
 <tns:Column>empleados::parent_id</tns:Column>
 <tns:Column>empleados::phone</tns:Column>
-<tns:Column>Activities1::max</tns:Column>
-<tns:Column>Activities1::sum</tns:Column>
 <tns:Column>Data Set_1::first_name</tns:Column>
+<tns:Column>Data Set1::last</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="connectios"/>
@@ -1890,22 +1875,22 @@ createdPeriod == actualPeriod</expression>
 </tns:join>
 <tns:join>
 <tns:type>leftOuter</tns:type>
-<tns:dataSet Index="2" name="Activities1"/>
+<tns:dataSet Index="1" alias="Data Set_1" name="Data Set"/>
 <tns:on>
 <tns:condition>
-<tns:leftColumn>connectios::user_id</tns:leftColumn>
-<tns:rightColumn>Activities1::user_id</tns:rightColumn>
+<tns:leftColumn>connectios::connection_id</tns:leftColumn>
+<tns:rightColumn>Data Set_1::id</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
 </tns:join>
 <tns:join>
 <tns:type>leftOuter</tns:type>
-<tns:dataSet Index="1" alias="Data Set_1" name="Data Set"/>
+<tns:dataSet Index="2" name="Data Set1"/>
 <tns:on>
 <tns:condition>
-<tns:leftColumn>connectios::connection_id</tns:leftColumn>
-<tns:rightColumn>Data Set_1::id</tns:rightColumn>
+<tns:leftColumn>connectios::user_id</tns:leftColumn>
+<tns:rightColumn>Data Set1::_id</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -2764,19 +2749,7 @@ createdPeriod == actualPeriod</expression>
                     <property name="compressed">false</property>
                 </structure>
             </list-property>
-            <list-property name="filter">
-                <structure>
-                    <property name="operator">ne</property>
-                    <expression name="expr" type="javascript">row["user_id"]</expression>
-                    <simple-property-list name="value1">
-                        <value type="javascript">1433</value>
-                    </simple-property-list>
-                    <property name="isOptional">false</property>
-                    <property name="extensionName">com.actuate.data.oda.jdbc.sqm.sqmResultSetExtension</property>
-                    <property name="extensionExprId">0</property>
-                    <property name="pushDown">true</property>
-                </structure>
-            </list-property>
+            <list-property name="filter"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -4237,7 +4210,7 @@ month</expression>
             <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id: {$in: [10540,25928,25927,25929]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$group: {_id:{\r\n\t\tdate:'$answers.5a1eecfbb43fdd65914505a1',\r\n  }}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.date"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1</property>
+                <property name="stateContentAsString">false,9</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -6076,6 +6049,116 @@ display;</expression>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Data Set1" id="518">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">last</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">last</text-property>
+                    <text-property name="heading">last</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">last</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">last</property>
+                    <property name="nativeName">last</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n{$sort: {\r\n\tcreated_at: 1,\r\n}},\r\n\r\n{$group:{\r\n\t_id: '$created_by_id',\r\n\tlast: { $last: \t{ $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }}},\r\n\t\r\n}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "last" , "_id"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>last</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>last</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>last</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="422">

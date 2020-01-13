@@ -13,108 +13,242 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <cascading-parameter-group name="Parametros" id="168">
+            <text-property name="promptText">Elije un puesto</text-property>
+            <property name="dataSet">Calificado</property>
+            <property name="dataSetMode">single</property>
+            <parameters>
+                <scalar-parameter name="Puesto" id="169">
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Calificado</property>
+                    <expression name="valueExpr">row["puesto"]</expression>
+                    <expression name="labelExpr">row["puesto"]</expression>
+                    <property name="dataType">string</property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+                <scalar-parameter name="Year" id="170">
+                    <text-property name="promptText">Año</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Calificado</property>
+                    <expression name="valueExpr">row["year"]</expression>
+                    <expression name="labelExpr">row["year"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+                <scalar-parameter name="Month" id="171">
+                    <text-property name="promptText">Mes</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">Calificado</property>
+                    <expression name="valueExpr">row["month"]</expression>
+                    <expression name="labelExpr">row["Month"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="controlType">list-box</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format"/>
+                </scalar-parameter>
+            </parameters>
+        </cascading-parameter-group>
+    </parameters>
     <data-sources>
-        <data-mart-data-source name="RRHH" id="108">
-            <property name="datamartURL">/account_1259/Resources/PCI_RRHH</property>
+        <data-mart-data-source name="PCI_Objetivos" id="4">
+            <property name="datamartURL">/account_1259/Resources/PCI_Objetivos</property>
             <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Puesto</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Puesto"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Inicial</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Month</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Month"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Year</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Year"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Year2</property>
+                </structure>
+            </list-property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
-        <data-mart-data-set name="Objetivos" id="109">
+        <data-mart-data-set name="Calificado" id="167">
             <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">_id</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">_id</text-property>
-                    <text-property name="heading">_id</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">nombre</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">nombre</text-property>
-                    <text-property name="heading">nombre</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">objetivos</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">objetivos</text-property>
-                    <text-property name="heading">objetivos</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">fecha</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">fecha</text-property>
-                    <text-property name="heading">fecha</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">calif</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">calif</text-property>
-                    <text-property name="heading">calif</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
                 <structure>
                     <property name="columnName">puesto</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">puesto</text-property>
-                    <text-property name="heading">puesto</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">gerencia</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">gerencia</text-property>
-                    <text-property name="heading">gerencia</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">peso</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">peso</text-property>
-                    <text-property name="heading">peso</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">cobertura</property>
-                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id</property>
-                        <property name="dataType">string</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">nombre</property>
-                        <property name="dataType">string</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">objetivos</property>
+                        <property name="name">Month</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">fecha</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">PCI_Objetivos</property>
+            <property name="dataObject">Join Calificado - Objetivos</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">month</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">year</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">Month</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">puesto</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+        <data-mart-data-set name="Join Objetivos" id="172">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">calificador</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">objetivo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">medida</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">medida</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">date</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">hora</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">hora</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Resultado</property>
+                    <property name="analysis">measure</property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["month"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Month"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["puesto"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Puesto"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["year"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Year"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">calificador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">medida</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">date</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">calif</property>
+                        <property name="name">hora</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">puesto</property>
+                        <property name="name">responsable</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -124,47 +258,67 @@
                     </structure>
                     <structure>
                         <property name="position">8</property>
-                        <property name="name">peso</property>
+                        <property name="name">Resultado</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">cobertura</property>
-                        <property name="dataType">float</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
-            <property name="dataSource">RRHH</property>
-            <property name="dataObject">Objetivos</property>
+            <property name="dataSource">PCI_Objetivos</property>
+            <property name="dataObject">Join Objetivos - General</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">_id</property>
+                    <property name="name">calificador</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">nombre</property>
+                    <property name="name">objetivo</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">objetivos</property>
-                    <property name="dataType">string</property>
+                    <property name="name">medida</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">fecha</property>
+                    <property name="name">date</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">calif</property>
+                    <property name="name">hora</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">puesto</property>
+                    <property name="name">responsable</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -174,13 +328,33 @@
                 </structure>
                 <structure>
                     <property name="position">8</property>
-                    <property name="name">peso</property>
+                    <property name="name">Resultado</property>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">9</property>
-                    <property name="name">cobertura</property>
-                    <property name="dataType">float</property>
+                    <property name="name">departamento</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">puesto</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">month</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">area</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">year</property>
+                    <property name="dataType">integer</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -197,47 +371,45 @@
         </simple-master-page>
     </page-setup>
     <body>
-        <table id="4">
-            <property name="borderBottomStyle">none</property>
-            <property name="borderLeftStyle">none</property>
-            <property name="borderRightStyle">none</property>
-            <property name="borderTopStyle">none</property>
-            <property name="dataSet">Objetivos</property>
+        <grid id="303">
+            <property name="marginLeft">12pt</property>
+            <property name="width">100%</property>
+            <property name="dataSet">Join Objetivos</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">_id</property>
-                    <text-property name="displayName">_id</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
+                    <property name="name">calificador</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["calificador"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">nombre</property>
-                    <text-property name="displayName">nombre</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
+                    <property name="name">objetivo</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["objetivo"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">objetivos</property>
-                    <text-property name="displayName">objetivos</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["objetivos"]</expression>
+                    <property name="name">medida</property>
+                    <text-property name="displayName">medida</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["medida"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <text-property name="displayName">date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">fecha</property>
-                    <text-property name="displayName">fecha</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["fecha"]</expression>
+                    <property name="name">hora</property>
+                    <text-property name="displayName">hora</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["hora"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">calif</property>
-                    <text-property name="displayName">calif</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["calif"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">puesto</property>
-                    <text-property name="displayName">puesto</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["puesto"]</expression>
+                    <property name="name">responsable</property>
+                    <text-property name="displayName">responsable</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["responsable"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -247,395 +419,449 @@
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">peso</property>
-                    <text-property name="displayName">peso</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["peso"]</expression>
+                    <property name="name">Resultado</property>
+                    <text-property name="displayName">Resultado</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Resultado"]</expression>
                     <property name="dataType">float</property>
                 </structure>
                 <structure>
-                    <property name="name">cobertura</property>
-                    <text-property name="displayName">cobertura</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["cobertura"]</expression>
-                    <property name="dataType">float</property>
+                    <property name="name">departamento</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["departamento"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">Suma Peso</property>
-                    <text-property name="displayName">SP</text-property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["peso"]</expression>
-                        </structure>
-                    </list-property>
-                    <property name="allowExport">true</property>
+                    <property name="name">puesto</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["puesto"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">Suma Cobertura</property>
-                    <text-property name="displayName">SC</text-property>
-                    <property name="dataType">float</property>
-                    <property name="aggregateFunction">SUM</property>
-                    <list-property name="arguments">
-                        <structure>
-                            <property name="name">Expression</property>
-                            <expression name="value" type="javascript">row["cobertura"]</expression>
-                        </structure>
-                    </list-property>
+                    <property name="name">month</property>
+                    <text-property name="displayName">month</text-property>
+                    <expression name="expression" type="javascript">var month = params["Month"].value;&#13;
+var display = "";&#13;
+&#13;
+var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];&#13;
+&#13;
+display = months[month-1];&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
-            <column id="35"/>
-            <column id="36"/>
-            <column id="38"/>
-            <column id="39"/>
-            <column id="40"/>
-            <column id="41"/>
-            <column id="43"/>
+            <column id="304">
+                <property name="width">5%</property>
+            </column>
+            <column id="305"/>
+            <column id="306">
+                <property name="width">5%</property>
+            </column>
+            <column id="307"/>
+            <row id="309">
+                <cell id="310">
+                    <text id="327">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Puesto:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="311">
+                    <data id="331">
+                        <property name="resultSetColumn">puesto</property>
+                    </data>
+                </cell>
+                <cell id="312">
+                    <text id="330">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Periodo:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="313">
+                    <data id="334">
+                        <property name="resultSetColumn">month</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="315">
+                <cell id="316">
+                    <text id="328">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Responsable:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="317">
+                    <data id="332">
+                        <property name="resultSetColumn">responsable</property>
+                    </data>
+                </cell>
+                <cell id="318"/>
+                <cell id="319"/>
+            </row>
+            <row id="321">
+                <cell id="322">
+                    <text id="329">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Gerencia:]]></text-property>
+                    </text>
+                </cell>
+                <cell id="323">
+                    <data id="333">
+                        <property name="resultSetColumn">gerencia</property>
+                    </data>
+                </cell>
+                <cell id="324"/>
+                <cell id="325"/>
+            </row>
+        </grid>
+        <table id="207">
+            <property name="borderBottomStyle">none</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderTopStyle">none</property>
+            <property name="marginTop">24pt</property>
+            <property name="marginLeft">12pt</property>
+            <property name="marginRight">0pt</property>
+            <property name="width">90%</property>
+            <property name="dataSet">Join Objetivos</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">departamento</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["departamento"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">medida</property>
+                    <text-property name="displayName">medida</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["medida"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">100</property>
+                    <text-property name="displayName">100</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+if(row["calificador"]=="100%")&#13;
+	display = "X";&#13;
+	&#13;
+display</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">90</property>
+                    <text-property name="displayName">90</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+if(row["calificador"]=="90%")&#13;
+	display = "X";&#13;
+	&#13;
+display</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">80</property>
+                    <text-property name="displayName">80</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+if(row["calificador"]=="80%")&#13;
+	display = "X";&#13;
+	&#13;
+display</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Medida</property>
+                    <text-property name="displayName">Medida</text-property>
+                    <expression name="expression" type="javascript">parseInt(dataSetRow["medida"])</expression>
+                    <property name="dataType">integer</property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Medida</property>
+                    <text-property name="displayName">SM</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Medida"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Resultado</property>
+                    <text-property name="displayName">SR</text-property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">calificador</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["calificador"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">objetivo</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["objetivo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">date</property>
+                    <text-property name="displayName">date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">hora</property>
+                    <text-property name="displayName">hora</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["hora"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">responsable</property>
+                    <text-property name="displayName">responsable</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["responsable"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">gerencia</property>
+                    <text-property name="displayName">gerencia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["gerencia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Resultado</property>
+                    <text-property name="displayName">Resultado</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Resultado"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <column id="236">
+                <property name="width">50%</property>
+            </column>
+            <column id="244"/>
+            <column id="249"/>
+            <column id="276"/>
+            <column id="238"/>
+            <column id="261"/>
+            <column id="266"/>
+            <column id="240"/>
             <header>
-                <row id="74">
-                    <cell id="75">
-                        <property name="colSpan">2</property>
-                        <property name="rowSpan">1</property>
+                <row id="251">
+                    <cell id="252">
                         <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <text id="84">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Puesto]]></text-property>
-                        </text>
-                    </cell>
-                    <cell id="77">
-                        <property name="colSpan">5</property>
-                        <property name="rowSpan">1</property>
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="textAlign">left</property>
-                        <data id="113">
-                            <property name="resultSetColumn">puesto</property>
-                        </data>
-                    </cell>
-                </row>
-                <row id="64">
-                    <cell id="65">
-                        <property name="colSpan">2</property>
-                        <property name="rowSpan">1</property>
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <text id="85">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Responsable]]></text-property>
-                        </text>
-                    </cell>
-                    <cell id="67">
-                        <property name="colSpan">5</property>
-                        <property name="rowSpan">1</property>
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="textAlign">left</property>
-                        <data id="114">
-                            <property name="resultSetColumn">nombre</property>
-                        </data>
-                    </cell>
-                </row>
-                <row id="86">
-                    <cell id="87">
-                        <property name="colSpan">2</property>
-                        <property name="rowSpan">1</property>
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <text id="96">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Gerencia]]></text-property>
-                        </text>
-                    </cell>
-                    <cell id="89">
-                        <property name="colSpan">5</property>
-                        <property name="rowSpan">1</property>
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="textAlign">left</property>
-                        <data id="115">
-                            <property name="resultSetColumn">gerencia</property>
-                        </data>
-                    </cell>
-                </row>
-                <row id="97">
-                    <cell id="98">
-                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
-                    <cell id="99">
+                    <cell id="253">
                         <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
-                    <cell id="101">
+                    <cell id="254">
                         <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
-                    <cell id="102">
+                    <cell id="272">
                         <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
-                    <cell id="103">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="104">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="106">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                </row>
-                <row id="5">
-                    <cell id="6">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="7">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="9">
-                        <property name="backgroundColor">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="10">
+                    <cell id="255">
                         <property name="colSpan">3</property>
                         <property name="rowSpan">1</property>
                         <property name="backgroundColor">#C8E6C9</property>
                         <property name="color">#000000</property>
-                        <text id="63">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Rango de calificación]]></text-property>
-                        </text>
+                        <label id="267">
+                            <text-property name="text">Rango de calificación</text-property>
+                        </label>
                     </cell>
-                    <cell id="14">
+                    <cell id="256">
                         <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
                 </row>
-                <row id="53">
-                    <cell id="54">
+                <row id="208">
+                    <cell id="209">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="44">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Objetivo]]></text-property>
-                        </text>
+                        <label id="210">
+                            <text-property name="text">Objetivos</text-property>
+                        </label>
                     </cell>
-                    <cell id="55">
+                    <cell id="241">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="45">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Fecha y hora]]></text-property>
-                        </text>
+                        <label id="245">
+                            <text-property name="text">Fecha</text-property>
+                        </label>
                     </cell>
-                    <cell id="57">
+                    <cell id="246">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="47">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Unidad de medida]]></text-property>
-                        </text>
+                        <label id="250">
+                            <text-property name="text">Hora</text-property>
+                        </label>
                     </cell>
-                    <cell id="58">
+                    <cell id="273">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="48">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[100%]]></text-property>
-                        </text>
+                        <label id="277">
+                            <text-property name="text">Unidad de medida</text-property>
+                        </label>
                     </cell>
-                    <cell id="59">
+                    <cell id="213">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="49">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[90%]]></text-property>
-                        </text>
+                        <label id="214">
+                            <text-property name="text">100%</text-property>
+                        </label>
                     </cell>
-                    <cell id="60">
+                    <cell id="258">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="50">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[80%]]></text-property>
-                        </text>
+                        <label id="268">
+                            <text-property name="text">90%</text-property>
+                        </label>
                     </cell>
-                    <cell id="62">
+                    <cell id="263">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <text id="52">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[% de Cobertura]]></text-property>
-                        </text>
+                        <label id="269">
+                            <text-property name="text">80%</text-property>
+                        </label>
+                    </cell>
+                    <cell id="217">
+                        <property name="backgroundColor">#0D47A1</property>
+                        <property name="color">#FFFFFF</property>
+                        <label id="218">
+                            <text-property name="text">Resultado</text-property>
+                        </label>
                     </cell>
                 </row>
             </header>
             <detail>
-                <row id="15">
-                    <cell id="16">
-                        <data id="116">
-                            <property name="resultSetColumn">objetivos</property>
+                <row id="219">
+                    <cell id="220">
+                        <data id="225">
+                            <property name="resultSetColumn">objetivo</property>
                         </data>
                     </cell>
-                    <cell id="17">
-                        <data id="117">
-                            <property name="resultSetColumn">fecha</property>
-                        </data>
-                    </cell>
-                    <cell id="19">
-                        <data id="118">
+                    <cell id="242"/>
+                    <cell id="247"/>
+                    <cell id="274">
+                        <data id="278">
                             <property name="textAlign">center</property>
-                            <property name="resultSetColumn">peso</property>
+                            <property name="resultSetColumn">medida</property>
                         </data>
                     </cell>
-                    <cell id="20">
-                        <list-property name="highlightRules">
-                            <structure>
-                                <property name="operator">eq</property>
-                                <property name="backgroundColor">#81C784</property>
-                                <property name="fontWeight">bold</property>
-                                <property name="color">#666666</property>
-                                <expression name="testExpr" type="javascript">row["calif"]</expression>
-                                <simple-property-list name="value1">
-                                    <value type="javascript">"100%"</value>
-                                </simple-property-list>
-                            </structure>
-                        </list-property>
+                    <cell id="224">
+                        <property name="textAlign">center</property>
+                        <data id="229">
+                            <property name="resultSetColumn">100</property>
+                        </data>
                     </cell>
-                    <cell id="21">
-                        <list-property name="highlightRules">
-                            <structure>
-                                <property name="operator">eq</property>
-                                <property name="backgroundColor">#FFEE58</property>
-                                <property name="fontWeight">bold</property>
-                                <expression name="testExpr" type="javascript">row["calif"]</expression>
-                                <simple-property-list name="value1">
-                                    <value type="javascript">"90%"</value>
-                                </simple-property-list>
-                            </structure>
-                        </list-property>
+                    <cell id="259">
+                        <property name="textAlign">center</property>
+                        <data id="270">
+                            <property name="resultSetColumn">90</property>
+                        </data>
                     </cell>
-                    <cell id="22">
-                        <list-property name="highlightRules">
-                            <structure>
-                                <property name="operator">eq</property>
-                                <property name="backgroundColor">#E57373</property>
-                                <expression name="testExpr" type="javascript">row["calif"]</expression>
-                                <simple-property-list name="value1">
-                                    <value type="javascript">"80%"</value>
-                                </simple-property-list>
-                            </structure>
-                        </list-property>
+                    <cell id="264">
+                        <property name="textAlign">center</property>
+                        <data id="271">
+                            <property name="resultSetColumn">80</property>
+                        </data>
                     </cell>
-                    <cell id="24">
-                        <data id="119">
+                    <cell id="228">
+                        <property name="textAlign">center</property>
+                        <data id="280">
                             <structure name="numberFormat">
                                 <property name="category">Percent</property>
                                 <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
                             </structure>
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">cobertura</property>
+                            <property name="resultSetColumn">Resultado</property>
                         </data>
                     </cell>
                 </row>
             </detail>
             <footer>
-                <row id="25">
-                    <cell id="26">
+                <row id="230">
+                    <cell id="231">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
                     </cell>
-                    <cell id="27">
+                    <cell id="243">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
                     </cell>
-                    <cell id="29">
+                    <cell id="248">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <data id="120">
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">Suma Peso</property>
+                        <property name="textAlign">center</property>
+                    </cell>
+                    <cell id="275">
+                        <property name="backgroundColor">#0D47A1</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
+                        <data id="279">
+                            <property name="resultSetColumn">Suma Medida</property>
                         </data>
                     </cell>
-                    <cell id="30">
+                    <cell id="233">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
                     </cell>
-                    <cell id="31">
+                    <cell id="260">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
                     </cell>
-                    <cell id="32">
+                    <cell id="265">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
+                        <property name="textAlign">center</property>
                     </cell>
-                    <cell id="34">
+                    <cell id="235">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <data id="121">
+                        <property name="textAlign">center</property>
+                        <data id="281">
                             <structure name="numberFormat">
                                 <property name="category">Percent</property>
                                 <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
                             </structure>
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">Suma Cobertura</property>
+                            <property name="resultSetColumn">Suma Resultado</property>
                         </data>
                     </cell>
                 </row>
