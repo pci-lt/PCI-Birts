@@ -14,61 +14,42 @@
         </structure>
     </list-property>
     <parameters>
-        <cascading-parameter-group name="Parametros" id="168">
-            <text-property name="promptText">Elije un puesto</text-property>
-            <property name="dataSet">Calificado</property>
-            <property name="dataSetMode">single</property>
-            <parameters>
-                <scalar-parameter name="Puesto" id="169">
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Calificado</property>
-                    <expression name="valueExpr">row["puesto"]</expression>
-                    <expression name="labelExpr">row["puesto"]</expression>
-                    <expression name="sortByColumn">dataSetRow["puesto"]</expression>
-                    <property name="sortDirection">asc</property>
-                    <property name="dataType">string</property>
-                    <simple-property-list name="defaultValue">
-                        <value type="constant">Encargado de Gastos Propios</value>
-                    </simple-property-list>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">false</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="Year" id="170">
-                    <text-property name="promptText">Año</text-property>
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Calificado</property>
-                    <expression name="valueExpr">row["year"]</expression>
-                    <expression name="labelExpr">row["year"]</expression>
-                    <property name="dataType">integer</property>
-                    <simple-property-list name="defaultValue">
-                        <value type="constant">2020</value>
-                    </simple-property-list>
-                    <property name="paramType">simple</property>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">true</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-                <scalar-parameter name="Month" id="171">
-                    <text-property name="promptText">Mes</text-property>
-                    <property name="valueType">dynamic</property>
-                    <property name="isRequired">true</property>
-                    <property name="dataSetName">Calificado</property>
-                    <expression name="valueExpr">row["month"]</expression>
-                    <expression name="labelExpr">row["Month"]</expression>
-                    <property name="dataType">integer</property>
-                    <simple-property-list name="defaultValue">
-                        <value type="constant">1</value>
-                    </simple-property-list>
-                    <property name="controlType">list-box</property>
-                    <property name="fixedOrder">true</property>
-                    <structure name="format"/>
-                </scalar-parameter>
-            </parameters>
-        </cascading-parameter-group>
+        <scalar-parameter name="Puesto" id="344">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Year" id="345">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Month" id="346">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="PCI_Objetivos" id="4">
@@ -650,8 +631,14 @@ display</expression>
                 <structure>
                     <property name="name">Resultado</property>
                     <text-property name="displayName">Resultado</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["Resultado"]</expression>
+                    <expression name="expression" type="javascript">var result = dataSetRow["Resultado"];&#13;
+var display = result;&#13;
+if(result == "NaN" || result == NaN)&#13;
+	var display = 0;&#13;
+&#13;
+display;</expression>
                     <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">puesto</property>

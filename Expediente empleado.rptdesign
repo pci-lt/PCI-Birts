@@ -1117,12 +1117,6 @@
         <data-mart-data-set name="Contratos" id="788">
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">contrato.file_url.file_url</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">contrato.file_url.file_url</text-property>
-                    <text-property name="heading">contrato.file_url.file_url</text-property>
-                </structure>
-                <structure>
                     <property name="columnName">contrato.file_name</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">contrato.file_name</text-property>
@@ -1133,13 +1127,13 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">contrato.file_url.file_url</property>
+                        <property name="name">contrato.file_name</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">contrato.file_name</property>
-                        <property name="dataType">string</property>
+                        <property name="name">contrato.file_url</property>
+                        <property name="dataType">javaObject</property>
                     </structure>
                 </list-property>
             </structure>
@@ -1148,13 +1142,13 @@
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">contrato.file_url.file_url</property>
+                    <property name="name">contrato.file_name</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">contrato.file_name</property>
-                    <property name="dataType">string</property>
+                    <property name="name">contrato.file_url</property>
+                    <property name="dataType">javaObject</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -1365,8 +1359,23 @@ resultado;</expression>
                 <structure>
                     <property name="name">empresa</property>
                     <text-property name="displayName">empresa</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["empresa"]</expression>
+                    <expression name="expression" type="javascript">var area = dataSetRow["empresa"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">no_empleado</property>
@@ -1476,8 +1485,23 @@ resultado;</expression>
                 <structure>
                     <property name="name">banco</property>
                     <text-property name="displayName">banco</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["banco"]</expression>
+                    <expression name="expression" type="javascript">var area = dataSetRow["banco"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+area = area.toUpperCase();&#13;
+var arr = area.split('_');&#13;
+var resultado = '';&#13;
+for (var i = 0; i &lt;arr.length;i++){&#13;
+var te =  (new Packages.java.lang.String(arr[i]));&#13;
+	resultado = resultado +  new Packages.java.lang.Character.toString(te.charAt(0)).toUpperCase() + te.substring(1);&#13;
+	if (i &lt; arr.length - 1) {&#13;
+		resultado = resultado + ' ';&#13;
+	}&#13;
+}&#13;
+resultado;</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">cta_ban</property>
@@ -2475,6 +2499,34 @@ resultado;</expression>
                         <property name="borderTopStyle">none</property>
                         <data id="659">
                             <property name="resultSetColumn">puesto</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">drill-through</property>
+                                    <property name="reportName">Descriptivo de puesto.rptdesign</property>
+                                    <property name="targetWindow">_blank</property>
+                                    <property name="targetFileType">report-design</property>
+                                    <list-property name="paramBindings">
+                                        <structure>
+                                            <property name="paramName">puesto</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["puesto"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">Nombre</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["nombre"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                        <structure>
+                                            <property name="paramName">Foto</property>
+                                            <simple-property-list name="expression">
+                                                <value type="javascript">row["Fotografia"]</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                </structure>
+                            </list-property>
                         </data>
                     </cell>
                 </row>
@@ -3135,16 +3187,16 @@ resultado;</expression>
             <property name="dataSet">Contratos</property>
             <list-property name="boundDataColumns">
                 <structure>
-                    <property name="name">contrato.file_url.file_url</property>
-                    <text-property name="displayName">contrato.file_url.file_url</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["contrato.file_url.file_url"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
                     <property name="name">contrato.file_name</property>
                     <text-property name="displayName">contrato.file_name</text-property>
                     <expression name="expression" type="javascript">dataSetRow["contrato.file_name"]</expression>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">contrato.file_url</property>
+                    <text-property name="displayName">contrato.file_url</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["contrato.file_url"]</expression>
+                    <property name="dataType">javaObject</property>
                 </structure>
             </list-property>
             <column id="805"/>
@@ -3156,7 +3208,7 @@ resultado;</expression>
                             <list-property name="action">
                                 <structure>
                                     <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">row["contrato.file_url.file_url"]</expression>
+                                    <expression name="uri" type="javascript">row["contrato.file_url"]</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>

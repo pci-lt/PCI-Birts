@@ -507,7 +507,7 @@ if (tec == "Cobre") {&#13;
                     <property name="type">string</property>
                 </structure>
             </list-property>
-            <property name="__ac_group_collapse_level">1</property>
+            <property name="__ac_group_collapse_level">1,2</property>
             <property name="marginTop">24pt</property>
             <property name="marginLeft">12pt</property>
             <property name="width">90%</property>
@@ -684,6 +684,36 @@ display;</expression>
                     <text-property name="displayName">observaciones</text-property>
                     <expression name="expression" type="javascript">dataSetRow["observaciones"]</expression>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Count Observaciones</property>
+                    <text-property name="displayName">CO</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Folio</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["observaciones"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Observaciones</property>
+                    <text-property name="displayName">Obs</text-property>
+                    <expression name="expression" type="javascript">var display = "";&#13;
+var count = row["Count Observaciones"];&#13;
+&#13;
+if(count == 2){&#13;
+	display = "Con Observación";&#13;
+}else{&#13;
+	display = "Sin Observaciones"&#13;
+}</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
             <property name="pageBreakInterval">1000000</property>
@@ -1044,6 +1074,167 @@ display;</expression>
                     </row>
                 </header>
             </group>
+            <group id="284">
+                <property name="groupName">Folio</property>
+                <expression name="keyExpr" type="javascript">row["folio"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["folio"]</expression>
+                </structure>
+                <property name="hideDetail">true</property>
+                <header>
+                    <row id="285">
+                        <cell id="286">
+                            <data id="136">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">tecnico</property>
+                            </data>
+                        </cell>
+                        <cell id="287"/>
+                        <cell id="288">
+                            <data id="95">
+                                <property name="fontWeight">normal</property>
+                                <property name="color">#689F38</property>
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">PDF</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">hyperlink</property>
+                                        <expression name="uri" type="javascript">row["pdf"]</expression>
+                                        <property name="targetWindow">_blank</property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="289">
+                            <data id="103">
+                                <property name="fontWeight">normal</property>
+                                <property name="color">#689F38</property>
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">folio</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">hyperlink</property>
+                                        <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
+                                        <property name="targetWindow">_blank</property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="290">
+                            <data id="93">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">telefono</property>
+                            </data>
+                        </cell>
+                        <cell id="291">
+                            <data id="232">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">tarea</property>
+                            </data>
+                        </cell>
+                        <cell id="292">
+                            <data id="233">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">metraje</property>
+                            </data>
+                        </cell>
+                        <cell id="293">
+                            <data id="276">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">Plusvalia</property>
+                            </data>
+                        </cell>
+                        <cell id="294">
+                            <data id="234">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">clave</property>
+                            </data>
+                        </cell>
+                        <cell id="295">
+                            <data id="263">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">Division</property>
+                            </data>
+                        </cell>
+                        <cell id="296">
+                            <data id="265">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">Area</property>
+                            </data>
+                        </cell>
+                        <cell id="297">
+                            <data id="139">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">Cope</property>
+                            </data>
+                        </cell>
+                        <cell id="298">
+                            <data id="91">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <structure name="dateTimeFormat">
+                                    <property name="category">Custom</property>
+                                </structure>
+                                <property name="resultSetColumn">fecha</property>
+                            </data>
+                        </cell>
+                        <cell id="299">
+                            <data id="201">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">tec</property>
+                            </data>
+                        </cell>
+                        <cell id="300">
+                            <data id="208">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">_id.folio</property>
+                            </data>
+                        </cell>
+                        <cell id="301">
+                            <data id="320">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">row["Observaciones"] == "Sin Observaciones"</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="resultSetColumn">Observaciones</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Observaciones Conteo.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Folio</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["folio"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
             <detail>
                 <row id="89">
                     <cell id="90">
@@ -1051,11 +1242,6 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="136">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">tecnico</property>
-                        </data>
                     </cell>
                     <cell id="92">
                         <property name="borderBottomStyle">none</property>
@@ -1068,164 +1254,78 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="95">
-                            <property name="fontWeight">normal</property>
-                            <property name="color">#689F38</property>
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">PDF</property>
-                            <list-property name="action">
-                                <structure>
-                                    <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">row["pdf"]</expression>
-                                    <property name="targetWindow">_blank</property>
-                                </structure>
-                            </list-property>
-                        </data>
                     </cell>
                     <cell id="96">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="103">
-                            <property name="fontWeight">normal</property>
-                            <property name="color">#689F38</property>
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">folio</property>
-                            <list-property name="action">
-                                <structure>
-                                    <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/records/detail/" + row["_id"]</expression>
-                                    <property name="targetWindow">_blank</property>
-                                </structure>
-                            </list-property>
-                        </data>
                     </cell>
                     <cell id="222">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="93">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">telefono</property>
-                        </data>
                     </cell>
                     <cell id="217">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="232">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">tarea</property>
-                        </data>
                     </cell>
                     <cell id="228">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="233">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">metraje</property>
-                        </data>
                     </cell>
                     <cell id="272">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="276">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">Plusvalia</property>
-                        </data>
                     </cell>
                     <cell id="98">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="234">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">clave</property>
-                        </data>
                     </cell>
                     <cell id="253">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="263">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">Division</property>
-                        </data>
                     </cell>
                     <cell id="258">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="265">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">Area</property>
-                        </data>
                     </cell>
                     <cell id="100">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="139">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">Cope</property>
-                        </data>
                     </cell>
                     <cell id="102">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="91">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <structure name="dateTimeFormat">
-                                <property name="category">Custom</property>
-                            </structure>
-                            <property name="resultSetColumn">fecha</property>
-                        </data>
                     </cell>
                     <cell id="197">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="201">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">tec</property>
-                        </data>
                     </cell>
                     <cell id="204">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="208">
-                            <property name="marginLeft">5pt</property>
-                            <property name="marginRight">5pt</property>
-                            <property name="resultSetColumn">_id.folio</property>
-                        </data>
                     </cell>
                     <cell id="279">
                         <property name="borderBottomStyle">none</property>
