@@ -411,6 +411,7 @@
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="A, B, C"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -596,6 +597,7 @@
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="A, B, C"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -783,6 +785,7 @@
   <extendedProperties name="enable.area.alt" value="false"/>
   <extendedProperties name="enable.drill.category" value="true"/>
   <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
   <sampleData>
    <baseSampleData dataSetRepresentation="A, B, C"/>
    <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
@@ -1190,6 +1193,23 @@
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Suma Resultado Marzo</property>
+                    <text-property name="displayName">SRM</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Puesto</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["month"] == 3</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <column id="299"/>
             <column id="300"/>
@@ -1487,7 +1507,43 @@
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="410"/>
+                        <cell id="410">
+                            <data id="471">
+                                <structure name="numberFormat">
+                                    <property name="category">Percent</property>
+                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Resultado Marzo</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Objetivos.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Puesto</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["puesto"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Year</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["Year"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Month</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["month"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
                         <cell id="411"/>
                         <cell id="412"/>
                         <cell id="413"/>

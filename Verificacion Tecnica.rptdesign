@@ -86,6 +86,13 @@
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Union Vetec" id="7">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">prueba</property>
+                    <expression name="expression" type="javascript">"http://pcindustrial.com.mx/images/PC-Industrial.png"</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">folio</property>
@@ -220,6 +227,10 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">prueba</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -341,6 +352,11 @@
                     <structure>
                         <property name="position">24</property>
                         <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">prueba</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -503,11 +519,113 @@
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="orientation">auto</property>
+            <page-header>
+                <grid id="593">
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                    <column id="603">
+                        <property name="width">25%</property>
+                    </column>
+                    <column id="601">
+                        <property name="width">25%</property>
+                    </column>
+                    <column id="594">
+                        <property name="width">25%</property>
+                    </column>
+                    <column id="599">
+                        <property name="width">25%</property>
+                    </column>
+                    <row id="595">
+                        <property name="fontSize">12pt</property>
+                        <cell id="602">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                        </cell>
+                        <cell id="600">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <text id="597">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[ASEGURAMIENTO DE LA CALIDAD]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="598">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="604">
+                                <property name="fontWeight">bold</property>
+                                <property name="paddingRight">12pt</property>
+                                <property name="textAlign">right</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="605">
+                        <cell id="606"/>
+                        <cell id="607">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text id="610">
+                                <property name="fontSize">12pt</property>
+                                <property name="fontWeight">normal</property>
+                                <property name="marginTop">12pt</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Informe de verificación]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="609"/>
+                    </row>
+                </grid>
+            </page-header>
             <page-footer>
-                <text id="3">
-                    <property name="contentType">html</property>
-                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
-                </text>
+                <grid id="613">
+                    <column id="614"/>
+                    <column id="615"/>
+                    <column id="616"/>
+                    <column id="625">
+                        <property name="width">90%</property>
+                    </column>
+                    <row id="617">
+                        <cell id="618">
+                            <auto-text id="619">
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="620">
+                            <text id="621">
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[ de ]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="622">
+                            <auto-text id="623">
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="624"/>
+                    </row>
+                </grid>
             </page-footer>
         </simple-master-page>
     </page-setup>
@@ -515,19 +633,136 @@
         <grid id="298">
             <property name="marginTop">12pt</property>
             <property name="marginLeft">12pt</property>
-            <property name="width">80%</property>
+            <property name="width">100%</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Cope</property>
+                    <text-property name="displayName">COPE</text-property>
+                    <expression name="expression" type="javascript">params["Cope"].value</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
             <column id="299">
-                <property name="width">60%</property>
+                <property name="width">40%</property>
             </column>
-            <column id="533">
-                <property name="width">30%</property>
-            </column>
-            <column id="300">
+            <column id="612">
                 <property name="width">20%</property>
             </column>
+            <column id="300">
+                <property name="width">40%</property>
+            </column>
+            <row id="631">
+                <cell id="632">
+                    <grid id="635">
+                        <column id="636"/>
+                        <column id="643"/>
+                        <row id="637">
+                            <cell id="638">
+                                <text id="644">
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Cobertura de COPE]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="641">
+                                <data id="645">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="resultSetColumn">Cope</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="633"/>
+                <cell id="634">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">2</property>
+                    <table id="343">
+                        <property name="width">90%</property>
+                        <property name="dataSet">Union Vetec</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">folio</property>
+                                <text-property name="displayName">folio</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">telefono</property>
+                                <text-property name="displayName">telefono</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["telefono"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">tecnico</property>
+                                <text-property name="displayName">tecnico</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["tecnico"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="pageBreakInterval">1000000</property>
+                        <column id="362">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="363">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="364"/>
+                        <header>
+                            <row id="626">
+                                <cell id="627">
+                                    <property name="colSpan">3</property>
+                                    <property name="rowSpan">1</property>
+                                    <label id="630">
+                                        <text-property name="text">OS Verificadas</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="344">
+                                <cell id="345">
+                                    <label id="346">
+                                        <text-property name="text">Folio:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="347">
+                                    <label id="348">
+                                        <text-property name="text">Teléfono:</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="349">
+                                    <label id="350">
+                                        <text-property name="text">Nombre del Técnico</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="351">
+                                <cell id="352">
+                                    <data id="353">
+                                        <property name="resultSetColumn">folio</property>
+                                    </data>
+                                </cell>
+                                <cell id="354">
+                                    <data id="355">
+                                        <property name="resultSetColumn">telefono</property>
+                                    </data>
+                                </cell>
+                                <cell id="356">
+                                    <data id="357">
+                                        <property name="resultSetColumn">tecnico</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
             <row id="301">
                 <cell id="302">
                     <grid id="304">
+                        <property name="marginTop">12pt</property>
+                        <property name="width">100%</property>
                         <property name="dataSet">Union Vetec</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -574,16 +809,20 @@
                                 <property name="allowExport">true</property>
                             </structure>
                         </list-property>
-                        <column id="305"/>
-                        <column id="306"/>
+                        <column id="305">
+                            <property name="width">90%</property>
+                        </column>
+                        <column id="306">
+                            <property name="width">10%</property>
+                        </column>
                         <row id="307">
                             <cell id="308">
                                 <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
                                 <text id="334">
-                                    <property name="fontSize">16pt</property>
+                                    <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
-                                    <property name="color">#B71C1C</property>
+                                    <property name="color">#000000</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Resultados de la revisión]]></text-property>
@@ -608,9 +847,9 @@
                                 <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
                                 <text id="336">
-                                    <property name="fontSize">16pt</property>
+                                    <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
-                                    <property name="color">#B71C1C</property>
+                                    <property name="color">#000000</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Resultados generales]]></text-property>
@@ -631,9 +870,9 @@
                                 <property name="colSpan">2</property>
                                 <property name="rowSpan">1</property>
                                 <text id="337">
-                                    <property name="fontSize">16pt</property>
+                                    <property name="fontSize">12pt</property>
                                     <property name="fontWeight">bold</property>
-                                    <property name="color">#B71C1C</property>
+                                    <property name="color">#000000</property>
                                     <property name="textAlign">center</property>
                                     <property name="contentType">auto</property>
                                     <text-property name="content"><![CDATA[Principales incidencias]]></text-property>
@@ -678,77 +917,11 @@
                         </row>
                     </grid>
                 </cell>
-                <cell id="532"/>
-                <cell id="303">
-                    <table id="343">
-                        <property name="dataSet">Union Vetec</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">folio</property>
-                                <text-property name="displayName">folio</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
-                                <property name="dataType">integer</property>
-                            </structure>
-                            <structure>
-                                <property name="name">telefono</property>
-                                <text-property name="displayName">telefono</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["telefono"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">tecnico</property>
-                                <text-property name="displayName">tecnico</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["tecnico"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                        </list-property>
-                        <property name="pageBreakInterval">1000000</property>
-                        <column id="362"/>
-                        <column id="363"/>
-                        <column id="364"/>
-                        <header>
-                            <row id="344">
-                                <cell id="345">
-                                    <label id="346">
-                                        <text-property name="text">Folio:</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="347">
-                                    <label id="348">
-                                        <text-property name="text">Teléfono:</text-property>
-                                    </label>
-                                </cell>
-                                <cell id="349">
-                                    <label id="350">
-                                        <text-property name="text">Nombre del Técnico</text-property>
-                                    </label>
-                                </cell>
-                            </row>
-                        </header>
-                        <detail>
-                            <row id="351">
-                                <cell id="352">
-                                    <data id="353">
-                                        <property name="resultSetColumn">folio</property>
-                                    </data>
-                                </cell>
-                                <cell id="354">
-                                    <data id="355">
-                                        <property name="resultSetColumn">telefono</property>
-                                    </data>
-                                </cell>
-                                <cell id="356">
-                                    <data id="357">
-                                        <property name="resultSetColumn">tecnico</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                    </table>
-                </cell>
+                <cell id="611"/>
             </row>
         </grid>
         <table id="370">
+            <property name="marginTop">24pt</property>
             <property name="dataSet">Union Vetec</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -895,6 +1068,12 @@
                     <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">prueba</property>
+                    <text-property name="displayName">prueba</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["prueba"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">100000000</property>
             <column id="494"/>
@@ -1010,155 +1189,20 @@
                             <column id="566"/>
                             <column id="567"/>
                             <row id="568">
-                                <cell id="569">
-                                    <image name="foto1" id="531">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto1"] == null || row["foto1"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">true</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto1"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="570">
-                                    <image name="foto11" id="584">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto2"] == null || row["foto2"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">true</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto2"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="571">
-                                    <image name="foto12" id="585">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto3"] == null || row["foto3"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">true</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto3"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="572">
-                                    <image name="foto13" id="586">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto4"] == null || row["foto4"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">true</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto4"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="573">
-                                    <image name="foto14" id="587">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto5"] == null || row["foto5"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">true</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto5"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="574">
-                                    <image name="foto15" id="588">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto6"] == null || row["foto6"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">false</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto6"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="575">
-                                    <image name="foto16" id="589">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto7"] == null || row["foto7"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">false</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto7"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="576">
-                                    <image name="foto17" id="590">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto8"] == null || row["foto8"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">false</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto8"]</expression>
-                                    </image>
-                                </cell>
-                                <cell id="577">
-                                    <image name="foto18" id="591">
-                                        <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
-                                        <list-property name="visibility">
-                                            <structure>
-                                                <property name="format">all</property>
-                                                <expression name="valueExpr" type="javascript">row["foto9"] == null || row["foto9"] == null</expression>
-                                            </structure>
-                                        </list-property>
-                                        <property name="allowExport">false</property>
-                                        <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto9"]</expression>
-                                    </image>
-                                </cell>
+                                <cell id="569"/>
+                                <cell id="570"/>
+                                <cell id="571"/>
+                                <cell id="572"/>
+                                <cell id="573"/>
+                                <cell id="574"/>
+                                <cell id="575"/>
+                                <cell id="576"/>
+                                <cell id="577"/>
                                 <cell id="578">
                                     <image name="foto19" id="592">
                                         <property name="display">inline</property>
-                                        <property name="height">200px</property>
-                                        <property name="width">200px</property>
+                                        <property name="height">420px</property>
+                                        <property name="width">590px</property>
                                         <list-property name="visibility">
                                             <structure>
                                                 <property name="format">all</property>
@@ -1167,7 +1211,7 @@
                                         </list-property>
                                         <property name="allowExport">false</property>
                                         <property name="source">url</property>
-                                        <expression name="uri" type="javascript">row["foto10"]</expression>
+                                        <expression name="uri" type="javascript">"https://vetstreet.brightspotcdn.com/dims4/default/bf899ab/2147483647/crop/650x463%2B0%2B0/resize/590x420/quality/90/?url=https%3A%2F%2Fvetstreet-brightspot.s3.amazonaws.com%2Fc3%2Fd7%2F9d43eceb4bf7a27bc8ba92facc07%2Fgolden-retriever-ap-hudfmx.jpg"</expression>
                                     </image>
                                 </cell>
                             </row>
