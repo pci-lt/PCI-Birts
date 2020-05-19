@@ -124,6 +124,11 @@
                         <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">pestatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">db_sept2018</property>
@@ -179,6 +184,11 @@
                     <property name="name">_id</property>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">pestatus</property>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
         </data-mart-data-set>
     </data-sets>
@@ -218,6 +228,45 @@
         </simple-master-page>
     </page-setup>
     <body>
+        <grid id="83">
+            <property name="width">20%</property>
+            <column id="84">
+                <property name="width">5%</property>
+            </column>
+            <column id="85"/>
+            <row id="92">
+                <cell id="93">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="95">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Simbología]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="86">
+                <cell id="87">
+                    <property name="backgroundColor">#FDD835</property>
+                </cell>
+                <cell id="88">
+                    <text id="96">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Técnico no encontrado en Plantilla Empresarial]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="89">
+                <cell id="90">
+                    <property name="backgroundColor">#B71C1C</property>
+                </cell>
+                <cell id="91">
+                    <text id="97">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Técnico dado de baja en Plantilla Empresarial]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
         <table id="15">
             <property name="borderBottomStyle">none</property>
             <property name="borderLeftStyle">none</property>
@@ -320,6 +369,12 @@ display;</expression>
                         </structure>
                     </list-property>
                     <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">pestatus</property>
+                    <text-property name="displayName">pestatus</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pestatus"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <property name="pageBreakInterval">1569325056</property>
@@ -426,6 +481,23 @@ display;</expression>
             </header>
             <detail>
                 <row id="33">
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#B71C1C</property>
+                            <property name="color">#FFFFFF</property>
+                            <expression name="testExpr" type="javascript">row["pestatus"]</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">"baja"</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
+                            <property name="operator">is-null</property>
+                            <property name="backgroundColor">#FDD835</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">row["pestatus"]</expression>
+                        </structure>
+                    </list-property>
                     <cell id="34">
                         <property name="borderBottomColor">#BDBDBD</property>
                         <property name="borderBottomStyle">dashed</property>

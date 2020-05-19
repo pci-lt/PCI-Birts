@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <list-property name="propertyBindings">
         <structure>
             <property name="name">queryText</property>
@@ -73,6 +73,18 @@
                 <ex-property>
                     <name>useKerberosAuthentication</name>
                     <value>false</value>
+                </ex-property>
+                <ex-property>
+                    <name>gssJAASConfig</name>
+                </ex-property>
+                <ex-property>
+                    <name>krb5config</name>
+                </ex-property>
+                <ex-property>
+                    <name>gssapiServiceName</name>
+                </ex-property>
+                <ex-property>
+                    <name>kerberosPrincipal</name>
                 </ex-property>
             </list-property>
             <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=120&amp;maxIdleTimeMS=120</property>
@@ -11335,7 +11347,7 @@ resultado;</expression>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tdeleted_at:{$exists:false},\r\n\tform_id: {$in: [12165]},\r\n}},\r\n\r\n{$project:{\r\n\tclave: '$folio',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tpaterno: '$answers.f1216500a010000000000005',\r\n\tmaterno: '$answers.f1216500a010000000000006',\r\n\r\n\r\n\tcope:'$answers.590a395ff851c2100f7c671a',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tdivision: '$answers.f1216500a010000000000011',\r\n\r\n\t\r\n\testatus:'$answers.590a4761f851c20e60ac168c',\r\n\tcontratista: \"$answers.590a2a71b43fdd3c7678af07\",\r\n\r\n\tflag: {$ifNull: ['$answers.5d30c343e860f96a34b93c66','']},\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "clave" , "nombre" , "paterno" , "materno" , "cope" , "area" , "division" , "estatus" , "contratista" , "flag"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tdeleted_at:{$exists:false},\r\n\tform_id: {$in: [12165]},\r\n\t'answers.5d30c343e860f96a34b93c66':'activo',\r\n}},\r\n\r\n{$project:{\r\n\tclave: '$folio',\r\n\tnombre: '$answers.f1216500a010000000000004',\r\n\tpaterno: '$answers.f1216500a010000000000005',\r\n\tmaterno: '$answers.f1216500a010000000000006',\r\n\r\n\r\n\tcope:'$answers.590a395ff851c2100f7c671a',\r\n\tarea: '$answers.590a34bab43fdd3c7678af0c',\r\n\tdivision: '$answers.f1216500a010000000000011',\r\n\r\n\t\r\n\testatus:'$answers.590a4761f851c20e60ac168c',\r\n\tcontratista: \"$answers.590a2a71b43fdd3c7678af07\",\r\n\r\n\tflag: {$ifNull: ['$answers.5d30c343e860f96a34b93c66','']},\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "clave" , "nombre" , "paterno" , "materno" , "cope" , "area" , "division" , "estatus" , "contratista" , "flag"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -11562,6 +11574,91 @@ resultado;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Tecnicos en plantilla" id="681">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <text-property name="heading">tecnico</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">pestatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pestatus</text-property>
+                    <text-property name="heading">pestatus</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">pestatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">tecnico</property>
+                    <property name="nativeName">tecnico</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">pestatus</property>
+                    <property name="nativeName">pestatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tdeleted_at:{$exists:false},\r\n\tform_id: {$in: [46429]},\r\n\t'answers.5e441e827328d32e7ddac6d4': {$exists:true},\r\n}},\r\n\r\n{$project:{\r\n\t\r\n\tpestatus: '$answers.5d5ec9a7c82d82ff8dbb41ac',\r\n\ttecnico: '$answers.5e441e827328d32e7ddac6d4',\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "tecnico" , "pestatus"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estatus</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>estatus</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estatus</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
         <derived-data-set extensionID="com.actuate.birt.data.join" name="Join UCargaTecnico - Listado tecnicos" id="646">
             <list-property name="columnHints">
                 <structure>
@@ -11666,11 +11763,17 @@ resultado;</expression>
                         <property name="name">Division</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">pestatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <simple-property-list name="inputDataSets">
                 <value>Ultima carga tecnico</value>
                 <value>Listado de tecnicos</value>
+                <value>Tecnicos en plantilla</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -11685,6 +11788,7 @@ resultado;</expression>
 <tns:Column>Listado de tecnicos::Cope</tns:Column>
 <tns:Column>Listado de tecnicos::Area</tns:Column>
 <tns:Column>Listado de tecnicos::Division</tns:Column>
+<tns:Column>Tecnicos en plantilla::pestatus</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Ultima carga tecnico"/>
@@ -11695,6 +11799,17 @@ resultado;</expression>
 <tns:condition>
 <tns:leftColumn>Ultima carga tecnico::_id</tns:leftColumn>
 <tns:rightColumn>Listado de tecnicos::clave</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="2" name="Tecnicos en plantilla"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Listado de tecnicos::clave</tns:leftColumn>
+<tns:rightColumn>Tecnicos en plantilla::tecnico</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -16971,6 +17086,1005 @@ this.queryText = query;]]></method>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="PIC" id="679">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Division1</property>
+                    <expression name="expression" type="javascript">var forma = row["forma1"];&#13;
+var display = "";&#13;
+&#13;
+if (forma == 46478) {&#13;
+	display = "Cobre - Metro";&#13;
+}else if (forma == 46476) {&#13;
+	display = "FTTH - Sur";&#13;
+}else if (forma == 46481) {&#13;
+	display = "Cobre - Sur";&#13;
+}else if (forma == 45962) {&#13;
+	display = "FTTH - Metro";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Folio</property>
+                    <expression name="expression" type="javascript">row["folio1"].toString();</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">forma1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">forma1</text-property>
+                    <text-property name="heading">forma1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">folio1</text-property>
+                    <text-property name="heading">folio1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">telefono1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono1</text-property>
+                    <text-property name="heading">telefono1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tipo1</text-property>
+                    <text-property name="heading">tipo1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">liquidacion1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">liquidacion1</text-property>
+                    <text-property name="heading">liquidacion1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">distrito1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">distrito1</text-property>
+                    <text-property name="heading">distrito1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cope1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cope1</text-property>
+                    <text-property name="heading">cope1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Folio</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">forma1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">folio1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">telefono1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">tipo1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">liquidacion1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">distrito1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">cope1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Division1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">forma1</property>
+                    <property name="nativeName">forma1</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">folio1</property>
+                    <property name="nativeName">folio1</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">telefono1</property>
+                    <property name="nativeName">telefono1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">18</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">tipo1</property>
+                    <property name="nativeName">tipo1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">liquidacion1</property>
+                    <property name="nativeName">liquidacion1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">distrito1</property>
+                    <property name="nativeName">distrito1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">cope1</property>
+                    <property name="nativeName">cope1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [46478,46476,46481,45962]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.5d43c4f6a35c069721041e36':'LIQUIDADO',\r\n\t'answers.5d43c4f6a35c069721041e37':'COMPLETADA',\r\n\t\r\n}},\r\n\r\n{$project:{\r\n\tforma1: '$form_id',\t\r\n\tfolio1: '$answers.5d43c4f6a35c069721041e33',\r\n\ttelefono1: '$answers.5d43c4f6a35c069721041e38',\r\n\ttipo1: '$answers.5d43c4f6a35c069721041e34',\r\n\tliquidacion1: '$answers.5d43c4f6a35c069721041e42',\r\n\tdistrito1: '$answers.5d43c4f6a35c069721041e39',\r\n\tcope1: '$answers.5d43c4f6a35c069721041e3a',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "forma1" , "folio1" , "telefono1" , "tipo1" , "liquidacion1" , "distrito1" , "cope1"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>forma</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>forma</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>forma</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>telefono</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>18</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>telefono</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>telefono</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>tipo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>tipo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>tipo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>liquidacion</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>liquidacion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>liquidacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>distrito</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>distrito</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>distrito</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cope</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cope</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cope</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Union Fibra-Cobre - Busqueda - PIC" id="680">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">forma</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::forma1"];&#13;
+var dato2 = row["PIC_1::forma1"];&#13;
+var display = 0;&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">PICTel</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::telefono1"];&#13;
+var dato2 = row["PIC_1::telefono1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::tipo1"];&#13;
+var dato2 = row["PIC_1::tipo1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">liquidacion</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::liquidacion1"];&#13;
+var dato2 = row["PIC_1::liquidacion1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">distrito</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::distrito1"];&#13;
+var dato2 = row["PIC_1::distrito1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">cope</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::cope1"];&#13;
+var dato2 = row["PIC_1::cope1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Division1_1</property>
+                    <expression name="expression" type="javascript">var dato1 = row["PIC::Division1"];&#13;
+var dato2 = row["PIC_1::Division1"];&#13;
+var display = "";&#13;
+if (dato1 != null &amp;&amp; dato1 != "") {&#13;
+	display = dato1;&#13;
+}else if ((dato1 == null &amp;&amp; dato1 == "") &amp;&amp; (dato2 != null || dato2 != "")) {&#13;
+	display = dato2;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tec</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id.folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">metraje</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">metraje</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tarea</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">clave</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">clave</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Area</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">observaciones</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">observaciones</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">forma</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">forma</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PICTel</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">telefono</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::forma1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">forma1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::telefono1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::tipo1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tipo1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::liquidacion1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">liquidacion1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::distrito1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">distrito1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::cope1</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cope1</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC::Division1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::forma1</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::telefono1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::tipo1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::liquidacion1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::distrito1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::cope1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PIC_1::Division1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">liquidacion</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">distrito</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cope</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cope</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division1_1</property>
+                    <property name="analysis">attribute</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">metraje</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">tarea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">clave</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">_id.folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">PIC::forma1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">PIC::telefono1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">PIC::tipo1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">PIC::liquidacion1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">PIC::distrito1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">PIC::cope1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">PIC::Division1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">PIC_1::forma1</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">PIC_1::telefono1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">PIC_1::tipo1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">PIC_1::liquidacion1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">PIC_1::distrito1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">PIC_1::cope1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">PIC_1::Division1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">forma</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">PICTel</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">liquidacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">distrito</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">Division1_1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Union Cobre - Fibra</value>
+                <value>Busqueda Folios</value>
+                <value>No Factible</value>
+                <value>PIC</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Union Cobre - Fibra::Cope</tns:Column>
+<tns:Column>Union Cobre - Fibra::tecnico</tns:Column>
+<tns:Column>Union Cobre - Fibra::_id</tns:Column>
+<tns:Column>Union Cobre - Fibra::folio</tns:Column>
+<tns:Column>Union Cobre - Fibra::fecha</tns:Column>
+<tns:Column>Union Cobre - Fibra::telefono</tns:Column>
+<tns:Column>Union Cobre - Fibra::pdf</tns:Column>
+<tns:Column>Union Cobre - Fibra::tec</tns:Column>
+<tns:Column>Union Cobre - Fibra::metraje</tns:Column>
+<tns:Column>Union Cobre - Fibra::tarea</tns:Column>
+<tns:Column>Union Cobre - Fibra::clave</tns:Column>
+<tns:Column>Union Cobre - Fibra::Division</tns:Column>
+<tns:Column>Union Cobre - Fibra::Area</tns:Column>
+<tns:Column>Busqueda Folios::_id.folio</tns:Column>
+<tns:Column>No Factible::observaciones</tns:Column>
+<tns:Column>PIC::forma1</tns:Column>
+<tns:Column>PIC::telefono1</tns:Column>
+<tns:Column>PIC::tipo1</tns:Column>
+<tns:Column>PIC::liquidacion1</tns:Column>
+<tns:Column>PIC::distrito1</tns:Column>
+<tns:Column>PIC::cope1</tns:Column>
+<tns:Column>PIC::Division1</tns:Column>
+<tns:Column>PIC_1::forma1</tns:Column>
+<tns:Column>PIC_1::telefono1</tns:Column>
+<tns:Column>PIC_1::tipo1</tns:Column>
+<tns:Column>PIC_1::liquidacion1</tns:Column>
+<tns:Column>PIC_1::distrito1</tns:Column>
+<tns:Column>PIC_1::cope1</tns:Column>
+<tns:Column>PIC_1::Division1</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Union Cobre - Fibra"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Busqueda Folios"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
+<tns:rightColumn>Busqueda Folios::_id.os</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="2" name="No Factible"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
+<tns:rightColumn>No Factible::folio</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="3" name="PIC"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
+<tns:rightColumn>PIC::Folio</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="3" alias="PIC_1" name="PIC"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::telefono</tns:leftColumn>
+<tns:rightColumn>PIC_1::telefono1</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="580">
@@ -16979,7 +18093,7 @@ this.queryText = query;]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2020-03-11</value>
+                <value type="constant">2019-06-11</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -16994,7 +18108,7 @@ this.queryText = query;]]></method>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2020-03-25</value>
+                <value type="constant">2019-06-25</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

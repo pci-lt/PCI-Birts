@@ -1,0 +1,2477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>useKerberosAuthentication</name>
+                    <value>false</value>
+                </ex-property>
+                <ex-property>
+                    <name>gssJAASConfig</name>
+                </ex-property>
+                <ex-property>
+                    <name>krb5config</name>
+                </ex-property>
+                <ex-property>
+                    <name>gssapiServiceName</name>
+                </ex-property>
+                <ex-property>
+                    <name>kerberosPrincipal</name>
+                </ex-property>
+            </list-property>
+            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=120&amp;maxIdleTimeMS=120</property>
+            <property name="ignoreURI">false</property>
+            <property name="serverPort">27017</property>
+            <property name="socketKeepAlive">false</property>
+        </oda-data-source>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Infosync" id="585">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5434/infosync</property>
+            <property name="odaUser">infosync</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Nombres" id="426">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Usuario</property>
+                    <expression name="expression" type="javascript">var user =row["first_name"];&#13;
+&#13;
+user = user.toUpperCase();&#13;
+&#13;
+&#13;
+user;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Compañia</property>
+                    <expression name="expression" type="javascript">var nombre = row["first_name"]&#13;
+var empresa = "";&#13;
+if(nombre == "Alejandra Argueta")&#13;
+	empresa = "NH Redes S.A. de C.V."&#13;
+else if (nombre == "Armando Ortega" || nombre == "Juan José Salazar Martiñón")&#13;
+	empresa = "Aglaskhom Servicios S.A. de C.V."&#13;
+else if (nombre == "Beatriz Ruíz" || nombre == "Elibeth Mendez Alegria")&#13;
+	empresa = "Alta Tecnología en Telecomunicaciones Saturno S.A. de C.V."&#13;
+else if (nombre == "Emmanuel Aguilar Rios")&#13;
+	empresa = "Jorge Guerrero Lopez"&#13;
+else if (nombre == "Francisco Cesar Aguilar Muñoz")&#13;
+	empresa = "Santa Muñoz Hernandez"&#13;
+else if (nombre == "Jose Luis Canto Carrillo" || nombre == "Jose Luis Nuñez Sosa" || nombre == "Ruben Gemayel")&#13;
+	empresa = "Café Servicios Dinámicos del Sureste S.A. de C.V."&#13;
+else if (nombre == "Maria de los Angeles Romero Garcia")&#13;
+	empresa = "Instalaciones de Antenas y Redes Telefónicas"&#13;
+else if (nombre == "Felipe Sanchez")&#13;
+	empresa = "MBG Constructora S.A. de C.V."&#13;
+else if (nombre == "Olga Migdalia Garcia Peña")&#13;
+	empresa = "Sistelver S.A. de C.V."&#13;
+else if (nombre == "Fabio Leonardo Mendez Lopez" || nombre == "Jose Eutimio Perez Castillo" || nombre == "Juan Pablo Perez Damian" || nombre == "Lorenzo Ortiz Daza" || nombre == "Maria Concepcion Gonzalez Melchor" || nombre == "Oscar Rey Garciapiña Flores" || nombre == "Ramon Francisco Magaña Portilla" || nombre == "Juan Pablo Zagada" || nombre == "Aline Arlette Lozano" || nombre == "Blanca Nayeli Mujica Sarabia" || nombre == "Candido Herndan Hernández" || nombre == "Dante Ortiz Maldonado")&#13;
+	empresa = nombre;&#13;
+else if (nombre == "Fernando Espinoza Flores") {&#13;
+	empresa = "Adriana Morales Miranda";&#13;
+}&#13;
+else if (nombre == "Juan Jose Salazar") {&#13;
+	empresa = "Aglaskhom";&#13;
+}&#13;
+else if (nombre == "Juan Gomez Hernandez") {&#13;
+	empresa = "Alejandro Leal";&#13;
+}&#13;
+else if (nombre == "Nichdali Najera Peralta" || nombre == "Oralia Neri Valenzo") {&#13;
+	empresa = "Saturno Metro";&#13;
+}&#13;
+else if (nombre == "Paulina Rosas Soto") {&#13;
+	empresa = "Comunicación Digital Aries";&#13;
+}&#13;
+else if (nombre == "Zeidy Hernandez Vidal") {&#13;
+	empresa = "Erika Hernández Vidal";&#13;
+}&#13;
+else if (nombre == "Luis Enrique Barrera Espinosa") {&#13;
+	empresa = "Francisco Arturo Amezcua Espinosa";&#13;
+}&#13;
+else if (nombre == "Ana Cristina Peña Solorio"){&#13;
+	empresa = "Grupo Aledher"&#13;
+}&#13;
+else if (nombre == "Alejandro Ortega Zarate") {&#13;
+	empresa = "Grupo JHAS";&#13;
+}&#13;
+else if (nombre == "Jessica Vences Hernandez") {&#13;
+	empresa = "Grupo Viagus";&#13;
+}&#13;
+else if (nombre == "Jose Antonio Martinez Bahena") {&#13;
+	empresa = "IETT";&#13;
+}&#13;
+else if (nombre == "Miguel Cachoa Ocampo") {&#13;
+	empresa = "Leonor Ocampo Vargas";&#13;
+}&#13;
+else if (nombre == "Maricela Gomar Ocampo") {&#13;
+	empresa = nombre;&#13;
+}&#13;
+else if (nombre == "Adrian Cigala Esquivel") {&#13;
+	empresa = "P&amp;P";&#13;
+}&#13;
+else if (nombre == "Mario Humberto Ibañez Alba"){&#13;
+	empresa = "BRUSIM"&#13;
+}&#13;
+else if (nombre == "Víctor Hugo Rodríguez Perez") {&#13;
+	empresa = "Quetzal"&#13;
+}&#13;
+else if (nombre == "Omar Maldonado") {&#13;
+	empresa = "Rafael Ortíz Camarillos";&#13;
+}&#13;
+else if (nombre == "Alejandro Rocha Martinez") {&#13;
+	empresa = "Saira Denis Rodríguez";&#13;
+}&#13;
+else if (nombre == "Juan Carlos Solares Sandoval") {&#13;
+	empresa = "Sertel";&#13;
+}&#13;
+else if(nombre == "Juan Manuel Prieto Alvarez"){&#13;
+	empresa = "SIC";&#13;
+}&#13;
+else if (nombre == "Javier Castillo Pantoja") {&#13;
+	empresa = "Javier Alejandro Castillo Pantoja";&#13;
+}&#13;
+else if (nombre == "Candido Herdan Hernández") {&#13;
+	empresa = "Candido Hernández";&#13;
+}&#13;
+else if (nombre == "Gerardo Rivera Chavarria" || nombre == "Jose Angel Rivera Cruz" || nombre == "Raul Huerta Jimenez" || nombre == "Rosendo Anaya Luna" || nombre == "Victor Hugo  Lopez Garcia" || nombre == "Viridiana Castillo Marin" || nombre == "Yair Arellano Mastachi" ) {&#13;
+	empresa = nombre;&#13;
+}&#13;
+else if (nombre == null || nombre == "") {&#13;
+	empresa = "PC Industrial"&#13;
+}&#13;
+else if (nombre == "Maria Garcia Olvera") {&#13;
+	empresa = "Elisur";&#13;
+}&#13;
+else if (nombre == "Adolfo Torres Ocampo") {&#13;
+	empresa = "PANMAR"&#13;
+}&#13;
+else if (nombre == "Herdan") {&#13;
+	empresa = "Herdán S.A. de C.V."&#13;
+}&#13;
+else if (nombre == "Diana Lidia Reyes García") {&#13;
+	empresa = "ITESA"&#13;
+}&#13;
+else if (nombre == "Carlos Hernandez Garcia" || nombre == "Guadalupe Avalos Sánchez" || nombre == "Ernesto Ramirez Enriquez" || nombre == "Graciela Delgado Rivera" || nombre == "Humberto Nicolas Escobar" || nombre == "Jesus Antonio Zatarain Osuna" || nombre == "Jesus Mario Castro Young" || nombre == "Jesus Muñoz Ibarra" || nombre == "Oscar Armando Gastelum Romero") {&#13;
+	empresa = "AVASAN"&#13;
+}&#13;
+else if (nombre == "Luis Gerardo Rodriguez Lopez") {&#13;
+	empresa = "MAQTEL"&#13;
+}&#13;
+else if (nombre == "Blanca Saldaña Solares" || nombre == "Janet Gomez Marquez") {&#13;
+	empresa = "AMSITEL"&#13;
+}&#13;
+else if (nombre == "PCI Robot") {&#13;
+	empresa = "Contratista Indefinido"&#13;
+}&#13;
+&#13;
+else&#13;
+	empresa = nombre + "*";&#13;
+&#13;
+empresa</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <text-property name="heading">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">position</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">position</text-property>
+                    <text-property name="heading">position</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">email</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">email</text-property>
+                    <text-property name="heading">email</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">is_active</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">is_active</text-property>
+                    <text-property name="heading">is_active</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">deleted_at</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">deleted_at</text-property>
+                    <text-property name="heading">deleted_at</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Usuario</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Compañia</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">id</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">position</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">email</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">is_active</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">deleted_at</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Usuario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">Compañia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Infosync</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">first_name</property>
+                    <property name="nativeName">first_name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">position</property>
+                    <property name="nativeName">position</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">email</property>
+                    <property name="nativeName">email</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">is_active</property>
+                    <property name="nativeName">is_active</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">deleted_at</property>
+                    <property name="nativeName">deleted_at</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT "first_name", "id", "position", "email","is_active","deleted_at"
+    FROM "public"."users_customuser"
+  ]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
+&lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Nombres" version="1.0">&#13;
+&lt;SQLStatement>SELECT &amp;quot;first_name&amp;quot;, &amp;quot;id&amp;quot;, &amp;quot;position&amp;quot;, &amp;quot;email&amp;quot;&amp;#x0A;    FROM &amp;quot;public&amp;quot;.&amp;quot;users_customuser&amp;quot;&amp;#x0A;  &lt;/SQLStatement>&#13;
+&lt;connInfo>postgres_8.x:Transient.org.eclipse.datatools.enablement.postgresql.connectionProfile:infosync:infosync&lt;/connInfo>&#13;
+&lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
+&lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
+&lt;windowState height="530" version="1.0" width="1116">&#13;
+&lt;control height="139" isHideable="true" isVisible="true" name="SQLSourceViewer" width="1089"/>&#13;
+&lt;control height="187" isHideable="true" isVisible="true" name="DesignViewer" width="1102"/>&#13;
+&lt;control height="166" isHideable="true" isVisible="true" name="GraphControl" width="1094"/>&#13;
+&lt;control height="170" isHideable="true" isVisible="false" name="OutlineViewer" width="101"/>&#13;
+&lt;/windowState>&#13;
+&lt;/SQLQueryBuilder></property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>password</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>128</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>password</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>password</design:label>
+            <design:formattingHints>
+              <design:displaySize>128</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>last_login</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>last_login</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>last_login</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_superuser</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_superuser</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_superuser</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>username</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>75</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>username</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>username</design:label>
+            <design:formattingHints>
+              <design:displaySize>75</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>first_name</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>first_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>first_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>last_name</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>30</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>last_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>last_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>30</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>email</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>75</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>email</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>email</design:label>
+            <design:formattingHints>
+              <design:displaySize>75</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_staff</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_staff</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_staff</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_active</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_active</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_active</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_joined</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_joined</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_joined</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>deleted_at</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>deleted_at</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>deleted_at</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_at</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_at</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_at</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_at</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_at</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_at</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>profile_picture</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>profile_picture</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>profile_picture</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>thumb</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>thumb</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>thumb</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>phone</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>20</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>phone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>phone</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>position</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>100</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>position</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>position</design:label>
+            <design:formattingHints>
+              <design:displaySize>100</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>parent_id</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>parent_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>parent_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_by_id</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_by_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_by_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_by_id</design:name>
+              <design:position>21</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_by_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_by_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>last_logout</design:name>
+              <design:position>22</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>35</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>last_logout</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>last_logout</design:label>
+            <design:formattingHints>
+              <design:displaySize>35</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>is_online</design:name>
+              <design:position>23</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>is_online</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>is_online</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>lang</design:name>
+              <design:position>24</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>6</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>lang</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>lang</design:label>
+            <design:formattingHints>
+              <design:displaySize>6</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>social_email</design:name>
+              <design:position>25</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>254</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>social_email</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>social_email</design:label>
+            <design:formattingHints>
+              <design:displaySize>254</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>social_id</design:name>
+              <design:position>26</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>254</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>social_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>social_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>254</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>social_network</design:name>
+              <design:position>27</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>254</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>social_network</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>social_network</design:label>
+            <design:formattingHints>
+              <design:displaySize>254</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>timezone</design:name>
+              <design:position>28</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>254</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>timezone</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>timezone</design:label>
+            <design:formattingHints>
+              <design:displaySize>254</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>company_logo</design:name>
+              <design:position>29</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>company_logo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>company_logo</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria>
+        <design:rowOrdering/>
+      </design:criteria>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="OCCobre" id="9">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">var monto = row["Total"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">subtotal</property>
+                    <expression name="expression" type="javascript">var monto = row["Subtotal"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">descuento</property>
+                    <expression name="expression" type="javascript">var monto = row["Descuento"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">iva</property>
+                    <expression name="expression" type="javascript">var monto = row["Iva"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">retencion</property>
+                    <expression name="expression" type="javascript">var monto = row["Retencion"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">Division</property>
+                    <expression name="expression" type="javascript">var forma = row["forma"];&#13;
+var display = "";&#13;
+&#13;
+if(forma == 33658){&#13;
+	display = "Metro";&#13;
+}else if (forma == 45420){&#13;
+	display = "Sur";&#13;
+}else if (forma == 50779) {&#13;
+	display = "Norte"&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Descuento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Descuento</text-property>
+                    <text-property name="heading">Descuento</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Subtotal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Subtotal</text-property>
+                    <text-property name="heading">Subtotal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Iva</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Iva</text-property>
+                    <text-property name="heading">Iva</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Total</text-property>
+                    <text-property name="heading">Total</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">flag</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">flag</text-property>
+                    <text-property name="heading">flag</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Retencion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Retencion</text-property>
+                    <text-property name="heading">Retencion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m1</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m1</text-property>
+                    <text-property name="heading">m1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m2</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m2</text-property>
+                    <text-property name="heading">m2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m3</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m3</text-property>
+                    <text-property name="heading">m3</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m4</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m4</text-property>
+                    <text-property name="heading">m4</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m5</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m5</text-property>
+                    <text-property name="heading">m5</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m6</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m6</text-property>
+                    <text-property name="heading">m6</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m7</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m7</text-property>
+                    <text-property name="heading">m7</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m8</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m8</text-property>
+                    <text-property name="heading">m8</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m9</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m9</text-property>
+                    <text-property name="heading">m9</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m10</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m10</text-property>
+                    <text-property name="heading">m10</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m11</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m11</text-property>
+                    <text-property name="heading">m11</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m12</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m12</text-property>
+                    <text-property name="heading">m12</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m13</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m13</text-property>
+                    <text-property name="heading">m13</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m14</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m14</text-property>
+                    <text-property name="heading">m14</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m15</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m15</text-property>
+                    <text-property name="heading">m15</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m16</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m16</text-property>
+                    <text-property name="heading">m16</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m17</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m17</text-property>
+                    <text-property name="heading">m17</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m18</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m18</text-property>
+                    <text-property name="heading">m18</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m19</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m19</text-property>
+                    <text-property name="heading">m19</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m20</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m20</text-property>
+                    <text-property name="heading">m20</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m21</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m21</text-property>
+                    <text-property name="heading">m21</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m22</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m22</text-property>
+                    <text-property name="heading">m22</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m23</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m23</text-property>
+                    <text-property name="heading">m23</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m24</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m24</text-property>
+                    <text-property name="heading">m24</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m25</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m25</text-property>
+                    <text-property name="heading">m25</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">m26</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">m26</text-property>
+                    <text-property name="heading">m26</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total_os</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total_os</text-property>
+                    <text-property name="heading">total_os</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">os</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">os</text-property>
+                    <text-property name="heading">os</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tipo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tipo</text-property>
+                    <text-property name="heading">tipo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">forma</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">forma</text-property>
+                    <text-property name="heading">forma</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subtotal</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">descuento</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">iva</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">retencion</property>
+                    <property name="analysis">measure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Descuento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">Subtotal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">Iva</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">Total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">flag</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Retencion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">m1</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">m2</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">m3</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">m4</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">m5</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">m6</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">m7</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">m8</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">m9</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">m10</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">m11</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">m12</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">m13</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">m14</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">m15</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">m16</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">m17</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">m18</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">m19</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">m20</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">m21</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">m22</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">m23</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">m24</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">m25</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">m26</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">total_os</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">os</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">forma</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">descuento</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">iva</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">retencion</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">Division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var date_one = params["Fecha Inicial"].value;
+var date_two = params["Fecha Final"].value;
+var estatus = params["Estatus"].value;
+var bookmark = "{$exists:false},";
+var bookmark2 = "form_id:{$in: [33658]},";
+var new_query = "";
+var new_query2 = "";
+var division = params["Division"].value;
+
+var hasta = date_two
+hasta = BirtDateTime.addDay(hasta, 1);
+var dia = BirtDateTime.day(hasta);
+var month = BirtDateTime.month(hasta);
+if(dia < 10)
+	dia = '0' + dia;
+if(month<10)
+	month = '0' + month
+hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
+	
+new_query = "created_at: {$gte: {$date:'" + date_one + "T07:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";
+
+
+
+if (estatus == "pagada") {
+	new_query = new_query + "'answers.f19620000000000000000fc5': 'pagada',";
+}else if (estatus == "no_pagada") {
+	new_query = new_query + "'answers.f19620000000000000000fc5': {$in:['error_de_factura','factura_valida','validar_factura','por_facturar']},";
+}else if (estatus == "todas") {
+	new_query = new_query + "";
+}
+
+	
+
+
+if (division == "metro") {
+	new_query2 = bookmark2;
+}else if (division == "sur") {
+	new_query2 = "form_id:{$in: [45420]},";
+}else if (division == "norte") {
+	new_query2 = "form_id:{$in: [50779]},";
+}else if (division == "todas") {
+	new_query2 = "form_id:{$in: [50779,33658,45420]},";
+}
+
+query = query.replace(bookmark2, new_query2 );
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Descuento</property>
+                    <property name="nativeName">Descuento</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Subtotal</property>
+                    <property name="nativeName">Subtotal</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">Iva</property>
+                    <property name="nativeName">Iva</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">Total</property>
+                    <property name="nativeName">Total</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">flag</property>
+                    <property name="nativeName">flag</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Retencion</property>
+                    <property name="nativeName">Retencion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">m1</property>
+                    <property name="nativeName">m1</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">m2</property>
+                    <property name="nativeName">m2</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">m3</property>
+                    <property name="nativeName">m3</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">m4</property>
+                    <property name="nativeName">m4</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">m5</property>
+                    <property name="nativeName">m5</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">m6</property>
+                    <property name="nativeName">m6</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">m7</property>
+                    <property name="nativeName">m7</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">m8</property>
+                    <property name="nativeName">m8</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">m9</property>
+                    <property name="nativeName">m9</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">m10</property>
+                    <property name="nativeName">m10</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">m11</property>
+                    <property name="nativeName">m11</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">m12</property>
+                    <property name="nativeName">m12</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">m13</property>
+                    <property name="nativeName">m13</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">m14</property>
+                    <property name="nativeName">m14</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">m15</property>
+                    <property name="nativeName">m15</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">m16</property>
+                    <property name="nativeName">m16</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">m17</property>
+                    <property name="nativeName">m17</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">m18</property>
+                    <property name="nativeName">m18</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">m19</property>
+                    <property name="nativeName">m19</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">m20</property>
+                    <property name="nativeName">m20</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">m21</property>
+                    <property name="nativeName">m21</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">m22</property>
+                    <property name="nativeName">m22</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">m23</property>
+                    <property name="nativeName">m23</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">m24</property>
+                    <property name="nativeName">m24</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">m25</property>
+                    <property name="nativeName">m25</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">m26</property>
+                    <property name="nativeName">m26</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">total_os</property>
+                    <property name="nativeName">total_os</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">os</property>
+                    <property name="nativeName">os</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">tipo</property>
+                    <property name="nativeName">tipo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">40</property>
+                    <property name="name">forma</property>
+                    <property name="nativeName">forma</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [33658]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$unwind: '$answers.f1962000000000000000fc10'},\r\n\r\n{$project:{\r\n\tforma: '$form_id',\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tDescuento: '$answers.f19620000000000000000f7c',\r\n\tSubtotal: '$answers.f19620000000000000000f7a',\r\n\tIva: '$answers.f19620000000000000000f7b',\r\n\tRetencion: {$ifNull:['$answers.5e5573fd8dd3fc39682c5fc1','0']},\r\n\tTotal: '$answers.f19620000000000000000fc7',\r\n\testatus: '$answers.f19620000000000000000fc5',\r\n\tflag: '$answers.5c7eee84f851c24c2864910a',\r\n\r\n\r\n\tos: '$answers.f1962000000000000000fc10.f19620000000000000001fc1',\r\n\ttipo: '$answers.f1962000000000000000fc10.f19620000000000000001fc4',\r\n\r\n\tm1: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986e',0]},\r\n\tm2: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986f',0]},\r\n\tm3: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99870',0]},\r\n\tm4:{$ifNull:[ '$answers.f1962000000000000000fc10.5c647760d5351b000dc99871',0]},\r\n\tm5: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99872',0]},\r\n\tm6: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99873',0]},\r\n\tm7: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99874',0]},\r\n\tm8: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99875',0]},\r\n\tm9: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99876',0.0]},\r\n\tm10: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99877',0]},\r\n\tm11: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99878',0]},\r\n\tm12: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99879',0]},\r\n\tm13: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987a',0]},\r\n\tm14: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987b',0]},\r\n\tm15: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987c',0]},\r\n\tm16: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987d',0]},\r\n\tm17: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987e',0]},\r\n\tm18: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987f',0]},\r\n\tm19:{$ifNull:[ '$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a23',0]},\r\n\tm20: {$ifNull:['$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a24',0]},\r\n\r\n\tm21: {$ifNull:['$answers.f1962000000000000000fc10.5d65a612bf3877964df708a6',0.0]},\r\n\tm22: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba6',0.0]},\r\n\tm23: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba7',0.0]},\r\n\tm24: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba8',0.0]},\r\n\tm25: {$ifNull:['$answers.f1962000000000000000fc10.5d6098b1fb82c7aaffaecbd8',0.0]},\r\n\tm26: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba9',0.0]},\r\n\t\r\n\r\n\t\r\n\ttotal_os:{$ifNull:['$answers.f1962000000000000000fc10.f1962000000000000001fc10',0]},\r\n\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "conexion" , "Descuento" , "Subtotal" , "Iva" , "Total" , "estatus" , "flag" , "Retencion" , "m1" , "m2" , "m3" , "m4" , "m5" , "m6" , "m7" , "m8" , "m9" , "m10" , "m11" , "m12" , "m13" , "m14" , "m15" , "m16" , "m17" , "m18" , "m19" , "m20" , "m21" , "m22" , "m23" , "m24" , "m25" , "m26" , "total_os" , "os" , "tipo" , "forma"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>conexion</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>conexion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>conexion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Descuento</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Descuento</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Descuento</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Subtotal</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Subtotal</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Subtotal</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Iva</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Iva</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Iva</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>Total</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>Total</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>Total</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>estatus</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>estatus</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>estatus</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>flag</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>flag</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>flag</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>rz</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>rz</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>rz</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join OCCobre - Nombres" id="586">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">flag</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">m1</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">m2</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">m3</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">m4</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">m5</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">m6</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">m7</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">m8</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">m9</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">m10</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">m11</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">m12</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">m13</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">m14</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">m15</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">m16</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">m17</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">m18</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">m19</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">m20</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">m21</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">m22</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">m23</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">m24</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">m25</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">m26</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">total_os</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">os</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">descuento</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">iva</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">retencion</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">Division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>OCCobre</value>
+                <value>Nombres</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>OCCobre::folio</tns:Column>
+<tns:Column>OCCobre::estatus</tns:Column>
+<tns:Column>OCCobre::flag</tns:Column>
+<tns:Column>OCCobre::m1</tns:Column>
+<tns:Column>OCCobre::m2</tns:Column>
+<tns:Column>OCCobre::m3</tns:Column>
+<tns:Column>OCCobre::m4</tns:Column>
+<tns:Column>OCCobre::m5</tns:Column>
+<tns:Column>OCCobre::m6</tns:Column>
+<tns:Column>OCCobre::m7</tns:Column>
+<tns:Column>OCCobre::m8</tns:Column>
+<tns:Column>OCCobre::m9</tns:Column>
+<tns:Column>OCCobre::m10</tns:Column>
+<tns:Column>OCCobre::m11</tns:Column>
+<tns:Column>OCCobre::m12</tns:Column>
+<tns:Column>OCCobre::m13</tns:Column>
+<tns:Column>OCCobre::m14</tns:Column>
+<tns:Column>OCCobre::m15</tns:Column>
+<tns:Column>OCCobre::m16</tns:Column>
+<tns:Column>OCCobre::m17</tns:Column>
+<tns:Column>OCCobre::m18</tns:Column>
+<tns:Column>OCCobre::m19</tns:Column>
+<tns:Column>OCCobre::m20</tns:Column>
+<tns:Column>OCCobre::m21</tns:Column>
+<tns:Column>OCCobre::m22</tns:Column>
+<tns:Column>OCCobre::m23</tns:Column>
+<tns:Column>OCCobre::m24</tns:Column>
+<tns:Column>OCCobre::m25</tns:Column>
+<tns:Column>OCCobre::m26</tns:Column>
+<tns:Column>OCCobre::total_os</tns:Column>
+<tns:Column>OCCobre::os</tns:Column>
+<tns:Column>OCCobre::tipo</tns:Column>
+<tns:Column>OCCobre::total</tns:Column>
+<tns:Column>OCCobre::subtotal</tns:Column>
+<tns:Column>OCCobre::descuento</tns:Column>
+<tns:Column>OCCobre::iva</tns:Column>
+<tns:Column>OCCobre::retencion</tns:Column>
+<tns:Column>OCCobre::Division</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="OCCobre"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>OCCobre::conexion</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
+    </data-sets>
+    <parameters>
+        <scalar-parameter name="Fecha Inicial" id="5">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2020-04-01</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="6">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2020-04-09</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Division" id="7">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Estatus" id="8">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">pagada</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+</datamart>

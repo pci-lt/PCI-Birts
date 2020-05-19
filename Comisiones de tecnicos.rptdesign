@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -127,6 +127,23 @@ if(url != null &amp;&amp; url != ""){&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Periodo</property>
+                    <expression name="expression" type="javascript">var liquidacion = row["fecha"];&#13;
+var parametro = params["Fecha Inicial"].value;&#13;
+var display = "";&#13;
+&#13;
+var diffDay = BirtDateTime.diffDay(parametro,liquidacion);&#13;
+&#13;
+if (diffDay >= 0 ) {&#13;
+	display = "Dentro";&#13;
+}else {&#13;
+	display = "Fuera";&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -149,6 +166,10 @@ display;</expression>
                 </structure>
                 <structure>
                     <property name="columnName">PDF</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Periodo</property>
                     <property name="analysis">dimension</property>
                 </structure>
             </list-property>
@@ -232,6 +253,11 @@ display;</expression>
                     <structure>
                         <property name="position">16</property>
                         <property name="name">PDF</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">Periodo</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -493,7 +519,7 @@ display;</expression>
                     <property name="name">A pagar</property>
                     <text-property name="displayName">AP</text-property>
                     <expression name="expression" type="javascript">var group = dataSetRow["Grupo"];&#13;
-var cantidad = row["Suma Cantidad Tecnico"];&#13;
+var cantidad = row["Suma Cantidad Tecnico"] - row["Count Fuera de Periodo"];&#13;
 var display = 0;&#13;
 &#13;
 if(group == "Producción 1" || group == "Producción 2" || group == "Producción 3" || group == "Grupo no identificado"){&#13;
@@ -525,6 +551,7 @@ display;</expression>
                             <expression name="value" type="javascript">row["_id"]</expression>
                         </structure>
                     </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Periodo"] == "Dentro"</expression>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
@@ -540,6 +567,8 @@ var fecha1 = dataSetRow["fecha"];&#13;
 var fecha2 = new Date("2018/08/27");&#13;
 var fecha3 = new Date("2018/09/24");&#13;
 var fecha4 = new Date("2018/11/25");&#13;
+var fecha5 = new Date("2020/03/26");&#13;
+var diff4 = BirtDateTime.diffDay(fecha1, fecha5);&#13;
 var diff3 = BirtDateTime.diffDay(fecha1, fecha4);&#13;
 var diff2 = BirtDateTime.diffDay(fecha1, fecha3);&#13;
 var diff = BirtDateTime.diffDay(fecha1, fecha2);&#13;
@@ -598,6 +627,18 @@ else if(diff &lt;= 0){&#13;
 }&#13;
 &#13;
 if(diff3 &lt;=0 &amp;&amp; nombre == "HECTOR FERNANDO ARISTIGUE RIVERA"){&#13;
+	if (payment == "Cobre") {&#13;
+		display = 200.00;&#13;
+	}&#13;
+	else if (payment == "Fibra") {&#13;
+		display = 500.00;&#13;
+	}&#13;
+	else if (payment == "Migraciones") {&#13;
+		display = 200.00;&#13;
+	}&#13;
+}&#13;
+&#13;
+if(diff4 &lt;=0 &amp;&amp; nombre == "RAYNIER RODRIGUEZ DEULOFEU"){&#13;
 	if (payment == "Cobre") {&#13;
 		display = 200.00;&#13;
 	}&#13;
@@ -750,6 +791,29 @@ display;</expression>
                     </list-property>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Periodo</property>
+                    <text-property name="displayName">Periodo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Periodo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Count Fuera de Periodo</property>
+                    <text-property name="displayName">CFP</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Tecnico</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["folio"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">row["Periodo"] == "Fuera"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">-727379968</property>
             <list-property name="sort">
@@ -767,6 +831,7 @@ display;</expression>
             <column id="135"/>
             <column id="143"/>
             <column id="42"/>
+            <column id="174"/>
             <column id="119"/>
             <column id="73"/>
             <column id="43"/>
@@ -858,7 +923,18 @@ display;</expression>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                         <label id="21">
-                            <text-property name="text">Producción del periodo</text-property>
+                            <text-property name="text">Producción reportada en el periodo</text-property>
+                        </label>
+                    </cell>
+                    <cell id="170">
+                        <property name="backgroundColor">#7986CB</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="175">
+                            <text-property name="text">Producción fuera del periodo</text-property>
                         </label>
                     </cell>
                     <cell id="114">
@@ -970,6 +1046,16 @@ display;</expression>
                             <data id="75">
                                 <property name="textAlign">center</property>
                                 <property name="resultSetColumn">Suma Cantidad Tecnico</property>
+                            </data>
+                        </cell>
+                        <cell id="171">
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="177">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Count Fuera de Periodo</property>
                             </data>
                         </cell>
                         <cell id="116">
@@ -1111,6 +1197,16 @@ display;</expression>
                             <property name="resultSetColumn">Estatus</property>
                         </data>
                     </cell>
+                    <cell id="172">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="176">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Periodo</property>
+                        </data>
+                    </cell>
                     <cell id="117">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
@@ -1180,7 +1276,7 @@ display;</expression>
             <footer>
                 <row id="35">
                     <cell id="164">
-                        <property name="colSpan">10</property>
+                        <property name="colSpan">11</property>
                         <property name="rowSpan">1</property>
                         <property name="backgroundColor">#7986CB</property>
                         <property name="color">#FFFFFF</property>
