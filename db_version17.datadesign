@@ -21,7 +21,7 @@
                     <name>kerberosPrincipal</name>
                 </ex-property>
             </list-property>
-            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=120&amp;maxIdleTimeMS=120</property>
+            <property name="mongoURI">mongodb://db2.linkaform.com:27017,db3.linkaform.com:27017,db4.linkaform.com:27017/infosync_answers_client_1259?maxPoolSize=1000&amp;maxIdleTimeMS=120</property>
             <property name="ignoreURI">false</property>
             <property name="serverPort">27017</property>
             <property name="socketKeepAlive">false</property>
@@ -3965,6 +3965,7 @@ var tk = 0;&#13;
 var fc = 0;&#13;
 var voz = 0;&#13;
 var ts = 0;&#13;
+var tn = 99;&#13;
 var tecnologia = "Fibra";&#13;
 &#13;
 if(tarea != null){&#13;
@@ -3972,6 +3973,7 @@ if(tarea != null){&#13;
 	fc = tarea.indexOf("FC");&#13;
 	voz = tarea.indexOf("VOZ");&#13;
 	ts = tarea.indexOf("TS");&#13;
+	tn = tarea.indexOf("TN");&#13;
 }&#13;
 &#13;
 if (voz != -1) {&#13;
@@ -3979,6 +3981,9 @@ if (voz != -1) {&#13;
 }&#13;
 else if (tk != -1 || fc != -1 || ts != -1) {&#13;
 	display = "Migraciones";&#13;
+}&#13;
+else if (tn != -1 &amp;&amp; tn == 0) {&#13;
+	display = "TN";&#13;
 }&#13;
 else{&#13;
 	display = tecnologia;&#13;
@@ -4371,7 +4376,7 @@ this.queryText = query;]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,1698,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: {$ifNull:['$answers.f1054000a0100000000000c2','']},\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5a8aefa7b43fdd100602f7be.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha" , "created" , "cope" , "clave" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,1698,2727,1929,7765]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tsubdireccion: {$ifNull:['$answers.f1054000a0100000000000c2','']},\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5a8aefa7b43fdd100602f7be.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "tarea" , "area" , "subdireccion" , "estatus" , "fecha" , "created" , "cope" , "clave" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -4525,6 +4530,7 @@ var tk = 0;&#13;
 var fc = 0;&#13;
 var voz = 0;&#13;
 var ts = 0;&#13;
+var tn = 99;&#13;
 var tecnologia = "Cobre";&#13;
 &#13;
 if(tarea != null){&#13;
@@ -4532,6 +4538,7 @@ if(tarea != null){&#13;
 	fc = tarea.indexOf("FC");&#13;
 	voz = tarea.indexOf("VOZ");&#13;
 	ts = tarea.indexOf("TS");&#13;
+	tn = tarea.indexOf("TN");&#13;
 }&#13;
 &#13;
 if (voz != -1) {&#13;
@@ -4539,6 +4546,8 @@ if (voz != -1) {&#13;
 }&#13;
 else if (tk != -1 || fc != -1 || ts != -1) {&#13;
 	display = "Migraciones";&#13;
+}else if (tn != -1 &amp;&amp; tn == 0) {&#13;
+	display = "TN";&#13;
 }&#13;
 else{&#13;
 	display = tecnologia;&#13;
@@ -4932,7 +4941,7 @@ this.queryText = query;]]></method>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,1698,2073,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "clave" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha" , "created" , "cope" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,1698,2727,1929,7765]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tsubdireccion: '$answers.f1054000a0100000000000c2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\testatus: '$answers.f1054000a030000000000012',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tpdf: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url','']},\r\n\tclave: { $ifNull: ['$answers.f1054000a02000000000fb04','Sin clave']},\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "clave" , "tecnico" , "tarea" , "subdireccion" , "area" , "estatus" , "fecha" , "created" , "cope" , "pdf"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>

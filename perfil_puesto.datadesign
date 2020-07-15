@@ -1409,6 +1409,11 @@ display = display.charAt(0).toLowerCase() + display.slice(1);&#13;
 display;</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">empleado</property>
+                    <expression name="expression" type="javascript">row["numero"].toString();</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
                 <structure>
@@ -1432,15 +1437,44 @@ display;</expression>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">puesto2</text-property>
                     <text-property name="heading">puesto2</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">id_pp</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">id_pp</text-property>
                     <text-property name="heading">id_pp</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">numero</text-property>
+                    <text-property name="heading">numero</text-property>
+                    <property name="horizontalAlign">right</property>
+                    <structure name="valueFormat">
+                        <property name="category">&lt;</property>
+                        <property name="pattern">&lt;</property>
+                    </structure>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">id_pclink</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">id_pclink</text-property>
+                    <text-property name="heading">id_pclink</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">empleado</property>
                     <property name="analysis">dimension</property>
                 </structure>
             </list-property>
@@ -1469,7 +1503,22 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">5</property>
+                        <property name="name">numero</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">id_pclink</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
                         <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">empleado</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -1526,8 +1575,22 @@ this.queryText = query;
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">numero</property>
+                    <property name="nativeName">numero</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">id_pclink</property>
+                    <property name="nativeName">id_pclink</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: 46429,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$unwind:'$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8'},\r\n\r\n{$project:{\r\n\t\r\n\tpuesto2: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tnombre: '$answers.5d5ec9a7c82d82ff8dbb41a7',\r\n\tfoto: '$answers.5d696d76bd9a26806240b62d.file_url',\r\n\tid_pp: '$answers.5eb71e8ca97bc2eb4f0e1ef8',\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "nombre" , "foto" , "puesto2" , "id_pp"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: 46429,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$unwind:'$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8'},\r\n\r\n{$project:{\r\n\t\r\n\tpuesto2: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tnombre: '$answers.5d5ec9a7c82d82ff8dbb41a7',\r\n\tfoto: '$answers.5d696d76bd9a26806240b62d.file_url',\r\n\tid_pp: '$answers.5eb71e8ca97bc2eb4f0e1ef8',\r\n\tnumero: '$answers.5d5ecf3f32bda676d5659787',\r\n\tid_pclink: {$ifNull:['$answers.5dd428f545b0dfa6321f3e89','']},\r\n\t\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "nombre" , "foto" , "puesto2" , "id_pp" , "numero" , "id_pclink"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -2469,6 +2532,12 @@ this.queryText = query;
                     <text-property name="displayName">nombre</text-property>
                     <text-property name="heading">nombre</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <text-property name="heading">numero</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -2516,6 +2585,11 @@ this.queryText = query;
                     <structure>
                         <property name="position">9</property>
                         <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">numero</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -2585,8 +2659,15 @@ this.queryText = query;
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">numero</property>
+                    <property name="nativeName">numero</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: 55000,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$unwind: '$answers.5ea0330b63ab596c77d83c1d'},\r\n\r\n{$project:{\r\n\t\r\n\tnombre: '$answers.5dba2795ac27375ae119d631.5dba2df56d6ac8715139e9f9',\r\n\tobjetivo: '$answers.5ea0330b63ab596c77d83c1d.5ea034bc6d8356850c0ce290',\r\n\tunidad: '$answers.5ea0330b63ab596c77d83c1d.5ea034bc6d8356850c0ce291',\r\n\tpuesto:'$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tfecha: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea107941c53008e6f9e1096','']},\r\n\thora: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea107941c53008e6f9e1097','']},\r\n\tcien: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8d',0]},\r\n\tnoventa: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8e',0]},\r\n\tochenta: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8f',0]},\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "objetivo" , "unidad" , "puesto" , "fecha" , "hora" , "cien" , "noventa" , "ochenta" , "nombre"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: 55000,\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n\r\n{$unwind: '$answers.5ea0330b63ab596c77d83c1d'},\r\n\r\n{$project:{\r\n\t\r\n\tnumero: '$answers.5dba2795ac27375ae119d631.5dba2795ac27375ae119d632',\r\n\tnombre: '$answers.5dba2795ac27375ae119d631.5dba2df56d6ac8715139e9f9',\r\n\tobjetivo: '$answers.5ea0330b63ab596c77d83c1d.5ea034bc6d8356850c0ce290',\r\n\tunidad: '$answers.5ea0330b63ab596c77d83c1d.5ea034bc6d8356850c0ce291',\r\n\tpuesto:'$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tfecha: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea107941c53008e6f9e1096','']},\r\n\thora: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea107941c53008e6f9e1097','']},\r\n\tcien: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8d',0]},\r\n\tnoventa: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8e',0]},\r\n\tochenta: {$ifNull:['$answers.5ea0330b63ab596c77d83c1d.5ea1042948f2f24e04fc8e8f',0]},\r\n\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "objetivo" , "unidad" , "puesto" , "fecha" , "hora" , "cien" , "noventa" , "ochenta" , "nombre" , "numero"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -2645,99 +2726,6 @@ this.queryText = query;
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join objetivos - Plantilla" id="618">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">objetivo</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">objetivo</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">unidad</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">unidad</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">puesto</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">objetivo</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">unidad</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">fecha</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">hora</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">cien</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">noventa</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">ochenta</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <simple-property-list name="inputDataSets">
-                <value>Plantilla</value>
-                <value>Objetivos 2</value>
-            </simple-property-list>
-            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
-<tns:selectColumns>
-<tns:Column>Plantilla::puesto</tns:Column>
-<tns:Column>Objetivos 2::objetivo</tns:Column>
-<tns:Column>Objetivos 2::unidad</tns:Column>
-<tns:Column>Objetivos 2::fecha</tns:Column>
-<tns:Column>Objetivos 2::hora</tns:Column>
-<tns:Column>Objetivos 2::cien</tns:Column>
-<tns:Column>Objetivos 2::noventa</tns:Column>
-<tns:Column>Objetivos 2::ochenta</tns:Column>
-</tns:selectColumns>
-<tns:joins>
-<tns:startingDataSet Index="0" name="Plantilla"/>
-<tns:join>
-<tns:type>leftOuter</tns:type>
-<tns:dataSet Index="1" name="Objetivos 2"/>
-<tns:on>
-<tns:condition>
-<tns:leftColumn>Plantilla::nombre</tns:leftColumn>
-<tns:rightColumn>Objetivos 2::nombre</tns:rightColumn>
-<tns:operator>eq</tns:operator>
-</tns:condition>
-</tns:on>
-</tns:join>
-</tns:joins>
-</tns:joinedDataSet>]]></xml-property>
-        </derived-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos general" id="651">
             <list-property name="computedColumns">
                 <structure>
@@ -3212,118 +3200,6 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Objetivos - General" id="685">
-            <property name="isVisible">true</property>
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">objetivo</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">objetivo</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-            </list-property>
-            <list-property name="filter"/>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">month</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">year</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">calificador</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">objetivo</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">area</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
-                        <property name="name">departamento</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
-                        <property name="name">puesto</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
-                        <property name="name">medida</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">responsable</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
-                        <property name="name">gerencia</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
-                        <property name="name">Resultado</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">12</property>
-                        <property name="name">nombre</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <simple-property-list name="inputDataSets">
-                <value>Objetivos Final 2</value>
-                <value>Plantilla</value>
-            </simple-property-list>
-            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
-<tns:selectColumns>
-<tns:Column>Objetivos Final 2::month</tns:Column>
-<tns:Column>Objetivos Final 2::year</tns:Column>
-<tns:Column>Objetivos Final 2::calificador</tns:Column>
-<tns:Column>Objetivos Final 2::objetivo</tns:Column>
-<tns:Column>Objetivos Final 2::area</tns:Column>
-<tns:Column>Objetivos Final 2::departamento</tns:Column>
-<tns:Column>Objetivos Final 2::puesto</tns:Column>
-<tns:Column>Objetivos Final 2::medida</tns:Column>
-<tns:Column>Objetivos Final 2::responsable</tns:Column>
-<tns:Column>Objetivos Final 2::gerencia</tns:Column>
-<tns:Column>Objetivos Final 2::Resultado</tns:Column>
-<tns:Column>Plantilla::nombre</tns:Column>
-</tns:selectColumns>
-<tns:joins>
-<tns:startingDataSet Index="0" name="Objetivos Final 2"/>
-<tns:join>
-<tns:type>rightOuter</tns:type>
-<tns:dataSet Index="1" name="Plantilla"/>
-<tns:on>
-<tns:condition>
-<tns:leftColumn>Objetivos Final 2::nombre</tns:leftColumn>
-<tns:rightColumn>Plantilla::nombre</tns:rightColumn>
-<tns:operator>eq</tns:operator>
-</tns:condition>
-</tns:on>
-</tns:join>
-</tns:joins>
-</tns:joinedDataSet>]]></xml-property>
-        </derived-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2" id="689">
             <list-property name="computedColumns">
                 <structure>
@@ -3352,16 +3228,13 @@ if(display == NaN || display == "NaN")&#13;
 display;</expression>
                     <property name="dataType">float</property>
                 </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">row["mes"]-1</expression>
+                    <property name="dataType">integer</property>
+                </structure>
             </list-property>
             <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">month</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">month</text-property>
-                    <text-property name="heading">month</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
                 <structure>
                     <property name="columnName">year</property>
                     <property name="analysis">measure</property>
@@ -3447,10 +3320,20 @@ display;</expression>
                     <text-property name="heading">nombre</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">mes</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mes</text-property>
+                    <text-property name="heading">mes</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Resultado</property>
                     <property name="analysis">measure</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
                 </structure>
             </list-property>
             <list-property name="parameters"/>
@@ -3458,68 +3341,73 @@ display;</expression>
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">month</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
                         <property name="name">year</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">3</property>
+                        <property name="position">2</property>
                         <property name="name">calificador</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">3</property>
                         <property name="name">objetivo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">4</property>
                         <property name="name">area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">5</property>
                         <property name="name">departamento</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">6</property>
                         <property name="name">puesto</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">7</property>
                         <property name="name">medida</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">8</property>
                         <property name="name">responsable</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">9</property>
                         <property name="name">gerencia</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">10</property>
                         <property name="name">numero</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">11</property>
                         <property name="name">nombre</property>
                         <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">13</property>
                         <property name="name">Resultado</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
                     </structure>
                 </list-property>
             </structure>
@@ -3527,90 +3415,90 @@ display;</expression>
             <list-property name="resultSet">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">month</property>
-                    <property name="nativeName">month</property>
-                    <property name="dataType">integer</property>
-                    <property name="nativeDataType">16</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
                     <property name="name">year</property>
                     <property name="nativeName">year</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                     <property name="name">calificador</property>
                     <property name="nativeName">calificador</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">3</property>
                     <property name="name">objetivo</property>
                     <property name="nativeName">objetivo</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">4</property>
                     <property name="name">area</property>
                     <property name="nativeName">area</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">5</property>
                     <property name="name">departamento</property>
                     <property name="nativeName">departamento</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">6</property>
                     <property name="name">puesto</property>
                     <property name="nativeName">puesto</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">7</property>
                     <property name="name">medida</property>
                     <property name="nativeName">medida</property>
                     <property name="dataType">integer</property>
                     <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">8</property>
                     <property name="name">responsable</property>
                     <property name="nativeName">responsable</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">10</property>
                 </structure>
                 <structure>
-                    <property name="position">10</property>
+                    <property name="position">9</property>
                     <property name="name">gerencia</property>
                     <property name="nativeName">gerencia</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">10</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">10</property>
                     <property name="name">numero</property>
                     <property name="nativeName">numero</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">11</property>
                     <property name="name">nombre</property>
                     <property name="nativeName">nombre</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmonth: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "month" , "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-06-01T07:00:00Z'} , $lt:{$date:'2020-06-14T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -3837,6 +3725,2266 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2 Abril" id="692">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Resultado</property>
+                    <expression name="expression" type="javascript">var calif = row["calificador"];&#13;
+var medida = row["medida"];&#13;
+var display = 0;&#13;
+&#13;
+if (calif == "100%") {&#13;
+	calif = 1;&#13;
+}else if (calif == "90%") {&#13;
+	calif = .9;&#13;
+}else if (calif == "80%") {&#13;
+	calif = .8;&#13;
+}else if (calif == "0%") {&#13;
+	calif = 0;&#13;
+}&#13;
+if(calif == 0)&#13;
+	display = 0;&#13;
+else&#13;
+	display = (medida*calif)/100;&#13;
+	&#13;
+if(display == NaN || display == "NaN")&#13;
+	display = 0;&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">row["mes"]-1</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">year</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">year</text-property>
+                    <text-property name="heading">year</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">calificador</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <text-property name="heading">calificador</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">objetivo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <text-property name="heading">objetivo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <text-property name="heading">departamento</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <text-property name="heading">puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">medida</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">medida</text-property>
+                    <text-property name="heading">medida</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">responsable</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">responsable</text-property>
+                    <text-property name="heading">responsable</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">gerencia</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">gerencia</text-property>
+                    <text-property name="heading">gerencia</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <text-property name="heading">numero</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <text-property name="heading">nombre</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mes</text-property>
+                    <text-property name="heading">mes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Resultado</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">calificador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">medida</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">responsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">gerencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">numero</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Resultado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">year</property>
+                    <property name="nativeName">year</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">calificador</property>
+                    <property name="nativeName">calificador</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">objetivo</property>
+                    <property name="nativeName">objetivo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">departamento</property>
+                    <property name="nativeName">departamento</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">puesto</property>
+                    <property name="nativeName">puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">medida</property>
+                    <property name="nativeName">medida</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">responsable</property>
+                    <property name="nativeName">responsable</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">10</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">gerencia</property>
+                    <property name="nativeName">gerencia</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">10</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">numero</property>
+                    <property name="nativeName">numero</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">nombre</property>
+                    <property name="nativeName">nombre</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-05-01T07:00:00Z'} , $lt:{$date:'2020-06-01T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "nearest" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>calificador</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>calificador</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>calificador</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>month</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>month</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>month</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>year</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>year</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>year</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>objetivo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>objetivo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>objetivo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>area</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>area</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>puesto</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>medida</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>medida</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>medida</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>responsable</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>responsable</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>responsable</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gerencia</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gerencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gerencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Junio" id="694">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">Resultado</property>
+                    <expression name="expression" type="javascript">var calif = row["calificador"];&#13;
+var medida = row["medida"];&#13;
+var display = 0;&#13;
+&#13;
+if (calif == "100%") {&#13;
+	calif = 1;&#13;
+}else if (calif == "90%") {&#13;
+	calif = .9;&#13;
+}else if (calif == "80%") {&#13;
+	calif = .8;&#13;
+}else if (calif == "0%") {&#13;
+	calif = 0;&#13;
+}&#13;
+if(calif == 0)&#13;
+	display = 0;&#13;
+else&#13;
+	display = (medida*calif)/100;&#13;
+	&#13;
+if(display == NaN || display == "NaN")&#13;
+	display = 0;&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">month</property>
+                    <expression name="expression" type="javascript">row["mes"]-1</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">year</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">year</text-property>
+                    <text-property name="heading">year</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">calificador</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <text-property name="heading">calificador</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">objetivo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <text-property name="heading">objetivo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <text-property name="heading">departamento</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <text-property name="heading">puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">medida</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">medida</text-property>
+                    <text-property name="heading">medida</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">responsable</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">responsable</text-property>
+                    <text-property name="heading">responsable</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">gerencia</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">gerencia</text-property>
+                    <text-property name="heading">gerencia</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <text-property name="heading">numero</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <text-property name="heading">nombre</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mes</text-property>
+                    <text-property name="heading">mes</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Resultado</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">calificador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">medida</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">responsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">gerencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">numero</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Resultado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">year</property>
+                    <property name="nativeName">year</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">calificador</property>
+                    <property name="nativeName">calificador</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">objetivo</property>
+                    <property name="nativeName">objetivo</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">departamento</property>
+                    <property name="nativeName">departamento</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">puesto</property>
+                    <property name="nativeName">puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">medida</property>
+                    <property name="nativeName">medida</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">responsable</property>
+                    <property name="nativeName">responsable</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">10</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">gerencia</property>
+                    <property name="nativeName">gerencia</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">10</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">numero</property>
+                    <property name="nativeName">numero</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">nombre</property>
+                    <property name="nativeName">nombre</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">mes</property>
+                    <property name="nativeName">mes</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-07-01T07:00:00Z'} , $lt:{$date:'2020-07-10T06:00:00Z'} },\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "nearest" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>calificador</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>calificador</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>calificador</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>month</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>month</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>month</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>year</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>year</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>year</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>objetivo</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>objetivo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>objetivo</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>area</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>area</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>area</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>puesto</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>medida</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>medida</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>medida</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>responsable</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>responsable</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>responsable</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>gerencia</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>gerencia</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>gerencia</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.union" name="Union Objetivos por Mes" id="693">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">year</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">year</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">calificador</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">calificador</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">objetivo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">medida</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">medida</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">responsable</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">responsable</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">gerencia</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">gerencia</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mes</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mes</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Resultado</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">month</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">calificador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">medida</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">responsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">gerencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">numero</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Resultado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Objetivos Final 2</value>
+                <value>Objetivos Final 2 Abril</value>
+                <value>Objetivos Junio</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:Union xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_union.xsd" xmlns:tns="http://schemas.actuate.com/">
+<tns:DataSet Index="0" name="Objetivos Final 2">
+<tns:Column name="year"/>
+<tns:Column name="calificador"/>
+<tns:Column name="objetivo"/>
+<tns:Column name="area"/>
+<tns:Column name="departamento"/>
+<tns:Column name="puesto"/>
+<tns:Column name="medida"/>
+<tns:Column name="responsable"/>
+<tns:Column name="gerencia"/>
+<tns:Column name="numero"/>
+<tns:Column name="nombre"/>
+<tns:Column name="mes"/>
+<tns:Column name="Resultado"/>
+<tns:Column name="month"/>
+</tns:DataSet>
+<tns:DataSet Index="1" name="Objetivos Final 2 Abril">
+<tns:Column name="year"/>
+<tns:Column name="calificador"/>
+<tns:Column name="objetivo"/>
+<tns:Column name="area"/>
+<tns:Column name="departamento"/>
+<tns:Column name="puesto"/>
+<tns:Column name="medida"/>
+<tns:Column name="responsable"/>
+<tns:Column name="gerencia"/>
+<tns:Column name="numero"/>
+<tns:Column name="nombre"/>
+<tns:Column name="mes"/>
+<tns:Column name="Resultado"/>
+<tns:Column name="month"/>
+</tns:DataSet>
+<tns:DataSet Index="2" name="Objetivos Junio">
+<tns:Column name="year"/>
+<tns:Column name="calificador"/>
+<tns:Column name="objetivo"/>
+<tns:Column name="area"/>
+<tns:Column name="departamento"/>
+<tns:Column name="puesto"/>
+<tns:Column name="medida"/>
+<tns:Column name="responsable"/>
+<tns:Column name="gerencia"/>
+<tns:Column name="numero"/>
+<tns:Column name="nombre"/>
+<tns:Column name="mes"/>
+<tns:Column name="Resultado"/>
+<tns:Column name="month"/>
+</tns:DataSet>
+</tns:Union>]]></xml-property>
+        </derived-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join objetivos - Plantilla" id="618">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">objetivo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">objetivo</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">unidad</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">unidad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">unidad</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">hora</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">cien</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">noventa</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">ochenta</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Plantilla</value>
+                <value>Objetivos 2</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Plantilla::puesto</tns:Column>
+<tns:Column>Objetivos 2::objetivo</tns:Column>
+<tns:Column>Objetivos 2::unidad</tns:Column>
+<tns:Column>Objetivos 2::fecha</tns:Column>
+<tns:Column>Objetivos 2::hora</tns:Column>
+<tns:Column>Objetivos 2::cien</tns:Column>
+<tns:Column>Objetivos 2::noventa</tns:Column>
+<tns:Column>Objetivos 2::ochenta</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Plantilla"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Objetivos 2"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Plantilla::empleado</tns:leftColumn>
+<tns:rightColumn>Objetivos 2::numero</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Objetivos - General" id="685">
+            <property name="isVisible">true</property>
+            <list-property name="filter"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">calificador</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">objetivo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">medida</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">responsable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">gerencia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">numero</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">mes</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">Resultado</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">month</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Plantilla</value>
+                <value>Union Objetivos por Mes</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Plantilla::nombre</tns:Column>
+<tns:Column>Union Objetivos por Mes::year</tns:Column>
+<tns:Column>Union Objetivos por Mes::calificador</tns:Column>
+<tns:Column>Union Objetivos por Mes::objetivo</tns:Column>
+<tns:Column>Union Objetivos por Mes::area</tns:Column>
+<tns:Column>Union Objetivos por Mes::departamento</tns:Column>
+<tns:Column>Union Objetivos por Mes::puesto</tns:Column>
+<tns:Column>Union Objetivos por Mes::medida</tns:Column>
+<tns:Column>Union Objetivos por Mes::responsable</tns:Column>
+<tns:Column>Union Objetivos por Mes::gerencia</tns:Column>
+<tns:Column>Union Objetivos por Mes::numero</tns:Column>
+<tns:Column>Union Objetivos por Mes::mes</tns:Column>
+<tns:Column>Union Objetivos por Mes::Resultado</tns:Column>
+<tns:Column>Union Objetivos por Mes::month</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Plantilla"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Union Objetivos por Mes"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Plantilla::nombre</tns:leftColumn>
+<tns:rightColumn>Union Objetivos por Mes::nombre</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Vacantes" id="695">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">habilidades</property>
+                    <expression name="expression" type="javascript">var str = row["telefono"];&#13;
+&#13;
+var display = "";&#13;
+&#13;
+&#13;
+&#13;
+	if (str == null) {&#13;
+		str = "Sin habilidades y competencias.";&#13;
+	}&#13;
+&#13;
+	str = str.replace("[ ", "");&#13;
+	str = str.replace("]", "");&#13;
+	display = str.replace(/['"]+/g, '')&#13;
+&#13;
+	&#13;
+&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <text-property name="heading">puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">telefono</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <text-property name="heading">telefono</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">preparacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">preparacion</text-property>
+                    <text-property name="heading">preparacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">antiguedad</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">antiguedad</text-property>
+                    <text-property name="heading">antiguedad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">anti_puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">anti_puesto</text-property>
+                    <text-property name="heading">anti_puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <text-property name="heading">departamento</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">habilidades</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">preparacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">antiguedad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">anti_puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">habilidades</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">puesto</property>
+                    <property name="nativeName">puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">preparacion</property>
+                    <property name="nativeName">preparacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">antiguedad</property>
+                    <property name="nativeName">antiguedad</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">anti_puesto</property>
+                    <property name="nativeName">anti_puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">departamento</property>
+                    <property name="nativeName">departamento</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [57589]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.5f0542576b48d64d2904b025':'activo',\r\n}},\r\n\r\n\r\n{$project:{\r\n\r\n\tfolio: '$folio',\r\n\tpuesto: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tdepartamento: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e7',\r\n\tarea: '$answers.5dcae3a64f92028b1f9017e6.5df148933b0f00c4e4b4a655',\r\n\ttelefono: '$answers.5efeca7023e27ba106f97633.5f04bd18f373e063a99335bf.5f04bd18f373e063a99335c1',\r\n\tpreparacion: '$answers.5efeca7023e27ba106f97635',\r\n\tantiguedad: '$answers.5efeca7023e27ba106f97636',\r\n\tanti_puesto: '$answers.5efeca7023e27ba106f97637',\r\n\t\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "puesto" , "telefono" , "preparacion" , "antiguedad" , "anti_puesto" , "departamento" , "area"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>puesto</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>telefono</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>telefono</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>telefono</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>preparacion</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>preparacion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>preparacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>antiguedad</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>antiguedad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>antiguedad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>anti_puesto</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>anti_puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>anti_puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Vacantes detalle" id="696">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">habilidades</property>
+                    <expression name="expression" type="javascript">var str = row["telefono"];&#13;
+&#13;
+var display = "";&#13;
+&#13;
+&#13;
+&#13;
+	if (str == null) {&#13;
+		str = "Sin habilidades y competencias.";&#13;
+	}&#13;
+&#13;
+	str = str.replace("[ ", "");&#13;
+	str = str.replace("]", "");&#13;
+	display = str.replace(/['"]+/g, '')&#13;
+&#13;
+	&#13;
+&#13;
+display = display.slice(0,-1);&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">puesto</text-property>
+                    <text-property name="heading">puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">telefono</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">telefono</text-property>
+                    <text-property name="heading">telefono</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">preparacion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">preparacion</text-property>
+                    <text-property name="heading">preparacion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">antiguedad</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">antiguedad</text-property>
+                    <text-property name="heading">antiguedad</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">anti_puesto</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">anti_puesto</text-property>
+                    <text-property name="heading">anti_puesto</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">departamento</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">departamento</text-property>
+                    <text-property name="heading">departamento</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">habilidades</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">telefono</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">preparacion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">antiguedad</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">anti_puesto</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">departamento</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">habilidades</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">puesto</property>
+                    <property name="nativeName">puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">telefono</property>
+                    <property name="nativeName">telefono</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">preparacion</property>
+                    <property name="nativeName">preparacion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">antiguedad</property>
+                    <property name="nativeName">antiguedad</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">anti_puesto</property>
+                    <property name="nativeName">anti_puesto</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">departamento</property>
+                    <property name="nativeName">departamento</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [57589]},\r\n\tdeleted_at:{$exists:false},\r\n\t'answers.5f0542576b48d64d2904b025':'activo',\r\n}},\r\n\r\n\r\n{$project:{\r\n\r\n\tfolio: '$folio',\r\n\tpuesto: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e8',\r\n\tdepartamento: '$answers.5dcae3a64f92028b1f9017e6.5dcae3a64f92028b1f9017e7',\r\n\tarea: '$answers.5dcae3a64f92028b1f9017e6.5df148933b0f00c4e4b4a655',\r\n\ttelefono: '$answers.5efeca7023e27ba106f97633.5f04bd18f373e063a99335bf.5f04bd18f373e063a99335c1',\r\n\tpreparacion: '$answers.5efeca7023e27ba106f97635',\r\n\tantiguedad: '$answers.5efeca7023e27ba106f97636',\r\n\tanti_puesto: '$answers.5efeca7023e27ba106f97637',\r\n\t\r\n\r\n\r\n}}\r\n\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "puesto" , "telefono" , "preparacion" , "antiguedad" , "anti_puesto" , "departamento" , "area"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>puesto</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>telefono</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>telefono</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>telefono</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>preparacion</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>preparacion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>preparacion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>antiguedad</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>antiguedad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>antiguedad</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>anti_puesto</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>anti_puesto</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>anti_puesto</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Password" id="426">
@@ -3845,7 +5993,7 @@ display;</expression>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">us#36&amp;s</value>
+                <value type="constant">oy#53412&amp;y</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

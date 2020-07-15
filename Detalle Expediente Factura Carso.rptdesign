@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -15,6 +15,18 @@
     </list-property>
     <parameters>
         <scalar-parameter name="Folio" id="4">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Version" id="22">
             <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
@@ -138,6 +150,48 @@
                 </structure>
             </list-property>
         </data-mart-data-set>
+        <data-mart-data-set name="Detalle EFCv2" id="23">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">oc.file_name</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">oc.file_url</property>
+                    <property name="analysis">dimension</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">oc.file_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">oc.file_url</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_sep2018</property>
+            <property name="dataObject">Detalle EFCv2</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">oc.file_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">oc.file_url</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -156,6 +210,12 @@
             <property name="marginLeft">12pt</property>
             <property name="width">30%</property>
             <property name="dataSet">Detalle Expediente FCarso</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">params["Version"].value == "V2"</expression>
+                </structure>
+            </list-property>
             <list-property name="boundDataColumns">
                 <structure>
                     <property name="name">oc.file_name</property>
@@ -199,6 +259,63 @@
             <footer>
                 <row id="18">
                     <cell id="19"/>
+                </row>
+            </footer>
+        </table>
+        <table id="44">
+            <property name="marginTop">12pt</property>
+            <property name="marginLeft">12pt</property>
+            <property name="width">30%</property>
+            <property name="dataSet">Detalle EFCv2</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">params["Version"].value == "V1"</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">oc.file_name</property>
+                    <text-property name="displayName">oc.file_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["oc.file_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">oc.file_url</property>
+                    <text-property name="displayName">oc.file_url</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["oc.file_url"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="53"/>
+            <header>
+                <row id="45">
+                    <cell id="46">
+                        <label id="47">
+                            <text-property name="text">OC Carso</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="48">
+                    <cell id="49">
+                        <data id="50">
+                            <property name="resultSetColumn">oc.file_name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["oc.file_url"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="51">
+                    <cell id="52"/>
                 </row>
             </footer>
         </table>

@@ -182,6 +182,12 @@
                     <text-property name="displayName">folio</text-property>
                     <text-property name="heading">folio</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">contratista</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <text-property name="heading">contratista</text-property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -288,6 +294,11 @@
                     <structure>
                         <property name="position">21</property>
                         <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">contratista</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -398,6 +409,11 @@
                 <structure>
                     <property name="position">21</property>
                     <property name="name">folio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">contratista</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -541,6 +557,8 @@ display;</expression>
                     <text-property name="displayName">nombre</text-property>
                     <expression name="expression" type="javascript">var str = dataSetRow["nombre"];&#13;
 var display = "";&#13;
+if(str == null)&#13;
+	str = "Dato no encontrado";&#13;
 str = str.toLowerCase();&#13;
 str = str.replace(/á/g,"a");&#13;
 str = str.replace(/é/g,"e");&#13;
@@ -559,6 +577,8 @@ display;</expression>
                     <text-property name="displayName">ape_pat</text-property>
                     <expression name="expression" type="javascript">var str = dataSetRow["ape_pat"];&#13;
 var display = "";&#13;
+if(str == null)&#13;
+	str = "Dato no encontrado";&#13;
 str = str.toLowerCase();&#13;
 str = str.replace(/á/g,"a");&#13;
 str = str.replace(/é/g,"e");&#13;
@@ -577,6 +597,8 @@ display;</expression>
                     <text-property name="displayName">ape_mat</text-property>
                     <expression name="expression" type="javascript">var str = dataSetRow["ape_mat"];&#13;
 var display = "";&#13;
+if(str == null)&#13;
+	str = "Dato no encontrado";&#13;
 str = str.toLowerCase();&#13;
 str = str.replace(/á/g,"a");&#13;
 str = str.replace(/é/g,"e");&#13;
@@ -636,6 +658,20 @@ display;</expression>
                     <expression name="expression" type="javascript">dataSetRow["folio"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">contratista</property>
+                    <text-property name="displayName">contratista</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["contratista"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+&#13;
+var display = area.replace(/_/g, ' ');&#13;
+display = display.toUpperCase();&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000</property>
             <list-property name="filter">
@@ -664,6 +700,7 @@ display;</expression>
             <column id="84"/>
             <column id="85"/>
             <column id="86"/>
+            <column id="133"/>
             <header>
                 <row id="7">
                     <cell id="125">
@@ -779,6 +816,11 @@ display;</expression>
                             <text-property name="text">TELEFONO</text-property>
                         </label>
                     </cell>
+                    <cell id="131">
+                        <label id="134">
+                            <text-property name="text">CONTRATISTA</text-property>
+                        </label>
+                    </cell>
                 </row>
             </header>
             <detail>
@@ -883,6 +925,11 @@ display;</expression>
                     <cell id="57">
                         <data id="48">
                             <property name="resultSetColumn">teléfono</property>
+                        </data>
+                    </cell>
+                    <cell id="132">
+                        <data id="135">
+                            <property name="resultSetColumn">contratista</property>
                         </data>
                     </cell>
                 </row>

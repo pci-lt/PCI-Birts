@@ -276,8 +276,18 @@ display;</expression>
                 <structure>
                     <property name="name">nombre</property>
                     <text-property name="displayName">nombre</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
+                    <expression name="expression" type="javascript">var str = dataSetRow["nombre"];&#13;
+var display = "";&#13;
+&#13;
+if (str != null &amp;&amp; str != "") {&#13;
+	str = str.replace("[ ","");&#13;
+	str = str.replace("]","");&#13;
+	display = str.replace(/['"]+/g, '');&#13;
+}&#13;
+&#13;
+display;</expression>
                     <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
                 </structure>
             </list-property>
             <property name="pageBreakInterval">10000000</property>

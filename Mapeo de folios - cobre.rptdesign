@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -61,6 +61,28 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="OC" id="143">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">Con OC</property>
+                    <property name="label">Con OC</property>
+                </structure>
+                <structure>
+                    <property name="value">Sin OC</property>
+                    <property name="label">Sin OC</property>
+                </structure>
+            </list-property>
+            <property name="column">OC</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="db_sep2008" id="7">
@@ -167,6 +189,10 @@
                     <property name="columnName">Reporte</property>
                     <property name="analysis">dimension</property>
                 </structure>
+                <structure>
+                    <property name="columnName">OC</property>
+                    <property name="analysis">dimension</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -228,6 +254,21 @@
                     <structure>
                         <property name="position">12</property>
                         <property name="name">Cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">metraje</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">OC</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -293,6 +334,21 @@
                 <structure>
                     <property name="position">12</property>
                     <property name="name">Cope</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">metraje</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">tipo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">OC</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -422,11 +478,38 @@
                     <expression name="expression" type="javascript">dataSetRow["Cope"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">metraje</property>
+                    <text-property name="displayName">metraje</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["metraje"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">tipo</property>
+                    <text-property name="displayName">tipo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OC</property>
+                    <text-property name="displayName">OC</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["OC"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">10000000</property>
+            <list-property name="filter">
+                <structure>
+                    <expression name="expr" type="javascript">row["OC"]</expression>
+                    <property name="dynamicFilterParameter">OC</property>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
             <column id="112"/>
             <column id="126"/>
             <column id="123"/>
+            <column id="140"/>
+            <column id="135"/>
             <column id="120"/>
             <column id="113"/>
             <column id="114"/>
@@ -466,6 +549,28 @@
                         <property name="borderTopStyle">none</property>
                         <label id="128">
                             <text-property name="text">Tipo de tarea</text-property>
+                        </label>
+                    </cell>
+                    <cell id="138">
+                        <property name="backgroundColor">#002171</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="141">
+                            <text-property name="text">Tipo de instalación</text-property>
+                        </label>
+                    </cell>
+                    <cell id="133">
+                        <property name="backgroundColor">#002171</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="136">
+                            <text-property name="text">Metraje</text-property>
                         </label>
                     </cell>
                     <cell id="118">
@@ -566,6 +671,26 @@
                         <property name="borderTopStyle">none</property>
                         <data id="131">
                             <property name="resultSetColumn">tarea</property>
+                        </data>
+                    </cell>
+                    <cell id="139">
+                        <property name="borderBottomStyle">dotted</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="142">
+                            <property name="resultSetColumn">tipo</property>
+                        </data>
+                    </cell>
+                    <cell id="134">
+                        <property name="borderBottomStyle">dotted</property>
+                        <property name="borderBottomWidth">1px</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="137">
+                            <property name="resultSetColumn">metraje</property>
                         </data>
                     </cell>
                     <cell id="119">

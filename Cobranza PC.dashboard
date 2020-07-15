@@ -1,0 +1,1590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
+    <property name="layoutPreference">auto layout</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">ThemesReportItems3.rptlibrary</property>
+            <property name="namespace">ThemesReportItems3</property>
+        </structure>
+    </list-property>
+    <data-sources>
+        <data-mart-data-source name="NewDataMartDataSource" id="9">
+            <property name="datamartURL">/account_1259/Resources/dashboards</property>
+            <property name="datamartVersion">-1</property>
+            <property name="accessType">transient</property>
+        </data-mart-data-source>
+    </data-sources>
+    <data-sets>
+        <data-mart-data-set name="NewDataMartDataSource::Expediente Factura CARSO" id="20">
+            <property name="dataSource">NewDataMartDataSource</property>
+            <property name="dataObject">Expediente Factura CARSO</property>
+        </data-mart-data-set>
+    </data-sets>
+    <cubes>
+        <data-mart-cube name="NewDataMartDataSource::Cube EFC" id="793">
+            <property name="dataSource">NewDataMartDataSource</property>
+            <property name="dataObject">Cube EFC</property>
+        </data-mart-cube>
+    </cubes>
+    <body>
+        <table name="Single Metric1" id="23">
+            <text-property name="displayName" key="SingleMetric_Dashboard_Single Metric1"></text-property>
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">image_position</property>
+                    <property name="type">string</property>
+                </structure>
+                <structure>
+                    <property name="name">type</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="image_position">right</property>
+            <property name="type">SINGLEMETRIC</property>
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">normal</property>
+            <property name="fontStyle">normal</property>
+            <property name="color">black</property>
+            <property name="textLineThrough">none</property>
+            <property name="textUnderline">none</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">none</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="marginTop">0px</property>
+            <property name="marginLeft">0px</property>
+            <property name="marginBottom">0px</property>
+            <property name="marginRight">0px</property>
+            <property name="textAlign">center</property>
+            <property name="overflow">auto</property>
+            <property name="height">32.25pt</property>
+            <property name="dataSet">NewDataMartDataSource::Expediente Factura CARSO</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <text-property name="displayName">total</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_Sum</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">Sum</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["total"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <list-property name="filter">
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr">dataSetRow["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value type="constant">recibido_por_carso</value>
+                    </simple-property-list>
+                    <property name="filterTarget">DataSet</property>
+                    <property name="type">slicer</property>
+                </structure>
+            </list-property>
+            <column id="28"/>
+            <column id="29"/>
+            <footer>
+                <row id="24">
+                    <property name="backgroundColor">#003366</property>
+                    <property name="color">#FFFFFF</property>
+                    <cell id="25">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="paddingTop">5pt</property>
+                        <property name="paddingLeft">5pt</property>
+                        <property name="paddingBottom">5pt</property>
+                        <property name="paddingRight">5pt</property>
+                        <label id="26">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">16pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="fontStyle">normal</property>
+                            <property name="color">#FFFFFF</property>
+                            <property name="textUnderline">none</property>
+                            <text-property name="text">Estimado de sig pago</text-property>
+                        </label>
+                        <data id="27">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontSize">24pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="fontStyle">normal</property>
+                            <property name="color">#FFFFFF</property>
+                            <property name="textUnderline">none</property>
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Aggregation_Sum</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <extended-item extensionName="Chart" name="Treemap Chart - Cube EFC_3464916c-0e60-450f-8b6a-744214c2ca94" id="796">
+            <property name="cube">NewDataMartDataSource::Cube EFC</property>
+            <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="SideBySide" orientation="0">
+  <block>
+   <children _type="TitleBlock" visible="false" auto="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <caption value="">
+      <font size="16.0" bold="false" italic="false" underline="false"/>
+      <color _body=",255,0,0,0"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" visible="false" orientation="1" position="3">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title visible="true">
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="jschart.range.selector" value="false"/>
+  <extendedProperties name="jschart.navigator" value="false"/>
+  <extendedProperties name="jschart.scroll" value="false"/>
+  <extendedProperties name="keep.hierarchy.category" value="false"/>
+  <extendedProperties name="keep.hierarchy.series" value="false"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration:function(o){if(o&amp;&amp;o.chart&amp;&amp;o.chart.renderTo){var r=document.getElementById(o.chart.renderTo);if(r.parentNode&amp;&amp;r.parentNode.id){var b=r.parentNode.id;var v=actuate.getViewer(b);if(v){v.enableGlobalFilter(o);}}}}"/>
+  <extendedProperties name="jschart.glass.style" value="false"/>
+  <extendedProperties name="jschart.zoom" value=""/>
+  <extendedProperties name="jschart.series.shadow" value="false"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="QWER"/>
+   <orthogonalSampleData dataSetRepresentation="2.3" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <interactivity enable="true" legendBehavior="1"/>
+  <emptyMessage visible="true">
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes type="2" gapWidth="0.5" labelPosition="1" staggered="false" interval="1" categoryAxis="true">
+   <title visible="false">
+    <caption value="">
+     <font size="14.0" bold="false" italic="false" underline="false" rotation="90.0"/>
+     <color _body=",255,0,0,0"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes type="0" labelPosition="2" staggered="false" primaryAxis="true" percent="false">
+    <title visible="false">
+     <caption value="">
+      <font bold="false" italic="false" underline="false" rotation="0.0"/>
+      <color _body=",255,0,0,0"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition=""/>
+     <series _type="BarSeries" seriesIdentifier="Summary Field2/total" labelPosition="5" stacked="false">
+      <label>
+       <caption value="Summary Field2/total"/>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="data[&quot;Summary Field2/total&quot;]"/>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="0"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+    </seriesDefinitions>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <label visible="true">
+     <caption>
+      <font size="10.0" bold="false" italic="false" underline="false" rotation="0.0"/>
+      <color _body=",255,0,0,0"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <scale step="0.0" stepNumber="1"/>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions>
+    <query definition=""/>
+    <series seriesIdentifier="Division/Division">
+     <label>
+      <caption value="Division/Division"/>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="data[&quot;Division/Division&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+   </seriesDefinitions>
+   <lineAttributes>
+    <color _nil="1"/>
+   </lineAttributes>
+   <label visible="true">
+    <caption>
+     <font bold="false" italic="false" underline="false" rotation="0.0"/>
+     <color _body=",255,0,0,0"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+            <property name="outputFormat">JS</property>
+            <property name="height">249.75pt</property>
+            <property name="width">242.25pt</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Division/Division</property>
+                    <text-property name="displayName">Division/Division</text-property>
+                    <expression name="expression">dimension["Division"]["Division"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Summary Field2/total</property>
+                    <text-property name="displayName">Summary Field2/total</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+            <property name="theme">ThemesReportItems3.OpenText</property>
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">copyHyperlink</property>
+                    <property name="type">string</property>
+                </structure>
+                <structure>
+                    <property name="name">createdBy</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="copyHyperlink">true</property>
+            <property name="createdBy">dashboard</property>
+        </extended-item>
+        <extended-item extensionName="Chart" name="Doughnut Chart - Cube EFC_ca394574-20a9-4e19-821d-afbc6c59cfb6" id="874">
+            <property name="cube">NewDataMartDataSource::Cube EFC</property>
+            <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithoutAxes version="2.6.1" type="Doughnut Chart" subType="standard" dimension="0">
+  <block>
+   <children _type="TitleBlock" visible="false" auto="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <caption value="">
+      <font size="16.0" bold="false" italic="false" underline="false"/>
+      <color _body=",255,0,0,0"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" visible="true" orientation="1" position="3" itemType="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title visible="true">
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="keep.hierarchy.category" value="true"/>
+  <extendedProperties name="keep.hierarchy.series" value="true"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration:function(o){if(o&amp;&amp;o.chart&amp;&amp;o.chart.renderTo){var r=document.getElementById(o.chart.renderTo);if(r.parentNode&amp;&amp;r.parentNode.id){var b=r.parentNode.id;var v=actuate.getViewer(b);if(v){v.enableGlobalFilter(o);}}}}"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <interactivity enable="true" legendBehavior="1"/>
+  <emptyMessage visible="true">
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <seriesDefinitions>
+   <query definition=""/>
+   <seriesDefinitions>
+    <query definition=""/>
+    <seriesPalette/>
+    <series _type="PieSeries" visible="true" seriesIdentifier="Summary Field2/total" explosion="20" titlePosition="1" rotation="0.0" innerRadius="60.0">
+     <label>
+      <caption>
+       <font size="10.0" bold="false" italic="false" underline="false"/>
+       <color _body=",255,51,51,51"/>
+      </caption>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="data[&quot;Summary Field2/total&quot;]"/>
+     <triggers condition="6">
+      <action type="1">
+       <value _type="TooltipValue" text="valueData" delay="0"/>
+      </action>
+     </triggers>
+     <title>
+      <caption>
+       <font size="10.666667"/>
+      </caption>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </title>
+    </series>
+    <grouping/>
+   </seriesDefinitions>
+   <series seriesIdentifier="Proyecto/Proyecto">
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <dataDefinition definition="data[&quot;Proyecto/Proyecto&quot;]"/>
+    <curveFitting _nil="1"/>
+   </series>
+  </seriesDefinitions>
+ </ChartWithoutAxes>
+</ActuateChart>
+]]></xml-property>
+            <property name="outputFormat">JS</property>
+            <property name="height">347.25pt</property>
+            <property name="width">444.75pt</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Proyecto/Proyecto</property>
+                    <text-property name="displayName">Proyecto/Proyecto</text-property>
+                    <expression name="expression">dimension["Proyecto"]["Proyecto"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Summary Field2/total</property>
+                    <text-property name="displayName">Summary Field2/total</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+            <property name="theme">ThemesReportItems3.Pastel rainbow</property>
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">copyHyperlink</property>
+                    <property name="type">string</property>
+                </structure>
+                <structure>
+                    <property name="name">createdBy</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="copyHyperlink">true</property>
+            <property name="createdBy">dashboard</property>
+        </extended-item>
+        <extended-item extensionName="Chart" name="Pie Chart - Cube EFC_a32a4b48-f6a6-4cde-9e67-ed662b859972" id="890">
+            <property name="cube">NewDataMartDataSource::Cube EFC</property>
+            <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithoutAxes version="2.6.1" type="Pie Chart" subType="standard" dimension="0">
+  <block>
+   <children _type="TitleBlock" visible="false" auto="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <caption value="">
+      <font size="16.0" bold="false" italic="false" underline="false"/>
+      <color _body=",255,51,51,51"/>
+     </caption>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" visible="true" orientation="0" position="1" itemType="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title visible="true">
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <extendedProperties name="keep.hierarchy.category" value="true"/>
+  <extendedProperties name="keep.hierarchy.series" value="true"/>
+  <extendedProperties name="jschart.client.script" value="beforeGeneration:function(o){if(o&amp;&amp;o.chart&amp;&amp;o.chart.renderTo){var r=document.getElementById(o.chart.renderTo);if(r.parentNode&amp;&amp;r.parentNode.id){var b=r.parentNode.id;var v=actuate.getViewer(b);if(v){v.enableGlobalFilter(o);}}}}"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <interactivity enable="true" legendBehavior="1"/>
+  <emptyMessage visible="true">
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <seriesDefinitions>
+   <query definition=""/>
+   <seriesDefinitions>
+    <query definition=""/>
+    <seriesPalette/>
+    <series _type="PieSeries" visible="true" seriesIdentifier="Summary Field2/total" explosion="20" titlePosition="1" rotation="0.0">
+     <label>
+      <caption>
+       <font size="10.0" bold="false" italic="false" underline="false"/>
+       <color _body=",255,51,51,51"/>
+      </caption>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="data[&quot;Summary Field2/total&quot;]"/>
+     <triggers condition="6">
+      <action type="1">
+       <value _type="TooltipValue" text="" delay="0"/>
+      </action>
+     </triggers>
+     <title>
+      <caption>
+       <font size="10.666667"/>
+      </caption>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </title>
+    </series>
+    <grouping/>
+   </seriesDefinitions>
+   <series seriesIdentifier="Estatus/Estatus">
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <dataDefinition definition="data[&quot;Estatus/Estatus&quot;]"/>
+    <curveFitting _nil="1"/>
+   </series>
+  </seriesDefinitions>
+ </ChartWithoutAxes>
+</ActuateChart>
+]]></xml-property>
+            <property name="outputFormat">JS</property>
+            <property name="height">347.25pt</property>
+            <property name="width">465pt</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Estatus/Estatus</property>
+                    <text-property name="displayName">Estatus/Estatus</text-property>
+                    <expression name="expression">dimension["Estatus"]["Estatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Summary Field2/total</property>
+                    <text-property name="displayName">Summary Field2/total</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+            <property name="theme">ThemesReportItems3.Mojave</property>
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">copyHyperlink</property>
+                    <property name="type">string</property>
+                </structure>
+                <structure>
+                    <property name="name">createdBy</property>
+                    <property name="type">string</property>
+                </structure>
+            </list-property>
+            <property name="copyHyperlink">true</property>
+            <property name="createdBy">dashboard</property>
+        </extended-item>
+        <extended-item extensionName="Crosstab" extensionVersion="3.7.0" name="Crosstab - Cube EFC_2442fcc5-c9a4-402f-858e-0f5739d41700"
+ id="894">
+            <property name="cube">NewDataMartDataSource::Cube EFC</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="918">
+                    <property name="measure">total</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="919">
+                            <property name="aggregationOnRow">Estatus/Estatus</property>
+                            <property name="aggregationOnColumn">Fecha/Month</property>
+                            <property name="content">
+                                <data id="920">
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="textAlign">left</property>
+                                    <property name="resultSetColumn">total_Estatus/Estatus_Fecha/Month</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="926">
+                            <property name="aggregationOnRow">Estatus/Estatus</property>
+                            <property name="content">
+                                <data id="927">
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="resultSetColumn">total_Estatus/Estatus</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="932">
+                            <property name="content">
+                                <data id="933">
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="resultSetColumn">total</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="934">
+                            <property name="aggregationOnColumn">Fecha/Month</property>
+                            <property name="content">
+                                <data id="935">
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="resultSetColumn">total_Fecha/Month</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="921">
+                            <property name="content">
+                                <label id="922">
+                                    <text-property name="text">total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="CrosstabCell" id="928">
+                            <property name="content">
+                                <label id="929">
+                                    <text-property name="text">total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="897">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="931">
+                            <property name="content">
+                                <label id="936">
+                                    <text-property name="text">Grand Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="899">
+                            <property name="dimension">Estatus</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="900">
+                                    <property name="level">Estatus/Estatus</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="901">
+                                            <property name="content">
+                                                <data name="Estatus" id="902">
+                                                    <property name="resultSetColumn">Estatus</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="898">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="925">
+                            <property name="content">
+                                <label id="930">
+                                    <text-property name="text">Grand Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="904">
+                            <property name="dimension">Fecha</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="905">
+                                    <property name="level">Fecha/Year</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="906">
+                                            <property name="content">
+                                                <data name="Year" id="907">
+                                                    <property name="resultSetColumn">Year</property>
+                                                </data>
+                                                <data id="910">
+                                                    <property name="fontWeight">normal</property>
+                                                    <property name="fontStyle">italic</property>
+                                                    <property name="paddingLeft">8px</property>
+                                                    <property name="resultSetColumn">Year_DateTime</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="911">
+                                    <property name="level">Fecha/Month</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="912">
+                                            <property name="content">
+                                                <data name="Month" id="914">
+                                                    <property name="resultSetColumn">Month</property>
+                                                </data>
+                                                <data id="917">
+                                                    <property name="fontWeight">normal</property>
+                                                    <property name="fontStyle">italic</property>
+                                                    <property name="paddingLeft">8px</property>
+                                                    <property name="resultSetColumn">Month_DateTime</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="913">
+                    <property name="content">
+                        <label id="915">
+                            <text-property name="text">Year</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="CrosstabCell" id="923">
+                    <property name="content">
+                        <label id="924">
+                            <text-property name="text">Month</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+                <extended-item extensionName="CrosstabCell" id="895">
+                    <property name="content">
+                        <label id="916">
+                            <text-property name="text">Estatus</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+            </property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Estatus</property>
+                    <expression name="expression">dimension["Estatus"]["Estatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <expression name="expression">dimension["Fecha"]["Year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Year_DateTime</property>
+                    <expression name="expression" type="javascript">dimension["Fecha"]["Year"]["DateTime"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <expression name="expression">dimension["Fecha"]["Month"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Month_DateTime</property>
+                    <expression name="expression" type="javascript">dimension["Fecha"]["Month"]["DateTime"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">total_Estatus/Estatus_Fecha/Month</property>
+                    <text-property name="displayName">total</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Estatus/Estatus</value>
+                        <value>Fecha/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">total_Estatus/Estatus</property>
+                    <text-property name="displayName">Total en pesos</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Estatus/Estatus</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">total</property>
+                    <text-property name="displayName">Total en pesos</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">total_Fecha/Month</property>
+                    <text-property name="displayName">Total en pesos</text-property>
+                    <expression name="expression">measure["total"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Fecha/Month</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+            <property name="theme">ThemesReportItems3.modern-crosstab</property>
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">__DA_USE_DEFAULT_HYPERLINK</property>
+                    <property name="type">boolean</property>
+                </structure>
+                <structure>
+                    <property name="name">__DA_ENABLE_PAGEBREAK</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="__DA_USE_DEFAULT_HYPERLINK">true</property>
+            <property name="__DA_ENABLE_PAGEBREAK">false</property>
+        </extended-item>
+    </body>
+    <property name="dashboardView">
+        <dashboard id="2">
+            <list-property name="userProperties">
+                <structure>
+                    <property name="name">enableGlobalFilter</property>
+                    <property name="type">boolean</property>
+                </structure>
+            </list-property>
+            <property name="enableGlobalFilter">true</property>
+            <property name="activeTab">180a3b33-87c3-4efd-af27-ac689d7b111c</property>
+            <property name="tabs">
+                <tab-element name="180a3b33-87c3-4efd-af27-ac689d7b111c" id="3">
+                    <property name="title">Cobranza PC</property>
+                    <property name="backgroundColor">auto</property>
+                    <property name="freeFormGadgets">
+                        <gadget name="f7d977a8-310c-4541-8aae-8cccb96c6fa8" id="6">
+                            <property name="x">10px</property>
+                            <property name="y">209px</property>
+                            <property name="zIndex">1</property>
+                            <property name="isVisible">false</property>
+                            <property name="height">150px</property>
+                            <property name="width">624px</property>
+                            <property name="caption">
+                                <gadget-caption id="8">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"tahoma", "arial", "verdana", sans-serif</property>
+                                    <property name="fontSize">8pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#000000</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <current-selections id="7"/>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_4698bda0-0e25-4c86-90fe-ee2b3dc4ee51" id="21">
+                            <property name="x">36px</property>
+                            <property name="y">118px</property>
+                            <property name="title">Single Metric - Expediente Factura CARSO 1</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">true</property>
+                            <property name="zIndex">3</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">78px</property>
+                            <property name="width">275px</property>
+                            <property name="caption">
+                                <gadget-caption id="22">
+                                    <property name="showCaption">false</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <data-view id="30">
+                                    <property name="gadgetType">viewer</property>
+                                    <property name="internalReportLetRef">Single Metric1</property>
+                                </data-view>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe" id="794">
+                            <property name="x">0px</property>
+                            <property name="y">252px</property>
+                            <property name="title">Total en pesos por division</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">false</property>
+                            <property name="zIndex">10</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">368px</property>
+                            <property name="width">340px</property>
+                            <property name="caption">
+                                <gadget-caption id="795">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <data-view id="797">
+                                    <property name="gadgetType">viewer</property>
+                                    <property name="internalReportLetRef">Treemap Chart - Cube EFC_3464916c-0e60-450f-8b6a-744214c2ca94</property>
+                                </data-view>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e" id="872">
+                            <property name="x">684px</property>
+                            <property name="y">720px</property>
+                            <property name="title">Cantidad en pesos por Proyecto</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">true</property>
+                            <property name="zIndex">13</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">498px</property>
+                            <property name="width">610px</property>
+                            <property name="caption">
+                                <gadget-caption id="873">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <data-view id="875">
+                                    <property name="gadgetType">viewer</property>
+                                    <property name="internalReportLetRef">Doughnut Chart - Cube EFC_ca394574-20a9-4e19-821d-afbc6c59cfb6</property>
+                                </data-view>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_bb348c03-5805-4da8-a325-009baed11cc9" id="888">
+                            <property name="x">0px</property>
+                            <property name="y">720px</property>
+                            <property name="title">Cantidad en pesos por Estatus</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">true</property>
+                            <property name="zIndex">14</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">498px</property>
+                            <property name="width">637px</property>
+                            <property name="caption">
+                                <gadget-caption id="889">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <data-view id="891">
+                                    <property name="gadgetType">viewer</property>
+                                    <property name="internalReportLetRef">Pie Chart - Cube EFC_a32a4b48-f6a6-4cde-9e67-ed662b859972</property>
+                                </data-view>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686" id="892">
+                            <property name="x">360px</property>
+                            <property name="y">252px</property>
+                            <property name="title">Cantidad de facturas y total de pesos por año, mes y estatus</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">false</property>
+                            <property name="zIndex">15</property>
+                            <property name="showScrollBar">true</property>
+                            <property name="height">365px</property>
+                            <property name="width">935px</property>
+                            <property name="caption">
+                                <gadget-caption id="893">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <data-view id="896">
+                                    <list-property name="userProperties">
+                                        <structure>
+                                            <property name="name">showViewerToolbar</property>
+                                            <property name="type">boolean</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="showViewerToolbar">true</property>
+                                    <property name="gadgetType">viewer</property>
+                                    <property name="internalReportLetRef">Crosstab - Cube EFC_2442fcc5-c9a4-402f-858e-0f5739d41700</property>
+                                </data-view>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c" id="956">
+                            <property name="x">360px</property>
+                            <property name="y">18px</property>
+                            <property name="title">Selector de año y mes</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">false</property>
+                            <property name="zIndex">16</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">141px</property>
+                            <property name="width">275px</property>
+                            <property name="caption">
+                                <gadget-caption id="957">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <list-data-selector-group id="958">
+                                    <property name="cube">NewDataMartDataSource::Cube EFC</property>
+                                    <property name="listLimit">1000</property>
+                                    <property name="orientation">horizontal</property>
+                                    <property name="columnSettings">
+                                        <column-setting>
+                                            <property name="displayColumn">Fecha/Year</property>
+                                            <property name="valueColumn">Fecha/Year</property>
+                                            <property name="sortDirection">desc</property>
+                                        </column-setting>
+                                        <column-setting>
+                                            <property name="displayColumn">Fecha/Month</property>
+                                            <property name="valueColumn">Fecha/Month</property>
+                                            <property name="sortDirection">asc</property>
+                                        </column-setting>
+                                    </property>
+                                    <property name="allowMultiValue">true</property>
+                                    <property name="enableSearch">false</property>
+                                </list-data-selector-group>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">f7d977a8-310c-4541-8aae-8cccb96c6fa8</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a" id="984">
+                            <property name="x">673px</property>
+                            <property name="y">18px</property>
+                            <property name="title">Selector de estatus</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">false</property>
+                            <property name="zIndex">17</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">140px</property>
+                            <property name="width">268px</property>
+                            <property name="caption">
+                                <gadget-caption id="985">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <list-data-selector id="988">
+                                    <property name="cube">NewDataMartDataSource::Cube EFC</property>
+                                    <property name="operator">in</property>
+                                    <simple-property-list name="columnNames">
+                                        <value>Estatus/Estatus</value>
+                                        <value>Estatus/Estatus</value>
+                                    </simple-property-list>
+                                    <property name="allowMultiValue">true</property>
+                                    <property name="enableSearch">true</property>
+                                    <property name="listLimit">1000</property>
+                                </list-data-selector>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">f7d977a8-310c-4541-8aae-8cccb96c6fa8</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                        <gadget name="Gadget_98ab313d-3276-40b3-900e-805f4ddd58e1" id="989">
+                            <property name="x">972px</property>
+                            <property name="y">18px</property>
+                            <property name="title">Selector de división</property>
+                            <property name="showTitle">true</property>
+                            <property name="showBorder">false</property>
+                            <property name="zIndex">18</property>
+                            <property name="showScrollBar">false</property>
+                            <property name="height">141px</property>
+                            <property name="width">262px</property>
+                            <property name="caption">
+                                <gadget-caption id="990">
+                                    <property name="showCaption">true</property>
+                                    <property name="horizontalAlignment">left</property>
+                                    <property name="fontFamily">"Lato"</property>
+                                    <property name="fontSize">18pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="color">#353535</property>
+                                    <property name="textUnderline">none</property>
+                                </gadget-caption>
+                            </property>
+                            <property name="content">
+                                <list-data-selector id="991">
+                                    <property name="cube">NewDataMartDataSource::Cube EFC</property>
+                                    <property name="sortDirection">asc</property>
+                                    <property name="operator">in</property>
+                                    <simple-property-list name="columnNames">
+                                        <value>Division/Division</value>
+                                        <value>Division/Division</value>
+                                    </simple-property-list>
+                                    <property name="allowMultiValue">true</property>
+                                    <property name="enableSearch">false</property>
+                                    <property name="listLimit">1000</property>
+                                </list-data-selector>
+                            </property>
+                            <property name="observers">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">f7d977a8-310c-4541-8aae-8cccb96c6fa8</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_9603bde4-64e4-4671-a06f-d4edaf5a4abe</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_f72ecf41-48fc-42b6-9c62-fc6e42cd191e</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bb348c03-5805-4da8-a325-009baed11cc9</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_ecfefee2-2fb7-4e08-b17d-6f8f67ba5686</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                            <property name="subscribeTo">
+                                <event-subscriber>
+                                    <property name="eventName">SELECT_EVENT:SEMANTIC_filter</property>
+                                    <property name="eventObjects">
+                                        <event-object>
+                                            <property name="gadget">Gadget_9d64a5da-d4fc-4d5b-b714-e0f10ef5a76c</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                        <event-object>
+                                            <property name="gadget">Gadget_bd43ff4d-6ed8-4536-b3a5-f589f11a605a</property>
+                                            <property name="dirty">false</property>
+                                        </event-object>
+                                    </property>
+                                </event-subscriber>
+                            </property>
+                        </gadget>
+                    </property>
+                </tab-element>
+                <tab-element name="dashboard_global_filter_tab" id="880">
+                    <property name="title">dashboard_global_filter_tab</property>
+                    <property name="sections">
+                        <section id="881">
+                            <property name="width">1in</property>
+                        </section>
+                    </property>
+                </tab-element>
+            </property>
+        </dashboard>
+    </property>
+</report>
