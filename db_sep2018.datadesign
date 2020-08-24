@@ -4877,6 +4877,21 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">carga_tec</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">carga_tec</text-property>
+                    <text-property name="heading">carga_tec</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Cope</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -4993,31 +5008,41 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">16</property>
-                        <property name="name">Cope</property>
+                        <property name="name">carga_tec</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">17</property>
-                        <property name="name">tec</property>
-                        <property name="dataType">string</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">18</property>
-                        <property name="name">Division</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">19</property>
-                        <property name="name">Area</property>
+                        <property name="name">tec</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">20</property>
-                        <property name="name">pdf</property>
+                        <property name="name">Division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">21</property>
+                        <property name="name">Area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
                         <property name="name">Pic</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -5045,10 +5070,13 @@ if( base == "creacion"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = "created_at: {$gte: {$date:'" + date_one + "T07:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
+	new_query = "created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
 }
 if (base == "liquidada") {
 	new_query = "'answers.5a1eecfbb43fdd65914505a1' : {$gte:'" + date_one + "', $lte:'" + date_two + "'},";
+}
+if ( base == "tecnico"){
+	new_query = "'answers.5f0e23eaca2ca23aa12f21a9' : {$gte: '" + date_one + " 00:00:00', $lte:'" + date_two + " 23:59:59'},";
 }
 	
 if(division == "sur"){
@@ -5169,11 +5197,25 @@ this.queryText = query;]]></method>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">carga_tec</property>
+                    <property name="nativeName">carga_tec</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttelefono: '$answers.f1054000a010000000000005',\r\n\tdivision: '$answers.f1054000a0100000000000b2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\t\r\n\tclave: {$ifNull: ['$answers.f1054000a02000000000fb04','']},\r\n\tmetraje: '$answers.f1054000a020000000000007',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tpic: {$ifNull:['$answers.5eb091915ae0d087df1163de','']},\r\n\t\r\n\tpdf2: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url',{$ifNull: ['$answers.5ad13e8cf851c220dd0eb769.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e30f851c2271179f823.file_url','']},\r\n\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "telefono" , "fecha" , "division" , "area" , "cope" , "metraje" , "tarea" , "clave" , "pdf2" , "pdf3" , "pic" , "created"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id: {$in: [10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,1698,2727,1929,7765,7844]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\ttecnico: '$answers.59e1280bb43fdd7cd6fc9f63',\r\n\ttelefono: '$answers.f1054000a010000000000005',\r\n\tdivision: '$answers.f1054000a0100000000000b2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\tfecha: '$answers.5a1eecfbb43fdd65914505a1',\r\n\tconexion: '$connection_id',\t\r\n\tcarga_tec: {$ifNull:['$answers.5f0e23eaca2ca23aa12f21a9','']},\r\n\tclave: {$ifNull: ['$answers.f1054000a02000000000fb04','']},\r\n\tmetraje: '$answers.f1054000a020000000000007',\r\n\ttarea: '$answers.f1054000a0100000000000a4',\r\n\tpic: {$ifNull:['$answers.5eb091915ae0d087df1163de','']},\r\n\t\r\n\tpdf2: { $ifNull: ['$answers.5ad13efef851c23d8a4d95af.file_url',{$ifNull: ['$answers.5ad13e8cf851c220dd0eb769.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e30f851c2271179f823.file_url','']},\r\n\r\n\t\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "tecnico" , "telefono" , "fecha" , "division" , "area" , "cope" , "metraje" , "tarea" , "clave" , "pdf2" , "pdf3" , "pic" , "created" , "carga_tec" , "conexion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100</property>
+                <property name="stateContentAsString">false,1000</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -5528,6 +5570,21 @@ display;</expression>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">carga_tec</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">carga_tec</text-property>
+                    <text-property name="heading">carga_tec</text-property>
+                    <property name="horizontalAlign">left</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Cope</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -5655,36 +5712,46 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">17</property>
-                        <property name="name">Cope</property>
+                        <property name="name">carga_tec</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">18</property>
-                        <property name="name">pdf</property>
-                        <property name="dataType">string</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">19</property>
-                        <property name="name">tec</property>
+                        <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">20</property>
-                        <property name="name">metraje</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">21</property>
-                        <property name="name">Division</property>
+                        <property name="name">tec</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">22</property>
+                        <property name="name">metraje</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">Division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">23</property>
+                        <property name="position">25</property>
                         <property name="name">Pic</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -5714,11 +5781,14 @@ if( base == "creacion"){
 		month = '0' + month
 	hasta = BirtDateTime.year(hasta) + "-" + month + "-" + dia;
 	
-	new_query = "created_at: {$gte: {$date:'" + date_one + "T07:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
+	new_query = "created_at: {$gte: {$date:'" + date_one + "T06:00:00Z'} , $lt:{$date:'" + hasta + "T06:00:00Z'} }, ";	
 }
 
 if (base == "liquidada") {
 	new_query = "'answers.f1054000a02000000000fa02' : {$gte: '" + date_one + "', $lte:'" + date_two + "'},";
+}
+if ( base == "tecnico"){
+	new_query = "'answers.5f0e23eaca2ca23aa12f21a9' : {$gte: '" + date_one + " 00:00:00', $lte:'" + date_two + " 23:59:59'},";
 }
 
 if(division == "sur"){
@@ -5846,8 +5916,22 @@ this.queryText = query;]]></method>
                     <property name="dataType">date-time</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">carga_tec</property>
+                    <property name="nativeName">carga_tec</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,2727,1929]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\tclave: {$ifNull: ['$answers.f1054000a02000000000fb04','']},\r\n\tdivision: '$answers.f1054000a0100000000000b2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\ttelefono: '$answers.f1054000a010000000000005',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tmetr: '$answers.f1054000a0200000000000d7',\r\n\tadic: {$ifNull: ['$answers.f1054000a020000000000bd7',0]},\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tpic: {$ifNull:['$answers.5eb091915ae0d087df1163de','']},\r\n\r\n\r\n\tpdf2: { $ifNull: ['$answers.5a8aefa7b43fdd100602f7be.file_url',{$ifNull: ['$answers.5ad14051f851c220dd0eb772.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e71b43fdd2b2d5a5893.file_url',{$ifNull: ['$answers.5a623ed8b43fdd2b2bffb905.file_url','']}]},\r\n\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "division" , "area" , "cope" , "fecha" , "pdf2" , "pdf3" , "tecnico" , "telefono" , "tarea" , "adic" , "metr" , "clave" , "pic" , "created"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954]},\r\n\tdeleted_at:{$exists:false},\r\n\tconnection_id: {$in: [2071,2072,2073,1698,2727,1929,7765,7844]},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n\r\n}},\r\n{$project: {\r\n\tfolio: '$folio',\r\n\tcreated: { $dateToString: { format: \"%Y-%m-%d %H:%M:%S\", date: '$created_at' }},\r\n\tconexion: '$connection_id',\r\n\ttecnico: '$answers.f1054000a02000000000fa04',\r\n\tclave: {$ifNull: ['$answers.f1054000a02000000000fb04','']},\r\n\tdivision: '$answers.f1054000a0100000000000b2',\r\n\tarea: '$answers.f1054000a0100000000000a2',\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\ttelefono: '$answers.f1054000a010000000000005',\r\n\tfecha: '$answers.f1054000a02000000000fa02',\r\n\tmetr: '$answers.f1054000a0200000000000d7',\r\n\tadic: {$ifNull: ['$answers.f1054000a020000000000bd7',0]},\r\n\ttarea: '$answers.f1054000a010000000000021',\r\n\tpic: {$ifNull:['$answers.5eb091915ae0d087df1163de','']},\r\n\tcarga_tec: {$ifNull:['$answers.5f0e23eaca2ca23aa12f21a9','']},\r\n\r\n\r\n\tpdf2: { $ifNull: ['$answers.5a8aefa7b43fdd100602f7be.file_url',{$ifNull: ['$answers.5ad14051f851c220dd0eb772.file_url','']}]},\r\n\tpdf3: { $ifNull: ['$answers.5a623e71b43fdd2b2d5a5893.file_url',{$ifNull: ['$answers.5a623ed8b43fdd2b2bffb905.file_url','']}]},\r\n\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "division" , "area" , "cope" , "fecha" , "pdf2" , "pdf3" , "tecnico" , "telefono" , "tarea" , "adic" , "metr" , "clave" , "pic" , "created" , "carga_tec" , "conexion"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -6170,6 +6254,16 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">16</property>
+                        <property name="name">carga_tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
                         <property name="name">created_mx</property>
                         <property name="dataType">date-time</property>
                     </structure>
@@ -6197,6 +6291,8 @@ display;</expression>
 <tns:Column name="Area"/>
 <tns:Column name="Pic"/>
 <tns:Column name="created"/>
+<tns:Column name="carga_tec"/>
+<tns:Column name="conexion"/>
 </tns:DataSet>
 <tns:DataSet Index="1" name="PFibra">
 <tns:Column name="Cope"/>
@@ -6214,6 +6310,8 @@ display;</expression>
 <tns:Column name="Area"/>
 <tns:Column name="Pic"/>
 <tns:Column name="created"/>
+<tns:Column name="carga_tec"/>
+<tns:Column name="conexion"/>
 </tns:DataSet>
 </tns:Union>]]></xml-property>
         </derived-data-set>
@@ -6441,6 +6539,13 @@ display;</expression>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">carga_tec</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">carga_tec</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
@@ -6516,17 +6621,27 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">15</property>
+                        <property name="name">carga_tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
                         <property name="name">created_mx</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">17</property>
                         <property name="name">_id.folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">18</property>
                         <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -6535,6 +6650,7 @@ display;</expression>
                 <value>Union Cobre - Fibra</value>
                 <value>Busqueda Folios</value>
                 <value>No Factible</value>
+                <value>Nombres</value>
             </simple-property-list>
             <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
@@ -6553,9 +6669,11 @@ display;</expression>
 <tns:Column>Union Cobre - Fibra::Division</tns:Column>
 <tns:Column>Union Cobre - Fibra::Area</tns:Column>
 <tns:Column>Union Cobre - Fibra::Pic</tns:Column>
+<tns:Column>Union Cobre - Fibra::carga_tec</tns:Column>
 <tns:Column>Union Cobre - Fibra::created_mx</tns:Column>
 <tns:Column>Busqueda Folios::_id.folio</tns:Column>
 <tns:Column>No Factible::observaciones</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
 </tns:selectColumns>
 <tns:joins>
 <tns:startingDataSet Index="0" name="Union Cobre - Fibra"/>
@@ -6577,6 +6695,17 @@ display;</expression>
 <tns:condition>
 <tns:leftColumn>Union Cobre - Fibra::folio</tns:leftColumn>
 <tns:rightColumn>No Factible::folio</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="3" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Union Cobre - Fibra::conexion</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
 <tns:operator>eq</tns:operator>
 </tns:condition>
 </tns:on>
@@ -21349,7 +21478,7 @@ display;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2019-06-11</value>
+                <value type="constant">2020-06-01</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -21364,7 +21493,7 @@ display;</expression>
             <property name="dataType">date</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2019-06-25</value>
+                <value type="constant">2020-06-15</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

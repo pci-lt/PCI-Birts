@@ -14,6 +14,84 @@
         </structure>
     </list-property>
     <parameters>
+        <scalar-parameter name="Fecha Inicial" id="4">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var hoy = new Date();&#13;
+var day = hoy.getDate();&#13;
+var month = hoy.getMonth() + 1;&#13;
+var year = hoy.getFullYear();&#13;
+var display = "";&#13;
+&#13;
+if (day > 11 &amp;&amp; day &lt; 25) {&#13;
+&#13;
+	month = "0"+ month;&#13;
+	 display = year + "-" + month + "-11";&#13;
+&#13;
+}else{&#13;
+&#13;
+	if (month == 12) {&#13;
+		month = 1;&#13;
+		year = year - 1;&#13;
+	}else{&#13;
+		month = month - 1;&#13;
+	}&#13;
+&#13;
+	if (month &lt; 10) {&#13;
+		month = "0" + month;&#13;
+	}&#13;
+	&#13;
+	display = year + "-" + month + "-26";&#13;
+}&#13;
+&#13;
+display;</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Fecha Final" id="5">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">var hoy = new Date();&#13;
+var day = hoy.getDate();&#13;
+var month = hoy.getMonth() + 1;&#13;
+var year = hoy.getFullYear();&#13;
+var display = "";&#13;
+&#13;
+if (day > 11 &amp;&amp; day &lt; 25) {&#13;
+&#13;
+	month = "0"+ month;&#13;
+	 display = year + "-" + month + "-25";&#13;
+&#13;
+}else{&#13;
+&#13;
+&#13;
+	if (month &lt; 10) {&#13;
+		month = "0" + month;&#13;
+	}&#13;
+	&#13;
+	display = year + "-" + month + "-10";&#13;
+}&#13;
+&#13;
+display;</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Base" id="178">
             <property name="hidden">true</property>
             <text-property name="promptText">Base de busqueda</text-property>
@@ -41,51 +119,13 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
-        <scalar-parameter name="Fecha Inicial" id="5">
+        <scalar-parameter name="Password" id="187">
             <property name="valueType">static</property>
-            <property name="dataType">date</property>
+            <property name="dataType">string</property>
             <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="javascript">var date_today = new Date();&#13;
-var day = date_today.getDate();&#13;
-if(day &lt; 10)&#13;
-	day = '0' + day;&#13;
-var month = date_today.getMonth()+1;&#13;
-if(month &lt; 10)&#13;
-	month = '0' + month;&#13;
-var year = date_today.getFullYear();&#13;
-&#13;
-var display = year + "-" + month + "-" + day;&#13;
-&#13;
-display;</value>
-            </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
-            <property name="controlType">text-box</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
-        <scalar-parameter name="Fecha Final" id="6">
-            <property name="valueType">static</property>
-            <property name="dataType">date</property>
-            <property name="distinct">true</property>
-            <simple-property-list name="defaultValue">
-                <value type="javascript">var date_today = new Date();&#13;
-var day = date_today.getDate();&#13;
-if(day &lt; 10)&#13;
-	day = '0' + day;&#13;
-var month = date_today.getMonth()+1;&#13;
-if(month &lt; 10)&#13;
-	month = '0' + month;&#13;
-var year = date_today.getFullYear();&#13;
-&#13;
-var display = year + "-" + month + "-" + day;&#13;
-&#13;
-display;</value>
-            </simple-property-list>
-            <list-property name="selectionList"/>
-            <property name="paramType">simple</property>
+            <property name="concealValue">true</property>
             <property name="controlType">text-box</property>
             <structure name="format">
                 <property name="category">Unformatted</property>
@@ -93,7 +133,7 @@ display;</value>
         </scalar-parameter>
     </parameters>
     <data-sources>
-        <data-mart-data-source name="db_version17" id="4">
+        <data-mart-data-source name="db_version17" id="186">
             <property name="datamartURL">/account_1259/Resources/db_version17</property>
             <property name="accessType">transient</property>
             <list-property name="paramBindings">
@@ -137,6 +177,12 @@ display;</value>
                     <property name="paramName">Base</property>
                     <simple-property-list name="expression">
                         <value type="javascript">params["Base"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Password</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Password"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
@@ -207,203 +253,292 @@ display;</expression>
             </list-property>
             <list-property name="columnHints">
                 <structure>
+                    <property name="columnName">nombre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tecnico</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tecnico</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">Subdireccion</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Grupo</property>
+                    <property name="columnName">Pago</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Estatus</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">clave</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">clave</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Area</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">carga_tec</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">carga_tec</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Diff</property>
                     <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">created_mx</property>
                     <property name="analysis">dimension</property>
-                </structure>
-                <structure>
-                    <property name="columnName">PDF</property>
-                    <property name="analysis">dimension</property>
-                </structure>
-                <structure>
-                    <property name="columnName">Periodo</property>
-                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">_id</property>
+                        <property name="name">nombre</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">tecnico</property>
+                        <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">3</property>
-                        <property name="name">Subdireccion</property>
+                        <property name="name">tecnico</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
-                        <property name="name">Pago</property>
+                        <property name="name">Subdireccion</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">5</property>
-                        <property name="name">Estatus</property>
+                        <property name="name">Pago</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">folio</property>
+                        <property name="name">Estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">7</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
                         <property name="name">fecha</property>
                         <property name="dataType">date</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">9</property>
                         <property name="name">created</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
-                        <property name="name">Diff</property>
-                        <property name="dataType">integer</property>
-                    </structure>
-                    <structure>
                         <property name="position">10</property>
-                        <property name="name">created_mx</property>
-                        <property name="dataType">date</property>
-                    </structure>
-                    <structure>
-                        <property name="position">11</property>
                         <property name="name">Cope</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">11</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">12</property>
                         <property name="name">clave</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">13</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
+                        <property name="position">14</property>
                         <property name="name">carga_tec</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
+                        <property name="position">15</property>
+                        <property name="name">Diff</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
                         <property name="position">16</property>
+                        <property name="name">created_mx</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
                         <property name="name">Grupo</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">18</property>
                         <property name="name">PDF</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">19</property>
                         <property name="name">Periodo</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
             <property name="dataSource">db_version17</property>
-            <property name="dataObject">Union Cobre - Fibra</property>
+            <property name="dataObject">Join Plantilla - Union Cobre y Fibra</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">_id</property>
+                    <property name="name">nombre</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">2</property>
-                    <property name="name">tecnico</property>
+                    <property name="name">_id</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
-                    <property name="name">Subdireccion</property>
+                    <property name="name">tecnico</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
-                    <property name="name">Pago</property>
+                    <property name="name">Subdireccion</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">5</property>
-                    <property name="name">Estatus</property>
+                    <property name="name">Pago</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">folio</property>
+                    <property name="name">Estatus</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">7</property>
+                    <property name="name">folio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
                     <property name="name">fecha</property>
                     <property name="dataType">date</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
+                    <property name="position">9</property>
                     <property name="name">created</property>
                     <property name="dataType">date-time</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
-                    <property name="name">Diff</property>
-                    <property name="dataType">integer</property>
-                </structure>
-                <structure>
                     <property name="position">10</property>
-                    <property name="name">created_mx</property>
-                    <property name="dataType">date</property>
-                </structure>
-                <structure>
-                    <property name="position">11</property>
                     <property name="name">Cope</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">11</property>
                     <property name="name">pdf</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">12</property>
                     <property name="name">clave</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">13</property>
                     <property name="name">Area</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
+                    <property name="position">14</property>
                     <property name="name">carga_tec</property>
                     <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">Diff</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">created_mx</property>
+                    <property name="dataType">date</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -422,8 +557,8 @@ display;</expression>
                     <row id="11">
                         <cell id="12">
                             <image id="14">
-                                <property name="height">53px</property>
-                                <property name="width">217px</property>
+                                <property name="height">71px</property>
+                                <property name="width">226px</property>
                                 <property name="source">embed</property>
                                 <property name="imageName">PCLink logo.png</property>
                             </image>
@@ -525,21 +660,6 @@ display;</expression>
                 <cell id="107"/>
             </row>
         </grid>
-        <text-data id="113">
-            <property name="fontWeight">bold</property>
-            <property name="color">#FF0000</property>
-            <expression name="valueExpr">var display = "";&#13;
-var diff = BirtDateTime.diffDay(params["Fecha Inicial"].value,params["Fecha Final"].value)+ 1;&#13;
-if(diff > 20){&#13;
-	display = "Alerta: El rango elegido supera los 20 días (días elegidos: "+ diff + " días), se recomienda utilizar un rango más corto para resultados más precisos";&#13;
-}&#13;
-else if (diff &lt; 10) {&#13;
-	display = "Alerta: El rango elegido NO supera los 10 días (días elegidos: "+ diff + " días), se recomienda utilizar un rango más largo para resultados más precisos";&#13;
-}&#13;
-&#13;
-display;</expression>
-            <property name="contentType">html</property>
-        </text-data>
         <table id="16">
             <list-property name="userProperties">
                 <structure>
@@ -547,7 +667,7 @@ display;</expression>
                     <property name="type">string</property>
                 </structure>
             </list-property>
-            <property name="__ac_group_collapse_level">1,2</property>
+            <property name="__ac_group_collapse_level">2</property>
             <property name="dataSet">Union Fibra - Cobre</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -932,7 +1052,6 @@ display;</expression>
             <column id="119"/>
             <column id="73"/>
             <column id="43"/>
-            <column id="151"/>
             <header>
                 <row id="17">
                     <cell id="161">
@@ -1067,17 +1186,6 @@ display;</expression>
                             <text-property name="text">Total a pagar</text-property>
                         </label>
                     </cell>
-                    <cell id="147">
-                        <property name="backgroundColor">#7986CB</property>
-                        <property name="color">#FFFFFF</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <label id="152">
-                            <text-property name="text">OS escaneada</text-property>
-                        </label>
-                    </cell>
                 </row>
             </header>
             <group id="56">
@@ -1210,14 +1318,6 @@ display;</expression>
                                 <property name="resultSetColumn">Suma Cantidad a pagar</property>
                             </data>
                         </cell>
-                        <cell id="148">
-                            <property name="borderBottomColor">#C0C0C0</property>
-                            <property name="borderBottomStyle">dashed</property>
-                            <property name="borderBottomWidth">thin</property>
-                            <property name="borderLeftStyle">none</property>
-                            <property name="borderRightStyle">none</property>
-                            <property name="borderTopStyle">none</property>
-                        </cell>
                     </row>
                 </header>
             </group>
@@ -1257,10 +1357,6 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="154">
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">clave</property>
-                        </data>
                     </cell>
                     <cell id="29">
                         <property name="borderBottomStyle">none</property>
@@ -1315,10 +1411,6 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <data id="80">
-                            <property name="textAlign">center</property>
-                            <property name="resultSetColumn">Estatus</property>
-                        </data>
                     </cell>
                     <cell id="172">
                         <property name="borderBottomStyle">none</property>
@@ -1372,28 +1464,6 @@ display;</expression>
                             <property name="resultSetColumn">Importe a Pagar</property>
                         </data>
                     </cell>
-                    <cell id="149">
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <data id="153">
-                            <property name="paddingRight">12pt</property>
-                            <structure name="numberFormat">
-                                <property name="category">Currency</property>
-                                <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
-                            </structure>
-                            <property name="textAlign">right</property>
-                            <property name="resultSetColumn">PDF</property>
-                            <list-property name="action">
-                                <structure>
-                                    <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">row["pdf"]</expression>
-                                    <property name="targetWindow">_blank</property>
-                                </structure>
-                            </list-property>
-                        </data>
-                    </cell>
                 </row>
             </detail>
             <footer>
@@ -1421,10 +1491,6 @@ display;</expression>
                             <property name="textAlign">right</property>
                             <property name="resultSetColumn">Suma Cantidad a Pagar</property>
                         </data>
-                    </cell>
-                    <cell id="150">
-                        <property name="backgroundColor">#7986CB</property>
-                        <property name="color">#FFFFFF</property>
                         <data id="169">
                             <property name="resultSetColumn">Count Folios</property>
                         </data>

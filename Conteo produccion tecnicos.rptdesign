@@ -31,6 +31,10 @@
                     <property name="value">liquidada</property>
                     <property name="label">Fecha liquidada</property>
                 </structure>
+                <structure>
+                    <property name="value">tecnico</property>
+                    <property name="label">Fecha de carga por técnico</property>
+                </structure>
             </list-property>
             <property name="paramType">simple</property>
             <property name="controlType">list-box</property>
@@ -144,6 +148,7 @@
     </data-sources>
     <data-sets>
         <data-mart-data-set name="Union Fibra - Cobre" id="7">
+            <property name="nullsOrdering">nulls lowest</property>
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Plusvalia</property>
@@ -173,19 +178,6 @@ if (tec == "Cobre") {&#13;
             </list-property>
             <list-property name="columnHints">
                 <structure>
-                    <property name="columnName">Cope</property>
-                    <property name="analysis">dimension</property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">tecnico</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">tecnico</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">_id</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id</text-property>
@@ -200,9 +192,9 @@ if (tec == "Cobre") {&#13;
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">fecha</property>
+                    <property name="columnName">tecnico</property>
                     <property name="analysis">dimension</property>
-                    <text-property name="displayName">fecha</text-property>
+                    <text-property name="displayName">tecnico</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -214,13 +206,71 @@ if (tec == "Cobre") {&#13;
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">pdf</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
+                    <property name="columnName">metraje</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">metraje</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tarea</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tarea</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">clave</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">clave</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Cope</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
                     <property name="columnName">tec</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Division</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Area</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Pic</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_mx</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
@@ -233,12 +283,16 @@ if (tec == "Cobre") {&#13;
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Plusvalia</property>
-                    <property name="analysis">measure</property>
+                    <property name="columnName">observaciones</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">observaciones</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">created_mx</property>
+                    <property name="columnName">carga_tec</property>
                     <property name="analysis">dimension</property>
+                    <text-property name="displayName">carga_tec</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -247,22 +301,22 @@ if (tec == "Cobre") {&#13;
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">Cope</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">tecnico</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
                         <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">4</property>
+                        <property name="position">2</property>
                         <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tecnico</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">telefono</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -272,66 +326,76 @@ if (tec == "Cobre") {&#13;
                     </structure>
                     <structure>
                         <property name="position">6</property>
-                        <property name="name">telefono</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">7</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
-                        <property name="name">tec</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">9</property>
-                        <property name="name">_id.folio</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">10</property>
+                        <property name="position">7</property>
                         <property name="name">metraje</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">8</property>
                         <property name="name">tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">9</property>
                         <property name="name">clave</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">10</property>
+                        <property name="name">Cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
                         <property name="name">Division</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">14</property>
+                        <property name="position">13</property>
                         <property name="name">Area</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">15</property>
-                        <property name="name">observaciones</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">16</property>
+                        <property name="position">14</property>
                         <property name="name">Pic</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">15</property>
                         <property name="name">created_mx</property>
                         <property name="dataType">date-time</property>
                     </structure>
                     <structure>
+                        <property name="position">16</property>
+                        <property name="name">_id.folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">observaciones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
                         <property name="position">18</property>
+                        <property name="name">carga_tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
                         <property name="name">Plusvalia</property>
                         <property name="dataType">integer</property>
                     </structure>
@@ -342,22 +406,22 @@ if (tec == "Cobre") {&#13;
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">Cope</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">tecnico</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
                     <property name="name">_id</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">4</property>
+                    <property name="position">2</property>
                     <property name="name">folio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tecnico</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">telefono</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -367,63 +431,73 @@ if (tec == "Cobre") {&#13;
                 </structure>
                 <structure>
                     <property name="position">6</property>
-                    <property name="name">telefono</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">7</property>
                     <property name="name">pdf</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">8</property>
-                    <property name="name">tec</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">9</property>
-                    <property name="name">_id.folio</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">10</property>
+                    <property name="position">7</property>
                     <property name="name">metraje</property>
                     <property name="dataType">integer</property>
                 </structure>
                 <structure>
-                    <property name="position">11</property>
+                    <property name="position">8</property>
                     <property name="name">tarea</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">12</property>
+                    <property name="position">9</property>
                     <property name="name">clave</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">13</property>
+                    <property name="position">10</property>
+                    <property name="name">Cope</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">tec</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
                     <property name="name">Division</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">14</property>
+                    <property name="position">13</property>
                     <property name="name">Area</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">15</property>
-                    <property name="name">observaciones</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">16</property>
+                    <property name="position">14</property>
                     <property name="name">Pic</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">17</property>
+                    <property name="position">15</property>
                     <property name="name">created_mx</property>
                     <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">_id.folio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">observaciones</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">carga_tec</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">first_name</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -747,6 +821,18 @@ if(count == 2){&#13;
                     <expression name="expression" type="javascript">dataSetRow["created_mx"]</expression>
                     <property name="dataType">date-time</property>
                 </structure>
+                <structure>
+                    <property name="name">carga_tec</property>
+                    <text-property name="displayName">carga_tec</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["carga_tec"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">first_name</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["first_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">1000000</property>
             <list-property name="sort">
@@ -763,6 +849,7 @@ if(count == 2){&#13;
             <column id="224"/>
             <column id="219"/>
             <column id="335"/>
+            <column id="343"/>
             <column id="230"/>
             <column id="274"/>
             <column id="116"/>
@@ -781,6 +868,7 @@ if(count == 2){&#13;
             <column id="206"/>
             <column id="281"/>
             <column id="326"/>
+            <column id="351"/>
             <header>
                 <row id="74">
                     <cell id="75">
@@ -860,6 +948,18 @@ if(count == 2){&#13;
                         <text id="336">
                             <property name="contentType">auto</property>
                             <text-property name="content"><![CDATA[Fecha de carga]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="338">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <text id="344">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Fecha de carga por TÉCNICO]]></text-property>
                         </text>
                     </cell>
                     <cell id="226">
@@ -986,6 +1086,17 @@ if(count == 2){&#13;
                             <text-property name="text">¿Cargado PIC?</text-property>
                         </label>
                     </cell>
+                    <cell id="346">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <label id="352">
+                            <text-property name="text">Conexión</text-property>
+                        </label>
+                    </cell>
                 </row>
             </header>
             <group id="140">
@@ -1065,6 +1176,13 @@ if(count == 2){&#13;
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
                         </cell>
+                        <cell id="339">
+                            <property name="borderBottomStyle">dashed</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
                         <cell id="227">
                             <property name="borderBottomStyle">dashed</property>
                             <property name="borderBottomWidth">thin</property>
@@ -1136,6 +1254,13 @@ if(count == 2){&#13;
                             <property name="borderTopStyle">none</property>
                         </cell>
                         <cell id="322">
+                            <property name="borderBottomStyle">dashed</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                        </cell>
+                        <cell id="347">
                             <property name="borderBottomStyle">dashed</property>
                             <property name="borderBottomWidth">thin</property>
                             <property name="borderLeftStyle">none</property>
@@ -1254,6 +1379,23 @@ if(count == 2){&#13;
                                 </structure>
                                 <property name="textAlign">left</property>
                                 <property name="resultSetColumn">created_mx</property>
+                            </data>
+                        </cell>
+                        <cell id="340">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="345">
+                                <property name="marginLeft">1pt</property>
+                                <property name="marginRight">1pt</property>
+                                <structure name="dateTimeFormat">
+                                    <property name="category">Long Date</property>
+                                    <property name="pattern">Long Date</property>
+                                </structure>
+                                <property name="textAlign">left</property>
+                                <property name="resultSetColumn">carga_tec</property>
                             </data>
                         </cell>
                         <cell id="292">
@@ -1413,6 +1555,18 @@ if(count == 2){&#13;
                                 <property name="resultSetColumn">Pic</property>
                             </data>
                         </cell>
+                        <cell id="348">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderTopStyle">none</property>
+                            <data id="353">
+                                <property name="marginLeft">5pt</property>
+                                <property name="marginRight">5pt</property>
+                                <property name="resultSetColumn">first_name</property>
+                            </data>
+                        </cell>
                     </row>
                 </header>
             </group>
@@ -1455,6 +1609,12 @@ if(count == 2){&#13;
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="333">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="341">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
@@ -1531,6 +1691,12 @@ if(count == 2){&#13;
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
+                    <cell id="349">
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
                 </row>
             </detail>
             <footer>
@@ -1577,6 +1743,10 @@ if(count == 2){&#13;
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
                     </cell>
+                    <cell id="342">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
                     <cell id="229">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
@@ -1618,6 +1788,10 @@ if(count == 2){&#13;
                         <property name="color">#FFFFFF</property>
                     </cell>
                     <cell id="325">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
+                    </cell>
+                    <cell id="350">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
                     </cell>
