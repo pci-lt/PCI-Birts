@@ -26,15 +26,19 @@ var month = hoy.getMonth() + 1;&#13;
 var year = hoy.getFullYear();&#13;
 var display = "";&#13;
 &#13;
-if (day > 12 &amp;&amp; day &lt; 26) {&#13;
+if (day >= 12 &amp;&amp; day &lt;= 26) {&#13;
 &#13;
 	month = "0"+ month;&#13;
 	 display = year + "-" + month + "-11";&#13;
 &#13;
+}else if (day > 26 &amp;&amp; day &lt;= 31) {&#13;
+	month = "0"+ month;&#13;
+	display = year + "-" + month + "-26";&#13;
+&#13;
 }else{&#13;
 &#13;
-	if (month == 12) {&#13;
-		month = 1;&#13;
+	if (month == 1) {&#13;
+		month = 12;&#13;
 		year = year - 1;&#13;
 	}else{&#13;
 		month = month - 1;&#13;
@@ -68,10 +72,20 @@ var month = hoy.getMonth() + 1;&#13;
 var year = hoy.getFullYear();&#13;
 var display = "";&#13;
 &#13;
-if (day > 12 &amp;&amp; day &lt; 26) {&#13;
+if (day >= 12 &amp;&amp; day &lt;= 26) {&#13;
 &#13;
 	month = "0"+ month;&#13;
 	 display = year + "-" + month + "-25";&#13;
+&#13;
+}else if (day >= 26 &amp;&amp; day &lt;= 31) {&#13;
+	&#13;
+	month = month +1;&#13;
+	if (month == 13) {&#13;
+		month = 1;&#13;
+		year = year + 1&#13;
+	}&#13;
+	month = "0"+ month;&#13;
+	display = year + "-" + month + "-10";&#13;
 &#13;
 }else{&#13;
 &#13;
@@ -861,6 +875,9 @@ if (payment == "TN" &amp;&amp; periodo == "Dentro") {&#13;
 	display = 20.00;&#13;
 }&#13;
 &#13;
+if (payment == "Queja") {&#13;
+	display = 0.0;&#13;
+}&#13;
 display;</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">false</property>
@@ -1031,6 +1048,23 @@ display;</expression>
                     <expression name="expression" type="javascript">dataSetRow["carga_tec"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">Count Quejas</property>
+                    <text-property name="displayName">CQ</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Tecnico</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">COUNTDISTINCT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["_id"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">row["Pago"] == "Queja"</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">-727379968</property>
             <list-property name="sort">
@@ -1161,7 +1195,7 @@ display;</expression>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                         <label id="120">
-                            <text-property name="text">Folio</text-property>
+                            <text-property name="text">Quejas reportadas / Folio OS</text-property>
                         </label>
                     </cell>
                     <cell id="68">
@@ -1288,6 +1322,10 @@ display;</expression>
                             <property name="borderLeftStyle">none</property>
                             <property name="borderRightStyle">none</property>
                             <property name="borderTopStyle">none</property>
+                            <data id="275">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">Count Quejas</property>
+                            </data>
                         </cell>
                         <cell id="70">
                             <property name="borderBottomColor">#C0C0C0</property>
@@ -1325,8 +1363,25 @@ display;</expression>
                 <row id="26">
                     <list-property name="highlightRules">
                         <structure>
+                            <property name="operator">ge</property>
+                            <property name="backgroundColor">#FFF59D</property>
+                            <expression name="testExpr" type="javascript">row["Diff"]</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">3</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
                             <property name="operator">eq</property>
-                            <property name="backgroundColor">#FFCDD2</property>
+                            <property name="backgroundColor">#B39DDB</property>
+                            <property name="color">#000000</property>
+                            <expression name="testExpr" type="javascript">row["Pago"]</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">"Queja"</value>
+                            </simple-property-list>
+                        </structure>
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#EF9A9A</property>
                             <property name="color">#000000</property>
                             <expression name="testExpr" type="javascript">row["Periodo"]</expression>
                             <simple-property-list name="value1">
@@ -1357,6 +1412,10 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
+                        <data id="276">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">clave</property>
+                        </data>
                     </cell>
                     <cell id="29">
                         <property name="borderBottomStyle">none</property>
@@ -1411,6 +1470,10 @@ display;</expression>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
+                        <data id="277">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Estatus</property>
+                        </data>
                     </cell>
                     <cell id="172">
                         <property name="borderBottomStyle">none</property>
@@ -1490,9 +1553,6 @@ display;</expression>
                             </structure>
                             <property name="textAlign">right</property>
                             <property name="resultSetColumn">Suma Cantidad a Pagar</property>
-                        </data>
-                        <data id="169">
-                            <property name="resultSetColumn">Count Folios</property>
                         </data>
                     </cell>
                 </row>

@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
+    <property name="units">in</property>
+    <property name="theme">ThemesReportItems31.Modern</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">/ThemesReportItems31.rptlibrary</property>
+            <property name="namespace">ThemesReportItems31</property>
+        </structure>
+    </list-property>
+    <parameters>
+        <scalar-parameter name="Division" id="123">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">metro</property>
+                    <property name="label">Metro</property>
+                </structure>
+                <structure>
+                    <property name="value">norte</property>
+                    <property name="label">Norte</property>
+                </structure>
+                <structure>
+                    <property name="value">occidente</property>
+                    <property name="label">Occidente</property>
+                </structure>
+                <structure>
+                    <property name="value">sur</property>
+                    <property name="label">Sur</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Tecnologia" id="124">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">Cobre</property>
+                    <property name="label">Cobre</property>
+                </structure>
+                <structure>
+                    <property name="value">FTTH</property>
+                    <property name="label">FTHH</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Cobranza" id="126">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">con oc</property>
+                    <property name="label">Con OC Carso</property>
+                </structure>
+                <structure>
+                    <property name="value">sin oc</property>
+                    <property name="label">Sin OC Carso</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <data-mart-data-source name="db_direccion" id="4">
+            <property name="datamartURL">/account_1259/Resources/db_direccion</property>
+            <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Tecnologia</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Tecnologia"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Division</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Division"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Cobranza</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Cobranza"].value</value>
+                    </simple-property-list>
+                </structure>
+            </list-property>
+        </data-mart-data-source>
+    </data-sources>
+    <data-sets>
+        <data-mart-data-set name="Join Todo" id="5">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">folio_os</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio_os</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha_liquidada</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha_liquidada</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">division</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">division</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OS - OC Contratista::oc_carso</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">oc_carso</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio_oc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio_oc</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha_oc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha_oc</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Expediente Factura Carso::oc_carso</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">oc_carso</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subtotal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subtotal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">total</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">factura.file_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">factura.file_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">factura.file_url</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">factura.file_url</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fecha_sc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">fecha_sc</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus_sc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus_sc</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">factura_sc.file_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">factura_sc.file_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">factura_sc.file_url</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">factura_sc.file_url</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">folio_os</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">fecha_liquidada</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">OS - OC Contratista::oc_carso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">folio_oc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">fecha_oc</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Expediente Factura Carso::oc_carso</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">factura.file_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">factura.file_url</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">fecha_sc</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">estatus_sc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">factura_sc.file_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">factura_sc.file_url</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">tecnologia</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">db_direccion</property>
+            <property name="dataObject">Join Final</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">folio_os</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">fecha_liquidada</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">area</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">division</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">OS - OC Contratista::oc_carso</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">folio_oc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">fecha_oc</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">fecha</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">estatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Expediente Factura Carso::oc_carso</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">subtotal</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">total</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">factura.file_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">factura.file_url</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">fecha_sc</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">estatus_sc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">factura_sc.file_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">factura_sc.file_url</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">tecnologia</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="6">
+            <property name="dataSet">Join Todo</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">folio_os</property>
+                    <text-property name="displayName">folio_os</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["folio_os"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_liquidada</property>
+                    <text-property name="displayName">fecha_liquidada</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha_liquidada"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">area</property>
+                    <text-property name="displayName">area</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["area"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">division</property>
+                    <text-property name="displayName">division</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["division"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OS - OC Contratista::oc_carso</property>
+                    <text-property name="displayName">oc_carso</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["OS - OC Contratista::oc_carso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">folio_oc</property>
+                    <text-property name="displayName">folio_oc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["folio_oc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_oc</property>
+                    <text-property name="displayName">fecha_oc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha_oc"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha</property>
+                    <text-property name="displayName">fecha</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Expediente Factura Carso::oc_carso</property>
+                    <text-property name="displayName">oc_carso</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Expediente Factura Carso::oc_carso"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">subtotal</property>
+                    <text-property name="displayName">subtotal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["subtotal"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">total</property>
+                    <text-property name="displayName">total</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">factura.file_name</property>
+                    <text-property name="displayName">factura.file_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["factura.file_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">factura.file_url</property>
+                    <text-property name="displayName">factura.file_url</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["factura.file_url"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">fecha_sc</property>
+                    <text-property name="displayName">fecha_sc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["fecha_sc"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus_sc</property>
+                    <text-property name="displayName">estatus_sc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estatus_sc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">factura_sc.file_name</property>
+                    <text-property name="displayName">factura_sc.file_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["factura_sc.file_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">factura_sc.file_url</property>
+                    <text-property name="displayName">factura_sc.file_url</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["factura_sc.file_url"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tecnologia</property>
+                    <text-property name="displayName">tecnologia</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tecnologia"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">10000</property>
+            <column id="100"/>
+            <column id="101"/>
+            <column id="102"/>
+            <column id="103"/>
+            <column id="104"/>
+            <column id="105"/>
+            <column id="106"/>
+            <column id="107"/>
+            <column id="108"/>
+            <column id="109"/>
+            <column id="110"/>
+            <column id="111"/>
+            <column id="112"/>
+            <column id="113"/>
+            <column id="114"/>
+            <column id="115"/>
+            <column id="116"/>
+            <column id="117"/>
+            <column id="121"/>
+            <header>
+                <row id="7">
+                    <cell id="8">
+                        <label id="9">
+                            <text-property name="text">FOLIO</text-property>
+                        </label>
+                    </cell>
+                    <cell id="10">
+                        <label id="11">
+                            <text-property name="text">FECHA LIQUIDACIÓN</text-property>
+                        </label>
+                    </cell>
+                    <cell id="12">
+                        <label id="13">
+                            <text-property name="text">MES</text-property>
+                        </label>
+                    </cell>
+                    <cell id="14">
+                        <label id="15">
+                            <text-property name="text">DIVISIÓN</text-property>
+                        </label>
+                    </cell>
+                    <cell id="16">
+                        <label id="17">
+                            <text-property name="text">ÁREA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="18">
+                        <label id="19">
+                            <text-property name="text"># OC</text-property>
+                        </label>
+                    </cell>
+                    <cell id="20">
+                        <label id="21">
+                            <text-property name="text">MES</text-property>
+                        </label>
+                    </cell>
+                    <cell id="22">
+                        <label id="23">
+                            <text-property name="text">FECHA DE CARGA OC</text-property>
+                        </label>
+                    </cell>
+                    <cell id="24">
+                        <label id="25">
+                            <text-property name="text">FACTURA PCI</text-property>
+                        </label>
+                    </cell>
+                    <cell id="26">
+                        <label id="27">
+                            <text-property name="text">FECHA REGISTRO DE FACTURA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="28">
+                        <label id="29">
+                            <text-property name="text">MES</text-property>
+                        </label>
+                    </cell>
+                    <cell id="30">
+                        <label id="31">
+                            <text-property name="text">SUBTOTAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="32">
+                        <label id="33">
+                            <text-property name="text">TOTAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="34">
+                        <label id="35">
+                            <text-property name="text">FACTURA SOCIO COMERCIAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="36">
+                        <label id="37">
+                            <text-property name="text">FECHA FACTURA</text-property>
+                        </label>
+                    </cell>
+                    <cell id="38">
+                        <label id="39">
+                            <text-property name="text">MES</text-property>
+                        </label>
+                    </cell>
+                    <cell id="40">
+                        <label id="41">
+                            <text-property name="text">SUBTOTAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="42">
+                        <label id="43">
+                            <text-property name="text">TOTAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="118">
+                        <label id="122">
+                            <text-property name="text">ESTATUS</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="44">
+                    <cell id="45">
+                        <data id="46">
+                            <property name="resultSetColumn">folio_os</property>
+                        </data>
+                    </cell>
+                    <cell id="47">
+                        <data id="48">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Short Date</property>
+                                <property name="pattern">Short Date</property>
+                                <property name="locale">es_MX</property>
+                            </structure>
+                            <property name="resultSetColumn">fecha_liquidada</property>
+                        </data>
+                    </cell>
+                    <cell id="49"/>
+                    <cell id="51">
+                        <data id="52">
+                            <property name="resultSetColumn">division</property>
+                        </data>
+                    </cell>
+                    <cell id="53">
+                        <data id="50">
+                            <property name="resultSetColumn">area</property>
+                        </data>
+                    </cell>
+                    <cell id="55">
+                        <data id="56">
+                            <property name="resultSetColumn">folio_oc</property>
+                        </data>
+                    </cell>
+                    <cell id="57"/>
+                    <cell id="59">
+                        <data id="58">
+                            <property name="resultSetColumn">fecha_oc</property>
+                        </data>
+                    </cell>
+                    <cell id="61">
+                        <data id="70">
+                            <property name="resultSetColumn">factura.file_name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["factura.file_url"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="63">
+                        <data id="64">
+                            <property name="resultSetColumn">fecha</property>
+                        </data>
+                    </cell>
+                    <cell id="65"/>
+                    <cell id="67">
+                        <data id="66">
+                            <property name="resultSetColumn">subtotal</property>
+                        </data>
+                    </cell>
+                    <cell id="69">
+                        <data id="68">
+                            <property name="resultSetColumn">total</property>
+                        </data>
+                    </cell>
+                    <cell id="71">
+                        <data id="78">
+                            <property name="resultSetColumn">factura_sc.file_name</property>
+                            <list-property name="action">
+                                <structure>
+                                    <property name="linkType">hyperlink</property>
+                                    <expression name="uri" type="javascript">row["factura_sc.file_url"]</expression>
+                                    <property name="targetWindow">_blank</property>
+                                </structure>
+                            </list-property>
+                        </data>
+                    </cell>
+                    <cell id="73">
+                        <data id="74">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Short Date</property>
+                                <property name="pattern">Short Date</property>
+                                <property name="locale">es_MX</property>
+                            </structure>
+                            <property name="resultSetColumn">fecha_sc</property>
+                        </data>
+                    </cell>
+                    <cell id="75">
+                        <data id="125">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">MMMM</property>
+                                <property name="locale">es_MX</property>
+                            </structure>
+                            <property name="resultSetColumn">fecha_sc</property>
+                        </data>
+                    </cell>
+                    <cell id="77"/>
+                    <cell id="79"/>
+                    <cell id="119">
+                        <data id="76">
+                            <property name="resultSetColumn">estatus_sc</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="81">
+                    <cell id="82"/>
+                    <cell id="83"/>
+                    <cell id="84"/>
+                    <cell id="85"/>
+                    <cell id="86"/>
+                    <cell id="87"/>
+                    <cell id="88"/>
+                    <cell id="89"/>
+                    <cell id="90"/>
+                    <cell id="91"/>
+                    <cell id="92"/>
+                    <cell id="93"/>
+                    <cell id="94"/>
+                    <cell id="95"/>
+                    <cell id="96"/>
+                    <cell id="97"/>
+                    <cell id="98"/>
+                    <cell id="99"/>
+                    <cell id="120"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

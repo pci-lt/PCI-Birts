@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201710020040</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <property name="units">in</property>
     <property name="theme">ThemesReportItems31.Modern</property>
     <property name="iconFile">/templates/blank_report.gif</property>
@@ -14,6 +14,32 @@
         </structure>
     </list-property>
     <parameters>
+        <scalar-parameter name="Base" id="191">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">creacion</property>
+                    <property name="label">Fecha de creación</property>
+                </structure>
+                <structure>
+                    <property name="value">liquidada</property>
+                    <property name="label">Fecha de liquidación</property>
+                </structure>
+                <structure>
+                    <property name="value">tecnico</property>
+                    <property name="label">Fecha de carga contratista/técnico</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Fecha Inicial" id="5">
             <property name="valueType">static</property>
             <property name="dataType">date</property>
@@ -51,6 +77,14 @@
                 <structure>
                     <property name="value">sur</property>
                     <property name="label">Sur</property>
+                </structure>
+                <structure>
+                    <property name="value">occidente</property>
+                    <property name="label">Occidente</property>
+                </structure>
+                <structure>
+                    <property name="value">norte</property>
+                    <property name="label">Norte</property>
                 </structure>
             </list-property>
             <property name="paramType">simple</property>
@@ -106,7 +140,7 @@
                 <structure>
                     <property name="paramName">Base</property>
                     <simple-property-list name="expression">
-                        <value type="constant">creacion</value>
+                        <value type="javascript">params["Base"].value</value>
                     </simple-property-list>
                 </structure>
                 <structure>
@@ -159,13 +193,6 @@
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">adicional</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">adicional</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
                     <property name="columnName">fecha</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">fecha</text-property>
@@ -176,6 +203,34 @@
                     <property name="columnName">pisaplex</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">pisaplex</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cliente</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cliente</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">adicional</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">adicional</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">f_carga</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">f_carga</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">created</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -204,8 +259,22 @@
                     <property name="compressed">false</property>
                 </structure>
                 <structure>
-                    <property name="columnName">Usuario</property>
+                    <property name="columnName">Estatus</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Conexion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Conexion</text-property>
                     <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
@@ -213,6 +282,7 @@
                 <structure>
                     <property name="columnName">Usuario</property>
                     <property name="analysis">dimension</property>
+                    <text-property name="displayName">Usuario</text-property>
                     <property name="horizontalAlign">left</property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
@@ -222,37 +292,37 @@
                 <list-property name="resultSet">
                     <structure>
                         <property name="position">1</property>
-                        <property name="name">cliente</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">Estatus</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">Conexion</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
                         <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">5</property>
+                        <property name="position">2</property>
                         <property name="name">telefono</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">6</property>
+                        <property name="position">3</property>
                         <property name="name">tarea</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">4</property>
                         <property name="name">metros</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">fecha</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">pisaplex</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">cliente</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -262,13 +332,13 @@
                     </structure>
                     <structure>
                         <property name="position">9</property>
-                        <property name="name">fecha</property>
+                        <property name="name">f_carga</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
-                        <property name="name">pisaplex</property>
-                        <property name="dataType">integer</property>
+                        <property name="name">created</property>
+                        <property name="dataType">date</property>
                     </structure>
                     <structure>
                         <property name="position">11</property>
@@ -292,47 +362,67 @@
                     </structure>
                     <structure>
                         <property name="position">15</property>
+                        <property name="name">Estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">Conexion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
                         <property name="name">Usuario</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">tec</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
             </structure>
             <property name="dataSource">db_sep2018</property>
-            <property name="dataObject">Join Fibra MyS - Nombres</property>
+            <property name="dataObject">Join Union - Nombres</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
-                    <property name="name">cliente</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">Estatus</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">Conexion</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
                     <property name="name">folio</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">5</property>
+                    <property name="position">2</property>
                     <property name="name">telefono</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">6</property>
+                    <property name="position">3</property>
                     <property name="name">tarea</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">7</property>
+                    <property name="position">4</property>
                     <property name="name">metros</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">fecha</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">pisaplex</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">cliente</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -342,13 +432,13 @@
                 </structure>
                 <structure>
                     <property name="position">9</property>
-                    <property name="name">fecha</property>
+                    <property name="name">f_carga</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">10</property>
-                    <property name="name">pisaplex</property>
-                    <property name="dataType">integer</property>
+                    <property name="name">created</property>
+                    <property name="dataType">date</property>
                 </structure>
                 <structure>
                     <property name="position">11</property>
@@ -372,7 +462,27 @@
                 </structure>
                 <structure>
                     <property name="position">15</property>
+                    <property name="name">Estatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">_id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">Conexion</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
                     <property name="name">Usuario</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">tec</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -483,8 +593,33 @@
                     <expression name="expression" type="javascript">dataSetRow["Usuario"]</expression>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="name">f_carga</property>
+                    <text-property name="displayName">f_carga</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["f_carga"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">created</property>
+                    <text-property name="displayName">created</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["created"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">_id</property>
+                    <text-property name="displayName">_id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["_id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">tec</property>
+                    <text-property name="displayName">tec</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["tec"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">100000</property>
+            <column id="213"/>
             <column id="171"/>
             <column id="172"/>
             <column id="173"/>
@@ -500,8 +635,15 @@
             <column id="183"/>
             <column id="184"/>
             <column id="188"/>
+            <column id="195"/>
+            <column id="199"/>
             <header>
                 <row id="98">
+                    <cell id="210">
+                        <label id="214">
+                            <text-property name="text">Tecnología</text-property>
+                        </label>
+                    </cell>
                     <cell id="99">
                         <label id="100">
                             <text-property name="text">Folio</text-property>
@@ -577,10 +719,26 @@
                             <text-property name="text">Estatus de orden</text-property>
                         </label>
                     </cell>
+                    <cell id="192">
+                        <label id="200">
+                            <text-property name="text">Fecha de carga por contratista</text-property>
+                        </label>
+                    </cell>
+                    <cell id="196">
+                        <label id="201">
+                            <text-property name="text">Fecha de creación</text-property>
+                        </label>
+                    </cell>
                 </row>
             </header>
             <detail>
                 <row id="127">
+                    <cell id="211">
+                        <data id="215">
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">tec</property>
+                        </data>
+                    </cell>
                     <cell id="128">
                         <data id="129">
                             <property name="resultSetColumn">folio</property>
@@ -657,10 +815,23 @@
                             <property name="resultSetColumn">Estatus</property>
                         </data>
                     </cell>
+                    <cell id="193">
+                        <data id="202">
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">f_carga</property>
+                        </data>
+                    </cell>
+                    <cell id="197">
+                        <data id="203">
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">created</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
                 <row id="156">
+                    <cell id="212"/>
                     <cell id="157"/>
                     <cell id="158"/>
                     <cell id="159"/>
@@ -676,6 +847,8 @@
                     <cell id="169"/>
                     <cell id="170"/>
                     <cell id="187"/>
+                    <cell id="194"/>
+                    <cell id="198"/>
                 </row>
             </footer>
         </table>

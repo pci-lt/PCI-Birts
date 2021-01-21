@@ -26,7 +26,6 @@
                     <property name="columnName">_id</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id</text-property>
-                    <text-property name="heading">_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -34,7 +33,6 @@
                     <property name="columnName">objetivo</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">objetivo</text-property>
-                    <text-property name="heading">objetivo</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -42,7 +40,6 @@
                     <property name="columnName">medida</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">medida</text-property>
-                    <text-property name="heading">medida</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -50,7 +47,6 @@
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">area</text-property>
-                    <text-property name="heading">area</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -58,7 +54,6 @@
                     <property name="columnName">departamento</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">departamento</text-property>
-                    <text-property name="heading">departamento</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -66,15 +61,6 @@
                     <property name="columnName">puesto</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">puesto</text-property>
-                    <text-property name="heading">puesto</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">gerencia</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">gerencia</text-property>
-                    <text-property name="heading">gerencia</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -82,7 +68,6 @@
                     <property name="columnName">responsable</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">responsable</text-property>
-                    <text-property name="heading">responsable</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -90,11 +75,28 @@
                     <property name="columnName">nombre</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">nombre</text-property>
-                    <text-property name="heading">nombre</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Editar</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -103,6 +105,13 @@
                     <expression name="expr" type="javascript">row["area"]</expression>
                     <simple-property-list name="value1">
                         <value>"[ \"DIRECCION REDES\"]"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"activo"</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -140,17 +149,17 @@
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">gerencia</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
                         <property name="name">responsable</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">8</property>
                         <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">numero</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -158,10 +167,15 @@
                         <property name="name">Editar</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">perfil_puesto</property>
-            <property name="dataObject">Objetivos General 2</property>
+            <property name="dataObject">Join Objetivos General</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -195,22 +209,27 @@
                 </structure>
                 <structure>
                     <property name="position">7</property>
-                    <property name="name">gerencia</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
                     <property name="name">responsable</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">8</property>
                     <property name="name">nombre</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">numero</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">10</property>
                     <property name="name">Editar</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">estatus</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -313,6 +332,13 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <list-property name="filter">
                 <structure>
@@ -320,6 +346,13 @@
                     <expression name="expr" type="javascript">row["area"]</expression>
                     <simple-property-list name="value1">
                         <value>"DIRECCION REDES"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"activo"</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -395,10 +428,15 @@
                         <property name="name">month</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">perfil_puesto</property>
-            <property name="dataObject">Union Objetivos por Mes</property>
+            <property name="dataObject">Join Union Objetivos por Mes - Plantilla</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -469,6 +507,11 @@
                     <property name="position">14</property>
                     <property name="name">month</property>
                     <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">estatus</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -555,12 +598,6 @@ display;</expression>
                     <property name="name">responsable</property>
                     <text-property name="displayName">responsable</text-property>
                     <expression name="expression" type="javascript">dataSetRow["responsable"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">gerencia</property>
-                    <text-property name="displayName">gerencia</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["gerencia"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -1019,7 +1056,7 @@ display;</expression>
                 </row>
             </footer>
         </table>
-        <table name="Datos" id="918">
+        <table name="Datos1" id="1220">
             <list-property name="userProperties">
                 <structure>
                     <property name="name">__ac_group_collapse_level</property>
@@ -1403,149 +1440,149 @@ if (meses == 0 || meses == null) {&#13;
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
-            <column id="301"/>
-            <column id="302">
+            <column id="1327"/>
+            <column id="1328">
                 <property name="textAlign">center</property>
             </column>
-            <column id="303">
+            <column id="1329">
                 <property name="textAlign">center</property>
             </column>
-            <column id="304">
+            <column id="1330">
                 <property name="textAlign">center</property>
             </column>
-            <column id="305">
+            <column id="1331">
                 <property name="textAlign">center</property>
             </column>
-            <column id="306">
+            <column id="1332">
                 <property name="textAlign">center</property>
             </column>
-            <column id="307">
+            <column id="1333">
                 <property name="textAlign">center</property>
             </column>
-            <column id="308">
+            <column id="1334">
                 <property name="textAlign">center</property>
             </column>
-            <column id="309">
+            <column id="1335">
                 <property name="textAlign">center</property>
             </column>
-            <column id="310">
+            <column id="1336">
                 <property name="textAlign">center</property>
             </column>
-            <column id="322">
+            <column id="1337">
                 <property name="textAlign">center</property>
             </column>
-            <column id="318">
+            <column id="1338">
                 <property name="textAlign">center</property>
             </column>
-            <column id="314">
+            <column id="1339">
                 <property name="textAlign">center</property>
             </column>
-            <column id="326">
+            <column id="1340">
                 <property name="textAlign">center</property>
             </column>
             <header>
-                <row id="919">
-                    <cell id="923">
+                <row id="1221">
+                    <cell id="1222">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="924">
+                        <label id="1223">
                             <text-property name="text">Puesto</text-property>
                         </label>
                     </cell>
-                    <cell id="925">
+                    <cell id="1224">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="926">
+                        <label id="1225">
                             <text-property name="text">Ene</text-property>
                         </label>
                     </cell>
-                    <cell id="927">
+                    <cell id="1226">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="246">
+                        <label id="1227">
                             <text-property name="text">Feb</text-property>
                         </label>
                     </cell>
-                    <cell id="928">
+                    <cell id="1228">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="248">
+                        <label id="1229">
                             <text-property name="text">Mar</text-property>
                         </label>
                     </cell>
-                    <cell id="249">
+                    <cell id="1230">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="929">
+                        <label id="1231">
                             <text-property name="text">Abr</text-property>
                         </label>
                     </cell>
-                    <cell id="930">
+                    <cell id="1232">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="931">
+                        <label id="1233">
                             <text-property name="text">May</text-property>
                         </label>
                     </cell>
-                    <cell id="932">
+                    <cell id="1234">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="933">
+                        <label id="1235">
                             <text-property name="text">Jun</text-property>
                         </label>
                     </cell>
-                    <cell id="255">
+                    <cell id="1236">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="256">
+                        <label id="1237">
                             <text-property name="text">Jul</text-property>
                         </label>
                     </cell>
-                    <cell id="934">
+                    <cell id="1238">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="935">
+                        <label id="1239">
                             <text-property name="text">Ago</text-property>
                         </label>
                     </cell>
-                    <cell id="259">
+                    <cell id="1240">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="936">
+                        <label id="1241">
                             <text-property name="text">Sep</text-property>
                         </label>
                     </cell>
-                    <cell id="319">
+                    <cell id="1242">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="327">
+                        <label id="1243">
                             <text-property name="text">Oct</text-property>
                         </label>
                     </cell>
-                    <cell id="315">
+                    <cell id="1244">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="328">
+                        <label id="1245">
                             <text-property name="text">Nov</text-property>
                         </label>
                     </cell>
-                    <cell id="311">
+                    <cell id="1246">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="329">
+                        <label id="1247">
                             <text-property name="text">Dic</text-property>
                         </label>
                     </cell>
-                    <cell id="323">
+                    <cell id="1248">
                         <property name="backgroundColor">#0D47A1</property>
                         <property name="color">#FFFFFF</property>
-                        <label id="330">
+                        <label id="1249">
                             <text-property name="text">Promedio</text-property>
                         </label>
                     </cell>
                 </row>
             </header>
-            <group id="403">
+            <group id="1250">
                 <property name="groupName">Puesto</property>
                 <expression name="keyExpr" type="javascript">row["puesto"]</expression>
                 <structure name="toc">
@@ -1553,29 +1590,29 @@ if (meses == 0 || meses == null) {&#13;
                 </structure>
                 <property name="hideDetail">false</property>
                 <header>
-                    <row id="404">
-                        <cell id="407">
-                            <data id="438">
+                    <row id="1251">
+                        <cell id="1252">
+                            <data id="1253">
                                 <property name="resultSetColumn">puesto</property>
                             </data>
                         </cell>
-                        <cell id="408"/>
-                        <cell id="409"/>
-                        <cell id="410"/>
-                        <cell id="411"/>
-                        <cell id="412"/>
-                        <cell id="413"/>
-                        <cell id="414"/>
-                        <cell id="415"/>
-                        <cell id="416"/>
-                        <cell id="417"/>
-                        <cell id="418"/>
-                        <cell id="419"/>
-                        <cell id="420"/>
+                        <cell id="1254"/>
+                        <cell id="1255"/>
+                        <cell id="1256"/>
+                        <cell id="1257"/>
+                        <cell id="1258"/>
+                        <cell id="1259"/>
+                        <cell id="1260"/>
+                        <cell id="1261"/>
+                        <cell id="1262"/>
+                        <cell id="1263"/>
+                        <cell id="1264"/>
+                        <cell id="1265"/>
+                        <cell id="1266"/>
                     </row>
                 </header>
             </group>
-            <group id="1120">
+            <group id="1267">
                 <property name="groupName">Nombre</property>
                 <expression name="keyExpr" type="javascript">row["nombre"]</expression>
                 <structure name="toc">
@@ -1583,15 +1620,15 @@ if (meses == 0 || meses == null) {&#13;
                 </structure>
                 <property name="hideDetail">true</property>
                 <header>
-                    <row id="1121">
-                        <cell id="1122">
-                            <data id="1151">
+                    <row id="1268">
+                        <cell id="1269">
+                            <data id="1270">
                                 <property name="paddingLeft">24pt</property>
                                 <property name="resultSetColumn">nombre</property>
                             </data>
                         </cell>
-                        <cell id="1123">
-                            <data id="445">
+                        <cell id="1271">
+                            <data id="1272">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1619,7 +1656,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">1</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1627,8 +1664,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1124">
-                            <data id="446">
+                        <cell id="1273">
+                            <data id="1274">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1656,7 +1693,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">2</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1664,8 +1701,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1125">
-                            <data id="1101">
+                        <cell id="1275">
+                            <data id="1276">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1693,7 +1730,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">3</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1701,8 +1738,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1126">
-                            <data id="1106">
+                        <cell id="1277">
+                            <data id="1278">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1730,7 +1767,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">4</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1738,8 +1775,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1127">
-                            <data id="1107">
+                        <cell id="1279">
+                            <data id="1280">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1767,7 +1804,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">5</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1775,8 +1812,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1128">
-                            <data id="1108">
+                        <cell id="1281">
+                            <data id="1282">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1804,7 +1841,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">6</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1812,8 +1849,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1129">
-                            <data id="1109">
+                        <cell id="1283">
+                            <data id="1284">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1841,7 +1878,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">7</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1849,8 +1886,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1130">
-                            <data id="1115">
+                        <cell id="1285">
+                            <data id="1286">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1878,7 +1915,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">8</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1886,8 +1923,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1131">
-                            <data id="1116">
+                        <cell id="1287">
+                            <data id="1288">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1915,7 +1952,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">9</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1923,8 +1960,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1132">
-                            <data id="1117">
+                        <cell id="1289">
+                            <data id="1290">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1952,7 +1989,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">10</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1960,8 +1997,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1133">
-                            <data id="1118">
+                        <cell id="1291">
+                            <data id="1292">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -1989,7 +2026,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">11</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1997,13 +2034,13 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1134">
-                            <data id="1119">
+                        <cell id="1293">
+                            <data id="1342">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
                                 </structure>
-                                <property name="resultSetColumn">Suma Resultado Julio</property>
+                                <property name="resultSetColumn">Suma Resultado Diciembre</property>
                                 <list-property name="action">
                                     <structure>
                                         <property name="linkType">drill-through</property>
@@ -2026,7 +2063,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">12</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -2034,8 +2071,8 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="1135">
-                            <data id="442">
+                        <cell id="1295">
+                            <data id="1296">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
@@ -2047,39 +2084,39 @@ if (meses == 0 || meses == null) {&#13;
                 </header>
             </group>
             <detail>
-                <row id="938">
-                    <cell id="941"/>
-                    <cell id="268"/>
-                    <cell id="942"/>
-                    <cell id="943"/>
-                    <cell id="944"/>
-                    <cell id="945"/>
-                    <cell id="946"/>
-                    <cell id="947"/>
-                    <cell id="948"/>
-                    <cell id="949"/>
-                    <cell id="320"/>
-                    <cell id="316"/>
-                    <cell id="312"/>
-                    <cell id="324"/>
+                <row id="1297">
+                    <cell id="1298"/>
+                    <cell id="1299"/>
+                    <cell id="1300"/>
+                    <cell id="1301"/>
+                    <cell id="1302"/>
+                    <cell id="1303"/>
+                    <cell id="1304"/>
+                    <cell id="1305"/>
+                    <cell id="1306"/>
+                    <cell id="1307"/>
+                    <cell id="1308"/>
+                    <cell id="1309"/>
+                    <cell id="1310"/>
+                    <cell id="1311"/>
                 </row>
             </detail>
             <footer>
-                <row id="950">
-                    <cell id="953"/>
-                    <cell id="954"/>
-                    <cell id="291"/>
-                    <cell id="292"/>
-                    <cell id="293"/>
-                    <cell id="294"/>
-                    <cell id="295"/>
-                    <cell id="296"/>
-                    <cell id="297"/>
-                    <cell id="298"/>
-                    <cell id="321"/>
-                    <cell id="317"/>
-                    <cell id="313"/>
-                    <cell id="325"/>
+                <row id="1312">
+                    <cell id="1313"/>
+                    <cell id="1314"/>
+                    <cell id="1315"/>
+                    <cell id="1316"/>
+                    <cell id="1317"/>
+                    <cell id="1318"/>
+                    <cell id="1319"/>
+                    <cell id="1320"/>
+                    <cell id="1321"/>
+                    <cell id="1322"/>
+                    <cell id="1323"/>
+                    <cell id="1324"/>
+                    <cell id="1325"/>
+                    <cell id="1326"/>
                 </row>
             </footer>
         </table>

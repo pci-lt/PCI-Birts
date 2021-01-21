@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
+    <property name="units">in</property>
+    <property name="theme">ThemesReportItems31.Modern</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">auto layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <list-property name="libraries">
+        <structure>
+            <property name="fileName">/ThemesReportItems31.rptlibrary</property>
+            <property name="namespace">ThemesReportItems31</property>
+        </structure>
+    </list-property>
+    <data-sources>
+        <data-mart-data-source name="ricardo_lorenzo" id="4">
+            <property name="datamartURL">/account_1259/Resources/ricardo_lorenzo</property>
+            <property name="accessType">transient</property>
+        </data-mart-data-source>
+    </data-sources>
+    <data-sets>
+        <data-mart-data-set name="Union Cobrado - Pagado" id="5">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.f_pago</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id.f_pago</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Tipo</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">tec</property>
+                    <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Total</property>
+                    <property name="analysis">measure</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.f_pago</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">Tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">tec</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">ricardo_lorenzo</property>
+            <property name="dataObject">Union Pagado - Cobrado</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.f_pago</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">Tipo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">tec</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Total</property>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Cobrado - Pagado" id="6">
+            <property name="dimensions">
+                <tabular-dimension name="Tecnologia" id="7">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="8">
+                            <property name="levels">
+                                <tabular-level name="tec" id="9">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">tec</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Fechas" id="10">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="11">
+                            <property name="levels">
+                                <tabular-level name="Year" id="12">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">year</property>
+                                    <property name="dateTimeFormat">yyyy</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">_id.f_pago</property>
+                                </tabular-level>
+                                <tabular-level name="Month" id="13">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">month</property>
+                                    <property name="dateTimeFormat">MMM</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">_id.f_pago</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Tipo" id="14">
+                    <property name="defaultHierarchy">NewTabularHierarchy3</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy3" id="15">
+                            <property name="levels">
+                                <tabular-level name="Tipo" id="16">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">Tipo</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="19">
+                    <property name="measures">
+                        <tabular-measure name="Total" id="20">
+                            <expression name="measureExpression" type="javascript">dataSetRow["Total"]</expression>
+                            <property name="dataType">float</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Union Cobrado - Pagado</property>
+        </tabular-cube>
+    </cubes>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">auto</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="81">
+            <property name="cube">Cobrado - Pagado</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="105">
+                    <property name="measure">Total</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="106">
+                            <property name="aggregationOnRow">Tecnologia/tec</property>
+                            <property name="aggregationOnColumn">Tipo/Tipo</property>
+                            <property name="content">
+                                <data id="107">
+                                    <structure name="numberFormat">
+                                        <property name="category">Currency</property>
+                                        <property name="pattern">$ #,##0.00{RoundingMode=HALF_UP}</property>
+                                    </structure>
+                                    <property name="resultSetColumn">Total_Tecnologia/tec_Tipo/Tipo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="108">
+                            <property name="content">
+                                <label id="109">
+                                    <text-property name="text">Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="100">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="101">
+                            <property name="dimension">Tecnologia</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View3" id="102">
+                                    <property name="level">Tecnologia/tec</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="103">
+                                            <property name="content">
+                                                <data name="tec" id="104">
+                                                    <property name="resultSetColumn">tec</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="83">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="89">
+                            <property name="dimension">Fechas</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="90">
+                                    <property name="level">Fechas/Year</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="91">
+                                            <property name="content">
+                                                <data name="Year" id="93">
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">yyyy</property>
+                                                    </structure>
+                                                    <property name="resultSetColumn">Year</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="95">
+                                    <property name="level">Fechas/Month</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="96">
+                                            <property name="content">
+                                                <data name="Month" id="98">
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">MMM</property>
+                                                    </structure>
+                                                    <property name="resultSetColumn">Month</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="DimensionView" id="84">
+                            <property name="dimension">Tipo</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="85">
+                                    <property name="level">Tipo/Tipo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="86">
+                                            <property name="content">
+                                                <data name="Tipo" id="87">
+                                                    <property name="resultSetColumn">Tipo</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="92"/>
+                <extended-item extensionName="CrosstabCell" id="97"/>
+                <extended-item extensionName="CrosstabCell" id="82">
+                    <property name="content">
+                        <label id="112">
+                            <text-property name="text">Tecnología</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="hideMeasureHeader">true</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Tipo</property>
+                    <expression name="expression">dimension["Tipo"]["Tipo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Year</property>
+                    <expression name="expression">dimension["Fechas"]["Year"]["DateTime"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">Month</property>
+                    <expression name="expression">dimension["Fechas"]["Month"]["DateTime"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">tec</property>
+                    <expression name="expression">dimension["Tecnologia"]["tec"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Total_Tecnologia/tec_Tipo/Tipo</property>
+                    <expression name="expression">measure["Total"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Tecnologia/tec</value>
+                        <value>Tipo/Tipo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

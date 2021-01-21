@@ -26,7 +26,6 @@
                     <property name="columnName">_id</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">_id</text-property>
-                    <text-property name="heading">_id</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -34,7 +33,6 @@
                     <property name="columnName">objetivo</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">objetivo</text-property>
-                    <text-property name="heading">objetivo</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -42,7 +40,6 @@
                     <property name="columnName">medida</property>
                     <property name="analysis">measure</property>
                     <text-property name="displayName">medida</text-property>
-                    <text-property name="heading">medida</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -50,7 +47,6 @@
                     <property name="columnName">area</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">area</text-property>
-                    <text-property name="heading">area</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -58,7 +54,6 @@
                     <property name="columnName">departamento</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">departamento</text-property>
-                    <text-property name="heading">departamento</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -66,15 +61,6 @@
                     <property name="columnName">puesto</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">puesto</text-property>
-                    <text-property name="heading">puesto</text-property>
-                    <property name="indexColumn">false</property>
-                    <property name="compressed">false</property>
-                </structure>
-                <structure>
-                    <property name="columnName">gerencia</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">gerencia</text-property>
-                    <text-property name="heading">gerencia</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -82,7 +68,6 @@
                     <property name="columnName">responsable</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">responsable</text-property>
-                    <text-property name="heading">responsable</text-property>
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
@@ -90,11 +75,28 @@
                     <property name="columnName">nombre</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">nombre</text-property>
-                    <text-property name="heading">nombre</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numero</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">numero</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
                 <structure>
                     <property name="columnName">Editar</property>
                     <property name="analysis">dimension</property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
                 </structure>
             </list-property>
             <list-property name="filter">
@@ -103,6 +105,13 @@
                     <expression name="expr" type="javascript">row["area"]</expression>
                     <simple-property-list name="value1">
                         <value>"[ \"ADMINISTRACION\"]"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"activo"</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -140,17 +149,17 @@
                     </structure>
                     <structure>
                         <property name="position">7</property>
-                        <property name="name">gerencia</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">8</property>
                         <property name="name">responsable</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">8</property>
                         <property name="name">nombre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">numero</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
@@ -158,10 +167,15 @@
                         <property name="name">Editar</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">perfil_puesto</property>
-            <property name="dataObject">Objetivos General 2</property>
+            <property name="dataObject">Join Objetivos General</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -195,22 +209,27 @@
                 </structure>
                 <structure>
                     <property name="position">7</property>
-                    <property name="name">gerencia</property>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="position">8</property>
                     <property name="name">responsable</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="position">9</property>
+                    <property name="position">8</property>
                     <property name="name">nombre</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">numero</property>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">10</property>
                     <property name="name">Editar</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">estatus</property>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>
@@ -313,6 +332,13 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <list-property name="filter">
                 <structure>
@@ -320,6 +346,13 @@
                     <expression name="expr" type="javascript">row["area"]</expression>
                     <simple-property-list name="value1">
                         <value>"ADMINISTRACION"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <simple-property-list name="value1">
+                        <value>"activo"</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -395,10 +428,15 @@
                         <property name="name">month</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">perfil_puesto</property>
-            <property name="dataObject">Union Objetivos por Mes</property>
+            <property name="dataObject">Join Union Objetivos por Mes - Plantilla</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -469,6 +507,11 @@
                     <property name="position">14</property>
                     <property name="name">month</property>
                     <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">estatus</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -555,12 +598,6 @@ display;</expression>
                     <property name="name">responsable</property>
                     <text-property name="displayName">responsable</text-property>
                     <expression name="expression" type="javascript">dataSetRow["responsable"]</expression>
-                    <property name="dataType">string</property>
-                </structure>
-                <structure>
-                    <property name="name">gerencia</property>
-                    <text-property name="displayName">gerencia</text-property>
-                    <expression name="expression" type="javascript">dataSetRow["gerencia"]</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
@@ -1619,7 +1656,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">1</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1656,7 +1693,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">2</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1693,7 +1730,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">3</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1730,7 +1767,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">4</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1767,7 +1804,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">5</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1804,7 +1841,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">6</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1841,7 +1878,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">7</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1878,7 +1915,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">8</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1915,7 +1952,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">9</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1952,7 +1989,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">10</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1989,7 +2026,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">11</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1998,12 +2035,12 @@ if (meses == 0 || meses == null) {&#13;
                             </data>
                         </cell>
                         <cell id="1293">
-                            <data id="1294">
+                            <data id="1342">
                                 <structure name="numberFormat">
                                     <property name="category">Percent</property>
                                     <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
                                 </structure>
-                                <property name="resultSetColumn">Suma Resultado Julio</property>
+                                <property name="resultSetColumn">Suma Resultado Diciembre</property>
                                 <list-property name="action">
                                     <structure>
                                         <property name="linkType">drill-through</property>
@@ -2026,7 +2063,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">12</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>

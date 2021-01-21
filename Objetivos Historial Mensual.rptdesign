@@ -34,6 +34,23 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <dynamic-filter-parameter name="Estatus" id="534">
+            <text-property name="promptText">Estatus del empleado:</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="isRequired">false</property>
+            <property name="dataSetName">Join Objetivos</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["estatus"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["estatus"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="column">estatus</property>
+            <property name="displayType">simple</property>
+            <property name="controlType">list-box</property>
+            <simple-property-list name="filterOperator">
+                <value>eq</value>
+            </simple-property-list>
+        </dynamic-filter-parameter>
     </parameters>
     <data-sources>
         <data-mart-data-source name="Objetivos" id="4">
@@ -247,6 +264,13 @@
                     <property name="indexColumn">false</property>
                     <property name="compressed">false</property>
                 </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
             </list-property>
             <list-property name="filter">
                 <structure>
@@ -336,10 +360,15 @@
                         <property name="name">month</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Objetivos</property>
-            <property name="dataObject">Union Objetivos por Mes</property>
+            <property name="dataObject">Join Union Objetivos por Mes - Plantilla</property>
             <list-property name="selectedColumns">
                 <structure>
                     <property name="position">1</property>
@@ -411,6 +440,11 @@
                     <property name="name">month</property>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">estatus</property>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
         </data-mart-data-set>
     </data-sets>
@@ -434,404 +468,6 @@
         </simple-master-page>
     </page-setup>
     <body>
-        <grid id="454">
-            <property name="width">100%</property>
-            <column id="455">
-                <property name="width">50%</property>
-            </column>
-            <column id="456">
-                <property name="width">50%</property>
-            </column>
-            <row id="457">
-                <cell id="458">
-                    <extended-item extensionName="Chart" id="463">
-                        <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side">
-  <block>
-   <children _type="TitleBlock">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <label>
-     <caption value="Productividad por &#xc1;rea"/>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </label>
-   </children>
-   <children _type="Plot">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <clientArea>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </clientArea>
-   </children>
-   <children _type="Legend">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <clientArea>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </clientArea>
-    <separator>
-     <color _nil="1"/>
-    </separator>
-    <title>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </title>
-   </children>
-   <bounds _body="0.0,0.0,572.25,286.125"/>
-   <outline>
-    <color _nil="1"/>
-   </outline>
-  </block>
-  <extendedProperties name="enable.area.alt" value="false"/>
-  <extendedProperties name="enable.drill.category" value="true"/>
-  <extendedProperties name="enable.drill.series" value="true"/>
-  <extendedProperties name="jschart.series.shadow" value="false"/>
-  <sampleData>
-   <baseSampleData dataSetRepresentation="A, B, C"/>
-   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
-  </sampleData>
-  <emptyMessage>
-   <caption value="This chart contains no data."/>
-   <background _body=",64,127,127,127"/>
-   <outline>
-    <color _body=",128,127,127,127"/>
-   </outline>
-  </emptyMessage>
-  <axes>
-   <title>
-    <background _nil="1"/>
-    <outline>
-     <color _nil="1"/>
-    </outline>
-   </title>
-   <associatedAxes primaryAxis="true">
-    <title>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </title>
-    <seriesDefinitions>
-     <query definition=""/>
-     <series _type="BarSeries" seriesIdentifier="Series 1" riser="0">
-      <label>
-       <background _nil="1"/>
-       <outline>
-        <color _nil="1"/>
-       </outline>
-      </label>
-      <dataDefinition definition="row[&quot;Promedio por Empleado&quot;]">
-       <grouping/>
-      </dataDefinition>
-      <triggers condition="6">
-       <action type="1">
-        <value _type="TooltipValue" text="" delay="200"/>
-       </action>
-      </triggers>
-      <curveFitting _nil="1"/>
-     </series>
-    </seriesDefinitions>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <label>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </label>
-    <formatSpecifier _type="JavaNumberFormatSpecifier" pattern="##.##%" multiplier="1.0"/>
-    <majorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </majorGrid>
-    <minorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </minorGrid>
-    <origin>
-     <value _nil="1"/>
-    </origin>
-   </associatedAxes>
-   <seriesDefinitions>
-    <query definition=""/>
-    <series seriesIdentifier="">
-     <label>
-      <background _nil="1"/>
-      <outline>
-       <color _nil="1"/>
-      </outline>
-     </label>
-     <dataDefinition definition="row[&quot;area&quot;]"/>
-     <curveFitting _nil="1"/>
-    </series>
-    <grouping enabled="true"/>
-   </seriesDefinitions>
-   <lineAttributes>
-    <color _nil="1"/>
-   </lineAttributes>
-   <label>
-    <background _nil="1"/>
-    <outline>
-     <color _nil="1"/>
-    </outline>
-   </label>
-   <majorGrid>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <tickAttributes>
-     <color _nil="1"/>
-    </tickAttributes>
-   </majorGrid>
-   <minorGrid>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <tickAttributes>
-     <color _nil="1"/>
-    </tickAttributes>
-   </minorGrid>
-   <origin>
-    <value _nil="1"/>
-   </origin>
-  </axes>
-  <rotation>
-   <angles/>
-  </rotation>
- </ChartWithAxes>
-</ActuateChart>
-]]></xml-property>
-                        <property name="outputFormat">JS</property>
-                        <property name="inheritColumns">false</property>
-                        <property name="height">286.125pt</property>
-                        <property name="width">572.25pt</property>
-                        <property name="dataBindingRef">Datos</property>
-                    </extended-item>
-                </cell>
-                <cell id="459">
-                    <extended-item extensionName="Chart" id="453">
-                        <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
- <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Side-by-side">
-  <block>
-   <children _type="TitleBlock">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <label>
-     <caption value="Productividad por Departamento"/>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </label>
-   </children>
-   <children _type="Plot">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <clientArea>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </clientArea>
-   </children>
-   <children _type="Legend">
-    <outline>
-     <color _nil="1"/>
-    </outline>
-    <cursor type="0"/>
-    <clientArea>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </clientArea>
-    <separator>
-     <color _nil="1"/>
-    </separator>
-    <title>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </title>
-   </children>
-   <bounds _body="0.0,0.0,572.25,286.125"/>
-   <outline>
-    <color _nil="1"/>
-   </outline>
-  </block>
-  <extendedProperties name="enable.area.alt" value="false"/>
-  <extendedProperties name="enable.drill.category" value="true"/>
-  <extendedProperties name="enable.drill.series" value="true"/>
-  <extendedProperties name="jschart.series.shadow" value="false"/>
-  <extendedProperties name="jschart.zoom" value="x"/>
-  <sampleData>
-   <baseSampleData dataSetRepresentation="A, B, C"/>
-   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
-  </sampleData>
-  <emptyMessage>
-   <caption value="This chart contains no data."/>
-   <background _body=",64,127,127,127"/>
-   <outline>
-    <color _body=",128,127,127,127"/>
-   </outline>
-  </emptyMessage>
-  <axes>
-   <title>
-    <background _nil="1"/>
-    <outline>
-     <color _nil="1"/>
-    </outline>
-   </title>
-   <associatedAxes primaryAxis="true">
-    <title>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </title>
-    <seriesDefinitions>
-     <query definition=""/>
-     <series _type="BarSeries" seriesIdentifier="Series 1" riser="0">
-      <label>
-       <background _nil="1"/>
-       <outline>
-        <color _nil="1"/>
-       </outline>
-      </label>
-      <dataDefinition definition="row[&quot;Promedio por Empleado&quot;]">
-       <grouping/>
-      </dataDefinition>
-      <dataPoint>
-       <components type="2"/>
-       <components type="0"/>
-      </dataPoint>
-      <triggers condition="6">
-       <action type="1">
-        <value _type="TooltipValue" text="" delay="200"/>
-       </action>
-      </triggers>
-      <curveFitting _nil="1"/>
-     </series>
-    </seriesDefinitions>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <label>
-     <background _nil="1"/>
-     <outline>
-      <color _nil="1"/>
-     </outline>
-    </label>
-    <formatSpecifier _type="JavaNumberFormatSpecifier" pattern="##.##%" multiplier="1.0"/>
-    <majorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </majorGrid>
-    <minorGrid>
-     <lineAttributes>
-      <color _nil="1"/>
-     </lineAttributes>
-     <tickAttributes>
-      <color _nil="1"/>
-     </tickAttributes>
-    </minorGrid>
-    <origin>
-     <value _nil="1"/>
-    </origin>
-   </associatedAxes>
-   <seriesDefinitions>
-    <query definition=""/>
-    <series seriesIdentifier="">
-     <label>
-      <background _nil="1"/>
-      <outline>
-       <color _nil="1"/>
-      </outline>
-     </label>
-     <dataDefinition definition="row[&quot;departamento&quot;]"/>
-     <curveFitting _nil="1"/>
-    </series>
-    <grouping enabled="true"/>
-   </seriesDefinitions>
-   <lineAttributes>
-    <color _nil="1"/>
-   </lineAttributes>
-   <label>
-    <caption>
-     <font size="9.0" rotation="90.0"/>
-    </caption>
-    <background _nil="1"/>
-    <outline>
-     <color _nil="1"/>
-    </outline>
-   </label>
-   <majorGrid>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <tickAttributes>
-     <color _nil="1"/>
-    </tickAttributes>
-   </majorGrid>
-   <minorGrid>
-    <lineAttributes>
-     <color _nil="1"/>
-    </lineAttributes>
-    <tickAttributes>
-     <color _nil="1"/>
-    </tickAttributes>
-   </minorGrid>
-   <origin>
-    <value _nil="1"/>
-   </origin>
-  </axes>
-  <rotation>
-   <angles/>
-  </rotation>
- </ChartWithAxes>
-</ActuateChart>
-]]></xml-property>
-                        <property name="outputFormat">JS</property>
-                        <property name="inheritColumns">false</property>
-                        <property name="height">286.125pt</property>
-                        <property name="width">572.25pt</property>
-                        <property name="dataBindingRef">Datos</property>
-                    </extended-item>
-                </cell>
-            </row>
-            <row id="460">
-                <cell id="461">
-                    <property name="colSpan">2</property>
-                    <property name="rowSpan">1</property>
-                </cell>
-            </row>
-        </grid>
         <table name="Datos" id="235">
             <list-property name="userProperties">
                 <structure>
@@ -840,7 +476,7 @@
                 </structure>
             </list-property>
             <property name="__ac_group_collapse_level">1,2</property>
-            <property name="pageBreakBefore">always</property>
+            <property name="pageBreakBefore">auto</property>
             <property name="dataSet">Join Objetivos</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -1130,7 +766,9 @@ if (meses == 0 || meses == null) {&#13;
 	display = 0;&#13;
 }else{&#13;
 	display = suma / meses;&#13;
-}</expression>
+}&#13;
+&#13;
+display;</expression>
                     <property name="dataType">float</property>
                     <property name="allowExport">true</property>
                 </structure>
@@ -1168,8 +806,95 @@ if (meses == 0 || meses == null) {&#13;
                     <expression name="filterExpr" type="javascript">dataSetRow["month"] == 7</expression>
                     <property name="allowExport">true</property>
                 </structure>
+                <structure>
+                    <property name="name">Suma Resultado Agosto</property>
+                    <text-property name="displayName">SRA</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Empleado</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["month"] == 8</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">mes</property>
+                    <text-property name="displayName">mes</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mes"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Resultado Septiembre</property>
+                    <text-property name="displayName">SRS</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Empleado</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["month"] == 9</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Resultado Octubre</property>
+                    <text-property name="displayName">SRO</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Empleado</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["month"] == 10</expression>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Suma Resultado Noviembre</property>
+                    <text-property name="displayName">SRN</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Empleado</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["Resultado"]</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">dataSetRow["month"] == 11</expression>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">10000000</property>
+            <list-property name="filter">
+                <structure>
+                    <expression name="expr" type="javascript">row["estatus"]</expression>
+                    <property name="dynamicFilterParameter">Estatus</property>
+                    <property name="updateAggregation">true</property>
+                </structure>
+            </list-property>
             <column id="299"/>
             <column id="300"/>
             <column id="301"/>
@@ -1230,7 +955,11 @@ if (meses == 0 || meses == null) {&#13;
                             <text-property name="text">Puesto</text-property>
                         </label>
                     </cell>
-                    <cell id="514"/>
+                    <cell id="514">
+                        <label id="538">
+                            <text-property name="text">Nombre empleado</text-property>
+                        </label>
+                    </cell>
                     <cell id="243">
                         <label id="244">
                             <text-property name="text">Ene</text-property>
@@ -1467,7 +1196,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">1</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1504,7 +1233,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">2</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1541,7 +1270,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">3</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1578,7 +1307,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">4</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1615,7 +1344,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">5</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1652,7 +1381,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">6</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1689,7 +1418,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">7</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>
@@ -1697,10 +1426,154 @@ if (meses == 0 || meses == null) {&#13;
                                 </list-property>
                             </data>
                         </cell>
-                        <cell id="490"/>
-                        <cell id="491"/>
-                        <cell id="492"/>
-                        <cell id="493"/>
+                        <cell id="490">
+                            <data id="543">
+                                <structure name="numberFormat">
+                                    <property name="category">Percent</property>
+                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Resultado Agosto</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Objetivos.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Puesto</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["nombre"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Year</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["Year"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Month</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">8</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="491">
+                            <data id="541">
+                                <structure name="numberFormat">
+                                    <property name="category">Percent</property>
+                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Resultado Septiembre</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Objetivos.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Puesto</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["nombre"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Year</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["Year"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Month</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">9</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="492">
+                            <data id="542">
+                                <structure name="numberFormat">
+                                    <property name="category">Percent</property>
+                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Resultado Octubre</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Objetivos.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Puesto</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["nombre"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Year</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["Year"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Month</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">10</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
+                        <cell id="493">
+                            <data id="545">
+                                <structure name="numberFormat">
+                                    <property name="category">Percent</property>
+                                    <property name="pattern">###0.00%{RoundingMode=HALF_UP}</property>
+                                </structure>
+                                <property name="resultSetColumn">Suma Resultado Noviembre</property>
+                                <list-property name="action">
+                                    <structure>
+                                        <property name="linkType">drill-through</property>
+                                        <property name="reportName">Objetivos.rptdesign</property>
+                                        <property name="targetWindow">_blank</property>
+                                        <property name="targetFileType">report-design</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">Puesto</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["nombre"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Year</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">params["Year"].value</value>
+                                                </simple-property-list>
+                                            </structure>
+                                            <structure>
+                                                <property name="paramName">Month</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">11</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                    </structure>
+                                </list-property>
+                            </data>
+                        </cell>
                         <cell id="494">
                             <data id="440">
                                 <structure name="numberFormat">
@@ -1718,7 +1591,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Puesto</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["puesto"]</value>
+                                                    <value type="javascript">row["nombre"]</value>
                                                 </simple-property-list>
                                             </structure>
                                             <structure>
@@ -1730,7 +1603,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Month</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">row["month"]</value>
+                                                    <value type="javascript">12</value>
                                                 </simple-property-list>
                                             </structure>
                                         </list-property>

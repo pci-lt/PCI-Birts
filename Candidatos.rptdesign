@@ -324,7 +324,7 @@
                             <expression name="value" type="javascript">row["_id"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "Aceptado"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "ACEPTADO" || dataSetRow["Estatus"] == "PREALTA"</expression>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
@@ -338,7 +338,7 @@
                             <expression name="value" type="javascript">row["_id"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "Pendiente"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "PENDIENTE"</expression>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
@@ -352,7 +352,7 @@
                             <expression name="value" type="javascript">row["_id"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "Rechazado"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "RECHAZADO"</expression>
                     <property name="allowExport">true</property>
                 </structure>
                 <structure>
@@ -366,7 +366,7 @@
                             <expression name="value" type="javascript">row["_id"]</expression>
                         </structure>
                     </list-property>
-                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "Contratado"</expression>
+                    <expression name="filterExpr" type="javascript">dataSetRow["Estatus"] == "CONTRATADO" || dataSetRow["Estatus"] == "ALTA"</expression>
                     <property name="allowExport">true</property>
                 </structure>
             </list-property>
@@ -590,7 +590,7 @@
                     <property name="operator">eq</property>
                     <expression name="expr" type="javascript">row["Estatus"]</expression>
                     <simple-property-list name="value1">
-                        <value type="javascript">"Pendiente"</value>
+                        <value type="javascript">"PENDIENTE"</value>
                     </simple-property-list>
                     <property name="updateAggregation">true</property>
                 </structure>
@@ -781,7 +781,7 @@
                             <list-property name="action">
                                 <structure>
                                     <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]</expression>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]+"/"</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>
@@ -997,10 +997,11 @@
             <property name="pageBreakInterval">10000000</property>
             <list-property name="filter">
                 <structure>
-                    <property name="operator">eq</property>
+                    <property name="operator">in</property>
                     <expression name="expr" type="javascript">row["Estatus"]</expression>
                     <simple-property-list name="value1">
-                        <value type="javascript">"Aceptado"</value>
+                        <value type="javascript">"ACEPTADO"</value>
+                        <value type="javascript">"PREALTA"</value>
                     </simple-property-list>
                     <property name="updateAggregation">true</property>
                 </structure>
@@ -1191,7 +1192,7 @@
                             <list-property name="action">
                                 <structure>
                                     <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]</expression>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]+"/"</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>
@@ -1407,10 +1408,11 @@
             <property name="pageBreakInterval">10000000</property>
             <list-property name="filter">
                 <structure>
-                    <property name="operator">eq</property>
+                    <property name="operator">in</property>
                     <expression name="expr" type="javascript">row["Estatus"]</expression>
                     <simple-property-list name="value1">
-                        <value type="javascript">"Rechazado"</value>
+                        <value type="javascript">"RECHAZADO"</value>
+                        <value type="javascript">"DECLINADO"</value>
                     </simple-property-list>
                     <property name="updateAggregation">true</property>
                 </structure>
@@ -1601,7 +1603,7 @@
                             <list-property name="action">
                                 <structure>
                                     <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]</expression>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]+"/"</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>
@@ -1817,10 +1819,12 @@
             <property name="pageBreakInterval">10000000</property>
             <list-property name="filter">
                 <structure>
-                    <property name="operator">eq</property>
+                    <property name="operator">in</property>
                     <expression name="expr" type="javascript">row["Estatus"]</expression>
                     <simple-property-list name="value1">
                         <value type="javascript">"Contratado"</value>
+                        <value type="javascript">"CONTRATADO"</value>
+                        <value type="javascript">"ALTA"</value>
                     </simple-property-list>
                     <property name="updateAggregation">true</property>
                 </structure>
@@ -1829,7 +1833,6 @@
             <column id="288"/>
             <column id="289"/>
             <column id="290"/>
-            <column id="291"/>
             <column id="292"/>
             <column id="293"/>
             <column id="294"/>
@@ -1878,17 +1881,6 @@
                         <text id="248">
                             <property name="contentType">auto</property>
                             <text-property name="content"><![CDATA[Candidato apto]]></text-property>
-                        </text>
-                    </cell>
-                    <cell id="249">
-                        <property name="backgroundColor">#E3F2FD</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <text id="250">
-                            <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[CV]]></text-property>
                         </text>
                     </cell>
                     <cell id="251">
@@ -1967,22 +1959,6 @@
                             <property name="resultSetColumn">apto</property>
                         </data>
                     </cell>
-                    <cell id="266">
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                        <data id="267">
-                            <property name="resultSetColumn">cv.file_name</property>
-                            <list-property name="action">
-                                <structure>
-                                    <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">row["cv.file_url"]</expression>
-                                    <property name="targetWindow">_blank</property>
-                                </structure>
-                            </list-property>
-                        </data>
-                    </cell>
                     <cell id="268">
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
@@ -2011,7 +1987,7 @@
                             <list-property name="action">
                                 <structure>
                                     <property name="linkType">hyperlink</property>
-                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]</expression>
+                                    <expression name="uri" type="javascript">"https://app.linkaform.com/#/forms/private/55007/"+row["_id"]+"/"</expression>
                                     <property name="targetWindow">_blank</property>
                                 </structure>
                             </list-property>
@@ -2061,13 +2037,6 @@
                         </data>
                     </cell>
                     <cell id="281">
-                        <property name="backgroundColor">#E3F2FD</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderTopStyle">none</property>
-                    </cell>
-                    <cell id="282">
                         <property name="backgroundColor">#E3F2FD</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
