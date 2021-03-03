@@ -13,6 +13,34 @@
             <property name="namespace">ThemesReportItems31</property>
         </structure>
     </list-property>
+    <parameters>
+        <scalar-parameter name="Year" id="1343">
+            <text-property name="promptText">Año</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2021</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2020</property>
+                    <property name="label">2020</property>
+                </structure>
+                <structure>
+                    <property name="value">2021</property>
+                    <property name="label">2021</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
     <data-sources>
         <data-mart-data-source name="perfil_puesto" id="955">
             <property name="datamartURL">/account_1259/Resources/PCI_Objetivos</property>
@@ -101,10 +129,11 @@
             </list-property>
             <list-property name="filter">
                 <structure>
-                    <property name="operator">eq</property>
+                    <property name="operator">in</property>
                     <expression name="expr" type="javascript">row["area"]</expression>
                     <simple-property-list name="value1">
                         <value>"[ \"ADMINISTRACION\"]"</value>
+                        <value>"ADMINISTRACION"</value>
                     </simple-property-list>
                 </structure>
                 <structure>
@@ -353,6 +382,13 @@
                     <expression name="expr" type="javascript">row["estatus"]</expression>
                     <simple-property-list name="value1">
                         <value>"activo"</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="operator">eq</property>
+                    <expression name="expr" type="javascript">row["year"]</expression>
+                    <simple-property-list name="value1">
+                        <value>params["Year"].value</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -1650,7 +1686,7 @@ if (meses == 0 || meses == null) {&#13;
                                             <structure>
                                                 <property name="paramName">Year</property>
                                                 <simple-property-list name="expression">
-                                                    <value type="javascript">2020</value>
+                                                    <value type="javascript">params["Year"].value</value>
                                                 </simple-property-list>
                                             </structure>
                                             <structure>

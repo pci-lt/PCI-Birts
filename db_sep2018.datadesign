@@ -9827,6 +9827,12 @@ display;</expression>
                     <text-property name="heading">Total</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">semana</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">semana</text-property>
+                    <text-property name="heading">semana</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">descuento</property>
                     <property name="analysis">dimension</property>
                     <text-property name="displayName">descuento</text-property>
@@ -9930,21 +9936,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">15</property>
+                        <property name="name">semana</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
                         <property name="name">descuento</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">16</property>
+                        <property name="position">17</property>
                         <property name="name">subtotal</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">17</property>
+                        <property name="position">18</property>
                         <property name="name">iva</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">18</property>
+                        <property name="position">19</property>
                         <property name="name">total</property>
                         <property name="dataType">float</property>
                     </structure>
@@ -9982,7 +9993,7 @@ this.queryText = query;]]></method>
                     <property name="name">conexion</property>
                     <property name="nativeName">conexion</property>
                     <property name="dataType">integer</property>
-                    <property name="nativeDataType">1</property>
+                    <property name="nativeDataType">16</property>
                 </structure>
                 <structure>
                     <property name="position">3</property>
@@ -10068,8 +10079,15 @@ this.queryText = query;]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">semana</property>
+                    <property name="nativeName">semana</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [33658]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tDescuento: '$answers.f19620000000000000000f7c',\r\n\tSubtotal: '$answers.f19620000000000000000f7a',\r\n\tIva: '$answers.f19620000000000000000f7b',\r\n\tTotal: '$answers.f19620000000000000000fc7',\r\n\txml: {$ifNull: ['$answers.f19620000000000000000fc2.file_url','']},\r\n\tpdf: {$ifNull: ['$answers.f19620000000000000000fc3.file_url','']},\r\n\tb2b: {$ifNull: ['$answers.5a96f809b43fdd6231dc0ede.file_url','']},\r\n\test_pay: '$answers.f19620000000000000000fc8',\r\n\testatus: '$answers.f19620000000000000000fc5',\r\n\tflag: '$answers.5c7eee84f851c24c2864910a',\r\n\tfecha: {$ifNull: ['$answers.5cf59bc653ceb8e0bccea84a','']},\r\n\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "xml" , "pdf" , "b2b" , "est_pay" , "folio" , "estatus" , "flag" , "fecha" , "Descuento" , "Subtotal" , "Iva" , "Total"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [33658]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tDescuento: '$answers.f19620000000000000000f7c',\r\n\tSubtotal: '$answers.f19620000000000000000f7a',\r\n\tIva: '$answers.f19620000000000000000f7b',\r\n\tTotal: '$answers.f19620000000000000000fc7',\r\n\txml: {$ifNull: ['$answers.f19620000000000000000fc2.file_url','']},\r\n\tpdf: {$ifNull: ['$answers.f19620000000000000000fc3.file_url','']},\r\n\tb2b: {$ifNull: ['$answers.5a96f809b43fdd6231dc0ede.file_url','']},\r\n\test_pay: '$answers.f19620000000000000000fc8',\r\n\testatus: '$answers.f19620000000000000000fc5',\r\n\tflag: '$answers.5c7eee84f851c24c2864910a',\r\n\tfecha: {$ifNull: ['$answers.5cf59bc653ceb8e0bccea84a','']},\r\n\tsemana: {$ifNull:['$answers.601346b08d12cc2721043c66',0]},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "xml" , "pdf" , "b2b" , "est_pay" , "folio" , "estatus" , "flag" , "fecha" , "Descuento" , "Subtotal" , "Iva" , "Total" , "semana"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,100</property>
@@ -10378,66 +10396,71 @@ this.queryText = query;]]></method>
                     </structure>
                     <structure>
                         <property name="position">2</property>
-                        <property name="name">descuento</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">subtotal</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">iva</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">5</property>
-                        <property name="name">total</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">6</property>
                         <property name="name">xml</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">7</property>
+                        <property name="position">3</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">8</property>
+                        <property name="position">4</property>
                         <property name="name">b2b</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">9</property>
+                        <property name="position">5</property>
                         <property name="name">est_pay</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">10</property>
+                        <property name="position">6</property>
                         <property name="name">folio</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">11</property>
+                        <property name="position">7</property>
                         <property name="name">estatus</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">12</property>
+                        <property name="position">8</property>
                         <property name="name">flag</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">13</property>
+                        <property name="position">9</property>
                         <property name="name">fecha</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
+                        <property name="position">10</property>
+                        <property name="name">semana</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">descuento</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">iva</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
                         <property name="position">14</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -10451,10 +10474,6 @@ this.queryText = query;]]></method>
 <tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
 <tns:selectColumns>
 <tns:Column>Facturacion::_id</tns:Column>
-<tns:Column>Facturacion::descuento</tns:Column>
-<tns:Column>Facturacion::subtotal</tns:Column>
-<tns:Column>Facturacion::iva</tns:Column>
-<tns:Column>Facturacion::total</tns:Column>
 <tns:Column>Facturacion::xml</tns:Column>
 <tns:Column>Facturacion::pdf</tns:Column>
 <tns:Column>Facturacion::b2b</tns:Column>
@@ -10463,6 +10482,11 @@ this.queryText = query;]]></method>
 <tns:Column>Facturacion::estatus</tns:Column>
 <tns:Column>Facturacion::flag</tns:Column>
 <tns:Column>Facturacion::fecha</tns:Column>
+<tns:Column>Facturacion::semana</tns:Column>
+<tns:Column>Facturacion::descuento</tns:Column>
+<tns:Column>Facturacion::subtotal</tns:Column>
+<tns:Column>Facturacion::iva</tns:Column>
+<tns:Column>Facturacion::total</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 </tns:selectColumns>
 <tns:joins>
@@ -11340,6 +11364,721 @@ this.queryText = query;]]></method>
 </tns:joins>
 </tns:joinedDataSet>]]></xml-property>
         </derived-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Facturacion Fielders" id="711">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">subtotal</property>
+                    <expression name="expression" type="javascript">var monto = row["Subtotal"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null &amp;&amp; monto != ""){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}else{&#13;
+	display = 0;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">iva</property>
+                    <expression name="expression" type="javascript">var monto = row["Iva"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null &amp;&amp; monto != ""){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}else{&#13;
+	display = 0;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">var monto = row["Total"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null &amp;&amp; monto != ""){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}else{&#13;
+	display = 0;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">conexion</text-property>
+                    <text-property name="heading">conexion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">xml</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">xml</text-property>
+                    <text-property name="heading">xml</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <text-property name="heading">pdf</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">b2b</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">b2b</text-property>
+                    <text-property name="heading">b2b</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <text-property name="heading">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">flag</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">flag</text-property>
+                    <text-property name="heading">flag</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Subtotal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Subtotal</text-property>
+                    <text-property name="heading">Subtotal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Iva</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Iva</text-property>
+                    <text-property name="heading">Iva</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Total</text-property>
+                    <text-property name="heading">Total</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subtotal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subtotal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">iva</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">iva</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">total</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">xml</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">b2b</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">flag</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">Subtotal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">Iva</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">Total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">iva</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">conexion</property>
+                    <property name="nativeName">conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">xml</property>
+                    <property name="nativeName">xml</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">pdf</property>
+                    <property name="nativeName">pdf</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">b2b</property>
+                    <property name="nativeName">b2b</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">estatus</property>
+                    <property name="nativeName">estatus</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">flag</property>
+                    <property name="nativeName">flag</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Subtotal</property>
+                    <property name="nativeName">Subtotal</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Iva</property>
+                    <property name="nativeName">Iva</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">Total</property>
+                    <property name="nativeName">Total</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [66030]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tconexion: '$connection_id',\r\n\tSubtotal: '$answers.f19620000000000000000f7a',\r\n\tIva: '$answers.f19620000000000000000f7b',\r\n\tTotal: '$answers.f19620000000000000000fc7',\r\n\txml: {$ifNull: ['$answers.f19620000000000000000fc2.file_url','']},\r\n\tpdf: {$ifNull: ['$answers.f19620000000000000000fc3.file_url','']},\r\n\tb2b: {$ifNull: ['$answers.5a96f809b43fdd6231dc0ede.file_url','']},\r\n\testatus: '$answers.f19620000000000000000fc5',\r\n\tflag: {$ifNull:['$answers.601d943f8c4267945989a85c','']},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "conexion" , "xml" , "pdf" , "b2b" , "folio" , "estatus" , "flag" , "Subtotal" , "Iva" , "Total"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,100</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>7</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>conexion</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>16</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>conexion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>conexion</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>descuento</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>descuento</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>descuento</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>subtotal</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>subtotal</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>subtotal</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>iva</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>iva</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>iva</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>total</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>total</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>total</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>xml</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>xml</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>xml</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>pdf</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>pdf</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>pdf</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>b2b</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>b2b</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>b2b</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>est_pay</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>est_pay</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>est_pay</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Fielders - Nombres" id="712">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">xml</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">xml</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pdf</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pdf</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">b2b</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">b2b</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">estatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">flag</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">flag</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">subtotal</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subtotal</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">iva</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">iva</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">total</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">xml</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">pdf</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">b2b</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">estatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">flag</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">subtotal</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">iva</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Facturacion Fielders</value>
+                <value>Nombres</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Facturacion Fielders::_id</tns:Column>
+<tns:Column>Facturacion Fielders::xml</tns:Column>
+<tns:Column>Facturacion Fielders::pdf</tns:Column>
+<tns:Column>Facturacion Fielders::b2b</tns:Column>
+<tns:Column>Facturacion Fielders::folio</tns:Column>
+<tns:Column>Facturacion Fielders::estatus</tns:Column>
+<tns:Column>Facturacion Fielders::flag</tns:Column>
+<tns:Column>Facturacion Fielders::subtotal</tns:Column>
+<tns:Column>Facturacion Fielders::iva</tns:Column>
+<tns:Column>Facturacion Fielders::total</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Facturacion Fielders"/>
+<tns:join>
+<tns:type>leftOuter</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Facturacion Fielders::conexion</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Detalle OC" id="608">
             <list-property name="columnHints">
                 <structure>
@@ -11947,6 +12686,12 @@ display;</expression>
                     <text-property name="heading">Descuento</text-property>
                 </structure>
                 <structure>
+                    <property name="columnName">com_desc</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">com_desc</text-property>
+                    <text-property name="heading">com_desc</text-property>
+                </structure>
+                <structure>
                     <property name="columnName">Tipo</property>
                     <property name="analysis">dimension</property>
                     <property name="indexColumn">false</property>
@@ -12117,11 +12862,16 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">32</property>
-                        <property name="name">Tipo</property>
+                        <property name="name">com_desc</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">33</property>
+                        <property name="name">Tipo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
                         <property name="name">descuento</property>
                         <property name="dataType">float</property>
                     </structure>
@@ -12271,42 +13021,42 @@ this.queryText = query;]]></method>
                     <property name="name">m15</property>
                     <property name="nativeName">m15</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">20</property>
                     <property name="name">m16</property>
                     <property name="nativeName">m16</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">21</property>
                     <property name="name">m17</property>
                     <property name="nativeName">m17</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">22</property>
                     <property name="name">m18</property>
                     <property name="nativeName">m18</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">23</property>
                     <property name="name">m19</property>
                     <property name="nativeName">m19</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">24</property>
                     <property name="name">m20</property>
                     <property name="nativeName">m20</property>
                     <property name="dataType">float</property>
-                    <property name="nativeDataType">16</property>
+                    <property name="nativeDataType">1</property>
                 </structure>
                 <structure>
                     <property name="position">25</property>
@@ -12357,8 +13107,15 @@ this.queryText = query;]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">com_desc</property>
+                    <property name="nativeName">com_desc</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [33658,45420,50779,50595]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n}},\r\n{$unwind: '$answers.f1962000000000000000fc10'},\r\n{$project:{\r\n\r\n\tos: '$answers.f1962000000000000000fc10.f19620000000000000001fc1',\r\n\ttipo: '$answers.f1962000000000000000fc10.f19620000000000000001fc4',\r\n\tDescuento: {$ifNull:['$answers.f19620000000000000000f7c','']},\r\n\t\r\n\tm1: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986e',0]},\r\n\tm2: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986f',0]},\r\n\tm3: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99870',0]},\r\n\tm4:{$ifNull:[ '$answers.f1962000000000000000fc10.5c647760d5351b000dc99871',0]},\r\n\tm5: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99872',0]},\r\n\tm6: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99873',0]},\r\n\tm7: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99874',0]},\r\n\tm8: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99875',0]},\r\n\tm9: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99876',0.0]},\r\n\tm10: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99877',0]},\r\n\tm11: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99878',0]},\r\n\tm12: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99879',0]},\r\n\tm13: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987a',0]},\r\n\tm14: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987b',0]},\r\n\tm15: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987c',0]},\r\n\tm16: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987d',0]},\r\n\tm17: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987e',0]},\r\n\tm18: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987f',0]},\r\n\tm19:{$ifNull:[ '$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a23',0]},\r\n\tm20: {$ifNull:['$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a24',0]},\r\n\r\n\tm21: {$ifNull:['$answers.f1962000000000000000fc10.5d65a612bf3877964df708a6',0.0]},\r\n\tm22: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba6',0.0]},\r\n\tm23: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba7',0.0]},\r\n\tm24: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba8',0.0]},\r\n\tm25: {$ifNull:['$answers.f1962000000000000000fc10.5d6098b1fb82c7aaffaecbd8',0.0]},\r\n\tm26: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba9',0.0]},\r\n\t\r\n\r\n\t\r\n\ttotal:{$ifNull:['$answers.f1962000000000000000fc10.f1962000000000000001fc10',0]},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "os" , "tipo" , "total" , "m1" , "m2" , "m3" , "m4" , "m5" , "m6" , "m7" , "m8" , "m9" , "m10" , "m11" , "m12" , "m13" , "m14" , "m15" , "m16" , "m17" , "m18" , "m19" , "m20" , "m21" , "m22" , "m23" , "m24" , "m25" , "m26" , "Descuento"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [33658,45420,50779,50595]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\r\n}},\r\n{$unwind: '$answers.f1962000000000000000fc10'},\r\n{$project:{\r\n\r\n\tos: '$answers.f1962000000000000000fc10.f19620000000000000001fc1',\r\n\ttipo: '$answers.f1962000000000000000fc10.f19620000000000000001fc4',\r\n\tcom_desc: {$ifNull:['$answers.60231d3a4524c60430be8e17','NA']},\r\n\tDescuento: {$ifNull:['$answers.f19620000000000000000f7c','']},\r\n\t\r\n\tm1: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986e',0]},\r\n\tm2: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9986f',0]},\r\n\tm3: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99870',0]},\r\n\tm4:{$ifNull:[ '$answers.f1962000000000000000fc10.5c647760d5351b000dc99871',0]},\r\n\tm5: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99872',0]},\r\n\tm6: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99873',0]},\r\n\tm7: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99874',0]},\r\n\tm8: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99875',0]},\r\n\tm9: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99876',0.0]},\r\n\tm10: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99877',0]},\r\n\tm11: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99878',0]},\r\n\tm12: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc99879',0]},\r\n\tm13: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987a',0]},\r\n\tm14: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987b',0]},\r\n\tm15: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987c',0]},\r\n\tm16: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987d',0]},\r\n\tm17: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987e',0]},\r\n\tm18: {$ifNull:['$answers.f1962000000000000000fc10.5c647760d5351b000dc9987f',0]},\r\n\tm19:{$ifNull:[ '$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a23',0]},\r\n\tm20: {$ifNull:['$answers.f1962000000000000000fc10.5cb8c23cc370fa0012f47a24',0]},\r\n\r\n\tm21: {$ifNull:['$answers.f1962000000000000000fc10.5d65a612bf3877964df708a6',0.0]},\r\n\tm22: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba6',0.0]},\r\n\tm23: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba7',0.0]},\r\n\tm24: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba8',0.0]},\r\n\tm25: {$ifNull:['$answers.f1962000000000000000fc10.5d6098b1fb82c7aaffaecbd8',0.0]},\r\n\tm26: {$ifNull:['$answers.f1962000000000000000fc10.5d6060b3b1086b98eeaecba9',0.0]},\r\n\t\r\n\r\n\t\r\n\ttotal:{$ifNull:['$answers.f1962000000000000000fc10.f1962000000000000001fc10',0]},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "os" , "tipo" , "total" , "m1" , "m2" , "m3" , "m4" , "m5" , "m6" , "m7" , "m8" , "m9" , "m10" , "m11" , "m12" , "m13" , "m14" , "m15" , "m16" , "m17" , "m18" , "m19" , "m20" , "m21" , "m22" , "m23" , "m24" , "m25" , "m26" , "Descuento" , "com_desc"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1000</property>
@@ -13431,6 +14188,331 @@ this.queryText = query;]]></method>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Detalle Folios Fielders" id="713">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">total</property>
+                    <expression name="expression" type="javascript">var monto = row["Total"];&#13;
+var display = 0;&#13;
+&#13;
+if(monto != null &amp;&amp; monto != ""){&#13;
+	monto = monto.replace(",","");&#13;
+	display = parseFloat(monto);&#13;
+}else{&#13;
+	display = 0;&#13;
+}&#13;
+&#13;
+display;</expression>
+                    <property name="dataType">float</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">_id</text-property>
+                    <text-property name="heading">_id</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio</text-property>
+                    <text-property name="heading">folio</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">quincena</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">quincena</text-property>
+                    <text-property name="heading">quincena</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">estrategia</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">estrategia</text-property>
+                    <text-property name="heading">estrategia</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">folio_f</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">folio_f</text-property>
+                    <text-property name="heading">folio_f</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">division</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">division</text-property>
+                    <text-property name="heading">division</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">subdireccion</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">subdireccion</text-property>
+                    <text-property name="heading">subdireccion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">area</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">area</text-property>
+                    <text-property name="heading">area</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">pago</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">pago</text-property>
+                    <text-property name="heading">pago</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">os_pago</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">os_pago</text-property>
+                    <text-property name="heading">os_pago</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">tel_pago</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">tel_pago</text-property>
+                    <text-property name="heading">tel_pago</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Total</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">Total</text-property>
+                    <text-property name="heading">Total</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total</property>
+                    <property name="analysis">measure</property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">folio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">quincena</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">estrategia</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">folio_f</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">division</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">subdireccion</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">area</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">pago</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">os_pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">tel_pago</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">Total</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">total</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var oc = params["OC"].value;
+var bookmark = "{$exists:false},";
+
+
+var	new_query = "folio: '" + oc + "' ,";
+
+
+
+query = query.replace(bookmark, bookmark + new_query );
+this.queryText = query;]]></method>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id</property>
+                    <property name="nativeName">_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">7</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">folio</property>
+                    <property name="nativeName">folio</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">quincena</property>
+                    <property name="nativeName">quincena</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">estrategia</property>
+                    <property name="nativeName">estrategia</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">folio_f</property>
+                    <property name="nativeName">folio_f</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">division</property>
+                    <property name="nativeName">division</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">subdireccion</property>
+                    <property name="nativeName">subdireccion</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">area</property>
+                    <property name="nativeName">area</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">pago</property>
+                    <property name="nativeName">pago</property>
+                    <property name="dataType">float</property>
+                    <property name="nativeDataType">1</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">os_pago</property>
+                    <property name="nativeName">os_pago</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">tel_pago</property>
+                    <property name="nativeName">tel_pago</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">Total</property>
+                    <property name="nativeName">Total</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\tform_id:{$in: [66030]},\r\n\tdeleted_at:{$exists:false},\r\n}},\r\n{$unwind: '$answers.601d8fc7f8824c625de29a13'},\r\n{$project:{\r\n\tfolio: '$folio',\r\n\tquincena: '$answers.601d8fc7f8824c625de29a13.601d938444851b8e44b1e265',\r\n\testrategia: '$answers.601d8fc7f8824c625de29a13.60243ab2a1c15883f22cd3b7',\r\n\tfolio_f: '$answers.601d8fc7f8824c625de29a13.601d938444851b8e44b1e269',\r\n\tos_pago: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd1',\r\n\ttel_pago: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd2',\r\n\tdivision: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd4',\r\n\tsubdireccion: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd5',\r\n\tarea: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd3',\r\n\tpago: '$answers.601d8fc7f8824c625de29a13.6022cf5321efecc9e460dcd6',\r\n\tTotal: '$answers.f19620000000000000000fc7',\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "quincena" , "estrategia" , "folio_f" , "division" , "subdireccion" , "area" , "pago" , "os_pago" , "tel_pago" , "Total"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1000</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.os</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.os</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.os</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.folio</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.folio</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.folio</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Folios Fibra" id="686">
             <list-property name="computedColumns">
                 <structure>
@@ -14006,38 +15088,38 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">24</property>
-                        <property name="name">descuento</property>
-                        <property name="dataType">float</property>
-                    </structure>
-                    <structure>
-                        <property name="position">25</property>
                         <property name="name">m21</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">26</property>
+                        <property name="position">25</property>
                         <property name="name">m22</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">27</property>
+                        <property name="position">26</property>
                         <property name="name">m23</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">28</property>
+                        <property name="position">27</property>
                         <property name="name">m24</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">29</property>
+                        <property name="position">28</property>
                         <property name="name">m25</property>
                         <property name="dataType">float</property>
                     </structure>
                     <structure>
-                        <property name="position">30</property>
+                        <property name="position">29</property>
                         <property name="name">m26</property>
                         <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">com_desc</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">31</property>
@@ -14046,21 +15128,26 @@ display;</expression>
                     </structure>
                     <structure>
                         <property name="position">32</property>
+                        <property name="name">descuento</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
                         <property name="name">_id</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">33</property>
+                        <property name="position">34</property>
                         <property name="name">conexion</property>
                         <property name="dataType">integer</property>
                     </structure>
                     <structure>
-                        <property name="position">34</property>
+                        <property name="position">35</property>
                         <property name="name">pdf</property>
                         <property name="dataType">string</property>
                     </structure>
                     <structure>
-                        <property name="position">35</property>
+                        <property name="position">36</property>
                         <property name="name">PDF</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -14096,14 +15183,15 @@ display;</expression>
 <tns:Column>Detalle Folios::m18</tns:Column>
 <tns:Column>Detalle Folios::m19</tns:Column>
 <tns:Column>Detalle Folios::m20</tns:Column>
-<tns:Column>Detalle Folios::descuento</tns:Column>
 <tns:Column>Detalle Folios::m21</tns:Column>
 <tns:Column>Detalle Folios::m22</tns:Column>
 <tns:Column>Detalle Folios::m23</tns:Column>
 <tns:Column>Detalle Folios::m24</tns:Column>
 <tns:Column>Detalle Folios::m25</tns:Column>
 <tns:Column>Detalle Folios::m26</tns:Column>
+<tns:Column>Detalle Folios::com_desc</tns:Column>
 <tns:Column>Detalle Folios::Tipo</tns:Column>
+<tns:Column>Detalle Folios::descuento</tns:Column>
 <tns:Column>Folios Cobre::_id</tns:Column>
 <tns:Column>Folios Cobre::conexion</tns:Column>
 <tns:Column>Folios Cobre::pdf</tns:Column>
@@ -22078,6 +23166,8 @@ var new_query = "";
 var base = params["Base"].value;
 
 
+
+
 if( base == "creacion"){
 	var hasta = date_two;
 	hasta = BirtDateTime.addDay(hasta, 1);
@@ -22100,17 +23190,21 @@ if ( base == "tecnico"){
 }
 
 
-if(division == "sur"){
-	new_query2 = "form_id: {$in: [16343]},";
-}else if(division == "metro"){
-	new_query2 = "form_id: {$in: [11044]},";
-}else if(division == "occidente"){
-	new_query2 = "form_id: {$in: [21953]},";
-}else if(division == "norte"){
-	new_query2 = "form_id: {$in: [21954]},";
-}else {
-	new_query2 = bookmark2;
-}
+
+	if(division == "sur"){
+		new_query2 = "form_id: {$in: [16343]},";
+	}else if(division == "metro"){
+		new_query2 = "form_id: {$in: [11044]},";
+	}else if(division == "occidente"){
+		new_query2 = "form_id: {$in: [21953]},";
+	}else if(division == "norte"){
+		new_query2 = "form_id: {$in: [21954]},";
+	}else {
+		new_query2 = bookmark2;
+	}
+
+
+
 
 query = query.replace(bookmark2, new_query2 );
 query = query.replace(bookmark, bookmark + new_query );
@@ -22873,6 +23967,8 @@ var new_query = "";
 var base = params["Base"].value;
 
 
+
+
 if( base == "creacion"){
 	var hasta = date_two;
 	hasta = BirtDateTime.addDay(hasta, 1);
@@ -22895,17 +23991,21 @@ if ( base == "tecnico"){
 }
 
 
-if(division == "sur"){
-	new_query2 = "form_id: {$in: [25927]},";
-}else if(division == "metro"){
-	new_query2 = "form_id: {$in: [10540]},";
-}else if(division == "occidente"){
-	new_query2 = "form_id: {$in: [25929]},";
-}else if(division == "norte"){
-	new_query2 = "form_id: {$in: [25928]},";
-}else {
-	new_query2 = bookmark2;
-}
+
+
+	if(division == "sur"){
+		new_query2 = "form_id: {$in: [25927]},";
+	}else if(division == "metro"){
+		new_query2 = "form_id: {$in: [10540]},";
+	}else if(division == "occidente"){
+		new_query2 = "form_id: {$in: [25929]},";
+	}else if(division == "norte"){
+		new_query2 = "form_id: {$in: [25928]},";
+	}else {
+		new_query2 = bookmark2;
+	}
+
+
 
 query = query.replace(bookmark2, new_query2 );
 query = query.replace(bookmark, bookmark + new_query );
@@ -27772,6 +28872,7 @@ display;</expression>
                     <property name="analysis">dimension</property>
                 </structure>
             </list-property>
+            <list-property name="parameters"/>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -27796,7 +28897,7 @@ display;</expression>
                     <property name="nativeDataType">2</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954,10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n\r\n}},\r\n{$group: { _id:{\r\n\t\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\t},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954,10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-01-01T06:00:00Z'}},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n\r\n}},\r\n{$group: { _id:{\r\n\t\r\n\tcope: '$answers.f1054000a010000000000002',\r\n\t},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.cope"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">false,1</property>
@@ -27834,6 +28935,130 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Conexiones" id="708">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.conexion</text-property>
+                    <text-property name="heading">_id.conexion</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">MongoDB</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">_id.conexion</property>
+                    <property name="nativeName">_id.conexion</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">16</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t form_id:{$in: [11044,16343,21953,21954,10540,25928,25927,25929,1929]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-01-01T06:00:00Z'}},\r\n\t'answers.f1054000a030000000000002' : 'liquidada',\r\n\r\n}},\r\n{$group: { _id:{\r\n\t\r\n\tconexion: '$connection_id',\r\n\t},\r\n\r\n}}\r\n]" , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id.conexion"] , "collectionName" : "form_answer"}]]></xml-property>
+            <structure name="designerState">
+                <property name="version">1.0</property>
+                <property name="stateContentAsString">false,1</property>
+            </structure>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>_id.cope</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>_id.cope</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>_id.cope</design:label>
+            <design:formattingHints>
+              <design:displaySize>-1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <derived-data-set extensionID="com.actuate.birt.data.join" name="Join Conexiones  - Nombres" id="709">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">_id.conexion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">_id.conexion</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+                <structure>
+                    <property name="columnName">first_name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">first_name</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">_id.conexion</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">first_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <simple-property-list name="inputDataSets">
+                <value>Conexiones</value>
+                <value>Nombres</value>
+            </simple-property-list>
+            <xml-property name="queryText"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tns:joinedDataSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.actuate.com/birt/dataset_join.xsd" xmlns:tns="http://schemas.actuate.com/birt/dataset_join.xsd">
+<tns:selectColumns>
+<tns:Column>Conexiones::_id.conexion</tns:Column>
+<tns:Column>Nombres::first_name</tns:Column>
+</tns:selectColumns>
+<tns:joins>
+<tns:startingDataSet Index="0" name="Conexiones"/>
+<tns:join>
+<tns:type>inner</tns:type>
+<tns:dataSet Index="1" name="Nombres"/>
+<tns:on>
+<tns:condition>
+<tns:leftColumn>Conexiones::_id.conexion</tns:leftColumn>
+<tns:rightColumn>Nombres::id</tns:rightColumn>
+<tns:operator>eq</tns:operator>
+</tns:condition>
+</tns:on>
+</tns:join>
+</tns:joins>
+</tns:joinedDataSet>]]></xml-property>
+        </derived-data-set>
     </data-sets>
     <parameters>
         <scalar-parameter name="Fecha Inicial" id="580">
@@ -28002,6 +29227,36 @@ display;</expression>
             </structure>
         </scalar-parameter>
         <scalar-parameter name="Cope" id="705">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Tecnologia" id="707">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Conexion" id="710">
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
             <property name="dataType">string</property>

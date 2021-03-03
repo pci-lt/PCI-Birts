@@ -15,6 +15,7 @@
     </list-property>
     <parameters>
         <scalar-parameter name="OC" id="10">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">string</property>
             <property name="distinct">true</property>
@@ -26,6 +27,7 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="Division" id="63">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="isRequired">true</property>
             <property name="dataType">string</property>
@@ -298,6 +300,11 @@
                         <property name="name">conexion</property>
                         <property name="dataType">integer</property>
                     </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">com_desc</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">db_sep2018</property>
@@ -477,6 +484,11 @@
                     <property name="position">35</property>
                     <property name="name">conexion</property>
                     <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">com_desc</property>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
         </data-mart-data-set>
@@ -1204,6 +1216,21 @@
                     <expression name="expression" type="javascript">dataSetRow["conexion"]</expression>
                     <property name="dataType">integer</property>
                 </structure>
+                <structure>
+                    <property name="name">com_desc</property>
+                    <text-property name="displayName">com_desc</text-property>
+                    <expression name="expression" type="javascript">var area = dataSetRow["com_desc"];&#13;
+if(area == null){&#13;
+	area = "sin_dato";&#13;
+}&#13;
+&#13;
+var display = area.replace(/_/g, ' ');&#13;
+display = display.charAt(0).toUpperCase() + display.slice(1);&#13;
+display = display.toUpperCase();&#13;
+display;</expression>
+                    <property name="dataType">string</property>
+                    <property name="allowExport">true</property>
+                </structure>
             </list-property>
             <property name="pageBreakInterval">100000000</property>
             <list-property name="sort">
@@ -1412,6 +1439,7 @@
                 </list-property>
             </column>
             <column id="104"/>
+            <column id="368"/>
             <header>
                 <row id="64">
                     <cell id="353">
@@ -1699,6 +1727,14 @@
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
+                    <cell id="362">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
                 </row>
                 <row id="272">
                     <cell id="354">
@@ -1949,6 +1985,14 @@
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="296">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="363">
                         <property name="backgroundColor">#FFFFFF</property>
                         <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
@@ -2207,6 +2251,14 @@
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                     </cell>
+                    <cell id="364">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
                 </row>
                 <row id="30">
                     <cell id="356">
@@ -2449,13 +2501,21 @@
                     <cell id="101">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <text id="85">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Valor total]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="365">
+                        <property name="backgroundColor">#1A237E</property>
+                        <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
-                        <text id="85">
+                        <text id="369">
                             <property name="contentType">auto</property>
-                            <text-property name="content"><![CDATA[Valor total]]></text-property>
+                            <text-property name="content"><![CDATA[Descuento por:]]></text-property>
                         </text>
                     </cell>
                 </row>
@@ -2859,6 +2919,16 @@
                             <property name="resultSetColumn">total</property>
                         </data>
                     </cell>
+                    <cell id="366">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                        <data id="370">
+                            <property name="resultSetColumn">com_desc</property>
+                        </data>
+                    </cell>
                 </row>
             </detail>
             <footer>
@@ -3104,6 +3174,14 @@
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="103">
+                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="color">#FFFFFF</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderTopStyle">none</property>
+                    </cell>
+                    <cell id="367">
                         <property name="backgroundColor">#FFFFFF</property>
                         <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
