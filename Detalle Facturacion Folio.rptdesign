@@ -305,6 +305,16 @@
                         <property name="name">com_desc</property>
                         <property name="dataType">string</property>
                     </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">Desc_Bon</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">semana</property>
+                        <property name="dataType">string</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">db_sep2018</property>
@@ -490,6 +500,16 @@
                     <property name="name">com_desc</property>
                     <property name="dataType">string</property>
                 </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">Desc_Bon</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">semana</property>
+                    <property name="dataType">string</property>
+                </structure>
             </list-property>
         </data-mart-data-set>
     </data-sets>
@@ -542,7 +562,7 @@
             <property name="marginTop">12pt</property>
             <property name="marginLeft">12pt</property>
             <property name="pageBreakInside">avoid</property>
-            <property name="width">60%</property>
+            <property name="width">80%</property>
             <property name="dataSet">Join Detalle - Pacos Cobre</property>
             <list-property name="boundDataColumns">
                 <structure>
@@ -1219,17 +1239,32 @@
                 <structure>
                     <property name="name">com_desc</property>
                     <text-property name="displayName">com_desc</text-property>
-                    <expression name="expression" type="javascript">var area = dataSetRow["com_desc"];&#13;
-if(area == null){&#13;
-	area = "sin_dato";&#13;
+                    <expression name="expression" type="javascript">var str = dataSetRow["com_desc"];&#13;
+var display = "";&#13;
+&#13;
+if(str != null){&#13;
+	display = str.replace(/['"]+/g, '');&#13;
+	display = display.replace("[ ","");&#13;
+	display = display.replace("]","");&#13;
+	display = display.replace(/_/g, ' ');&#13;
+&#13;
 }&#13;
 &#13;
-var display = area.replace(/_/g, ' ');&#13;
-display = display.charAt(0).toUpperCase() + display.slice(1);&#13;
-display = display.toUpperCase();&#13;
 display;</expression>
                     <property name="dataType">string</property>
                     <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Desc_Bon</property>
+                    <text-property name="displayName">Desc_Bon</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Desc_Bon"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">semana</property>
+                    <text-property name="displayName">semana</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["semana"]</expression>
+                    <property name="dataType">string</property>
                 </structure>
             </list-property>
             <property name="pageBreakInterval">100000000</property>
@@ -1445,6 +1480,17 @@ display;</expression>
                     <cell id="353">
                         <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
+                        <text id="373">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Semana]]></text-property>
+                        </text>
+                        <data id="374">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">semana</property>
+                        </data>
                     </cell>
                     <cell id="65">
                         <property name="backgroundColor">#1A237E</property>
@@ -1770,12 +1816,23 @@ display;</expression>
                         <property name="borderTopStyle">none</property>
                     </cell>
                     <cell id="276">
-                        <property name="backgroundColor">#FFFFFF</property>
+                        <property name="backgroundColor">#1A237E</property>
                         <property name="color">#FFFFFF</property>
                         <property name="borderBottomStyle">none</property>
                         <property name="borderLeftStyle">none</property>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
+                        <text id="371">
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Descuento Bonificación]]></text-property>
+                        </text>
+                        <data id="372">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">$#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="resultSetColumn">Desc_Bon</property>
+                        </data>
                     </cell>
                     <cell id="277">
                         <property name="backgroundColor">#1A237E</property>
@@ -2926,6 +2983,10 @@ display;</expression>
                         <property name="borderRightStyle">none</property>
                         <property name="borderTopStyle">none</property>
                         <data id="370">
+                            <structure name="stringFormat">
+                                <property name="category">></property>
+                                <property name="pattern">></property>
+                            </structure>
                             <property name="resultSetColumn">com_desc</property>
                         </data>
                     </cell>
