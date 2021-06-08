@@ -2,7 +2,7 @@
 <datamart xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.11.0.v201911071803</property>
     <data-sources>
-<oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
+        <oda-data-source extensionID="org.eclipse.birt.data.oda.mongodb" name="MongoDB" id="4">
             <list-property name="privateDriverProperties">
                 <ex-property>
                     <name>useKerberosAuthentication</name>
@@ -2092,6 +2092,12 @@ this.queryText = query;]]></method>
                     <text-property name="displayName">email</text-property>
                     <text-property name="heading">email</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">f_carga</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">f_carga</text-property>
+                    <text-property name="heading">f_carga</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters"/>
             <structure name="cachedMetaData">
@@ -2194,6 +2200,11 @@ this.queryText = query;]]></method>
                     <structure>
                         <property name="position">20</property>
                         <property name="name">email</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">f_carga</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -2340,11 +2351,18 @@ this.queryText = query;]]></method>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">2</property>
                 </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">f_carga</property>
+                    <property name="nativeName">f_carga</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [66948]},\r\n\tdeleted_at:{$exists:false},\r\n\t\r\n\t\r\n\r\n}},\r\n\r\n{$project:{\r\n\tfolio: '$folio',\r\n\t\r\n\tproyecto: '$answers.6040fa4fdf2d44f06fec2881',\r\n\tzona: '$answers.604a589451ca2c951db966fc',\r\n\tsubtotal: '$answers.f19620000000000000000f7a',\r\n\tiva: '$answers.f19620000000000000000f7b',\r\n\tretencion: '$answers.5e5573fd8dd3fc39682c5fc1',\r\n\ttotal: '$answers.f19620000000000000000fc7',\r\n\r\n\tpdf: '$answers.f19620000000000000000fc3',\r\n\txml: '$answers.f19620000000000000000fc2',\r\n\tb2b: '$answers.5a96f809b43fdd6231dc0ede',\r\n\testimacion: '$answers.60406531057c8207e4ddb58f',\r\n\tflag: {$ifNull:['$answers.6042689c1a43e4655db6a9a3','']},\r\n\tautorizacion: '$answers.604244be3bdf4fb5c819e73d',\r\n\testatus: {$ifNull:['$answers.f19620000000000000000fc5','']},\r\n\temail: '$answers.604bb58292cbf7cb3f44a3fe',\r\n\t}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "proyecto" , "zona" , "subtotal" , "iva" , "retencion" , "total" , "pdf.file_name" , "pdf.file_url" , "xml.file_name" , "xml.file_url" , "b2b.file_name" , "b2b.file_url" , "estimacion.file_name" , "estimacion.file_url" , "flag" , "autorizacion" , "estatus" , "email"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [66948]},\r\n\tdeleted_at:{$exists:false},\r\n\t\r\n\t\r\n\r\n}},\r\n\r\n{$project:{\r\n\tfolio: '$folio',\r\n\t\r\n\tproyecto: '$answers.6040fa4fdf2d44f06fec2881',\r\n\tzona: '$answers.604a589451ca2c951db966fc',\r\n\tsubtotal: '$answers.f19620000000000000000f7a',\r\n\tiva: '$answers.f19620000000000000000f7b',\r\n\tretencion: '$answers.5e5573fd8dd3fc39682c5fc1',\r\n\ttotal: '$answers.f19620000000000000000fc7',\r\n\r\n\tpdf: '$answers.f19620000000000000000fc3',\r\n\txml: '$answers.f19620000000000000000fc2',\r\n\tb2b: '$answers.5a96f809b43fdd6231dc0ede',\r\n\testimacion: '$answers.60406531057c8207e4ddb58f',\r\n\tflag: {$ifNull:['$answers.6042689c1a43e4655db6a9a3','']},\r\n\tautorizacion: '$answers.604244be3bdf4fb5c819e73d',\r\n\testatus: {$ifNull:['$answers.f19620000000000000000fc5','']},\r\n\temail: '$answers.604bb58292cbf7cb3f44a3fe',\r\n\tf_carga: '$answers.5cf59bc653ceb8e0bccea84a',\r\n\t}}\r\n\r\n]" , "operationType" : "AGGREGATE" , "selectedFields" : [ "_id" , "folio" , "proyecto" , "zona" , "subtotal" , "iva" , "retencion" , "total" , "pdf.file_name" , "pdf.file_url" , "xml.file_name" , "xml.file_url" , "b2b.file_name" , "b2b.file_url" , "estimacion.file_name" , "estimacion.file_url" , "flag" , "autorizacion" , "estatus" , "email" , "f_carga"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2941,6 +2959,11 @@ this.queryText = query;]]></method>
                     </structure>
                     <structure>
                         <property name="position">21</property>
+                        <property name="name">f_carga</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
                         <property name="name">first_name</property>
                         <property name="dataType">string</property>
                     </structure>
@@ -2973,6 +2996,7 @@ this.queryText = query;]]></method>
 <tns:Column>ZTEyHuawei::autorizacion</tns:Column>
 <tns:Column>ZTEyHuawei::estatus</tns:Column>
 <tns:Column>ZTEyHuawei::email</tns:Column>
+<tns:Column>ZTEyHuawei::f_carga</tns:Column>
 <tns:Column>Nombres::first_name</tns:Column>
 </tns:selectColumns>
 <tns:joins>

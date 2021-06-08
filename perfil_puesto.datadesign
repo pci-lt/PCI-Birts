@@ -3218,7 +3218,7 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2" id="689">
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2 Abril" id="692">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Resultado</property>
@@ -3429,6 +3429,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-05-01T07:00:00Z'} , $lt:{$date:'2020-06-01T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-05-01T06:00:00Z'} , $lt:{$date:'" + year + "-05-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -3516,10 +3530,10 @@ display;</expression>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-06-01T07:00:00Z'} , $lt:{$date:'2020-06-14T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-05-01T07:00:00Z'} , $lt:{$date:'2020-06-01T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "nearest" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,1</property>
+                <property name="stateContentAsString">false,100</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3743,7 +3757,7 @@ display;</expression>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2 Abril" id="692">
+        <oda-data-set extensionID="org.eclipse.birt.data.oda.mongodb.dataSet" name="Objetivos Final 2" id="689">
             <list-property name="computedColumns">
                 <structure>
                     <property name="name">Resultado</property>
@@ -3954,6 +3968,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-06-01T07:00:00Z'} , $lt:{$date:'2020-06-14T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-06-01T06:00:00Z'} , $lt:{$date:'" + year + "-06-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -4041,10 +4069,10 @@ display;</expression>
                     <property name="nativeDataType">16</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-05-01T07:00:00Z'} , $lt:{$date:'2020-06-01T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "nearest" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
+            <xml-property name="queryText"><![CDATA[{ "operationExpr" : "[{$match:{\r\n\t\r\n\tform_id: {$in: [55005]},\r\n\tdeleted_at:{$exists:false},\r\n\tcreated_at: {$gte: {$date:'2020-06-01T07:00:00Z'} , $lt:{$date:'2020-06-14T06:00:00Z'} },\r\n\r\n}},\r\n\r\n{$sort:{\r\n\tcreated_at:1,\r\n}},\r\n\r\n{$group:{\r\n\r\n\t_id:'$answers.5ea03de7573c7d577d1e344c',\r\n\tmonth: {$last:{$month:'$created_at'}},\r\n\tyear: {$last:{$year:'$created_at'}},\r\n\tgrupo: {$last:'$answers.5ea0330b63ab596c77d83c1d'},\r\n\tarea: {$last:'$answers.5ea03de7573c7d577d1e3448'},\r\n\tdepartamento: {$last:'$answers.5ea03de7573c7d577d1e3447'},\r\n\tpuesto: {$last:'$answers.5ea03de7573c7d577d1e3446'},\r\n\tnumero: {$last:'$answers.5ea03de7573c7d577d1e344c'},\r\n\tnombre: {$last:'$answers.5ea03de7573c7d577d1e344b'},\r\n\tresponsable:{$last:'$answers.5ea03de7573c7d577d1e3449'},\r\n\tgerencia: {$last:'$answers.5ea03de7573c7d577d1e344a'},\r\n\r\n}},\r\n{$unwind:'$grupo'},\r\n{$project:{\r\n\t\r\n\tmes: '$month',\r\n\tyear: '$year',\r\n\tcalificador: '$grupo.5ea034bc6d8356850c0ce292',\r\n\tobjetivo:'$grupo.5ea034bc6d8356850c0ce290',\r\n\tarea: '$area',\r\n\tdepartamento: '$departamento',\r\n\tpuesto: '$puesto',\r\n\tnumero: '$numero',\r\n\tnombre: '$nombre',\r\n\tmedida:'$grupo.5ea034bc6d8356850c0ce291',\r\n\tresponsable:'$responsable',\r\n\tgerencia: '$gerencia',\t\r\n}}\r\n]," , "queryReadPreference" : "secondaryPreferred" , "operationType" : "AGGREGATE" , "selectedFields" : [ "year" , "calificador" , "objetivo" , "area" , "departamento" , "puesto" , "medida" , "responsable" , "gerencia" , "numero" , "nombre" , "mes"] , "collectionName" : "form_answer"}]]></xml-property>
             <structure name="designerState">
                 <property name="version">1.0</property>
-                <property name="stateContentAsString">false,100</property>
+                <property name="stateContentAsString">false,1</property>
             </structure>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -4479,6 +4507,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-07-01T07:00:00Z'} , $lt:{$date:'2020-07-10T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-07-01T06:00:00Z'} , $lt:{$date:'" + year + "-07-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -5004,6 +5046,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-08-01T07:00:00Z'} , $lt:{$date:'2020-08-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-08-01T06:00:00Z'} , $lt:{$date:'" + year + "-08-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -5529,6 +5585,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-09-01T07:00:00Z'} , $lt:{$date:'2020-09-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-09-01T06:00:00Z'} , $lt:{$date:'" + year + "-09-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -6054,6 +6124,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-10-01T07:00:00Z'} , $lt:{$date:'2020-10-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-10-01T06:00:00Z'} , $lt:{$date:'" + year + "-10-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -6579,6 +6663,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-11-01T07:00:00Z'} , $lt:{$date:'2020-11-09T19:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-11-01T06:00:00Z'} , $lt:{$date:'" + year + "-11-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -7104,6 +7202,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2020-12-01T07:00:00Z'} , $lt:{$date:'2020-12-09T18:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-12-01T06:00:00Z'} , $lt:{$date:'" + year + "-12-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -7637,6 +7749,21 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2021-01-01T06:00:00Z'} , $lt:{$date:'2021-01-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2020) {
+		new_query = bookmark;
+	}else{
+		year = year +1;
+		new_query = "created_at: {$gte: {$date:'" + year + "-12-01T06:00:00Z'} , $lt:{$date:'" + year + "-12-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -8170,6 +8297,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2021-02-01T06:00:00Z'} , $lt:{$date:'2021-02-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2021) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-02-01T06:00:00Z'} , $lt:{$date:'" + year + "-02-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -8703,6 +8844,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2021-03-01T06:00:00Z'} , $lt:{$date:'2021-03-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2021) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-03-01T06:00:00Z'} , $lt:{$date:'" + year + "-03-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -9236,6 +9391,20 @@ display;</expression>
                     </structure>
                 </list-property>
             </structure>
+            <method name="beforeOpen"><![CDATA[var query = this.queryText.toString();
+var year = params["Year"].value;
+
+var bookmark = "created_at: {$gte: {$date:'2021-04-01T06:00:00Z'} , $lt:{$date:'2021-04-08T06:00:00Z'} },";
+var new_query = "";
+	
+	if (year == 2021) {
+		new_query = bookmark;
+	}else{
+		new_query = "created_at: {$gte: {$date:'" + year + "-04-01T06:00:00Z'} , $lt:{$date:'" + year + "-04-08T06:00:00Z'} }, ";	
+	}
+
+query = query.replace(bookmark, new_query );
+this.queryText = query;]]></method>
             <property name="dataSource">MongoDB</property>
             <list-property name="resultSet">
                 <structure>
@@ -12183,6 +12352,21 @@ display;</expression>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
                 <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="Year" id="732">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2021</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>

@@ -44,6 +44,41 @@
         <data-mart-data-source name="perfil_puesto" id="955">
             <property name="datamartURL">/account_1259/Resources/PCI_Objetivos</property>
             <property name="accessType">transient</property>
+            <list-property name="paramBindings">
+                <structure>
+                    <property name="paramName">Puesto</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Inicial</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">2019-11-26</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Fecha Final</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">2019-12-10</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Month</property>
+                </structure>
+                <structure>
+                    <property name="paramName">Year</property>
+                    <simple-property-list name="expression">
+                        <value type="javascript">params["Year"].value</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Year2</property>
+                    <simple-property-list name="expression">
+                        <value type="constant">2019</value>
+                    </simple-property-list>
+                </structure>
+                <structure>
+                    <property name="paramName">Empleado</property>
+                </structure>
+            </list-property>
         </data-mart-data-source>
     </data-sources>
     <data-sets>
@@ -188,7 +223,7 @@
                     <structure>
                         <property name="position">9</property>
                         <property name="name">numero</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">integer</property>
                     </structure>
                     <structure>
                         <property name="position">10</property>
@@ -248,7 +283,7 @@
                 <structure>
                     <property name="position">9</property>
                     <property name="name">numero</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">integer</property>
                 </structure>
                 <structure>
                     <property name="position">10</property>
@@ -381,13 +416,6 @@
                     <expression name="expr" type="javascript">row["estatus"]</expression>
                     <simple-property-list name="value1">
                         <value>"activo"</value>
-                    </simple-property-list>
-                </structure>
-                <structure>
-                    <property name="operator">eq</property>
-                    <expression name="expr" type="javascript">row["year"]</expression>
-                    <simple-property-list name="value1">
-                        <value>params["Year"].value</value>
                     </simple-property-list>
                 </structure>
             </list-property>
@@ -642,25 +670,27 @@ display;</expression>
                     <property name="dataType">string</property>
                 </structure>
                 <structure>
-                    <property name="name">nombre</property>
-                    <text-property name="displayName">nombre</text-property>
-                    <expression name="expression" type="javascript">var str = dataSetRow["nombre"];&#13;
-var display = "";&#13;
-&#13;
-if (str != null &amp;&amp; str != "") {&#13;
-	str = str.replace("[ ","");&#13;
-	str = str.replace("]","");&#13;
-	display = str.replace(/['"]+/g, '');&#13;
-}&#13;
-&#13;
-display;</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
                     <property name="name">Editar</property>
                     <text-property name="displayName">Editar</text-property>
                     <expression name="expression" type="javascript">dataSetRow["Editar"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nombre</property>
+                    <text-property name="displayName">nombre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["nombre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">numero</property>
+                    <text-property name="displayName">numero</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["numero"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">estatus</property>
+                    <text-property name="displayName">estatus</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["estatus"]</expression>
                     <property name="dataType">string</property>
                 </structure>
             </list-property>

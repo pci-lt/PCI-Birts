@@ -222,7 +222,114 @@
                 </structure>
             </list-property>
         </data-mart-data-set>
+        <data-mart-data-set name="Casos" id="222">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">casos</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">casos</text-property>
+                    <text-property name="heading">casos</text-property>
+                    <property name="indexColumn">false</property>
+                    <property name="compressed">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">casos</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">_id.cope</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">_id.apoyo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">Apoyo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">PCI_RRHH2</property>
+            <property name="dataObject">Tablas</property>
+            <list-property name="selectedColumns">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">casos</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">_id.cope</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">_id.apoyo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Apoyo</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+        </data-mart-data-set>
     </data-sets>
+    <cubes>
+        <tabular-cube name="Informacion" id="226">
+            <property name="dimensions">
+                <tabular-dimension name="Apoyo" id="227">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="228">
+                            <property name="levels">
+                                <tabular-level name="_id_cope" id="233">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">_id.cope</property>
+                                </tabular-level>
+                                <tabular-level name="Apoyo" id="229">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">Apoyo</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Cope" id="230">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="231">
+                            <property name="levels">
+                                <tabular-level name="_id_cope" id="232">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">_id.cope</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="234">
+                    <property name="measures">
+                        <tabular-measure name="casos" id="235">
+                            <expression name="measureExpression" type="javascript">dataSetRow["casos"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Casos</property>
+        </tabular-cube>
+    </cubes>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="orientation">auto</property>
@@ -235,6 +342,407 @@
         </simple-master-page>
     </page-setup>
     <body>
+        <text id="269">
+            <property name="fontSize">16pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Casos con acercamiento de RRHH]]></text-property>
+        </text>
+        <extended-item extensionName="Crosstab" extensionVersion="3.7.0" id="236">
+            <property name="cube">Informacion</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="249">
+                    <property name="measure">casos</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="250">
+                            <property name="aggregationOnRow">Cope/_id_cope</property>
+                            <property name="aggregationOnColumn">Apoyo/Apoyo</property>
+                            <property name="content">
+                                <data id="251">
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">casos_Cope/_id_cope_Apoyo/Apoyo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="257">
+                            <property name="aggregationOnColumn">Apoyo/Apoyo</property>
+                            <property name="content">
+                                <data id="258">
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">casos_Apoyo/Apoyo</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="261">
+                            <property name="aggregationOnRow">Cope/_id_cope</property>
+                            <property name="content">
+                                <data id="262">
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">casos_Cope/_id_cope</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="AggregationCell" id="263">
+                            <property name="content">
+                                <data id="264">
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">casos</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="252">
+                            <property name="content">
+                                <label id="253">
+                                    <text-property name="text">casos</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                        <extended-item extensionName="CrosstabCell" id="265">
+                            <property name="content">
+                                <label id="266">
+                                    <text-property name="text">casos</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="238">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="256">
+                            <property name="content">
+                                <label id="259">
+                                    <text-property name="text">Total</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="239">
+                            <property name="dimension">Cope</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="240">
+                                    <property name="level">Cope/_id_cope</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="241">
+                                            <property name="content">
+                                                <data name="_id_cope" id="242">
+                                                    <property name="resultSetColumn">_id_cope</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="244">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="260">
+                            <property name="content">
+                                <label id="267">
+                                    <text-property name="text">Total por Zona</text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="245">
+                            <property name="dimension">Apoyo</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="246">
+                                    <property name="level">Apoyo/Apoyo</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="247">
+                                            <property name="content">
+                                                <data name="Apoyo" id="248">
+                                                    <property name="resultSetColumn">Apoyo</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="237">
+                    <property name="content">
+                        <label id="243">
+                            <text-property name="text">Zona</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="hideMeasureHeader">true</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">_id_cope</property>
+                    <expression name="expression">dimension["Cope"]["_id_cope"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Apoyo</property>
+                    <expression name="expression">dimension["Apoyo"]["Apoyo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">casos_Cope/_id_cope_Apoyo/Apoyo</property>
+                    <expression name="expression">measure["casos"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Cope/_id_cope</value>
+                        <value>Apoyo/Apoyo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">casos_Apoyo/Apoyo</property>
+                    <expression name="expression">measure["casos"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Apoyo/Apoyo</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">casos_Cope/_id_cope</property>
+                    <expression name="expression">measure["casos"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Cope/_id_cope</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">casos</property>
+                    <expression name="expression">measure["casos"]</expression>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+        </extended-item>
+        <extended-item extensionName="Chart" id="268">
+            <property name="cube">Informacion</property>
+            <xml-property name="xmlRepresentation"><![CDATA[<ActuateChart version="2.6.1">
+ <ChartWithAxes version="2.6.1" type="Bar Chart" subType="Stacked">
+  <block>
+   <children _type="TitleBlock" visible="false">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+   </children>
+   <children _type="Plot">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+   </children>
+   <children _type="Legend" visible="false" itemType="1">
+    <outline>
+     <color _nil="1"/>
+    </outline>
+    <clientArea>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </clientArea>
+    <separator>
+     <color _nil="1"/>
+    </separator>
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+   </children>
+   <bounds _body="0.0,0.0,572.25,286.125"/>
+   <outline>
+    <color _nil="1"/>
+   </outline>
+  </block>
+  <extendedProperties name="enable.area.alt" value="false"/>
+  <extendedProperties name="enable.drill.category" value="true"/>
+  <extendedProperties name="enable.drill.series" value="true"/>
+  <sampleData>
+   <baseSampleData dataSetRepresentation="&#039;A&#039;,&#039;B&#039;,&#039;C&#039;,&#039;D&#039;,&#039;E&#039;"/>
+   <orthogonalSampleData dataSetRepresentation="6,4,12,8,10" seriesDefinitionIndex="0"/>
+  </sampleData>
+  <emptyMessage>
+   <caption value="This chart contains no data."/>
+   <background _body=",64,127,127,127"/>
+   <outline>
+    <color _body=",128,127,127,127"/>
+   </outline>
+  </emptyMessage>
+  <axes>
+   <title>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </title>
+   <associatedAxes primaryAxis="true" percent="false">
+    <title>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </title>
+    <seriesDefinitions>
+     <query definition="data[&quot;Apoyo/Apoyo&quot;]">
+      <grouping/>
+     </query>
+     <series _type="BarSeries" seriesIdentifier="Series 1" labelPosition="4" stacked="true" riser="0">
+      <label>
+       <background _nil="1"/>
+       <outline>
+        <color _nil="1"/>
+       </outline>
+      </label>
+      <dataDefinition definition="data[&quot;Summary Field/casos&quot;]">
+       <grouping/>
+      </dataDefinition>
+      <triggers condition="6">
+       <action type="1">
+        <value _type="TooltipValue" text="" delay="200"/>
+       </action>
+      </triggers>
+      <curveFitting _nil="1"/>
+     </series>
+    </seriesDefinitions>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <label>
+     <background _nil="1"/>
+     <outline>
+      <color _nil="1"/>
+     </outline>
+    </label>
+    <majorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </majorGrid>
+    <minorGrid>
+     <lineAttributes>
+      <color _nil="1"/>
+     </lineAttributes>
+     <tickAttributes>
+      <color _nil="1"/>
+     </tickAttributes>
+    </minorGrid>
+    <origin>
+     <value _nil="1"/>
+    </origin>
+   </associatedAxes>
+   <seriesDefinitions>
+    <query definition=""/>
+    <series seriesIdentifier="">
+     <label>
+      <background _nil="1"/>
+      <outline>
+       <color _nil="1"/>
+      </outline>
+     </label>
+     <dataDefinition definition="data[&quot;Cope/_id_cope&quot;]"/>
+     <curveFitting _nil="1"/>
+    </series>
+   </seriesDefinitions>
+   <lineAttributes>
+    <color _nil="1"/>
+   </lineAttributes>
+   <label>
+    <caption>
+     <font rotation="90.0"/>
+    </caption>
+    <background _nil="1"/>
+    <outline>
+     <color _nil="1"/>
+    </outline>
+   </label>
+   <majorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </majorGrid>
+   <minorGrid>
+    <lineAttributes>
+     <color _nil="1"/>
+    </lineAttributes>
+    <tickAttributes>
+     <color _nil="1"/>
+    </tickAttributes>
+   </minorGrid>
+   <origin>
+    <value _nil="1"/>
+   </origin>
+  </axes>
+  <rotation>
+   <angles/>
+  </rotation>
+ </ChartWithAxes>
+</ActuateChart>
+]]></xml-property>
+            <property name="outputFormat">JS</property>
+            <property name="inheritColumns">false</property>
+            <property name="height">50%</property>
+            <property name="width">100%</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">Apoyo/_id_cope</property>
+                    <expression name="expression" type="javascript">dimension["Apoyo"]["_id_cope"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Apoyo/Apoyo</property>
+                    <expression name="expression" type="javascript">dimension["Apoyo"]["Apoyo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Cope/_id_cope</property>
+                    <expression name="expression" type="javascript">dimension["Cope"]["_id_cope"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Summary Field/casos</property>
+                    <expression name="expression" type="javascript">measure["casos"]</expression>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+        </extended-item>
         <table id="6">
             <list-property name="userProperties">
                 <structure>
@@ -243,6 +751,7 @@
                 </structure>
             </list-property>
             <property name="marginLeft">12pt</property>
+            <property name="pageBreakBefore">always</property>
             <property name="dataSet">Seguimiento</property>
             <list-property name="boundDataColumns">
                 <structure>
